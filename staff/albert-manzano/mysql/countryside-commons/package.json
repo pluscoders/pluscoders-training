@@ -1,0 +1,18 @@
+{
+  "name": "countryside-commons",
+  "version": "1.0.0",
+  "description": "shared tools between packages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "utils",
+    "common-use"
+  ],
+  "author": "Albert Manzano",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
