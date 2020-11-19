@@ -11,9 +11,6 @@
 * 
 * @returns {number} The result of the operation, once applied with the two numbers.
 */
-function calculate(number1, operation, number2) { 
-    ...
-
 
 
     function calculate(a, operador, b) {
