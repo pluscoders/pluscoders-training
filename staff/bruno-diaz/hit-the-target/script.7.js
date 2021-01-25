@@ -4,11 +4,11 @@
 // 2 - Repetición de cálculos ya que, siguiendo el ejemplo, (N-1)! = (N-1) (N-2)!, etc.
 // Hay métodos para conseguir subsanarlos como la técnica de memorización.
 
-const positionCircle = (i) => {
+function positionCircle(i) {
     if(i > 0) {
         dot.down()
         dot.right()
-        positionCircle (i - 1)
+        positionCircle(i-1)
     }
 }
 
