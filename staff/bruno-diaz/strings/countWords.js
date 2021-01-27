@@ -5,7 +5,7 @@ function countWords(text) {
     for (var i = 0; i < array.length; i++){
         if (array[i] === '') {
             array.splice(i, 1)
-            i = -1
+            i--
         }
     }
     return array
