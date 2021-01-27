@@ -1,19 +1,12 @@
 function stringToArray(text) {
-    var arrayString = []
-    if (typeof text === 'string') {
-        if (!text) {
-            return 'No hay texto; escribe un texto sobre el que trabajar'
-        } else {
-            for(var i = 0; i < text.length; i++) {
-                arrayString[i] = text.charAt(i)
-            }
-        }
-        return arrayString
-    } else {
-        return 'El texto introducido no tiene el formato correcto; recuerda escribir el texto entre comillas'
+    if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
+    var array = []
+    
+    for(var i = 0; i < text.length; i++) {
+        array[i] = text.charAt(i)
     }
+    return array
 }
-
 
 // TESTS
 
@@ -32,23 +25,13 @@ function stringToArray(text) {
         console.assert(result[6], 'u')
         console.assert(result[7], 'n')
         console.assert(result[8], 'd')
-        console.assert(result[9], 'o')
-        console.assert(result[9], 'o')
-
-
+        console.assert(result[9], 'o')   
+        
     // CASE text is ""
-
+        
         var result = stringToArray('')
 
-        console.assert(result === 'No hay texto; escribe un texto sobre el que trabajar', 'result has bug with empty text')
-
-
-    // CASE text is 08028
-
-        var result = stringToArray(08028)
-
-        console.assert(result === 'El texto introducido no tiene el formato correcto; recuerda escribir el texto entre comillas', 'result has bug with numbers')
-
+        console.assert(result.length === 0, 'result.length is no correct')
 
     // CASE text is "08028"
 
@@ -61,3 +44,66 @@ function stringToArray(text) {
         console.assert(result[3], '2')
         console.assert(result[4], '8')
         console.assert(result.length === 5, 'result.length is no correct')
+
+        
+// UNHAPPY RESULTS
+
+    // CASE text is not a string, but number 8028
+
+        var result
+        try {
+            stringToArray(8028)
+        } catch(error) {
+            result = error
+        }
+
+        console.assert(result instanceof TypeError)
+        console.assert(result.message === '8028 is not a string')
+
+    // CASE text is not a string, but boolean true
+
+        var result
+        try {
+            stringToArray(true)
+        } catch(error) {
+            result = error
+        }
+
+        console.assert(result instanceof TypeError)
+        console.assert(result.message === 'true is not a string')
+
+    // CASE text is not a string, but an array
+
+        var result
+        try {
+            stringToArray([])
+        } catch(error) {
+            result = error
+        }
+
+        console.assert(result instanceof TypeError)
+        console.assert(result.message === ' is not a string')
+
+    // CASE text is not a string, but an object
+
+        var result
+        try {
+            stringToArray({})
+        } catch(error) {
+            result = error
+        }
+
+        console.assert(result instanceof TypeError)
+        console.assert(result.message === '[object Object] is not a string')
+    
+    // CASE text is not a string, but a function
+
+        var result
+        try {
+            stringToArray(function() {})
+        } catch(error) {
+            result = error
+        }
+
+        console.assert(result instanceof TypeError)
+        console.assert(result.message === 'function() {} is not a string')
