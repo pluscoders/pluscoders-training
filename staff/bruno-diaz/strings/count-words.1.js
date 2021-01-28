@@ -1,15 +1,19 @@
+// Testear para verificar que recibo un número con el número de palabras
+// DONE RTFM trim() - Recorta los espacios en blanco al comienzo y al final
+// TODO nueva versión sin alterar un iterador (i--)
+
 function countWords(text) {
     if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
 
     var array = text.split(' ')
-    var result = []
     for (var i = 0; i < array.length; i++){
-        if (array[i] !== '') {
-            result.push(array[i])
+        if (array[i] === '') {
+            array.splice(i, 1)
+            i--
         }
     }
 
-    return result.length
+    return array.length
 }
 
 // TESTS
