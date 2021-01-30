@@ -1,25 +1,16 @@
-// TODO Comprobar que no se trata de '.' '!' '?'
+// TODO No usar split
+
 function countWords(text) {
     if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
 
+    var array = text.split(' ')
     var result = []
-    var j = 0
-    // Recorro string
-    for (var i = 0; i < text.length; i++) {
-        // Busco los espacios blancos que separan palabras o la última palabra del string
-        if (text[i] === ' ') {
-            // Hay qye asegurarse de que no se trata de un espacio blanco extra
-            if (i !== j) {
-                result.push(text.substr(j, i-j))
-            }
-            // Situamos j en el inicio de la siguiente palabra, si fuese otro espacio blanco 'i !== j' se asegurará de no pushearlo
-            j = i+1
-        // Pusheamos la última palabra asegurándonos de que no se trata de un espacio en blanco
-        } else if (i === text.length - 1 && text[i] !== ' ') {
-            result.push(text.substr(j, 1))
+    for (var i = 0; i < array.length; i++){
+        if (array[i] !== '') {
+            result.push(array[i])
         }
     }
-    // return result.length
+
     return result.length
 }
 
