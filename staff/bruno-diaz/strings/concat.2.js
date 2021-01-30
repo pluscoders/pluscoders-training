@@ -1,8 +1,12 @@
+// TODO No usar Arrow functions 
+// TODO Mirar chicha de argumentos "Array.prototype.slice.call(arguments)"  =>  Usar arguments sin slice (a pelo)
+
+
 function concat() {
-    var texts = Array.from(arguments);
+    var texts = Array.prototype.slice.call(arguments);
     var result = ""
 
-    texts.forEach(function(item) {
+    texts.forEach(item => {
         result += item
     })
 
@@ -48,3 +52,14 @@ function concat() {
                     
         console.assert(typeof result === 'string', 'result must be a string')
         console.assert(result === '  ', 'result is not the right solution')
+
+      
+
+
+    --> REVISAR
+    new String("Hola mundo") instanceof String
+        true
+    "Hola Mundo" instanceof String
+        false
+
+    Función constructora -> Primitivos
