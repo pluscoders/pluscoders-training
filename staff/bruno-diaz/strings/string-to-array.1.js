@@ -2,10 +2,9 @@ function stringToArray(text) {
     if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
     var array = []
     
-    for (var i = 0; i < text.length; i++) {
-        array.push(text[i])
+    for(var i = 0; i < text.length; i++) {
+        array[i] = text.charAt(i)
     }
-    
     return array
 }
 
