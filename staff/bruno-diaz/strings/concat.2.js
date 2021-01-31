@@ -52,14 +52,3 @@ function concat() {
                     
         console.assert(typeof result === 'string', 'result must be a string')
         console.assert(result === '  ', 'result is not the right solution')
-
-      
-
-
-    --> REVISAR
-    new String("Hola mundo") instanceof String
-        true
-    "Hola Mundo" instanceof String
-        false
-
-    Función constructora -> Primitivos
