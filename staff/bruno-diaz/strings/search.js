@@ -216,7 +216,7 @@ function search(text, search) {
 
 // TODO no usar indexOf
 
-function search1(text, search) {
+function search(text, search) {
     if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
     if (typeof search !== 'string') throw new TypeError(search + ' is not a string')
     return text.indexOf(search)
