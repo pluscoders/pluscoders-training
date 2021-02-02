@@ -1,9 +1,19 @@
-// TODO en test 2 no funciona result[2]
-
 function split(text, pattern) {
     if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
     if (typeof pattern !== 'string') throw new TypeError(pattern + ' is not a string')
-    return text.split(pattern)
+    var result = ['']
+    var elementResult = 0
+
+    for (var i = 0; i < text.length; i++) {
+        if (text[i] === pattern) {
+            elementResult++
+            result[elementResult] = ''
+        } else {
+            result[elementResult] += text[i]
+        }
+    }
+
+    return result
 }
 
 
@@ -14,25 +24,18 @@ function split(text, pattern) {
 
         console.assert(result instanceof Array, 'result must be an array')
         console.assert(result.length === 2, 'result is not the right solution')
-        console.assert(result[0], 'Hello')
-        console.assert(result[1], 'World')
+        console.assert(result[0] === 'Hello')
+        console.assert(result[1] === 'World')
 
-    // CASE text is 'hola mundo', pattern is '0'
-        var result = split('hola mundo','o')
-
-        console.assert(result instanceof Array, 'result must be an array')
-        console.assert(result.length === 3, 'result is not the right solution')
-        console.assert(result[0], 'h')
-        console.assert(result[1], 'la mund')
-        // console.assert(result[2], '')
+    
 
     // CASE text is 'hola mundo', pattern is 'a'
         var result = split('hola mundo','a')
 
         console.assert(result instanceof Array, 'result must be an array')
         console.assert(result.length === 2, 'result is not the right solution')
-        console.assert(result[0], 'hol')
-        console.assert(result[1], ' mundo')
+        console.assert(result[0] === 'hol')
+        console.assert(result[1] === ' mundo')
 
 // UNHAPPY RESULTS
 
@@ -155,3 +158,16 @@ function split(text, pattern) {
 
         console.assert(result instanceof TypeError)
         console.assert(result.message === 'function() {} is not a string')
+
+
+
+
+// ------------------------------------------------------------------------------------------------------------ VERSION 1
+
+// TODO rehacer sin método split
+
+function split1(text, pattern) {
+    if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
+    if (typeof pattern !== 'string') throw new TypeError(pattern + ' is not a string')
+    return text.split(pattern)
+}
