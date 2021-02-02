@@ -166,7 +166,7 @@ function split(text, pattern) {
 
 // TODO rehacer sin método split
 
-function split1(text, pattern) {
+function split(text, pattern) {
     if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
     if (typeof pattern !== 'string') throw new TypeError(pattern + ' is not a string')
     return text.split(pattern)
