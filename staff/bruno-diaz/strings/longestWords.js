@@ -137,7 +137,7 @@ function longestWords(text) {
 
 // TODO cómo se resetear un array
 
-function longestWords1(text) {
+function longestWords(text) {
     if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
     var array = text.replaceAll(/[.,¿?¡!0-9]+/g, '').trim().split(' ')
     var i = 0
