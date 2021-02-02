@@ -17,16 +17,16 @@ function stringToArray(text) {
 
         console.assert(result instanceof Array, 'result must be an array')
         console.assert(result.length === 10, 'result.length is no correct')
-        console.assert(result[0], 'H')
-        console.assert(result[1], 'o')
-        console.assert(result[2], 'l')
-        console.assert(result[3], 'a')
-        console.assert(result[4], ' ')
-        console.assert(result[5], 'M')
-        console.assert(result[6], 'u')
-        console.assert(result[7], 'n')
-        console.assert(result[8], 'd')
-        console.assert(result[9], 'o')   
+        console.assert(result[0] === 'H')
+        console.assert(result[1] === 'o')
+        console.assert(result[2] === 'l')
+        console.assert(result[3] === 'a')
+        console.assert(result[4] === ' ')
+        console.assert(result[5] === 'M')
+        console.assert(result[6] === 'u')
+        console.assert(result[7] === 'n')
+        console.assert(result[8] === 'd')
+        console.assert(result[9] === 'o')   
         
     // CASE text is ""
         
@@ -39,11 +39,11 @@ function stringToArray(text) {
         var result = stringToArray('08028')
 
         console.assert(result instanceof Array, 'result must be an array')
-        console.assert(result[0], '0')
-        console.assert(result[1], '8')
-        console.assert(result[2], '0')
-        console.assert(result[3], '2')
-        console.assert(result[4], '8')
+        console.assert(result[0] === '0')
+        console.assert(result[1] === '8')
+        console.assert(result[2] === '0')
+        console.assert(result[3] === '2')
+        console.assert(result[4] === '8')
         console.assert(result.length === 5, 'result.length is no correct')
 
         
@@ -108,3 +108,16 @@ function stringToArray(text) {
 
         console.assert(result instanceof TypeError)
         console.assert(result.message === 'function() {} is not a string')
+
+
+// ------------------------------------------------------------------------------------------------------------ VERSION 1
+
+function stringToArray(text) {
+    if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
+    var array = []
+    
+    for(var i = 0; i < text.length; i++) {
+        array[i] = text.charAt(i)
+    }
+    return array
+}
