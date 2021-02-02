@@ -1,13 +1,33 @@
+// TODO no usar indexOf
+
 function search(text, search) {
     if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
     if (typeof search !== 'string') throw new TypeError(search + ' is not a string')
-    return text.indexOf(search)
+    var verificador
+    var letra = 0
+
+    for (var j = 0; j < text.length; j++) {
+        if (text[j] === search[letra] && (verificador && verificador === j - 1 || !verificador)) {
+            verificador = j
+            letra++
+        } else {
+            verificador = undefined
+            letra = 0
+        }
+        if (letra === search.length) break
+    }
+    if (verificador) {
+        verificador = verificador - search.length + 1
+    } else {
+        verificador = -1
+    }
+    return verificador
 }
 
 
 // TESTS
 
-    // CASE text is '    ', search is ''
+    // CASE text is '    ', search is '' ----------------------------------------------- No lo pasa
         var result = search('    ','')
 
         console.assert(typeof result === 'number', 'result must be a number')
@@ -82,7 +102,6 @@ function search(text, search) {
 // UNHAPPY RESULTS
 
     // CASE text is not a string, but number 8028
-
         var result
         try {
             search(8028, '')
@@ -94,7 +113,6 @@ function search(text, search) {
         console.assert(result.message === '8028 is not a string')
 
     // CASE text is not a string, but boolean
-
         var result
         try {
             search(true, '')
@@ -106,7 +124,6 @@ function search(text, search) {
         console.assert(result.message === 'true is not a string')
 
     // CASE text is not a string, but array
-
         var result
         try {
             search([], '')
@@ -118,7 +135,6 @@ function search(text, search) {
         console.assert(result.message === ' is not a string')
 
     // CASE text is not a string, but object
-
         var result
         try {
             search({}, '')
@@ -130,7 +146,6 @@ function search(text, search) {
         console.assert(result.message === '[object Object] is not a string')
 
     // CASE text is not a string, but function
-
         var result
         try {
             search(function() {}, '')
@@ -142,7 +157,6 @@ function search(text, search) {
         console.assert(result.message === 'function() {} is not a string')
 
     // CASE search is not a string, but number 8028
-
         var result
         try {
             search('', 8028)
@@ -154,7 +168,6 @@ function search(text, search) {
         console.assert(result.message === '8028 is not a string')
 
     // CASE text is not a string, but boolean
-
         var result
         try {
             search('', true)
@@ -166,7 +179,6 @@ function search(text, search) {
         console.assert(result.message === 'true is not a string')
 
     // CASE text is not a string, but array
-
         var result
         try {
             search('', [])
@@ -178,7 +190,6 @@ function search(text, search) {
         console.assert(result.message === ' is not a string')
 
     // CASE text is not a string, but object
-
         var result
         try {
             search('', {})
@@ -190,7 +201,6 @@ function search(text, search) {
         console.assert(result.message === '[object Object] is not a string')
 
     // CASE text is not a string, but function() {}
-
         var result
         try {
             search('', function() {})
@@ -200,3 +210,14 @@ function search(text, search) {
 
         console.assert(result instanceof TypeError)
         console.assert(result.message === 'function() {} is not a string')
+
+
+// ------------------------------------------------------------------------------------------------------------ VERSION 1
+
+// TODO no usar indexOf
+
+function search1(text, search) {
+    if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
+    if (typeof search !== 'string') throw new TypeError(search + ' is not a string')
+    return text.indexOf(search)
+}
