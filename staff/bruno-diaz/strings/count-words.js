@@ -1,4 +1,3 @@
-// TODO Comprobar que no se trata de '.' '!' '?'
 function countWords(text) {
     if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
 
@@ -8,7 +7,7 @@ function countWords(text) {
     for (var i = 0; i < text.length; i++) {
         // Busco los espacios blancos que separan palabras o la última palabra del string
         if (text[i] === ' ') {
-            // Hay qye asegurarse de que no se trata de un espacio blanco extra
+            // Hay que asegurarse de que no se trata de un espacio blanco extra
             if (i !== j) {
                 result.push(text.substr(j, i-j))
             }
@@ -123,3 +122,43 @@ function countWords(text) {
 
         console.assert(result instanceof TypeError)
         console.assert(result.message === 'function() {} is not a string')
+
+
+
+// ------------------------------------------------------------------------------------------------------------ VERSION 1
+
+// Testear para verificar que recibo un número con el número de palabras
+// TODO RTFM trim() - Recorta los espacios en blanco al comienzo y al final
+// TODO nueva versión sin alterar un iterador (i--)
+
+function countWords(text) {
+    if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
+    
+    var array = text.split(' ')
+    for (var i = 0; i < array.length; i++){
+        if (array[i] === '') {
+            array.splice(i, 1)
+            i--
+        }
+    }
+    
+    return array.length
+}
+
+// ------------------------------------------------------------------------------------------------------------ VERSION 2
+
+// TODO No usar split
+
+function countWords(text) {
+    if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
+
+    var array = text.split(' ')
+    var result = []
+    for (var i = 0; i < array.length; i++){
+        if (array[i] !== '') {
+            result.push(array[i])
+        }
+    }
+
+    return result.length
+}
