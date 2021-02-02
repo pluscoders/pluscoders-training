@@ -1,16 +1,16 @@
-// TODO mejorar sintaxis para limpiar string text
-
 function longestWords(text) {
     if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
     var array = text.replaceAll(/[.,¿?¡!0-9]+/g, '').trim().split(' ')
     var i = 0
     var result = [array[i]]
 
-    for (var j = i+1; j < array.length; j++) {
+    for (var j = 1; j < array.length; j++) {
         if (array[i].length === array[j].length) {
             result.push(array[j])
             i = j
         } else if (array[i].length < array[j].length) {
+            while(result.length > 0)
+                result.pop();
             result = []
             result.push(array[j])
             i = j
@@ -131,3 +131,28 @@ function longestWords(text) {
 
         console.assert(result instanceof TypeError)
         console.assert(result.message === 'function() {} is not a string')
+
+
+// ------------------------------------------------------------------------------------------------------------ VERSION 1
+
+// TODO cómo se resetear un array
+
+function longestWords1(text) {
+    if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
+    var array = text.replaceAll(/[.,¿?¡!0-9]+/g, '').trim().split(' ')
+    var i = 0
+    var result = [array[i]]
+
+    for (var j = 1; j < array.length; j++) {
+        if (array[i].length === array[j].length) {
+            result.push(array[j])
+            i = j
+        } else if (array[i].length < array[j].length) {
+            // TODO Mirar cómo resetear un array
+            result = []
+            result.push(array[j])
+            i = j
+        }
+    }
+    return result
+}
