@@ -48,3 +48,39 @@ function concat() {
                     
         console.assert(typeof result === 'string', 'result must be a string')
         console.assert(result === '  ', 'result is not the right solution')
+
+
+
+// ------------------------------------------------------------------------------------------------------------ VERSION 1
+
+// TODO cómo manejar argumentos variables en JS
+// TODO Revisar https://developer.mozilla.org/es/docs/Web/JavaScript/Data_structures para ver el porqué me sale que no es string y a la vez que sí
+// TODO Rehacer sin ...restArgs --> https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Funciones/arguments
+
+function concat(...strings) {
+    var result = new String
+    
+    for (var i = 0; i < strings.length; i++) {
+        var string = strings[i]
+    }
+
+    return result
+}
+
+
+// ------------------------------------------------------------------------------------------------------------ VERSION 2
+
+// TODO No usar Arrow functions 
+// TODO Mirar chicha de argumentos "Array.prototype.slice.call(arguments)"  =>  Usar arguments sin slice (a pelo)
+
+
+function concat() {
+    var texts = Array.prototype.slice.call(arguments);
+    var result = ""
+
+    texts.forEach(item => {
+        result += item
+    })
+
+    return result
+}
