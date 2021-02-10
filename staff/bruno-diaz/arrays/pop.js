@@ -1,9 +1,9 @@
 function pop(array) {
     if (!(array instanceof Array)) throw new TypeError(array + ' is not an array')
-    var result = []
-
-    for (var i = 0; i < array.length - 1; i++)
-        result[i] = array[i]
+    
+    var result = array[array.length - 1]
+    
+    array.length = array.length - 1
 
     return result
 }
@@ -13,16 +13,12 @@ function pop(array) {
     // CASE array is []
         var result = pop([])
 
-        console.assert(result instanceof Array, 'result must be an array')
-        console.assert(result.length === 0, 'result.length is no correct')
         console.assert(result[0] === undefined, 'result is no correct')
 
     // CASE array is ["👋"]
         var result = pop(['👋'])
 
-        console.assert(result instanceof Array, 'result must be an array')
-        console.assert(result.length === 0, 'result.length is no correct')
-        console.assert(result[0] === undefined, 'result is no correct')
+        console.assert(result === undefined, 'result is no correct')
 
     // CASE array is ['🥚', '🐣', '🐥', '🐓']
         var result = pop(['🥚', '🐣', '🐥', '🐓'])
@@ -107,3 +103,34 @@ function pop(array) {
 
         console.assert(result instanceof TypeError)
         console.assert(result.message === 'function() {} is not a array')
+
+
+
+
+// WHY?????????
+
+var x = [1, 2, 3, 4, 5, 6, 7]
+function prueba1(array) {
+    var other = ['A', 'B', 'C']
+    
+    array[0] = other[0]
+
+    return array
+}
+prueba1(x)
+
+--> Si tratamos un elemento concreto cambia el array a nivel global
+
+
+// BUT
+
+var y = [1, 2, 3, 4, 5, 6, 7]
+function prueba2(array) {
+    
+    array = ['A', 'B', 'C']
+
+    return array
+}
+prueba2(y)
+
+--> Si definimos de nuevo un array NO cambia el array a nivel global, solo dentro del scope de la función

@@ -1,14 +1,16 @@
 function reverse(array) {
     if (!(array instanceof Array)) throw new TypeError(array + ' is not an array')
-    var result = []
-    var j = 0
+    var mirror = []
 
     for (var i = array.length - 1; i > -1; i--) {
-        result[j] = array[i]
-        j++
+        mirror[mirror.length] = array[i]
     }
 
-    return result
+    for (i = 0; i < mirror.length; i++) {
+        array[i] = mirror[i]
+    }
+
+    return array
 }
 
 // TESTS
@@ -63,7 +65,7 @@ function reverse(array) {
         }
 
         console.assert(result instanceof TypeError)
-        console.assert(result.message === 'Hello, World! is not a array')
+        console.assert(result.message === 'Hello, World! is not an array')
 
     // CASE array is not a array, but number 8028
         var result
@@ -75,7 +77,7 @@ function reverse(array) {
         }
 
         console.assert(result instanceof TypeError)
-        console.assert(result.message === '8028 is not a array')
+        console.assert(result.message === '8028 is not an array')
 
     // CASE array is not a array, but boolean true
         var result
@@ -87,7 +89,7 @@ function reverse(array) {
         }
 
         console.assert(result instanceof TypeError)
-        console.assert(result.message === 'true is not a array')
+        console.assert(result.message === 'true is not an array')
 
     // CASE array is not a array, but an object
         var result
@@ -99,7 +101,7 @@ function reverse(array) {
         }
 
         console.assert(result instanceof TypeError)
-        console.assert(result.message === '[object Object] is not a array')
+        console.assert(result.message === '[object Object] is not an array')
 
     // CASE array is not a array, but a function
         var result
@@ -111,4 +113,4 @@ function reverse(array) {
         }
 
         console.assert(result instanceof TypeError)
-        console.assert(result.message === 'function() {} is not a array')
+        console.assert(result.message === 'function() {} is not an array')
