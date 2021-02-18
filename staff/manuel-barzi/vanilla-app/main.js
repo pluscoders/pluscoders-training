@@ -1,78 +1,20 @@
-document.open()
-document.write('<body></body>')
+var register = createRegister(function (email, password) {
+    try {
+        registerUser(email, password)
 
-var users = []
+        register.style.display = 'none'
+        welcome.style.display = 'block'
+    } catch(error) {
+        //alert(error.message)
 
-function createRegister(onRegister) {
-    var form = document.createElement('form')
-
-    var emailLabel = document.createElement('label')
-    emailLabel.innerText = 'E-mail'
-    emailLabel.for = 'email'
-
-    var email = document.createElement('input')
-    email.type = 'email'
-    email.name = 'email'
-    email.id = 'email'
-
-    var passwordLabel = document.createElement('label')
-    passwordLabel.innerText = 'Password'
-    passwordLabel.for = 'password'
-
-    var password = document.createElement('input')
-    password.type = 'password'
-    password.name = 'password'
-    password.id = 'password'
-
-    var submit = document.createElement('button')
-    submit.innerText = 'Register'
-
-    emailLabel.append(email)
-    passwordLabel.append(password)
-
-    form.append(emailLabel)
-    form.append(passwordLabel)
-    form.append(submit)
-
-    form.onsubmit = function(event) {
-        event.preventDefault()
-
-        var email = event.target.email.value
-        var password = event.target.password.value
-
-        onRegister(email, password)
+        var feedback = register.querySelector('span')
+        feedback.innerText = error.message
+        feedback.style.display = 'block'
     }
 
-    return form
-}
-
-var form = createRegister(function(email, password) {
-    //console.log(email, password)
-
-    var user = { email, password }
-
-    // TODO check whether user already exists (or not). otherwise do not add it into db, and throw an error "user already exists"
-
-    var exists = users.some(function(user) { return user.email === email })
-
-    if (exists) throw new Error('user already exists')
-
-    users.push(user)
-
-    form.style.display = 'none'
-    welcome.style.display = 'block'
 })
 
-document.body.append(form)
-
-
-function createWelcome() {
-    var h1 = document.createElement('h1')
-
-    h1.innerText = 'Welcome!'
-
-    return h1
-}
+document.body.append(register)
 
 var welcome = createWelcome()
 welcome.style.display = 'none'
