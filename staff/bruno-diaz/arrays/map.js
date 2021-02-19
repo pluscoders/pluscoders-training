@@ -1,3 +1,5 @@
+//TODO Add optional params in call to fuction and tests
+
 function map(array, callback) {
     if (!(array instanceof Array)) throw new TypeError(array + ' is not an array')
     if (!(callback instanceof Function)) throw new TypeError(callback + ' is not a function')
@@ -5,7 +7,7 @@ function map(array, callback) {
     var result = []
 
     for (var i = 0; i < array.length; i++) {
-        result[result.length] = callback(array[i])
+        result[result.length] = callback(array[i], i, array)
     }
 
     return result
@@ -13,8 +15,8 @@ function map(array, callback) {
 
 // TEST
 
-    // Inputs: Array with random length + mirror of array + function called callback
     var length = Math.floor(Math.random() * 100)
+
     var array = []
     var mirror = []
 
@@ -23,26 +25,26 @@ function map(array, callback) {
         mirror[i] = array[i]
     }
 
-    var multiplier = Math.floor(Math.random() * 100 * 1/2)
-
-    function callback(element) {
-        return element * multiplier
-    }
-
-    // Call to test
-    var result = map(array, callback)
-    // Comparation
-    var otherResult = array.map(callback)
+    var result = []
+    var arrays = []
     
-    // Results
+    map(array, function(value, index, array) {
+        result[index] = value
+        arrays[index] = array
+    })
+    
+    // Checks
+
     console.assert(result instanceof Array, 'result must be an array')
-    console.assert(otherResult instanceof Array, 'result must be the same type of otherResult')
-    console.assert(result.length === otherResult.length, 'result.length is no correct')
+
+    console.assert(array.length === mirror.length, 'result.length is no correct')
+    console.assert(result.length === array.length, 'result.length is no correct')
+    console.assert(arrays.length === array.length, 'arrays.length was changed')
     
-    for (var i = 0; i < result.length; i++)
-        console.assert(result[i] === multiplier * array[i], 'result is no correct')
+    for (var i = 0; i < result.length; i++) {
+        console.assert(array[i] === mirror[i], 'array was changed')
+        console.assert(result[i] === array[i], 'result is no correct')
+    }
     
     for (var j = 0; j < result.length; j++)
-        console.assert(array[j] === mirror[j], 'array was changed')
-    
-    console.assert(array.length === mirror.length, 'array.length was changed')
+        console.assert(arrays[j] === array, 'array was changed')

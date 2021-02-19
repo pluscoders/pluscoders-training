@@ -1,14 +1,14 @@
 function concat() {
-    var array = Array.from(arguments);
+    Array.from(arguments)
     var result = []
     
-    for (var i = 0; i < array.length; i++) {
+    for (var i = 0; i < arguments.length; i++) {
+        if (!(arguments[i] instanceof Array)) throw new TypeError(array + ' is not an array')
 
-        if (!(array[i] instanceof Array)) throw new TypeError(array + ' is not an array')
+        var next = arguments[i]
 
-        for (var j = 0; j < array[i].length; j++)
-
-            result[result.length] = array[i][j]
+        for (var j = 0; j < next.length; j++)
+            result[result.length] = next[j]
     }
 
     return result

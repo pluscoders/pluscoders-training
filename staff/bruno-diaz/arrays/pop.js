@@ -3,7 +3,7 @@ function pop(array) {
     
     var result = array[array.length - 1]
     
-    array.length = array.length - 1
+    array.length--
 
     return result
 }
@@ -13,33 +13,22 @@ function pop(array) {
     // CASE array is []
         var result = pop([])
 
-        console.assert(result[0] === undefined, 'result is no correct')
+        console.assert(result === undefined, 'result is no correct')
 
     // CASE array is ["👋"]
         var result = pop(['👋'])
 
-        console.assert(result === undefined, 'result is no correct')
+        console.assert(result === '👋', 'result is no correct')
 
     // CASE array is ['🥚', '🐣', '🐥', '🐓']
         var result = pop(['🥚', '🐣', '🐥', '🐓'])
 
-        console.assert(result instanceof Array, 'result must be an array')
-        console.assert(result.length === 3, 'result.length is no correct')
-        console.assert(result[0] === '🥚', 'result is no correct')
-        console.assert(result[1] === '🐣', 'result is no correct')
-        console.assert(result[2] === '🐥', 'result is no correct')
+        console.assert(result === '🐓', 'result is no correct')
 
     // CASE array is [0, 1, 2, 3, 4, 5, 6]
         var result = pop([0, 1, 2, 3, 4, 5, 6])
 
-        console.assert(result instanceof Array, 'result must be an array')
-        console.assert(result.length === 6, 'result.length is no correct')
-        console.assert(result[0] === 0, 'result is no correct')
-        console.assert(result[1] === 1, 'result is no correct')
-        console.assert(result[2] === 2, 'result is no correct')
-        console.assert(result[3] === 3, 'result is no correct')
-        console.assert(result[4] === 4, 'result is no correct')
-        console.assert(result[5] === 5, 'result is no correct')
+        console.assert(result === 6, 'result is no correct')
 
         
 // UNHAPPY RESULTS
@@ -103,34 +92,3 @@ function pop(array) {
 
         console.assert(result instanceof TypeError)
         console.assert(result.message === 'function() {} is not a array')
-
-
-
-
-// WHY?????????
-
-var x = [1, 2, 3, 4, 5, 6, 7]
-function prueba1(array) {
-    var other = ['A', 'B', 'C']
-    
-    array[0] = other[0]
-
-    return array
-}
-prueba1(x)
-
---> Si tratamos un elemento concreto cambia el array a nivel global
-
-
-// BUT
-
-var y = [1, 2, 3, 4, 5, 6, 7]
-function prueba2(array) {
-    
-    array = ['A', 'B', 'C']
-
-    return array
-}
-prueba2(y)
-
---> Si definimos de nuevo un array NO cambia el array a nivel global, solo dentro del scope de la función

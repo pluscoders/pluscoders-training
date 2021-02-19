@@ -1,4 +1,3 @@
-// TODO omitir el array toPush
 
 var a = [0, 4, 8, 11, 17, 25, 23, 1, 53, 87, 32, 13, 67, 90]
 
@@ -18,11 +17,7 @@ function splice(array, from) {
         count = array.length - from
         var i = 2
     }
-    
-    var toPush = []
-
-    for (i; i < arguments.length; i++)
-        toPush[toPush.length] = arguments[i]
+    var m = i
 
     var mirror = []
     var result = []
@@ -35,8 +30,8 @@ function splice(array, from) {
     
     array.length = from
 
-    for (var m = 0; m < toPush.length; m++)
-        array[array.length] = toPush[m]
+    for (m; m < arguments.length; m++)
+        array[array.length] = arguments[m]
 
     for (var n = 0; n < mirror.length; n++)
         array[array.length] = mirror[n]
@@ -49,31 +44,34 @@ splice(a, 3, 'hola', 'adiós')
 
     var length = Math.floor(Math.random() * 100)
     var array = []
-    var mirror = []
+    // var mirror = []
 
     for (var i = 0; i < length; i++) {
         array[i] = Math.random()
-        mirror[i] = array[i]
+        // mirror[i] = array[i]
     }
 
     var from = Math.floor(Math.random() * length * 1/2)
     var elements = Math.floor(Math.random() * length * 1/2)
 
-    var result = slice(array, from, elements)
-    var otesult = slice(array, from, elements)
+    var length2 = Math.floor(Math.random() * 100)
+    var addElements = []
+    for (var j = 0; j < length2; j++) {
+        addElements[j] = Math.floor(Math.random() * 100)
+    }
+
+    var result = splice(array, from, elements, addElements.toString())
+    var otherResult = array.splice(from, elements)
 
     // Results
 
     console.assert(result instanceof Array, 'result must be an array')
     console.assert(result.length === result.length - elements, 'result.length is no correct')
     
-    var j = 0
-    for (var i = 0; i < array.length; i++)
-    while (i < from && i > from + elements) {
-            console.assert(array[i] === result.[j, 'result.length is no correct')
-            j++
-        }
+
+    for (var i = 0; i < result.length; i++)
+        console.assert(result[i] === otherResult[i], 'result is wrong')
 
 
-    for (var i = 0; i < mirror.length; i++)
-        console.assert(mirror[i] === array[i], 'array was changed')
+// Result = elementos borrados (desde from y elements restantes)
+// Array muta. Se borran los elementos de result y se añaden los nuevos

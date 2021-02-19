@@ -113,7 +113,7 @@ function push(array) {
 
 
 
-function push(array, ...arg) {
+function push1(array, ...arg) {
     if (!(array instanceof Array)) throw new TypeError(array + ' is not an array')
     var arguments = Array.from(arg);
     var j = array.length
