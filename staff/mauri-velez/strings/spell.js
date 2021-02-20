@@ -15,7 +15,7 @@ Implement a function named spell that receives a text (string) as a parameter an
 
 function  spell(text) {
   var caracter = text.split('');
-  for (var i = 0; i < caracter.length; i++);
+  for (var i = 0; i < caracter.length; i++)
     console.log(caracter[i]);
 }
 spell("mauri")
