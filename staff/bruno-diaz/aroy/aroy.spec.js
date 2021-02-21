@@ -711,7 +711,7 @@ describe('Aroy', function () {
     })
 
     describe('some', function() {
-        it('Return a true', function() {
+        it('should return true when any element matches the callback condition', function() {
             var aroy = new Aroy
             aroy.length = Math.floor(Math.random() * 100) + 10
 
@@ -746,7 +746,7 @@ describe('Aroy', function () {
             for (var j = 0; j < aroys.length; j++)
                 expect(aroys[j]).toEqual(aroy)
         })
-        it('Return a false', function() {
+        it('should return false when no element matches the callback condition', function() {
             var aroy = new Aroy
             aroy.length = Math.floor(Math.random() * 100) + 10
 
@@ -781,7 +781,7 @@ describe('Aroy', function () {
     })
 
     describe('every', function() {
-        it('Return a true', function() {
+        it('it should return true when all elements matches the callback condition', function() {
             var aroy = new Aroy
             aroy.length = Math.floor(Math.random() * 100) + 10
 
@@ -813,7 +813,7 @@ describe('Aroy', function () {
             for (var j = 0; j < aroys.length; j++)
                 expect(aroys[j]).toEqual(aroy)
         })
-        it('Return a false', function() {
+        it('it should return false when any element matches the callback condition', function() {
             var aroy = new Aroy
             aroy.length = Math.floor(Math.random() * 100) + 10
 
