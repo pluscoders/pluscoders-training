@@ -1,6 +1,5 @@
 function includes (array, pattern, i) {
     if (!(array instanceof Array)) throw new TypeError(array + ' is not an array')
-    if (pattern === undefined || pattern === null) throw new TypeError('You have to put the pattern value')
     if (i && typeof i !== 'number') throw new TypeError(i + ' is not a number')
 
     if (!i) i = 0

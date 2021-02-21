@@ -1,13 +1,14 @@
-function indexOf(array, pattern, i) {
+function indexOf(array, pattern, from) {
     if (!(array instanceof Array)) throw new TypeError(array + ' is not an array')
-    if (pattern === undefined || pattern === null) throw new TypeError('You have to put the pattern value')
-    if (i && typeof i !== 'number') throw new TypeError(i + ' is not a number')
+    if (pattern === undefined || pattern === null) throw new TypeError('You have to put a pattern value')
+    if (from && typeof from !== 'number') throw new TypeError(from + ' is not a number')
 
-    if (!i) i = 0
-    else if (i < 0) i += array.length
+    if (typeof from === 'undefined') from = 0
+    if (from < 0) from += array.length
+
     var result = -1
 
-    for (i; i < array.length; i++) {
+    for (var i = from; i < array.length; i++) {
         if (array[i] === pattern) {
             result = i
             break
