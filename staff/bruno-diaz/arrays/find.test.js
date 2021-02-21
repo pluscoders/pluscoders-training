@@ -10,7 +10,7 @@ console.log('TEST find')
  * @yields {boolean} [result] - The pattern was founded in array
  */
 
-console.log(' - CASE return the value of an array returned of a callback')
+console.log(' - CASE the array returned values of a callback')
 
 var array = []
 var copy = []
@@ -60,7 +60,7 @@ for (var i = 0; i < array.length; i++)
  * @yields {boolean} [result] - The pattern was founded in array
  */
 
-console.log(' - CASE return the value of an array returned of a callback')
+console.log(' - CASE the array returned undefined of a callback')
 
 var array = []
 var copy = []

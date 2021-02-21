@@ -15,9 +15,9 @@ describe('Aroy', function () {
             var copy = []
             var aroys = []
 
-            aroy.forEach(function (value, index, array) {
+            aroy.forEach(function (value, index, aroy) {
                 copy[index] = value
-                aroys[index] = array
+                aroys[index] = aroy
             })
 
             expect(aroy.length).toEqual(values.length)
@@ -56,7 +56,7 @@ describe('Aroy', function () {
     })
 
     describe('push', function() {
-        it('should succeed on pushing an element into an array', function() {
+        it('should succeed on pushing an element into an aroy', function() {
             var length = Math.floor(Math.random() * 100) + 100
 
             var aroy = new Aroy
@@ -84,7 +84,7 @@ describe('Aroy', function () {
                 expect(aroy[i]).toEqual(copy[i])
         })
 
-        it('should succeed on pushing more than one element into an array', function() {
+        it('should succeed on pushing more than one element into an aroy', function() {
             var length = Math.floor(Math.random() * 100) + 100
 
             var aroy = new Aroy
@@ -667,6 +667,204 @@ describe('Aroy', function () {
 
             for (var i = from; i < aroy.length; i++)
                 expect(aroy[i]).toEqual(copy[i + count])
+        })
+    })
+
+    describe('reduce', function() {
+        it('reduce an aroy through a function', function() {
+            var aroy = new Aroy
+            var copy = []
+            aroy.length = Math.floor(Math.random() * 1000) + 100  
+
+            for (var i = 0; i < aroy.length; i++) {
+                aroy[i] = Math.random()
+                copy[i] = aroy[i]
+            }
+
+            var mirror = []
+            var aroys = []
+            var count = 1
+
+            aroy.reduce(function(accumulator, value, index, aroy) {
+                accumulator++
+
+                mirror[index] = value
+                
+                aroys[index] = aroy
+
+                return accumulator
+            }, count)
+
+            expect(aroy.length).toEqual(copy.length)
+            
+            for (var i = 0; i < copy.length; i++)
+                expect(aroy[i]).toEqual(copy[i])
+                
+            expect(mirror.length).toEqual(aroy.length)
+            
+            for (var i = 0; i < mirror.length; i++)
+                expect(mirror[i]).toEqual(aroy[i])
+            
+            for (var i = 0; i < aroy.length; i++)
+                expect(aroys[i]).toEqual(aroy)
+        })
+    })
+
+    describe('some', function() {
+        it('Return a true', function() {
+            var aroy = new Aroy
+            aroy.length = Math.floor(Math.random() * 100) + 10
+
+            var copy = []
+
+            for (var i = 0; i < aroy.length; i++) {
+                aroy[i] = Math.floor(Math.random() * 100)
+                copy[i] = aroy[i]
+            }
+
+            var targetIndex = Math.floor(Math.random() * aroy.length)
+
+            var aroys = []
+
+            // APPLY
+
+            var result = aroy.some(function(value, index, aroy) {
+                aroys[index] = aroy
+
+                var feedback = false
+
+                if (targetIndex === index) feedback = true
+
+                return feedback
+            })
+
+            expect(typeof result).toEqual('boolean')
+            expect(result).toEqual(true)
+            
+            expect(aroy.length).toEqual(copy.length)
+            for (var i = 0; i < aroy.length; i++)
+            expect(aroy[i]).toEqual(copy[i])
+            
+            expect(aroys.length).toEqual(targetIndex + 1)
+            for (var j = 0; j < aroys.length; j++)
+                expect(aroys[j]).toEqual(aroy)
+        })
+        it('Return a false', function() {
+            var aroy = new Aroy
+            aroy.length = Math.floor(Math.random() * 100) + 10
+
+            var copy = []
+
+            for (var i = 0; i < aroy.length; i++) {
+                aroy[i] = Math.floor(Math.random() * 100)
+                copy[i] = aroy[i]
+            }
+
+            var targetIndex = aroy.length
+
+            var aroys = []
+
+            // APPLY
+
+            var result = aroy.some(function(value, index, aroy) {
+                aroys[index] = aroy
+
+                var feedback = false
+
+                if (targetIndex === index) feedback = true
+
+                return feedback
+            })
+
+            expect(typeof result).toEqual('boolean')
+            expect(result).toEqual(false)
+            
+            expect(aroy.length).toEqual(copy.length)
+            for (var i = 0; i < aroy.length; i++)
+            expect(aroy[i]).toEqual(copy[i])
+            
+            expect(aroys.length).toEqual(aroy.length)
+            for (var j = 0; j < aroys.length; j++)
+                expect(aroys[j]).toEqual(aroy)
+        })
+    })
+
+    describe('every', function() {
+        it('Return a true', function() {
+            var aroy = new Aroy
+            aroy.length = Math.floor(Math.random() * 100) + 10
+
+            var copy = []
+
+            for (var i = 0; i < aroy.length; i++) {
+                aroy[i] = Math.floor(Math.random() * 100)
+                copy[i] = aroy[i]
+            }
+
+            var aroys = []
+
+            // APPLY
+
+            var result = aroy.every(function(value, index, aroy) {
+                aroys[index] = aroy
+
+                var feedback = false
+
+                if (typeof value === 'number') feedback = true
+
+                return feedback
+            })
+
+            expect(typeof result).toEqual('boolean')
+            expect(result).toEqual(true)
+            
+            expect(aroy.length).toEqual(copy.length)
+            for (var i = 0; i < aroy.length; i++)
+            expect(aroy[i]).toEqual(copy[i])
+            
+            expect(aroys.length).toEqual(aroy.length)
+            for (var j = 0; j < aroys.length; j++)
+                expect(aroys[j]).toEqual(aroy)
+        })
+        it('Return a false', function() {
+            var aroy = new Aroy
+            aroy.length = Math.floor(Math.random() * 100) + 10
+
+            var copy = []
+
+            for (var i = 0; i < aroy.length; i++) {
+                aroy[i] = Math.floor(Math.random() * 100)
+                copy[i] = aroy[i]
+            }
+
+            targetIndex = Math.floor(Math.random() * aroy.length)
+            aroy[targetIndex] = Math.random().toString(36).substring(7);
+            copy[targetIndex] = aroy[targetIndex]
+
+            var aroys = []
+
+            // APPLY
+
+            var result = aroy.every(function(value, index, aroy) {
+                aroys[index] = aroy
+
+                var feedback = false
+
+                if (typeof value === 'number') feedback = true
+
+                return feedback
+            })
+
+            expect(typeof result).toEqual('boolean')
+            expect(result).toEqual(false)
+            
+            expect(aroy.length).toEqual(copy.length)
+            for (var i = 0; i < aroy.length; i++)
+            expect(aroy[i]).toEqual(copy[i])
+            
+            expect(aroys.length).toEqual(targetIndex + 1)
+            for (var j = 0; j < aroys.length; j++)
+                expect(aroys[j]).toEqual(aroy)
         })
     })
 }) 

@@ -6,7 +6,7 @@ console.log('TEST filter')
  * @function filter
  * @variation 1 - Create a new array with all elements that pass callback
  * @param {array} [array] - Array to work - | Random |
- * @yields {boolean} [result] - The pattern was founded in array
+ * @yields {array} [result] - An array with all elements returned by callback
  */
 
 console.log(' - CASE create a new array with the values returned by callback')
@@ -17,7 +17,7 @@ var copy = []
 array.length = Math.floor(Math.random() * 100) + 100
 
 for (var i = 0; i < array.length; i++) {
-    array[i] = Math.floor(Math.random() * 100)
+    array[i] = Math.random()
     copy[i] = array[i]
 }
 
@@ -30,21 +30,21 @@ for (var i = 0; i < targetIndex.length; i++)
 var arrays = []
 
 // APPLY
-
-var result = filter(array, function(value, index, array) {
-    arrays[index] = array
-
-    for (var i = 0; i < targetIndex.length; i++)
-        if (index === targetIndex[i]) return value
-})
+// TODO No funciona --> Length no funciona
+// var result = filter(array, function(value, index, array) {
+//     arrays[index] = array
+    
+//     for (var i = 0; i < array.length; i++)
+//         return index === targetIndex[i]
+// })
 
 // CHECKS
 
 // Result is an array
 assert(result instanceof Array, 'result must be an array')
 // Result is not empty
-// assert(result.length === targetIndex.length, 'result.length is no correct')
+// assert(result.length === targetIndex.length, 'result.length is ' + result.length + ' and it should be ' + targetIndex.length)
 // Array was not changed
 assert(array.length === copy.length, 'array.length was changed')
-for (var i = 0; l < array.length; i++)
+for (var i = 0; i < array.length; i++)
     assert(array[i] === copy[i], 'array was changed')

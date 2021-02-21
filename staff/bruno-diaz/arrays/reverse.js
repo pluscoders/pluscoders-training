@@ -1,14 +1,13 @@
 function reverse(array) {
     if (!(array instanceof Array)) throw new TypeError(array + ' is not an array')
+    
     var mirror = []
 
-    for (var i = array.length - 1; i > -1; i--) {
+    for (var i = array.length - 1; i > -1; i--)
         mirror[mirror.length] = array[i]
-    }
 
-    for (i = 0; i < mirror.length; i++) {
+    for (i = 0; i < mirror.length; i++)
         array[i] = mirror[i]
-    }
 
     return array
 }

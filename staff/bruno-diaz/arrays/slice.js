@@ -16,28 +16,28 @@ function slice(array, from, to) {
 
 // TEST
 
-    var length = Math.floor(Math.random() * 100)
-    var array = []
-    var values = []
+    // var length = Math.floor(Math.random() * 100)
+    // var array = []
+    // var values = []
     
-    for (var i = 0; i < length; i++) {
-        array[i] = Math.random()
-        values[i] = array[i]
-    }
+    // for (var i = 0; i < length; i++) {
+    //     array[i] = Math.random()
+    //     values[i] = array[i]
+    // }
     
-    var from = Math.floor(Math.random() * length * 1/2)
-    var to = 0
+    // var from = Math.floor(Math.random() * length * 1/2)
+    // var to = 0
 
-    while (from > to)
-        to = Math.floor(Math.random() * length)
+    // while (from > to)
+    //     to = Math.floor(Math.random() * length)
 
-    var result = slice(array, from, to)
+    // var result = slice(array, from, to)
 
-    console.assert(result instanceof Array, 'result must be an array')
-    console.assert(result.length === to - from, 'result.length is no correct')
+    // console.assert(result instanceof Array, 'result must be an array')
+    // console.assert(result.length === to - from, 'result.length is no correct')
 
-    for (var i = 0; i < values.length; i++)
-        console.assert(values[i] === array[i], 'array was changed')
+    // for (var i = 0; i < values.length; i++)
+    //     console.assert(values[i] === array[i], 'array was changed')
         
-    for (var j = 0; j < result.length; j++)
-        console.assert(result[j] === array[j + from], 'result is wrong')
+    // for (var j = 0; j < result.length; j++)
+    //     console.assert(result[j] === array[j + from], 'result is wrong')

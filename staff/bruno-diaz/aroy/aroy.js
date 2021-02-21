@@ -143,7 +143,6 @@ Aroy.prototype.slice = function(from, to) {
 }
 
 Aroy.prototype.splice = function(from) {
-// debugger
     if (from < 0) from += this.length
 
     var count
@@ -184,3 +183,55 @@ Aroy.prototype.splice = function(from) {
     return result
 }
 
+Aroy.prototype.reduce = function(callback, accumulator) {
+    if (!(callback instanceof Function)) throw new TypeError(callback + ' is not an function')
+
+    var result
+
+    if (this.length === 0) {
+        if (typeof accumulator === 'undefined') throw new TypeError('Reduce of empty aroy with no initial value')
+    } else if (this.length === 1) {
+        if (typeof accumulator === 'undefined') result = this[0]
+    } else {
+        var i = 0
+        if (typeof accumulator === 'undefined') {
+            accumulator = this[0]
+            result = this[0]
+            i = 1
+        }
+        for (i; i < this.length; i++) {
+            if (i !== 0) accumulator = result
+            result = callback(accumulator, this[i], i, this)
+        }
+    }
+
+    return result
+}
+
+Aroy.prototype.some = function(callback) {
+    if (!(callback instanceof Function)) throw new TypeError(callback + ' is not a function')
+
+    var result = false
+
+    for (var i = 0; i < this.length; i++) {
+        result = callback(this[i], i, this)
+
+        if (result) break
+    }
+
+    return result
+}
+
+Aroy.prototype.every = function(callback) {
+    if (!(callback instanceof Function)) throw new TypeError(callback + ' is not a function')
+
+    var result = true
+
+    for (var i = 0; i < this.length; i++) {
+        result = callback(this[i], i, this)
+
+        if (!result) break
+    }
+
+    return result
+}

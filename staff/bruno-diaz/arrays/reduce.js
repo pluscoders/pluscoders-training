@@ -23,32 +23,3 @@ function reduce(array, callback, accumulator) {
 
     return result
 }
-
-
-var array = [1, 2, 3, 4]
-var callback = function(accumulator, currentValue) {
-    return accumulator + currentValue;
-} 
-
-var a = reduce(array, callback)
-var b = reduce(array, callback, 5)
-var c = reduce(array, callback, 10)
-console.log('a: ', a, '  === 10?')
-console.log('b: ', b, '  === 15?')
-console.log('c: ', c, '  === 20?')
-
-// --------------------------------------------------------------------
-
-var array = [0, 1, 2, 3]
-var callback = function(a, b){ return a + b; }
-
-var d = reduce(array, callback)
-console.log('d: ', d, '  === 6?')
-
-// --------------------------------------------------------------------
-
-var array = [[0,1], [2,3], [4,5]]
-var callback = function(a,b) { return a.concat(b); }
-
-var e = reduce(array, callback)
-console.log('e: ', e, '  === [0, 1, 2, 3, 4, 5]?')
