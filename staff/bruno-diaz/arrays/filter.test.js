@@ -31,12 +31,12 @@ var arrays = []
 
 // APPLY
 // TODO No funciona --> Length no funciona
-// var result = filter(array, function(value, index, array) {
-//     arrays[index] = array
+var result = filter(array, function(value, index, array) {
+    arrays[index] = array
     
-//     for (var i = 0; i < array.length; i++)
-//         return index === targetIndex[i]
-// })
+    for (var i = 0; i < targetIndex.length; i++)
+        return index === targetIndex[i]
+})
 
 // CHECKS
 

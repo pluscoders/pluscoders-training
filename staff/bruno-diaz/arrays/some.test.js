@@ -30,11 +30,7 @@ var arrays = []
 var result = some(array, function(value, index, array) {
     arrays[index] = array
 
-    var feedback = false
-
-    if (targetIndex === index) feedback = true
-
-    return feedback
+    return targetIndex === index
 })
 
 // CHECKS
@@ -84,11 +80,7 @@ var arrays = []
 var result = some(array, function(value, index, array) {
     arrays[index] = array
 
-    var feedback = false
-
-    if (targetIndex === index) feedback = true
-
-    return feedback
+    return targetIndex === index
 })
 
 // CHECKS

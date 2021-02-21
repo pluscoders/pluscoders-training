@@ -723,7 +723,8 @@ describe('Aroy', function () {
             }
 
             var targetIndex = Math.floor(Math.random() * aroy.length)
-
+            aroy[targetIndex] = Math.random().toString(36).substring(7)
+            copy[targetIndex] = aroy[targetIndex]
             var aroys = []
 
             // APPLY
@@ -731,11 +732,7 @@ describe('Aroy', function () {
             var result = aroy.some(function(value, index, aroy) {
                 aroys[index] = aroy
 
-                var feedback = false
-
-                if (targetIndex === index) feedback = true
-
-                return feedback
+                return typeof value === 'string'
             })
 
             expect(typeof result).toEqual('boolean')
@@ -760,8 +757,6 @@ describe('Aroy', function () {
                 copy[i] = aroy[i]
             }
 
-            var targetIndex = aroy.length
-
             var aroys = []
 
             // APPLY
@@ -769,11 +764,7 @@ describe('Aroy', function () {
             var result = aroy.some(function(value, index, aroy) {
                 aroys[index] = aroy
 
-                var feedback = false
-
-                if (targetIndex === index) feedback = true
-
-                return feedback
+                return typeof value === 'string'
             })
 
             expect(typeof result).toEqual('boolean')
@@ -808,11 +799,7 @@ describe('Aroy', function () {
             var result = aroy.every(function(value, index, aroy) {
                 aroys[index] = aroy
 
-                var feedback = false
-
-                if (typeof value === 'number') feedback = true
-
-                return feedback
+                return typeof value === 'number'
             })
 
             expect(typeof result).toEqual('boolean')
@@ -838,7 +825,7 @@ describe('Aroy', function () {
             }
 
             targetIndex = Math.floor(Math.random() * aroy.length)
-            aroy[targetIndex] = Math.random().toString(36).substring(7);
+            aroy[targetIndex] = Math.random().toString(36).substring(7)
             copy[targetIndex] = aroy[targetIndex]
 
             var aroys = []
@@ -848,11 +835,7 @@ describe('Aroy', function () {
             var result = aroy.every(function(value, index, aroy) {
                 aroys[index] = aroy
 
-                var feedback = false
-
-                if (typeof value === 'number') feedback = true
-
-                return feedback
+                return typeof value === 'number'
             })
 
             expect(typeof result).toEqual('boolean')

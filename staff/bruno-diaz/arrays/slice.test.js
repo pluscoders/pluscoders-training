@@ -11,7 +11,7 @@ console.log('TEST slice')
  * @yields {array} [result] - A copy of a portion of an array
  */
 
-console.log(' - A copy of a portion of an array (from | to | elementsToAdd)')
+console.log(' - CASE A copy of a portion of an array (from | to | elementsToAdd)')
 
 var array = []
 var copy = []

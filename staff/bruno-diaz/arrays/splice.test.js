@@ -11,7 +11,7 @@ console.log('TEST splice')
  * @yields {array} [result] - Array with count elements
  */
 
-console.log(' - changes the contents of an array by removing or replacing existing elements and/or adding new elements')
+console.log(' - CASE changes the contents of an array by removing or replacing existing elements and/or adding new elements')
 
 var array = []
 array.length = Math.floor(Math.random() * 100) + 10

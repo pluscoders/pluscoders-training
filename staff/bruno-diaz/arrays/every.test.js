@@ -28,11 +28,7 @@ var arrays = []
 var result = every(array, function(value, index, array) {
     arrays[index] = array
 
-    var feedback = false
-
-    if (typeof value === 'number') feedback = true
-
-    return feedback
+    return typeof value === 'number'
 })
 
 // CHECKS
@@ -84,11 +80,7 @@ var arrays = []
 var result = every(array, function(value, index, array) {
     arrays[index] = array
 
-    var feedback = false
-
-    if (typeof value === 'number') feedback = true
-
-    return feedback
+    return typeof value === 'number'
 })
 
 // CHECKS
