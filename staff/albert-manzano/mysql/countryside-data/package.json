@@ -1,0 +1,22 @@
+{
+  "name": "countryside-data",
+  "version": "1.0.0",
+  "description": "database set up ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mysql",
+    "DB"
+  ],
+  "author": "Albert Manzano",
+  "license": "ISC",
+  "dependencies": {
+    "countryside-commons": "file:../countryside-commons",
+    "dotenv": "^8.2.0",
+    "graphql": "^15.4.0",
+    "mysql": "^2.18.1"
+  }
+}
