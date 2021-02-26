@@ -27,3 +27,8 @@
 - `chmod +x XXX` *Modifica los permisos (6.4.4)*
 - `XXX -rf XXX` *(`-rf`) permite hacer referancia a algo*
 - `killall XXX` *Cierra todos los procesos que hayas iniciado*
+- `wich` *Permite ver cosas instaladas (Ejemplo del calendario)*
+- `history` *Te muestra el historial de hasta 1000 comandos utilizados*
+- `history |` *Te muestra historial de comabdos y cambios en textos*
+- `whatis` *Te da información sobre el comando escrito a continuación*
+- `apropos` *Con la palabra o letras a continuación te mostrará los comandos asociados o disponibles relacionados*
