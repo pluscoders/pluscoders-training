@@ -26,3 +26,4 @@
 - `id` *Muestra información del usuario*
 - `chmod +x XXX` *Modifica los permisos (6.4.4)*
 - `XXX -rf XXX` *(`-rf`) permice hacer referancia a algo*
+- `killall XXX` *Cierra todos los procesos que hayas iniciado*
