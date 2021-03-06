@@ -1,30 +1,43 @@
-var register = createRegister(function (email, password) {
+var register = createRegister(function (fullname, email, password, repassword) {
     try {
-        registerUser(email, password)
+        registerUser(fullname, email, password, repassword)
 
         register.style.display = 'none'
-        welcome.style.display = 'block'
+        login.style.display = 'block'
     } catch(error) {
-        //alert(error.message)
-
         var feedback = register.querySelector('span')
         feedback.innerText = error.message
         feedback.style.display = 'block'
     }
-
+}, function() {
+    register.style.display = 'none'
+    login.style.display = 'block'
 })
 
 document.body.append(register)
+register.style.display = 'none'
 
 var welcome = createWelcome()
 welcome.style.display = 'none'
 
 document.body.append(welcome)
 
+var login = createLogin(function (email, password) {
+    try {
+        authenticateUser(email, password)
 
-// TODO add a logout button in welcome, that accepts a configurable behavior to logout and show the landing panel
-// TODO add a landing to choose "Register or Login", so that when clicking on register it shows the register panel, otherwise, when clicking on the login it shows the login panel. also make this landing panel the default panel when the app start.
-// TODO add a login panel, that when submitting with the correct credentials, it logs the user in, otherwise it throws an error "wrong credentials"
+        login.style.display = 'none'
+        welcome.style.display = 'block'
+    } catch(error) {
+        var feedback = login.querySelector('span')
+        feedback.innerText = error.message
+        feedback.style.display = 'block'
+    }
+}, function() {
+    login.style.display = 'none'
+    register.style.display = 'block'
+})
 
+document.body.append(login)
 
 

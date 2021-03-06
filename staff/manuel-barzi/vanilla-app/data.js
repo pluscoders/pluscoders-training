@@ -1,1 +1,1 @@
-var users = [{ email: 'pepito@grillo.com', password: '123123123' }]
+var users = [{ fullname: 'Pepito Grillo', email: 'pepito@grillo.com', password: '123123123' }]
