@@ -1,10 +1,9 @@
-function createBackofficeForm(onRegister, onLogin) {
+function createBackofficeForm(onRegister, onLogin, onSwitch) {
 
     var backofficeForm = document.createElement('div')
     backofficeForm.style.width = '400px'
     backofficeForm.style.margin = '42px auto'
     backofficeForm.style.boxSizing = 'border-box'
-
 
 
     var navBackofficeForm = document.createElement('nav')
@@ -21,11 +20,10 @@ function createBackofficeForm(onRegister, onLogin) {
     var navItemLogin = document.createElement('li')
     navListBackofficeForm.append(navItemLogin)
 
-    var registerLink = createLinkActionBackoffice('Register', navItemRegister)
+    var registerLink = createLinkActionBackoffice('Register', navItemRegister, onSwitch)
     registerLink.classList.add('backofficeForm__link--active')
 
-    var loginLink = createLinkActionBackoffice('Log in', navItemLogin)
-
+    var loginLink = createLinkActionBackoffice('Log in', navItemLogin, onSwitch)
 
 
     var formWrapper = document.createElement('div')
@@ -50,7 +48,6 @@ function createBackofficeForm(onRegister, onLogin) {
     feedback.style.display = 'none'
     formWrapper.append(feedback)
 
-
     
     var registerForm = document.createElement('form')
     registerForm.style.display = 'flex'
@@ -58,24 +55,12 @@ function createBackofficeForm(onRegister, onLogin) {
     registerForm.style.justifyContent = 'center'
     registerForm.style.alignItems = 'center'
     registerForm.id = 'registerForm'
+    registerForm.classList.add('backofficeForm__form')
     formWrapper.append(registerForm)
 
-    var nameRegister = createInputBackoffice('User name', 'text', registerForm)
-    var emailRegister = createInputBackoffice('E-mail', 'email', registerForm)
-    var nameRegister = createInputBackoffice('Password', 'password', registerForm)
-
-    var loginForm = document.createElement('form')
-    loginForm.style.display = 'none'
-    loginForm.style.flexFlow = 'column nowrap'
-    loginForm.style.justifyContent = 'center'
-    loginForm.style.alignItems = 'center'
-    loginForm.id = 'loginForm'
-    formWrapper.append(loginForm)
-
-    var emailLogin = createInputBackoffice('E-mail', 'email', loginForm)
-    var nameLogin = createInputBackoffice('Password', 'password', loginForm)
-
-
+    var fullnameRegister = createInputBackoffice('Full name', 'text', 'fullname', registerForm)
+    var emailRegister = createInputBackoffice('E-mail', 'email', 'email', registerForm)
+    var nameRegister = createInputBackoffice('Password', 'password', 'password', registerForm)
 
     var submit = document.createElement('button')
     submit.classList.add('backofficeForm__submit')
@@ -90,17 +75,55 @@ function createBackofficeForm(onRegister, onLogin) {
     submit.style.fontWeight = 'bold'
     submit.style.borderRadius = '5px'
     submit.style.outline = 'none'
-    formWrapper.append(submit)
+    registerForm.append(submit)
 
-    formWrapper.onsubmit = function (event) {
+    registerForm.onsubmit = function (event) {
+        event.preventDefault()
+
+        var fullname = event.target.fullname.value
+        var email = event.target.email.value
+        var password = event.target.password.value
+
+        onRegister(fullname, email, password)
+    }
+
+
+    var loginForm = document.createElement('form')
+    loginForm.style.display = 'none'
+    loginForm.style.flexFlow = 'column nowrap'
+    loginForm.style.justifyContent = 'center'
+    loginForm.style.alignItems = 'center'
+    loginForm.id = 'loginForm'
+    loginForm.classList.add('backofficeForm__form')
+    formWrapper.append(loginForm)
+
+    var emailLogin = createInputBackoffice('E-mail', 'email', 'email', loginForm)
+    var nameLogin = createInputBackoffice('Password', 'password', 'password', loginForm)
+
+    var submit = document.createElement('button')
+    submit.classList.add('backofficeForm__submit')
+    submit.innerText = 'Register'
+    submit.style.width = '200px'
+    submit.style.margin = '32px auto'
+    submit.style.padding = '8px'
+    submit.style.backgroundColor = 'Teal'
+    submit.style.color = '#ffffff'
+    submit.style.border = 'none'
+    submit.style.fontSize = '15px'
+    submit.style.fontWeight = 'bold'
+    submit.style.borderRadius = '5px'
+    submit.style.outline = 'none'
+    loginForm.append(submit)
+
+    loginForm.onsubmit = function (event) {
         event.preventDefault()
 
         var email = event.target.email.value
         var password = event.target.password.value
 
-        if (submit.innerText === 'Register') onRegister(email, password)
-        else onLogin(email, password)
+        onLogin(email, password)
     }
+    
 
     return backofficeForm
 }
@@ -109,7 +132,7 @@ function createBackofficeForm(onRegister, onLogin) {
 
 // Add a link of backoffice form
 
-function createLinkActionBackoffice(text, where) {
+function createLinkActionBackoffice(text, where, onSwitch) {
     var element = document.createElement('a')
     element.title = text
     element.href = '#'
@@ -118,24 +141,7 @@ function createLinkActionBackoffice(text, where) {
     
     where.append(element)
 
-    element.onclick = function() {
-        var optionLinks = document.querySelectorAll('.backofficeForm__link--active')
-        optionLinks.forEach(function(link) {
-             link.classList.remove('backofficeForm__link--active')
-        })
-
-        element.classList.add('backofficeForm__link--active')
-
-        if (text === 'Register') {
-            document.getElementById('registerForm').style.display === 'flex'
-            document.getElementById('loginForm').style.display === 'none'
-        } else {
-            document.getElementById('registerForm').style.display === 'none'
-            document.getElementById('loginForm').style.display === 'flex'
-        }
-
-        document.querySelector('.backofficeForm__submit').innerText = text
-    }
+    element.onclick = onSwitch
 
     return element
 }
@@ -144,7 +150,7 @@ function createLinkActionBackoffice(text, where) {
 
 // Add a input of backoffice form
 
-function createInputBackoffice(text, type, where) {
+function createInputBackoffice(text, type, name, where) {
     var elementLabel = document.createElement('label')
     elementLabel.innerText = text
     elementLabel.for = type
@@ -153,8 +159,8 @@ function createInputBackoffice(text, type, where) {
 
     var element = document.createElement('input')
     element.type = type
-    element.name = type
-    element.id = type
+    element.name = name
+    element.id = name
     element.style.width = elementLabel.style.width
     element.style.margin = '6px 0'
 
@@ -166,32 +172,280 @@ function createInputBackoffice(text, type, where) {
 
 
 
+// Create a header of session
 
-function createWelcome() {
-    var h1 = document.createElement('h1')
+function createHeader(onLogout) {
+    var header = document.createElement('header')
+    header.id = 'header'
 
-    h1.innerText = 'Welcome!'
+    var logo = document.createElement('h1')
+    logo.innerText = 'logo'
+    header.append(logo)
 
-    return h1
+    var logout = document.createElement('button')
+    logout.classList.add('header__logout')
+    logout.innerHTML = 'LOG OUT'
+    header.append(logout)
+
+    logout.onclick = onLogout
+
+    return header
 }
 
 
 
-function createLogout(onLogout) {
-    var logout = document.createElement('button')
+// Create pag welcome
 
-    logout.style.width = '50px'
-    logout.style.height = '50px'
-    logout.style.borderStyle = 'solid'
-    logout.style.borderWidth = '2px'
-    logout.style.padding = '2px'
-    logout.style.display = 'flex'
-    logout.style.justifyContent = 'center'
-    logout.style.alignItems = 'center'
+function createWelcome(onLogout, onSearch) {
+    var pagWelcome = document.createElement('div')
 
-    logout.innerHTML = 'LOG OUT'
+    var header = createHeader(onLogout)
+    pagWelcome.append(header)
+    
+    var searchComponent = createSearchComponent(onSearch);
+    pagWelcome.append(searchComponent)
 
-    logout.onclick = onLogout
+    return pagWelcome
+}
 
-    return logout
+
+
+// Create search component
+
+function createSearchComponent(onSearch) {
+    var sectionSearch = document.createElement('section')
+    sectionSearch.id = 'searchComponent'
+    sectionSearch.classList.add('searchComponent--searching')
+
+    var titleWrapper = document.createElement('div')
+    titleWrapper.classList.add('searchComponent__titleWrapper')
+    sectionSearch.append(titleWrapper)
+    
+    var title = document.createElement('h2')
+    title.innerText = 'Start to look for all you want'
+    title.classList.add('searchComponent__title')
+    titleWrapper.append(title)
+
+    var form = document.createElement('form')
+    form.classList.add('searchComponent__form')
+    sectionSearch.append(form)
+
+    var searchSearchers = document.createElement('select')
+    searchSearchers.name = 'searchers'
+    searchSearchers.classList.add('searchComponent__select')
+    form.append(searchSearchers)
+
+    var searchSearchersAll = document.createElement('option')
+    searchSearchersAll.value = 'all'
+    searchSearchersAll.innerText = 'All'
+    searchSearchers.append(searchSearchersAll)
+
+    var searchSearchersGoogle = document.createElement('option')
+    searchSearchersGoogle.value = 'google'
+    searchSearchersGoogle.innerText = 'Google'
+    searchSearchers.append(searchSearchersGoogle)
+
+    var searchSearchersYahoo = document.createElement('option')
+    searchSearchersYahoo.value = 'yahoo'
+    searchSearchersYahoo.innerText = 'Yahoo'
+    searchSearchers.append(searchSearchersYahoo)
+
+    var searchSearchersBing = document.createElement('option')
+    searchSearchersBing.value = 'bing'
+    searchSearchersBing.innerText = 'Bing'
+    searchSearchers.append(searchSearchersBing)
+    
+    var searchInput = document.createElement('input')
+    searchInput.type = 'text'
+    searchInput.name = 'searchInput'
+    searchInput.classList.add('searchComponent__input')
+    form.append(searchInput)
+
+    var searchSubmit = document.createElement('button')
+    searchSubmit.innerText = 'Search'
+    searchSubmit.classList.add('searchComponent__submit')
+    form.append(searchSubmit)
+    
+    form.onsubmit = function (event) {
+        event.preventDefault()
+        
+        var searcher = event.target.searchers.value
+        var query = event.target.searchInput.value
+        
+        onSearch(searcher, query)
+    }
+
+    return sectionSearch
+}
+
+
+
+
+// pagination results component
+
+// function createPagination() {
+//     var pagination = document.createElement('ul')
+//     pagination.id = 'paginatoComponent'
+
+//     for (var i = 0; i < searchResultsPagination.length; i++) {
+//         var pagination = document.createElement('ul')
+//         pagination.id = 'paginatoComponent'
+//     }
+
+// }
+
+
+
+
+// loading results component
+
+function setLoading(dimmer) {
+    var submitSearchLoading = document.querySelector('.searchComponent__submit')
+
+    var searchComponentLoading = document.getElementById('searchComponent')
+
+    var resultsWrapper = document.getElementById('resultsWrapper')
+
+    if (dimmer === 'start') {
+        searchComponentLoading.classList.add('searchComponent--searching')
+
+        submitSearchLoading.innerText = ''
+        submitSearchLoading.disabled = true
+        
+        for (var i = 0; i < 5; i++) {
+            var element = document.createElement('span')
+            submitSearchLoading.append(element)
+        }
+        
+        if (resultsWrapper) resultsWrapper.style.opacity = '0.3'
+        
+    } else if (dimmer === 'stop') {
+        searchComponentLoading.classList.remove('searchComponent--searching')
+        
+        submitSearchLoading.innerText = 'search'
+        submitSearchLoading.disabled = false
+
+        if (resultsWrapper) resultsWrapper.style.opacity = '1'
+    }
+}
+
+
+
+// Create pag welcome
+
+function createResults(searchResults) {
+    var oldResultsWrapper = document.getElementById('resultsWrapper')
+    if (oldResultsWrapper)
+        oldResultsWrapper.remove()
+    
+    var resultsWrapper = document.createElement('section')
+    resultsWrapper.style.margin = '0 auto'
+    resultsWrapper.style.padding = '24px 16px'
+    resultsWrapper.style.maxWidth = '1100px'
+    resultsWrapper.id = 'resultsWrapper'
+    document.body.append(resultsWrapper)
+    
+    var resultsList = document.createElement('ul')
+    resultsList.style.padding = '0 16px'
+    resultsList.style.listStyleType = 'none'
+    resultsWrapper.append(resultsList)
+
+    for (var i = 0; i < searchResults.length; i++) {
+        var searchResult = searchResults[i]
+
+        var resultItem = document.createElement('li')
+        resultItem.style.margin = '24px 0'
+        resultsList.append(resultItem)
+        
+        var result = document.createElement('a')
+        result.href = searchResult.href
+        result.target = '_blank'
+        resultItem.append(result)
+
+        var breadcrumb = document.createElement('p')
+        breadcrumb.innerHTML = searchResult.breadcrumb
+        breadcrumb.over = searchResult.breadcrumb
+        breadcrumb.style.fontSize = '12px'
+        breadcrumb.style.opacity = '.6'
+        breadcrumb.style.margin = '8px 0'
+        // breadcrumb.classList.add('result__breadcrumb')
+        result.append(breadcrumb)
+        
+        var resultTitle = document.createElement('p')
+        resultTitle.innerHTML = searchResult.title
+        resultTitle.over = searchResult.title
+        resultTitle.style.fontSize = '20px'
+        // resultTitle.style.fontWeight = 'bold'
+        resultTitle.style.color = 'Teal'
+        resultTitle.style.margin = '8px 0'
+        resultTitle.classList.add('result__title')
+        result.append(resultTitle)
+
+        var resultDescription = document.createElement('p')
+        resultDescription.innerHTML = searchResult.preview
+        resultDescription.style.fontSize = '14px'
+        resultDescription.style.opacity = '.8'
+        result.append(resultDescription)
+    }
+
+    return resultsWrapper
+}
+
+
+
+// loading results component
+
+function createLoading1() {
+    var searchComponentLoading = document.getElementById('searchComponent')
+    searchComponentLoading.classList.add('searchComponent--searching')
+
+    var submitSearchLoading = document.querySelector('.searchComponent__submit')
+    submitSearchLoading.innerText = ''
+    submitSearchLoading.classList.add('searchComponent__submit--searching')
+
+    var circle1 = document.createElement('span')
+    submitSearchLoading.append(circle1)
+    var circle2 = document.createElement('span')
+    submitSearchLoading.append(circle2)
+    var circle3 = document.createElement('span')
+    submitSearchLoading.append(circle3)
+    var circle4 = document.createElement('span')
+    submitSearchLoading.append(circle4)
+    var circle5 = document.createElement('span')
+    submitSearchLoading.append(circle5)
+
+
+
+
+
+
+    // var loading = document.createElement('div')
+    // loading.classList.add('loading')
+    // document.body.append(loading)
+
+    // var text = document.createElement('p')
+    // text.classList.add('loading__text')
+    // text.innerText = 'searching'
+    // loading.append(text)
+
+    // var spinner = document.createElement('div')
+    // spinner.classList.add('loading__spinner')
+    // loading.append(spinner)
+
+    // var circle1 = document.createElement('span')
+    // spinner.append(circle1)
+    // var circle2 = document.createElement('span')
+    // spinner.append(circle2)
+    // var circle3 = document.createElement('span')
+    // spinner.append(circle3)
+    // var circle4 = document.createElement('span')
+    // spinner.append(circle4)
+    // var circle5 = document.createElement('span')
+    // spinner.append(circle5)
+    // var circle6 = document.createElement('span')
+    // spinner.append(circle6)
+    // var circle7 = document.createElement('span')
+    // spinner.append(circle7)
+
+    return loading
 }

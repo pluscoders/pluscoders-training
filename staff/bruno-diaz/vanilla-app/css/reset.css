@@ -446,3 +446,10 @@ input, select {
   }
 
   body, nav, ul, li, div, span, a, form, input { box-sizing: border-box; }
+
+  * {
+    box-sizing: inherit;
+  }
+  *:before, *:after {
+    box-sizing: inherit;
+  }
