@@ -10,7 +10,7 @@
 |cd|Change directory|
 |pwd|Prints the name of the directory in which you are currently working|
 |Locate|Finds a file anywhere on the system by referring to a semi-regularly-updated cached list of files:|
-|Shit + Cursor|Manteniendo el shift + cursor hacia arriba puedes ver los comandos que has ido picando|
+|Shift + Cursor|Manteniendo el shift + cursor hacia arriba puedes ver los comandos que has ido picando|
 |touch|Was created to modify file timestamps, but it can also be used to quickly create an empty file|
 |cp|Copies a file|
 |mv|Move / Rename|
