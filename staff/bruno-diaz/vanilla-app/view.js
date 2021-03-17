@@ -6,18 +6,17 @@ function createBackofficeForm(onRegister, onLogin, onSwitch) {
     backofficeForm.style.boxSizing = 'border-box'
 
 
-    var navBackofficeForm = document.createElement('nav')
-    backofficeForm.append(navBackofficeForm)
-
     var navListBackofficeForm = document.createElement('ul')
     navListBackofficeForm.style.display = 'flex'
     navListBackofficeForm.style.flexFlow = 'row nowrap'
-    navBackofficeForm.append(navListBackofficeForm)
+    backofficeForm.append(navListBackofficeForm)
     
     var navItemRegister = document.createElement('li')
+    navItemRegister.style.width = '200px'
     navListBackofficeForm.append(navItemRegister)
 
     var navItemLogin = document.createElement('li')
+    navItemLogin.style.width = '200px'
     navListBackofficeForm.append(navItemLogin)
 
     var registerLink = createLinkActionBackoffice('Register', navItemRegister, onSwitch)
@@ -58,9 +57,9 @@ function createBackofficeForm(onRegister, onLogin, onSwitch) {
     registerForm.classList.add('backofficeForm__form')
     formWrapper.append(registerForm)
 
-    var fullnameRegister = createInputBackoffice('Full name', 'text', 'fullname', registerForm)
-    var emailRegister = createInputBackoffice('E-mail', 'email', 'email', registerForm)
-    var nameRegister = createInputBackoffice('Password', 'password', 'password', registerForm)
+    createInputBackoffice('Full name', 'text', 'fullname', registerForm)
+    createInputBackoffice('E-mail', 'email', 'email', registerForm)
+    createInputBackoffice('Password', 'password', 'password', registerForm)
 
     var submit = document.createElement('button')
     submit.classList.add('backofficeForm__submit')
@@ -97,8 +96,8 @@ function createBackofficeForm(onRegister, onLogin, onSwitch) {
     loginForm.classList.add('backofficeForm__form')
     formWrapper.append(loginForm)
 
-    var emailLogin = createInputBackoffice('E-mail', 'email', 'email', loginForm)
-    var nameLogin = createInputBackoffice('Password', 'password', 'password', loginForm)
+    createInputBackoffice('E-mail', 'email', 'email', loginForm)
+    createInputBackoffice('Password', 'password', 'password', loginForm)
 
     var submit = document.createElement('button')
     submit.classList.add('backofficeForm__submit')
@@ -123,7 +122,6 @@ function createBackofficeForm(onRegister, onLogin, onSwitch) {
 
         onLogin(email, password)
     }
-    
 
     return backofficeForm
 }
@@ -202,8 +200,8 @@ function createWelcome(onLogout, onSearch) {
     var header = createHeader(onLogout)
     pagWelcome.append(header)
     
-    var searchComponent = createSearchComponent(onSearch);
-    pagWelcome.append(searchComponent)
+    var search = createSearch(onSearch);
+    pagWelcome.append(search)
 
     return pagWelcome
 }
@@ -212,7 +210,7 @@ function createWelcome(onLogout, onSearch) {
 
 // Create search component
 
-function createSearchComponent(onSearch) {
+function createSearch(onSearch) {
     var sectionSearch = document.createElement('section')
     sectionSearch.id = 'searchComponent'
     sectionSearch.classList.add('searchComponent--searching')
@@ -265,10 +263,11 @@ function createSearchComponent(onSearch) {
     searchSubmit.innerText = 'Search'
     searchSubmit.classList.add('searchComponent__submit')
     form.append(searchSubmit)
+
     
     form.onsubmit = function (event) {
         event.preventDefault()
-        
+
         var searcher = event.target.searchers.value
         var query = event.target.searchInput.value
         
@@ -277,23 +276,6 @@ function createSearchComponent(onSearch) {
 
     return sectionSearch
 }
-
-
-
-
-// pagination results component
-
-// function createPagination() {
-//     var pagination = document.createElement('ul')
-//     pagination.id = 'paginatoComponent'
-
-//     for (var i = 0; i < searchResultsPagination.length; i++) {
-//         var pagination = document.createElement('ul')
-//         pagination.id = 'paginatoComponent'
-//     }
-
-// }
-
 
 
 
@@ -333,7 +315,8 @@ function setLoading(dimmer) {
 
 // Create pag welcome
 
-function createResults(searchResults) {
+function createResults(searchResults, page, onPage) {
+
     var oldResultsWrapper = document.getElementById('resultsWrapper')
     if (oldResultsWrapper)
         oldResultsWrapper.remove()
@@ -358,18 +341,9 @@ function createResults(searchResults) {
         resultsList.append(resultItem)
         
         var result = document.createElement('a')
-        result.href = searchResult.href
+        result.href = searchResult.url
         result.target = '_blank'
         resultItem.append(result)
-
-        var breadcrumb = document.createElement('p')
-        breadcrumb.innerHTML = searchResult.breadcrumb
-        breadcrumb.over = searchResult.breadcrumb
-        breadcrumb.style.fontSize = '12px'
-        breadcrumb.style.opacity = '.6'
-        breadcrumb.style.margin = '8px 0'
-        // breadcrumb.classList.add('result__breadcrumb')
-        result.append(breadcrumb)
         
         var resultTitle = document.createElement('p')
         resultTitle.innerHTML = searchResult.title
@@ -386,6 +360,33 @@ function createResults(searchResults) {
         resultDescription.style.fontSize = '14px'
         resultDescription.style.opacity = '.8'
         result.append(resultDescription)
+    }
+    
+    var pagination = document.createElement('ul')
+    pagination.id = 'pagination'
+    resultsWrapper.append(pagination)
+
+    for (var i = 1; i < 6; i++) {
+        var pageWrapper = document.createElement('li')
+        pagination.append(pageWrapper)
+
+        var pageLink = document.createElement('a')
+        pageLink.classList.add('pagination__page')
+        pageLink.href = '#' + i
+        pageLink.innerText = i
+        pageWrapper.append(pageLink);
+
+        // IIFE: inmediatly... RTFM
+        (function(i) {
+            pageLink.onclick = function () {    
+                var page = i
+
+                onPage(page)
+            }
+        })(i)
+
+        if (i === page)
+            pageLink.classList.add('pagination__page--selected')
     }
 
     return resultsWrapper
@@ -413,39 +414,6 @@ function createLoading1() {
     submitSearchLoading.append(circle4)
     var circle5 = document.createElement('span')
     submitSearchLoading.append(circle5)
-
-
-
-
-
-
-    // var loading = document.createElement('div')
-    // loading.classList.add('loading')
-    // document.body.append(loading)
-
-    // var text = document.createElement('p')
-    // text.classList.add('loading__text')
-    // text.innerText = 'searching'
-    // loading.append(text)
-
-    // var spinner = document.createElement('div')
-    // spinner.classList.add('loading__spinner')
-    // loading.append(spinner)
-
-    // var circle1 = document.createElement('span')
-    // spinner.append(circle1)
-    // var circle2 = document.createElement('span')
-    // spinner.append(circle2)
-    // var circle3 = document.createElement('span')
-    // spinner.append(circle3)
-    // var circle4 = document.createElement('span')
-    // spinner.append(circle4)
-    // var circle5 = document.createElement('span')
-    // spinner.append(circle5)
-    // var circle6 = document.createElement('span')
-    // spinner.append(circle6)
-    // var circle7 = document.createElement('span')
-    // spinner.append(circle7)
 
     return loading
 }

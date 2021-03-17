@@ -12,6 +12,8 @@
 
 @import url("searchComponent.css");
 
+@import url("pagination.css");
+
 * { font-family: 'Roboto', sans-serif; }
 
 

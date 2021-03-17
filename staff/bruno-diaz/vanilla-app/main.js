@@ -52,16 +52,49 @@ var welcome = createWelcome(
         backofficeForm.style.display = 'block'
         welcome.style.display = 'none'
     },
-    function(searcher, query) {
+    function searchByQuery(searcher, query, page) {
         setLoading('start')
 
+        if (!page) page = 1
+
+        // TODO move to component
         if (!document.querySelector('.searchComponent--used'))
             document.getElementById('searchComponent').classList.add('searchComponent--used')
 
-        searchInSearchers(searcher, query, function(searchResults) {
-            setLoading('stop')
-            createResults(searchResults)
-        })
+        switch (searcher) {
+            case 'google':
+                searchInGoogle(query, page, function(searchResults, page) {
+                    setLoading('stop')
+                    createResults(searchResults, page, function(page) {
+                        searchByQuery(searcher, query, page)
+                    })
+                })
+                break
+            case 'yahoo':
+                searchInYahoo(query, page, function(searchResults, page) {
+                    setLoading('stop')
+                    createResults(searchResults, page, function(page) {
+                        searchByQuery(searcher, query, page)
+                    })
+                })
+                break
+            case 'bing':
+                searchInBing(query, page, function(searchResults, page) {
+                    setLoading('stop')
+                    createResults(searchResults, page, function(page) {
+                        searchByQuery(searcher, query, page)
+                    })
+                })
+                break
+            default:
+                searchInAll(query, page, function(searchResults, page) {
+                    setLoading('stop')
+                    createResults(searchResults, page, function(page) {
+                        searchByQuery(searcher, query, page)
+                    })
+                })
+                break
+        }
     }
 )
 // welcome.style.display = 'none'
