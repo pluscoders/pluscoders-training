@@ -97,12 +97,12 @@ function searchInGoogle(query, page, callback) {
 
         var title = result.querySelector("h3").innerText;
 
-        // var preview = result.querySelector("span.aCOpRe > span:last-of-type").innerText;
+        var preview = result.querySelector("span.aCOpRe > span:last-of-type").innerText;
 
         var searchResult = {
           title: title,
           url: url,
-          //   preview: preview,
+            preview: preview,
         };
 
         searchResults.push(searchResult);
@@ -144,12 +144,12 @@ function searchInYahoo(query, page, callback) {
 
         var title = result.querySelector("h3").innerText;
 
-        // var preview = result.querySelector(".compText > p").innerText;
+        var preview = result.querySelector(".compText > p").innerText;
 
         var searchResult = {
           title: title,
           url: url,
-          //   preview: preview,
+          preview: preview,
         };
 
         searchResults.push(searchResult);
@@ -192,12 +192,12 @@ function searchInBing(query, page, callback) {
 
         var title = result.querySelector("h2").innerText;
 
-        // var preview = result.querySelector(".b_caption > p").innerText;
+        var preview = result.querySelector(".b_caption > p").innerText;
 
         var searchResult = {
           title: title,
           url: url,
-          // preview: preview,
+          preview: preview,
         };
 
         searchResults.push(searchResult);
