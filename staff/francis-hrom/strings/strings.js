@@ -147,8 +147,10 @@ function longestWords(text) {
 }
 
 /* 
-there is errors in the following example:
+On page https://pluscoders.com/javascript/strings/challenges/longest-words/
+there is a "bug" in the following example:
 longestWords("Hello, World!")
 ["Hello"]
-because Hello.length === World.length
+because Hello.length === World.length, the correct results should be
+["Hello","World"]
 */
