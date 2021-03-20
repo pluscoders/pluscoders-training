@@ -4,6 +4,7 @@
 |-------|------------|
 |git init|Initialize a local Git repository|
 |git clone ssh://git@github.com/[username]/[repository-name].git|Create a local copy of a remote repository|
+|git clone https://git@github.com/[username]/[repository-name].git|Create a local copy of a remote repository|
 ****
 ## Basic Snapshotting	
 |Command|Description|
@@ -32,12 +33,17 @@
 |git merge [source branch] [target branch]	|Merge a branch into a target branch|
 |git stash	|Stash changes in a dirty working directory|
 |git stash clear|	Remove all stashed entries|
+|git stash pop| Reapply previously stashed changes. Removes the changes from your stash and reapplies them to your working copy|
+|git clean -df| Remove untracked directories in addition to untracked files. If an untracked directory is managed by a different Git repository, it is not removed by default. Use -f option twice if you really want to remove such a director.
+|git reset <commit-id>|Reset current HEAD to the specified state|
+|git reset --hard HEAD| Resets the current branch head to <commit> and possibly updates the index (resetting it to the tree of <commit>) Resets the index and working tree. Any changes to tracked files in the working tree since <commit> are discarded. 
+
 ***
 ## Sharing & Updating Projects	
 |Command|Description|
 |-------|-----------|
 |git push origin [branch name]|Push a branch to your remote repository|
-|git push -u origin [branch name]|	Push changes to remote repository (and remember the branch)|
+|git push -u origin [branch name]| Push changes to remote repository (and remember the branch). This command is equivalent to  (git push --set-upstream origin ...)
 |git push	|Push changes to remote repository (remembered branch)|
 |git push origin --delete [branch name]	|Delete a remote branch|
 |git pull	|Update local repository to the newest commit|
