@@ -3,7 +3,14 @@ function longestWords(text) {
   var longestWordsArray = [];
 
   if (text != "" ) {
-    var words = text.match(/\w+/g);
+    text = text.split("!").join(" ");
+    text = text.split("?").join(" ");
+    text = text.split(".").join(" ");    
+    text = text.split(":").join(" ");
+    text = text.split(",").join("");
+    text = text.split(")").join(" ");
+        
+    var words = text.split(" ");
     var longestWordLenght = 0;
 
       for (var i=0; i < words.length; i++) {
@@ -22,4 +29,3 @@ function longestWords(text) {
 
  return longestWordsArray;
 }
-  
