@@ -1,5 +1,5 @@
-import com.hello.Logger;
-import com.hello.LoggerBuilder;
+import com.logger.Logger;
+import com.logger.LoggerBuilder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

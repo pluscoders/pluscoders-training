@@ -1,4 +1,4 @@
-import com.hello.Logger;
+import com.logger.Logger;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 import java.io.ByteArrayOutputStream;

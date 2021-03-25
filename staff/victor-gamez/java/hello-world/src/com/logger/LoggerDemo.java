@@ -1,7 +1,6 @@
-import com.hello.LoggerBuilder;
-import com.hello.Logger;
+package com.logger;
 
-public class Hello {
+public class LoggerDemo {
     public static void main(String[] args) {
         Logger logger = new LoggerBuilder().withPrefix().withDate().withDash().build();
         logger.print("Patata");

@@ -1,4 +1,4 @@
-package com.hello;
+package com.logger;
 
 public class Logger {
     private String buildMessage;

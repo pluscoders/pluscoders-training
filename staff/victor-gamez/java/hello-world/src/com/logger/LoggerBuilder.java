@@ -1,4 +1,4 @@
-package com.hello;
+package com.logger;
 import java.util.Date;
 
 public class LoggerBuilder {
