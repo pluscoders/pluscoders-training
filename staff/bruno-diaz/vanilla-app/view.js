@@ -327,66 +327,76 @@ function createResults(searchResults, page, onPage) {
     resultsWrapper.style.maxWidth = '1100px'
     resultsWrapper.id = 'resultsWrapper'
     document.body.append(resultsWrapper)
+
+    if (searchResults.length === 0) {
+
+        var noResult = document.createElement('p')
+        noResult.innerText = 'No results for this search'
+        noResult.style.textAlign = 'center'
+        resultsWrapper.append(noResult)
+
+    } else {
     
-    var resultsList = document.createElement('ul')
-    resultsList.style.padding = '0 16px'
-    resultsList.style.listStyleType = 'none'
-    resultsWrapper.append(resultsList)
+        var resultsList = document.createElement('ul')
+        resultsList.style.padding = '0 16px'
+        resultsList.style.listStyleType = 'none'
+        resultsWrapper.append(resultsList)
 
-    for (var i = 0; i < searchResults.length; i++) {
-        var searchResult = searchResults[i]
+        for (var i = 0; i < searchResults.length; i++) {
+            var searchResult = searchResults[i]
 
-        var resultItem = document.createElement('li')
-        resultItem.style.margin = '24px 0'
-        resultsList.append(resultItem)
+            var resultItem = document.createElement('li')
+            resultItem.style.margin = '24px 0'
+            resultsList.append(resultItem)
+            
+            var result = document.createElement('a')
+            result.href = searchResult.url
+            result.target = '_blank'
+            resultItem.append(result)
+            
+            var resultTitle = document.createElement('p')
+            resultTitle.innerHTML = searchResult.title
+            resultTitle.over = searchResult.title
+            resultTitle.style.fontSize = '20px'
+            // resultTitle.style.fontWeight = 'bold'
+            resultTitle.style.color = 'Teal'
+            resultTitle.style.margin = '8px 0'
+            resultTitle.classList.add('result__title')
+            result.append(resultTitle)
+
+            var resultDescription = document.createElement('p')
+            resultDescription.innerHTML = searchResult.preview
+            resultDescription.style.fontSize = '14px'
+            resultDescription.style.opacity = '.8'
+            result.append(resultDescription)
+        }
         
-        var result = document.createElement('a')
-        result.href = searchResult.url
-        result.target = '_blank'
-        resultItem.append(result)
-        
-        var resultTitle = document.createElement('p')
-        resultTitle.innerHTML = searchResult.title
-        resultTitle.over = searchResult.title
-        resultTitle.style.fontSize = '20px'
-        // resultTitle.style.fontWeight = 'bold'
-        resultTitle.style.color = 'Teal'
-        resultTitle.style.margin = '8px 0'
-        resultTitle.classList.add('result__title')
-        result.append(resultTitle)
+        var pagination = document.createElement('ul')
+        pagination.id = 'pagination'
+        resultsWrapper.append(pagination)
 
-        var resultDescription = document.createElement('p')
-        resultDescription.innerHTML = searchResult.preview
-        resultDescription.style.fontSize = '14px'
-        resultDescription.style.opacity = '.8'
-        result.append(resultDescription)
-    }
-    
-    var pagination = document.createElement('ul')
-    pagination.id = 'pagination'
-    resultsWrapper.append(pagination)
+        for (var i = 1; i < 6; i++) {
+            var pageWrapper = document.createElement('li')
+            pagination.append(pageWrapper)
 
-    for (var i = 1; i < 6; i++) {
-        var pageWrapper = document.createElement('li')
-        pagination.append(pageWrapper)
+            var pageLink = document.createElement('a')
+            pageLink.classList.add('pagination__page')
+            pageLink.href = '#' + i
+            pageLink.innerText = i
+            pageWrapper.append(pageLink);
 
-        var pageLink = document.createElement('a')
-        pageLink.classList.add('pagination__page')
-        pageLink.href = '#' + i
-        pageLink.innerText = i
-        pageWrapper.append(pageLink);
+            // IIFE: inmediatly... RTFM
+            (function(i) {
+                pageLink.onclick = function () {    
+                    var page = i
 
-        // IIFE: inmediatly... RTFM
-        (function(i) {
-            pageLink.onclick = function () {    
-                var page = i
+                    onPage(page)
+                }
+            })(i)
 
-                onPage(page)
-            }
-        })(i)
-
-        if (i === page)
-            pageLink.classList.add('pagination__page--selected')
+            if (i === page)
+                pageLink.classList.add('pagination__page--selected')
+        }
     }
 
     return resultsWrapper

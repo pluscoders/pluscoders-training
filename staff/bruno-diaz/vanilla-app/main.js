@@ -53,48 +53,49 @@ var welcome = createWelcome(
         welcome.style.display = 'none'
     },
     function searchByQuery(searcher, query, page) {
-        setLoading('start')
+        
+            setLoading('start')
 
-        if (!page) page = 1
+            if (!page) page = 1
 
-        // TODO move to component
-        if (!document.querySelector('.searchComponent--used'))
-            document.getElementById('searchComponent').classList.add('searchComponent--used')
+            // TODO move to component
+            if (!document.querySelector('.searchComponent--used'))
+                document.getElementById('searchComponent').classList.add('searchComponent--used')
 
-        switch (searcher) {
-            case 'google':
-                searchInGoogle(query, page, function(searchResults, page) {
-                    setLoading('stop')
-                    createResults(searchResults, page, function(page) {
-                        searchByQuery(searcher, query, page)
+            switch (searcher) {
+                case 'google':
+                    searchInGoogle(query, page, function(searchResults, page) {
+                        setLoading('stop')
+                        createResults(searchResults, page, function(page) {
+                            searchByQuery(searcher, query, page)
+                        })
                     })
-                })
-                break
-            case 'yahoo':
-                searchInYahoo(query, page, function(searchResults, page) {
-                    setLoading('stop')
-                    createResults(searchResults, page, function(page) {
-                        searchByQuery(searcher, query, page)
+                    break
+                case 'yahoo':
+                    searchInYahoo(query, page, function(searchResults, page) {
+                        setLoading('stop')
+                        createResults(searchResults, page, function(page) {
+                            searchByQuery(searcher, query, page)
+                        })
                     })
-                })
-                break
-            case 'bing':
-                searchInBing(query, page, function(searchResults, page) {
-                    setLoading('stop')
-                    createResults(searchResults, page, function(page) {
-                        searchByQuery(searcher, query, page)
+                    break
+                case 'bing':
+                    searchInBing(query, page, function(searchResults, page) {
+                        setLoading('stop')
+                        createResults(searchResults, page, function(page) {
+                            searchByQuery(searcher, query, page)
+                        })
                     })
-                })
-                break
-            default:
-                searchInAll(query, page, function(searchResults, page) {
-                    setLoading('stop')
-                    createResults(searchResults, page, function(page) {
-                        searchByQuery(searcher, query, page)
+                    break
+                default:
+                    searchInAll(query, page, function(searchResults, page) {
+                        setLoading('stop')
+                        createResults(searchResults, page, function(page) {
+                            searchByQuery(searcher, query, page)
+                        })
                     })
-                })
-                break
-        }
+                    break
+            }
     }
 )
 // welcome.style.display = 'none'

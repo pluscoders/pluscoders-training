@@ -6,10 +6,15 @@ function registerUser(fullname, email, password) {
   if (typeof password !== "string")
     throw new TypeError(password + " is not a string");
 
-  var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-  if (!regex.test(String(email).toLowerCase()))
+  var regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  
+  if (!regexEmail.test(String(email).toLowerCase()))
     throw new Error(email + " is not an e-mail");
+
+  var regexPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,13}$/;
+  
+  if (!regexPassword.test(String(password)))
+    throw new Error("The password have to contain between 8 to 13 characters which at least one lowercase letter, one uppercase letter, one numeric digit, and one special character");
 
   var exists = users.some(function (user) {
     return user.email === email;
@@ -28,21 +33,23 @@ function authenticateUser(email, password) {
   if (typeof password !== "string")
     throw new TypeError(password + " is not a string");
 
-  var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  var regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  if (!regex.test(String(email).toLowerCase()))
+  if (!regexEmail.test(String(email).toLowerCase()))
     throw new Error(email + " is not an e-mail");
 
   var user = users.find(function (user) {
     return user.email === email && user.password === password;
   });
 
-  if (!user) throw new Error("We have no user with this email or password");
+  if (!user) throw new Error("There is no registered user with those credentials");
 }
 
 function searchInAll(query, page, callback) {
   if (typeof query !== "string")
     throw new TypeError(query + " is not a string");
+  if (typeof page !== "number")
+    throw new TypeError(page + " is not a number");
   if (typeof callback !== "function")
     throw new TypeError(callback + " is not a function");
 
@@ -66,6 +73,13 @@ function searchInAll(query, page, callback) {
 }
 
 function searchInGoogle(query, page, callback) {
+  if (typeof query !== "string")
+    throw new TypeError(query + " is not a string");
+  if (typeof page !== "number")
+    throw new TypeError(page + " is not a number");
+  if (typeof callback !== "function")
+    throw new TypeError(callback + " is not a function");
+
   var pageUrl = "&start=";
 
   var pageRef = (page - 1) * 10;
@@ -102,7 +116,7 @@ function searchInGoogle(query, page, callback) {
         var searchResult = {
           title: title,
           url: url,
-            preview: preview,
+          preview: preview,
         };
 
         searchResults.push(searchResult);
@@ -113,6 +127,13 @@ function searchInGoogle(query, page, callback) {
 }
 
 function searchInYahoo(query, page, callback) {
+  if (typeof query !== "string")
+    throw new TypeError(query + " is not a string");
+  if (typeof page !== "number")
+    throw new TypeError(page + " is not a number");
+  if (typeof callback !== "function")
+    throw new TypeError(callback + " is not a function");
+    
   var pageUrl = "&b=";
 
   var pageRef = (page - 1) * 10 + 1;
@@ -154,22 +175,30 @@ function searchInYahoo(query, page, callback) {
 
         searchResults.push(searchResult);
       }
+
       callback(searchResults, page);
     });
 }
 
 function searchInBing(query, page, callback) {
+  if (typeof query !== "string")
+    throw new TypeError(query + " is not a string");
+  if (typeof page !== "number")
+    throw new TypeError(page + " is not a number");
+  if (typeof callback !== "function")
+    throw new TypeError(callback + " is not a function");
+
   var pageUrl = "&b=";
 
   var pageRef;
-  if (page === 1) pagRef = 0;
+  if (page === 1) pageRef = 0;
   else pageRef = 5 + (page - 2) * 10;
 
   fetch(
     "https://b00tc4mp.herokuapp.com/proxy?url=https://www.bing.com/search?q=" +
       query +
       pageUrl +
-      pagRef
+      pageRef
   )
     .then(function (response) {
       return response.text();
@@ -202,6 +231,7 @@ function searchInBing(query, page, callback) {
 
         searchResults.push(searchResult);
       }
+
       callback(searchResults, page);
     });
 }
