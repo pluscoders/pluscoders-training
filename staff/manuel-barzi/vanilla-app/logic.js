@@ -1,4 +1,4 @@
-function registerUser(fullname, email, password, repassword) {
+function registerUser(fullname, email, password, repassword, callback) {
     if (typeof fullname !== 'string') throw new TypeError(fullname + ' is not a string')
     if (!fullname.trim().length) throw new Error('fullname is empty or blank')
 
@@ -13,23 +13,60 @@ function registerUser(fullname, email, password, repassword) {
 
     if (password !== repassword) throw new Error('passwords do not match')
 
-    var exists = users.some(function (user) { return user.email === email })
+    fetch(
+        'https://b00tc4mp.herokuapp.com/api/v2/users',
+        {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: '{ "fullname": "' + fullname + '", "username" : "' + email + '", "password": "' + password + '" }'
+        }
+    )
+        .then(function (response) {
+            if (response.status === 201)
+                callback(null)
+            else
+                return response.json()
+                    .then(function (response) {
+                        var error = response.error
 
-    if (exists) throw new Error('user already exists')
-
-    var user = { fullname: fullname, email: email, password: password }
-
-    users.push(user)
+                        callback(new Error(error))
+                    })
+        })
 }
 
-function authenticateUser(email, password) {
+function authenticateUser(email, password, callback) {
     if (typeof email !== 'string') throw new TypeError(email + ' is not a string')
     if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) throw new Error(email + ' is not a valid e-mail')
 
     if (typeof password !== 'string') throw new TypeError(password + ' is not a string')
     if (!password.trim().length) throw new Error('password is empty or blank')
 
-    var exists = users.some(function (user) { return user.email === email && user.password === password })
+    fetch(
+        'https://b00tc4mp.herokuapp.com/api/v2/users/auth',
+        {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: '{ "username" : "' + email + '", "password": "' + password + '" }'
+        }
+    )
+        .then(function (response) {
+            if (response.status === 200)
+                return response.json()
+                    .then(function (response) {
+                        var token = response.token
 
-    if (!exists) throw new Error('wrong credentials')
+                        callback(null, token)
+                    })
+            else
+                return response.json()
+                    .then(function (response) {
+                        var error = response.error
+
+                        callback(new Error(error))
+                    })
+        })
 }
