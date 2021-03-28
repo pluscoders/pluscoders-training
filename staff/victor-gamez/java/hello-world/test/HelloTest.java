@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 public class HelloTest {
+
     @Test
     @DisplayName("Hello should salute to name")
     void helloShouldSalute() {
