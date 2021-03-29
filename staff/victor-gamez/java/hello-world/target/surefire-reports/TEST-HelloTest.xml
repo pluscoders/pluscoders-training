@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="HelloTest" time="0.009" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="HelloTest" time="0.023" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -18,7 +18,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\OpenJDK\openjdk-8u262-b10\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\V8000~1.GAM\AppData\Local\Temp\surefire3251756591272936690\surefirebooter489498203396895903.jar C:\Users\v.gamez\AppData\Local\Temp\surefire3251756591272936690 2021-03-28T12-45-10_786-jvmRun1 surefire275459378588962702tmp surefire_07960312648574186361tmp"/>
+    <property name="sun.java.command" value="C:\Users\V8000~1.GAM\AppData\Local\Temp\surefire1891172244459853711\surefirebooter8854302481058919438.jar C:\Users\v.gamez\AppData\Local\Temp\surefire1891172244459853711 2021-03-29T19-14-27_067-jvmRun1 surefire3058088736357815689tmp surefire_0361563235830631530tmp"/>
     <property name="surefire.test.class.path" value="C:\Users\v.gamez\pluscoders-training\staff\victor-gamez\java\hello-world\target\test-classes;C:\Users\v.gamez\pluscoders-training\staff\victor-gamez\java\hello-world\target\classes;C:\Users\v.gamez\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.4.2\junit-jupiter-engine-5.4.2.jar;C:\Users\v.gamez\.m2\repository\org\apiguardian\apiguardian-api\1.0.0\apiguardian-api-1.0.0.jar;C:\Users\v.gamez\.m2\repository\org\junit\platform\junit-platform-engine\1.4.2\junit-platform-engine-1.4.2.jar;C:\Users\v.gamez\.m2\repository\org\opentest4j\opentest4j\1.1.1\opentest4j-1.1.1.jar;C:\Users\v.gamez\.m2\repository\org\junit\platform\junit-platform-commons\1.4.2\junit-platform-commons-1.4.2.jar;C:\Users\v.gamez\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.4.2\junit-jupiter-api-5.4.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\v.gamez"/>
@@ -31,7 +31,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\V8000~1.GAM\AppData\Local\Temp\surefire3251756591272936690\surefirebooter489498203396895903.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\V8000~1.GAM\AppData\Local\Temp\surefire1891172244459853711\surefirebooter8854302481058919438.jar;C:\\Users\\v.gamez\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.6\\org.jacoco.agent-0.8.6-runtime.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files\OpenJDK\openjdk-8u262-b10\jre\lib\resources.jar;C:\Program Files\OpenJDK\openjdk-8u262-b10\jre\lib\rt.jar;C:\Program Files\OpenJDK\openjdk-8u262-b10\jre\lib\sunrsasign.jar;C:\Program Files\OpenJDK\openjdk-8u262-b10\jre\lib\jsse.jar;C:\Program Files\OpenJDK\openjdk-8u262-b10\jre\lib\jce.jar;C:\Program Files\OpenJDK\openjdk-8u262-b10\jre\lib\charsets.jar;C:\Program Files\OpenJDK\openjdk-8u262-b10\jre\lib\jfr.jar;C:\Program Files\OpenJDK\openjdk-8u262-b10\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -61,5 +61,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="helloShouldSalute" classname="HelloTest" time="0.007"/>
+  <testcase name="helloShouldSalute" classname="HelloTest" time="0.019"/>
 </testsuite>
