@@ -3,20 +3,20 @@
   to { background-color: var(--color-cta-lighten); }
 }
 
-@keyframes searchComponent-title-hidden {
-  from {
-    opacity: 0;
-    height: 54px;
-  }
-  to {
-    opacity: 1;
-    height: 0;
-  }
-}
-
 @keyframes searchComponent-padding {
   from { padding: 80px 0 40px; }
   to { padding: 30px 0; }
+}
+
+@keyframes searchComponent-title-hidden {
+  from {
+    opacity: 1;
+    height: 54px;
+  }
+  to {
+    opacity: 0;
+    height: 0;
+  }
 }
 
 @keyframes searchComponent-spinners-loading {

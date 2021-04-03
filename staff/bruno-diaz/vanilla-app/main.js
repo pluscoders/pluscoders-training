@@ -1,57 +1,123 @@
 var backofficeForm = createBackofficeForm(
     function (fullname, email, password) {
         try {
-            registerUser(fullname, email, password)
-
-            backofficeForm.style.display = 'none'
-            welcome.style.display = 'block'
+            registerUser(fullname, email, password, function(feedback) {
+                if (feedback === null) {
+                    authenticateUser(email, password, function(feedback, token) {
+                        if (feedback === null) {
+                            sessionStorage.token = token
+                            retrieveUser(sessionStorage.token, function(feedback, user) {
+                                if (feedback === null) {
+                                    sessionStorage.fullname = user.fullname
+                                    sessionStorage.email = user.username
+                                    var userNameWrapper = welcome.querySelector('.acountDropdown__name')
+                                    userNameWrapper.innerText = sessionStorage.fullname
+                                    bimmerViews()
+                                }
+                            })
+                        } else {
+                            var feedbackWrapper = backofficeForm.querySelector('.form__feedback')
+                            feedbackWrapper.innerText = feedback.message
+                            feedbackWrapper.style.display = 'block'
+                        }
+                    })
+                } else {
+                    var feedbackWrapper = backofficeForm.querySelector('.form__feedback')
+                    feedbackWrapper.innerText = feedback.message
+                    feedbackWrapper.style.display = 'block'
+                }
+            })
         } catch(error) {
-            var feedback = backofficeForm.querySelector('span')
-            header.innerText = error.message
-            feedback.style.display = 'block'
+            var feedbackWrapper = backofficeForm.querySelector('.form__feedback')
+            feedbackWrapper.innerText = error.message
+            feedbackWrapper.style.display = 'block'
         }
     }, function (email, password) {
         try {
-            authenticateUser(email, password)
-
-            backofficeForm.style.display = 'none'
-            welcome.style.display = 'block'
+            authenticateUser(email, password, function(feedback, token) {
+                if (feedback === null) {
+                    sessionStorage.token = token
+                    retrieveUser(sessionStorage.token, function(feedback, user) {
+                        if (feedback === null) {
+                            sessionStorage.fullname = user.fullname
+                            sessionStorage.email = user.username
+                            var userNameWrapper = welcome.querySelector('.acountDropdown__name')
+                            userNameWrapper.innerText = sessionStorage.fullname
+                            bimmerViews()
+                        }
+                    })
+                } else {
+                    var feedbackWrapper = backofficeForm.querySelector('.form__feedback')
+                    feedbackWrapper.innerText = feedback.message
+                    feedbackWrapper.style.display = 'block'
+                }
+            })
         } catch(error) {
-            var feedback = backofficeForm.querySelector('span')
-            feedback.innerText = error.message
-            feedback.style.display = 'block'
+            var feedbackWrapper = backofficeForm.querySelector('.form__feedback')
+            feedbackWrapper.innerText = error.message
+            feedbackWrapper.style.display = 'block'
         }
     }, function () {
-        var optionLinkActive = document.querySelector('.backofficeForm__link--active')
-        optionLinkActive.classList.remove('backofficeForm__link--active')
+        document.querySelector('.switchButtons__link--active').classList.remove('switchButtons__link--active')
 
-        var forms = document.querySelectorAll('.backofficeForm__form')
+        backofficeForm.querySelector('.form__feedback').style.display = 'none'
 
-        var links = document.querySelectorAll('.backofficeForm__link')
+        var forms = document.querySelectorAll('.form')
+
+        var links = document.querySelectorAll('.switchButtons__link')
 
         if (forms[1].style.display === 'flex') {
-            links[0].classList.add('backofficeForm__link--active')
+            links[0].classList.add('switchButtons__link--active')
             document.getElementById('registerForm').style.display = 'flex'
             document.getElementById('loginForm').style.display = 'none'
-            document.querySelector('.backofficeForm__submit').innerText = 'Register'
         } else {
-            links[1].classList.add('backofficeForm__link--active')
+            links[1].classList.add('switchButtons__link--active')
             document.getElementById('registerForm').style.display = 'none'
             document.getElementById('loginForm').style.display = 'flex'
-            document.querySelector('.backofficeForm__submit').innerText = 'Log in'
         }
     }
 )
-// document.body.append(backofficeForm)
-backofficeForm.style.display = 'none'
+document.body.append(backofficeForm)
 
-
+var editProfile
 
 var welcome = createWelcome(
-    function() { 
-        backofficeForm.style.display = 'block'
+    // onEditProfile
+    function() {
+        editProfile = createEditProfile(
+            // onEditProfile
+            function() {
+                welcome.style.display = 'none'
+                editProfile.style.display = 'block'
+            },
+            // onLogout
+            function() { 
+                var menuDropdownOpened = document.querySelector('.acountDropdown__menu--opened')
+                menuDropdownOpened.classList.remove('.acountDropdown__menu--opened')
+                
+                // sessionStorage.clear()  ???
+                sessionStorage.removeItem("token")
+                sessionStorage.removeItem("fullname")
+                sessionStorage.removeItem("email")
+        
+                bimmerViews()
+            }
+        )
+        document.body.append(editProfile)
         welcome.style.display = 'none'
     },
+    // onLogout
+    function() { 
+        var menuOpened = welcome.querySelector('.acountDropdown__menu--opened')
+        menuOpened.classList.remove('.acountDropdown__menu--opened')
+        
+        // sessionStorage.clear()  ???
+        sessionStorage.removeItem("token")
+        sessionStorage.removeItem("fullname")
+
+        bimmerViews()
+    },
+    // onSearch
     function searchByQuery(searcher, query, page) {
         
             setLoading('start')
@@ -98,6 +164,32 @@ var welcome = createWelcome(
             }
     }
 )
-// welcome.style.display = 'none'
-welcome.style.display = 'block'
 document.body.append(welcome)
+
+
+
+
+function bimmerViews() {
+    if (sessionStorage.token) {
+        backofficeForm.style.display = 'none'
+        welcome.style.display = 'block'
+    } else {
+        backofficeForm.style.display = 'block'
+        welcome.style.display = 'none'
+        if (editProfile)
+            editProfile.style.display = 'none'
+    }
+}
+
+bimmerViews()
+
+function logout() { 
+    var menuDropdownOpened = document.querySelector('.acountDropdown__menu--opened')
+    menuDropdownOpened.classList.remove('.acountDropdown__menu--opened')
+    
+    // sessionStorage.clear()  ???
+    sessionStorage.removeItem("token")
+    sessionStorage.removeItem("fullname")
+
+    bimmerViews()
+}
