@@ -1,7 +1,8 @@
-function createBackofficeForm(onRegister, onLogin, onSwitch) {
+function createAccessControlPanel(onRegister, onLogin, onSwitch) {
 
     var backofficeForm = document.createElement('div')
     backofficeForm.classList.add('backofficeAccess')
+    backofficeForm.id = 'backofficeAccess'
     
     
     var navListBackofficeForm = document.createElement('ul')
@@ -87,7 +88,7 @@ function createBackofficeForm(onRegister, onLogin, onSwitch) {
 
 // Add a link of backoffice form
 
-function createLinkActionBackoffice(text, where, onSwitch) {
+function createLinkActionBackoffice(text, where, callback) {
     var element = document.createElement('a')
     element.title = text
     element.href = '#'
@@ -96,7 +97,7 @@ function createLinkActionBackoffice(text, where, onSwitch) {
     
     where.append(element)
 
-    element.onclick = onSwitch
+    element.onclick = callback
 
     return element
 }
@@ -105,16 +106,13 @@ function createLinkActionBackoffice(text, where, onSwitch) {
 
 // Add a input of backoffice form
 
-function createInputBackoffice(text, type, name, where, placeholder) {
+function createInputBackoffice(text, type, name, where) {
     var width = '300px'
 
     var elementWrapper = document.createElement('span')
     elementWrapper.classList.add('form__element')
     elementWrapper.style.width = width
     where.append(elementWrapper)
-
-    // if (text === 'New password')
-    //     width = '142px'
 
     var elementLabel = document.createElement('label')
     elementLabel.innerText = text
@@ -129,31 +127,7 @@ function createInputBackoffice(text, type, name, where, placeholder) {
     element.style.width = width
     element.classList.add('form__element--input')
 
-    if (sessionStorage.token)
-        element.placeholder = placeholder
-
     elementLabel.append(element)
-    
-    // if (text === 'New password') {     
-    //     elementWrapper.style.display = 'flex'
-    //     elementWrapper.style.flexFlow = 'row-reverse nowrap'
-    //     elementWrapper.style.justifyContent = 'space-between'
-
-    //     var elementLabelNew = document.createElement('label')
-    //     elementLabelNew.innerText = 'Password'
-    //     elementLabelNew.for = type
-    //     elementLabelNew.style.width = width
-    //     elementLabelNew.style.margin = '8px 0'
-    //     elementWrapper.append(elementLabelNew)
-
-    //     var elementNew = document.createElement('input')
-    //     elementNew.type = type
-    //     elementNew.name = name
-    //     elementNew.id = name
-    //     elementNew.style.width = width
-    //     elementNew.style.margin = '6px 0'
-    //     elementLabelNew.append(elementNew)
-    // }
 
     return elementLabel
 }
@@ -162,7 +136,7 @@ function createInputBackoffice(text, type, name, where, placeholder) {
 
 // Create a header of session
 
-function createHeader(onEditProfile, onLogout) {
+function createHeader(user, openUserMenu, onEditProfile, onLogout) {
     var header = document.createElement('header')
     header.id = 'header'
 
@@ -178,25 +152,11 @@ function createHeader(onEditProfile, onLogout) {
     accountNameWrapper.classList.add("acountDropdown__link")
     accountDropdown.append(accountNameWrapper)
 
-    accountDropdown.onclick = function() {
-        var elementOpened = header.querySelector('.acountDropdown__menu--opened')
-
-        if (elementOpened)
-            elementOpened.classList.remove("acountDropdown__menu--opened")
-        else
-            accountMenu.classList.add("acountDropdown__menu--opened")
-
-        var iconOpened = document.querySelector('.fa-opened')
-
-        if (elementOpened)
-            iconOpened.classList.remove("fa-opened")
-        else
-            accountIcon.classList.add("fa-opened")
-    }
+    accountDropdown.onclick = openUserMenu
 
     var accountName = document.createElement('span')
     accountName.classList.add("acountDropdown__name")
-    accountName.innerText = sessionStorage.fullname
+    accountName.innerText = user.fullname
     accountNameWrapper.append(accountName)
     
     var accountIcon = document.createElement('i')
@@ -241,51 +201,158 @@ function createHeader(onEditProfile, onLogout) {
 
 // Create Edit profile form
 
-function createEditProfile(onEditProfile, onLogout) {
-    var pagEditProfile = document.createElement('div')
+function createEditProfile(user, onSwitchInfo, onSwitchPassword, onSwitchAccount, closeModal, onUpdate, onDelete) {
 
-    var header = createHeader(onEditProfile, onLogout)
-    pagEditProfile.append(header)
+    var modal = document.createElement('section')
+    modal.classList.add('modal')
+    modal.classList.add('modal--editProfile')
+
+    var modalBackground = document.createElement('div')
+    modalBackground.classList.add('modal__background')
+    modalBackground.onclick = function() {
+        closeModal(modal)
+    }
+    modal.append(modalBackground)
+
+    var modalContainer = document.createElement('div')
+    modalContainer.classList.add('modal__container')
+    modal.append(modalContainer)
+
+    var modalHeader = document.createElement('div')
+    modalHeader.classList.add('modalHeader')
+    modalContainer.append(modalHeader)
+
+    var modalTitle = document.createElement('h3')
+    modalTitle.innerText = 'Edit Account'
+    modalTitle.classList.add('modalHeader__title')
+    modalHeader.append(modalTitle)
+
+    var modalClose = document.createElement('i')
+    modalClose.classList.add('fa')
+    modalClose.classList.add('fa-times')
+    modalClose.classList.add('modalHeader__close')
+    modalClose.onclick = function() {
+        closeModal(modal)
+    }
+    modalHeader.append(modalClose)
+
+    var editProfile = document.createElement('div')
+    editProfile.classList.add('formContainer')
+    modalContainer.append(editProfile)
     
-    var editProfileForm = document.createElement('div')
-    editProfileForm.style.padding = '24px 0 16px'
-    pagEditProfile.append(editProfileForm)
+    var navListEditProfile = document.createElement('ul')
+    navListEditProfile.classList.add('switchButtons')
+    editProfile.append(navListEditProfile)
+    
+    var navItemInfo = document.createElement('li')
+    navListEditProfile.append(navItemInfo)
 
-    var editForm = document.createElement('form')
-    editForm.classList.add('form')
-    editProfileForm.append(editForm)
+    var navItemPassword = document.createElement('li')
+    navListEditProfile.append(navItemPassword)
 
-    createInputBackoffice('Full name', 'text', 'fullname', editForm, sessionStorage.fullname)
-    createInputBackoffice('E-mail', 'email', 'email', editForm, sessionStorage.email)
-    // createInputBackoffice('New password', 'password', 'password', editForm, '')
+    var navItemAccount = document.createElement('li')
+    navListEditProfile.append(navItemAccount)
+
+    var navInfoLink = createLinkActionBackoffice('Info', navItemInfo, onSwitchInfo)
+    navInfoLink.classList.add('switchButtons__link--active')
+
+    var navPasswordLink = createLinkActionBackoffice('Password', navItemPassword, onSwitchPassword)
+
+    var navAccountLink = createLinkActionBackoffice('Delete Account', navItemAccount, onSwitchAccount)
+
+    var formWrapper = document.createElement('div')
+    formWrapper.classList.add('backofficeAccess__form')
+    editProfile.append(formWrapper)
+
+    var feedback = document.createElement('span')
+    feedback.classList.add("form__feedback")
+    formWrapper.append(feedback)
+
+    var editInfoForm = document.createElement('form')
+    editInfoForm.classList.add('form')
+    editInfoForm.id = 'editInfoForm'
+    formWrapper.append(editInfoForm)
+
+    var fullnameInput = createInputBackoffice('Full name', 'text', 'fullname', editInfoForm)
+    fullnameInput = fullnameInput.querySelector('#fullname.form__element--input')
+    fullnameInput.value= user.fullname
+
+    var emailInput = createInputBackoffice('E-mail', 'email', 'email', editInfoForm)
+    emailInput = emailInput.querySelector('#email.form__element--input')
+    emailInput.value = user.username
 
     var submit = document.createElement('button')
     submit.classList.add('form__button')
     submit.classList.add('form__button--submit')
     submit.innerText = 'Save'
-    editForm.append(submit)
+    editInfoForm.append(submit)
 
-    editForm.onsubmit = function (event) {
+    editInfoForm.onsubmit = function (event) {
         event.preventDefault()
 
         var fullname = event.target.fullname.value
         var email = event.target.email.value
-        var password = event.target.password.value
 
-        onRegister(fullname, email, password)
+        onUpdate('info', fullname, email)
     }
 
-    return pagEditProfile
+    var changePasswordForm = document.createElement('form')
+    changePasswordForm.classList.add('form')
+    changePasswordForm.id = 'changePasswordForm'
+    changePasswordForm.style.display = 'none'
+    formWrapper.append(changePasswordForm)
+
+    var password = createInputBackoffice('Password', 'password', 'oldPassword', changePasswordForm)
+    var passwordNew = createInputBackoffice('New password', 'password', 'password', changePasswordForm)
+
+    var submit = document.createElement('button')
+    submit.classList.add('form__button')
+    submit.classList.add('form__button--submit')
+    submit.innerText = 'Save'
+    changePasswordForm.append(submit)
+
+    changePasswordForm.onsubmit = function (event) {
+        event.preventDefault()
+        var oldPassword = event.target.oldPassword.value
+        var password = event.target.password.value
+
+        onUpdate('password', oldPassword, password)
+    }
+
+    var deleteAccountForm = document.createElement('form')
+    deleteAccountForm.classList.add('form')
+    deleteAccountForm.id = 'deleteAccountForm'
+    deleteAccountForm.style.display = 'none'
+    formWrapper.append(deleteAccountForm)
+
+    var password = createInputBackoffice('Password', 'password', 'password', deleteAccountForm)
+
+    var submit = document.createElement('button')
+    submit.classList.add('form__button')
+    submit.classList.add('form__button--delete')
+    submit.innerText = 'Delete account'
+    deleteAccountForm.append(submit)
+
+    deleteAccountForm.onsubmit = function (event) {
+        event.preventDefault()
+
+        var password = event.target.password.value
+
+        onDelete(password)
+    }
+
+    return modal
 }
 
 
 
 // Create pag welcome
 
-function createWelcome(onEditProfile, onLogout, onSearch) {
+function createSession(user, openUserMenu, onEditProfile, onLogout, onSearch) {
     var pagWelcome = document.createElement('div')
+    pagWelcome.id = 'account'
 
-    var header = createHeader(onEditProfile, onLogout)
+    var header = createHeader(user, openUserMenu, onEditProfile, onLogout)
     pagWelcome.append(header)
     
     var search = createSearch(onSearch);

@@ -8,6 +8,8 @@
 
 /* COMPONENTS */
 
+@import url("c-modal.css");
+
 @import url("c-header.css");
 
 @import url("c-search.css");
@@ -26,11 +28,6 @@
 
 
 
-
-
-
-
-
 #resultsWrapper a {
     text-decoration: none;
     color: #333333;
@@ -40,3 +37,12 @@
     text-decoration: underline;
 }
 
+
+
+
+
+#feedback {
+    background-color: pink;
+    position: absolute;
+    top: 0;
+}

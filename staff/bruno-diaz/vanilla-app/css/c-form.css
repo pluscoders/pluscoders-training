@@ -7,6 +7,11 @@
   margin: 24px auto;
 }
 
+.formContainer {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
 .form__element {
   margin: 4px 0;
   padding: 4px 0;
@@ -48,6 +53,17 @@
 
   background-color: var(--color-cta-lighten);
   border: 1px solid var(--color-cta);
+}
+
+.form__button--delete {
+  background-color: FireBrick;
+  color: white;
+  border: none;
+}
+.form__button--delete:hover {
+  background-color: rgb(230, 61, 61);
+  color: white;
+  border: 1px solid FireBrick;
 }
 
 .form__feedback {
