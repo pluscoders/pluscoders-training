@@ -92,8 +92,9 @@ function goToSessionScreen() {
         if (feedback === null) {
             renderSessionScreen(user)
         } else {
-            sessionStorage.clear()
-            goToAccessControlScreen()
+            var feedbackWrapper = controlAccessPanel.querySelector('.form__feedback')
+            feedbackWrapper.innerText = feedback.message
+            feedbackWrapper.style.display = 'block'
         }
     })
 }
@@ -210,7 +211,7 @@ function renderSessionScreen(user) {
         },
         // onLogout
         function() { 
-            sessionStorage.clear()
+            sessionStorage.removeItem("token")
 
             init()
         },
