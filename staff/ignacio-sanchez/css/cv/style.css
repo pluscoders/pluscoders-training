@@ -1,0 +1,35 @@
+body {
+    background-color: rgb(94, 255, 0, 0.1)
+}
+  #title {
+    font-family: Verdana,sans-serif;
+    padding-left: 20px;
+  }
+
+  img {
+    display: block;
+    margin-left: 10px;
+    margin-right: 50px;
+    width: 60%;
+    border: 3px solid black;
+    padding-bottom: 30px;
+    
+  }
+
+  h2 {
+    color: black;
+    border-left:  6px solid red;
+    background-color: lightgrey;
+    border-radius: 5px;
+    margin: 20px 5px 5px;
+    max-width: 70%;
+    padding: 5px 10px 5px 10px;
+    letter-spacing: 1px;
+
+  }
+
+  p { margin-left:10px;
+    max-width: 65%;
+
+
+}
