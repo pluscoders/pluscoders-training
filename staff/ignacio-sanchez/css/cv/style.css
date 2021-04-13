@@ -1,35 +1,61 @@
 body {
-    background-color: rgb(94, 255, 0, 0.1)
+  font-family: Georgia, verdana, sans-serifs;
+  background-color: rgb(94, 255, 0, 0.1) ;
+  margin-right: 15%px;
+  margin-top: 0px;
+  margin-bottom: 30px;
+  margin-left: 15%;
 }
-  #title {
-    font-family: Verdana,sans-serif;
-    padding-left: 20px;
-  }
 
-  img {
-    display: block;
-    margin-left: 10px;
-    margin-right: 50px;
-    width: 60%;
-    border: 3px solid black;
-    padding-bottom: 30px;
-    
-  }
+div {
+  border-radius: 10px;
+}
 
-  h2 {
-    color: black;
-    border-left:  6px solid red;
-    background-color: lightgrey;
-    border-radius: 5px;
-    margin: 20px 5px 5px;
-    max-width: 70%;
-    padding: 5px 10px 5px 10px;
-    letter-spacing: 1px;
+a:link, a:visited {
+  background-color: white;
+  color: black;
+  padding: 3px 3px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
 
-  }
+a:hover, a:active {
+  background-color: green;
+  color: white;
+}
 
-  p { margin-left:10px;
-    max-width: 65%;
+#title {
+  font-family: Verdana, sans-serif;
+  padding-left: 20px;
+}
 
+img.photo {
+  display: block;
+  margin-left: 10px;
+  margin-right: 50px;
+  margin-bottom: 20px;
+  width: 20%;
+  border: 2px solid black;
+  border-radius: 5px;
+}
 
+h2 {
+  color: black;
+  border-left: 6px solid red;
+  background-color: lightgrey;
+  border-radius: 5px;
+  margin: 20px 5px 5px;
+  max-width: 70%;
+  padding: 5px 10px 5px 10px;
+  letter-spacing: 1px;
+}
+
+p {
+  margin-left: 10px;
+  max-width: 65%;
+}
+
+.professional-background {
+  background-color: skyblue;
 }
