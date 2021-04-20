@@ -1,0 +1,46 @@
+div {
+    background-color: #000000;
+    margin: 5px;
+    padding: 5px;
+    font-size: 30px;
+    border-style: dotted;
+    border-color: blue;
+    color: wheat;
+}
+
+hr {
+    display: block;
+    overflow: hidden;
+    border-style: inset;
+    border-width: 1px;
+}
+
+.container {
+    display: flex;
+    align-items: stretch;
+}
+
+.container1 {
+    display: flex;
+    align-items: flex-start;
+    height: 150px;
+}
+
+.container1>*:first-child {
+    align-self: stretch;
+}
+
+.center {
+    align-self: center;
+}
+
+.container3 {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.box {
+    background-color: violet;
+}

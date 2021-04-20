@@ -23,6 +23,7 @@
   grid-template-columns: 20% auto auto 20%;
   grid-gap: 1px;
   padding: 1px;
+  
 }
 
 .grid-container>div {
@@ -35,7 +36,6 @@ body {
 }
 
 a:link, a:visited {
-  background-color: white;
   color: black;
   padding: 3px 3px;
   text-align: center;
@@ -44,13 +44,17 @@ a:link, a:visited {
 }
 
 a:hover, a:active {
-  background-color: green;
   color: white;
 }
 
-#title {
+.fa-envelope-open, .fa-phone-square-alt {
+  margin-right: 1rem;
+}
+
+.title {
   font-family: Verdana, sans-serif;
   padding-left: 20px;
+  border-radius: 5px;
 }
 
 .container-photo {
@@ -82,10 +86,10 @@ h1 {
 h2 {
   color: black;
   border-left: 6px solid red;
-  background-color: lightgrey;
+  background-color: rgba(211, 211, 211, 0.418);
   border-radius: 5px;
   margin: 20px 5px 5px;
-  max-width: 70%;
+  max-width: 100%;
   padding: 5px 10px 5px 10px;
   letter-spacing: 1px;
 }
