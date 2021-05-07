@@ -1,0 +1,61 @@
+=box($grid-area,$background-color)
+  grid-area: $grid-area
+  background-color: $background-color
+
+$separation: 10px
+$row-size-tablet: 200px
+$column-size-tablet: 200px
+$row-size-desktop: 314px
+$column-size-desktop: 314px
+
+.mozaic
+  display: grid
+  grid-template-columns: 325px
+  grid-auto-rows: minmax($row-size-tablet, auto)
+  grid-template-areas: 'box-1' 'box-2' 'box-3' 'box-4' 'box-5' 'box-6' 'box-7' 'box-8' 'box-9'
+  border-color: white
+  border-width: $separation
+  justify-content: center
+  text-align: center
+  row-gap: $separation
+  column-gap: $separation
+
+  &__box
+    &-1
+      +box(box-1, rgba(255, 0, 0, 0.5))
+
+    &-2
+      +box(box-2, rgba(0, 47, 255, 0.5))
+
+    &-3
+      +box(box-3, rgba(238, 255, 0, 0.5))
+
+    &-4
+      +box(box-4, rgba(255, 187, 0, 0.5))
+
+    &-5
+      +box(box-5, rgba(0, 47, 255, 0.5))
+
+    &-6
+      +box(box-6, rgba(255, 0, 0, 0.5))
+
+    &-7
+      +box(box-7, rgba(255, 0, 0, 0.5))
+
+    &-8
+      +box(box-8, rgba(119, 0, 255, 0.5))
+
+    &-9
+      +box(box-9, rgba(238, 255, 0, 0.5))
+
+  @media (min-width: 680px) and (max-width: 940px)
+    &
+      grid-template-areas: 'box-1 box-2 box-2' 'box-1 box-3 box-3' 'box-4 box-4 box-6' 'box-5 box-5 box-6' 'box-7 box-8 box-8' 'box-7 box-9 box-9'
+      grid-auto-rows: minmax($row-size-tablet)
+      grid-template-columns: $column-size-tablet $column-size-tablet $column-size-tablet
+
+  @media (min-width: 940px)
+    &
+      grid-template-areas: 'box-1 box-2 box-2' 'box-1 box-3 box-3' 'box-4 box-4 box-6' 'box-5 box-5 box-6' 'box-7 box-8 box-8' 'box-7 box-9 box-9'
+      grid-auto-rows: minmax($row-size-desktop)
+      grid-template-columns: $column-size-desktop $column-size-desktop $column-size-desktop
