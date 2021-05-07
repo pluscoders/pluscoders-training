@@ -2,6 +2,17 @@ $desktop: 1024px
 $tablet: 768px
 $mobile: 600px
 
+@mixin containerBoxesStyling($width $columnWidth $rowHeight)
+    width: $width
+    margin: 0 auto
+    display: grid
+    grid-template-columns: repeat(3, $columnWidth)
+    grid-template-rows: repeat(6, $rowHeight)
+    grid-template-areas: "box1 box2 box2" "box1 box3 box3" "box4 box4 box6" "box5 box5 box6" "box7 box8 box8" "box7 box9 box9"
+    column-gap: .6rem
+    row-gap: .6rem
+
+
 @media screen and (max-width: $mobile)
     .container--box
         margin: 0 auto
@@ -12,34 +23,16 @@ $mobile: 600px
 
 @media screen and (min-width: $mobile+1)
     .container--boxes
-        width: 80%
-        margin: 0 auto
-        display: grid
-        grid-template-columns: 14.063 14.063 14.063
-        grid-template-rows: repeat(6, 12.188rem)
-        grid-template-areas: "box1 box2 box2" "box1 box3 box3" "box4 box4 box6" "box5 box5 box6" "box7 box8 box8" "box7 box9 box9"
-        column-gap: .6rem
-        row-gap: .6rem
+        @include containerBoxesStyling(80%, 14.063rem, 12.188rem)
 
 @media screen and (min-width: $desktop)
-    body
-        background-color: lightblue
     .container--boxes
-        width: 90%
-        margin: 0 auto
-        display: grid
-        grid-template-columns: 21.875 21.875 21.875
-        grid-template-rows: repeat(6, 18.75rem)
-        grid-template-areas: "box1 box2 box2" "box1 box3 box3" "box4 box4 box6" "box5 box5 box6" "box7 box8 box8" "box7 box9 box9"
-        column-gap: .6rem
-        row-gap: .6rem
+        @include containerBoxesStyling(90%, 21.875rem, 18.75rem)      
   
 
 .container--box__1
   grid-area: box1
   background-color: grey
-  width: 21.875
-
 
 .container--box__2
   grid-area: box2

@@ -14,8 +14,8 @@
     margin: 0 auto;
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: 14.063 14.063 14.063;
-        grid-template-columns: 14.063 14.063 14.063;
+    -ms-grid-columns: (14.063)[3];
+        grid-template-columns: repeat(3, 14.063);
     -ms-grid-rows: (12.188rem)[6];
         grid-template-rows: repeat(6, 12.188rem);
         grid-template-areas: "box1 box2 box2" "box1 box3 box3" "box4 box4 box6" "box5 box5 box6" "box7 box8 box8" "box7 box9 box9";
@@ -26,16 +26,13 @@
 }
 
 @media screen and (min-width: 1024px) {
-  body {
-    background-color: lightblue;
-  }
   .container--boxes {
     width: 90%;
     margin: 0 auto;
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: 21.875 21.875 21.875;
-        grid-template-columns: 21.875 21.875 21.875;
+    -ms-grid-columns: (21.875)[3];
+        grid-template-columns: repeat(3, 21.875);
     -ms-grid-rows: (18.75rem)[6];
         grid-template-rows: repeat(6, 18.75rem);
         grid-template-areas: "box1 box2 box2" "box1 box3 box3" "box4 box4 box6" "box5 box5 box6" "box7 box8 box8" "box7 box9 box9";
