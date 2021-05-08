@@ -87,7 +87,7 @@
 
 /* -------------------------------------------------------------- Loading when the component is searching */
 
-/* .searchComponent--searching .searchComponent__submit:disabled {
+.searchComponent--searching .searchComponent__submit:disabled {
   background-color: var(--color-cta);
   border: none;
   animation: none;
@@ -119,21 +119,4 @@
 .searchComponent--searching .searchComponent__submit span:nth-of-type(5) {
   animation-delay: 0.8s;
   background: #A0B61E;
-} */
-
-/* -------------------------------------------------------------- Search results */
-
-.resultsItem {
-  margin: 24px 0;
-}
-
-.resultsItem__title {
-  font-size: 20px;
-  color: Teal;
-  margin: 8px 0;
-}
-
-.resultsItem__preview {
-  font-size: 14px;
-  opacity: .8;
 }

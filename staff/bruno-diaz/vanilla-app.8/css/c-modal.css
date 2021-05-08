@@ -9,7 +9,7 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal__wrapper {
+.modal__container {
     position: absolute;
     top: 10vh;
     left: 10%;
@@ -52,4 +52,4 @@
     opacity: 1;
 }
 
-.modal--editProfile .modal__wrapper { min-height: 545px;}
+.modal--editProfile .modal__container { min-height: 545px;}

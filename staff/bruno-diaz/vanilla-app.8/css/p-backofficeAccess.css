@@ -1,10 +1,9 @@
-.accessPanel {
+.backofficeAccess {
     width: 400px;
     margin: 48px auto;
-    display: block;
 }
 
-.accessPanel__form {
+.backofficeAccess__form {
     width: 100%;
     border: 1px solid #cccccc;
     border-top: none;

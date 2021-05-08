@@ -35,8 +35,6 @@ function goToAccessControlScreen() {
                 feedbackWrapper.style.display = 'block'
             }
         }, function (email, password) {
-            setLoading()
-
             try {
                 authenticateUser(email, password, function(feedback, token) {
                     if (feedback === null) {
@@ -62,6 +60,24 @@ function goToAccessControlScreen() {
                 feedbackWrapper.innerText = error.message
                 feedbackWrapper.style.display = 'block'
             }
+        }, function () {
+            document.querySelector('.switchButtons__link--active').classList.remove('switchButtons__link--active')
+    
+            controlAccessPanel.querySelector('.form__feedback').style.display = 'none'
+    
+            var forms = document.querySelectorAll('.form')
+    
+            var links = document.querySelectorAll('.switchButtons__link')
+    
+            if (forms[1].style.display === 'flex') {
+                links[0].classList.add('switchButtons__link--active')
+                document.getElementById('registerForm').style.display = 'flex'
+                document.getElementById('loginForm').style.display = 'none'
+            } else {
+                links[1].classList.add('switchButtons__link--active')
+                document.getElementById('registerForm').style.display = 'none'
+                document.getElementById('loginForm').style.display = 'flex'
+            }
         }
     )
     var page = document.getElementById('account')
@@ -74,9 +90,6 @@ function goToAccessControlScreen() {
 function goToSessionScreen() {
     retrieveUser(sessionStorage.token, function(feedback, user) {
         if (feedback === null) {
-            var page = document.querySelector('access-panel')
-            if (page) page.remove()
-
             renderSessionScreen(user)
         } else {
             sessionStorage.clear()
@@ -86,9 +99,6 @@ function goToSessionScreen() {
 }
 
 function renderSessionScreen(user) {
-    var loading = document.querySelector('.loading');
-    if (loading) loading.parentNode.removeChild(loading);
-
     var account = createSession(
         user,
         // openMenuDropdown
@@ -108,6 +118,50 @@ function renderSessionScreen(user) {
         function() {
             var modalEditProfile = createEditProfile(
                 user,
+                function () {
+                    var modal = document.querySelector('.modal')
+                    modal.querySelector('.switchButtons__link--active').classList.remove('switchButtons__link--active')
+                    modal.querySelector('.form__feedback').style.display = 'none'
+
+                    var links = modal.querySelectorAll('.switchButtons__link')
+                    links[0].classList.add('switchButtons__link--active')
+
+                    var forms = modal.querySelectorAll('.form')
+                    forms[0].style.display = 'flex'
+                    forms[1].style.display = 'none'
+                    forms[2].style.display = 'none'
+                },
+                function () {
+                    var modal = document.querySelector('.modal')
+                    modal.querySelector('.switchButtons__link--active').classList.remove('switchButtons__link--active')
+                    modal.querySelector('.form__feedback').style.display = 'none'
+
+                    var links = modal.querySelectorAll('.switchButtons__link')
+                    links[1].classList.add('switchButtons__link--active')
+
+                    var forms = modal.querySelectorAll('.form')
+                    forms[0].style.display = 'none'
+                    forms[1].style.display = 'flex'
+                    forms[2].style.display = 'none'
+                    
+                },
+                function () {
+                    var modal = document.querySelector('.modal')
+                    modal.querySelector('.switchButtons__link--active').classList.remove('switchButtons__link--active')
+                    modal.querySelector('.form__feedback').style.display = 'none'
+
+                    var links = modal.querySelectorAll('.switchButtons__link')
+                    links[2].classList.add('switchButtons__link--active')
+                    
+                    var forms = modal.querySelectorAll('.form')
+                    forms[0].style.display = 'none'
+                    forms[1].style.display = 'none'
+                    forms[2].style.display = 'flex'
+                    
+                },
+                function closeModal(wrapper) {
+                    wrapper.remove()
+                },
                 function(type, dataOne, dataTwo) {
                     //TODO separar updateUserInfo y updateUserPassword
                     updateUser(type, dataOne, dataTwo, function(feedback) {
@@ -152,6 +206,7 @@ function renderSessionScreen(user) {
                     })
                 }
             )
+            document.body.append(modalEditProfile)
         },
         // onLogout
         function() { 
@@ -168,7 +223,7 @@ function renderSessionScreen(user) {
 
                 // TODO move to component
                 if (!account.querySelector('.searchComponent--used'))
-                    account.querySelector('#searchComponent').classList.add('searchComponent--used')
+                    account.getElementById('searchComponent').classList.add('searchComponent--used')
 
                 switch (searcher) {
                     case 'google':
