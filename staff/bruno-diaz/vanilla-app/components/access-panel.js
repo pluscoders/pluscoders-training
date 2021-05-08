@@ -8,26 +8,26 @@ class AccessPanel extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
             <div class="tabsElement switchButtons">
-                <tab-element text="Register"></tab-element>
                 <tab-element text="Log in"></tab-element>
+                <tab-element text="Register"></tab-element>
             </div>
 
             <div class="accessPanel__form">
                 <span class="form__feedback"></span>
-
-                <form id="registerForm" class="form">
-                    <input-form label='Full name' type='text' name='fullname'></input-form>
-                    <input-form label='E-mail' type='email' name='email'></input-form>
-                    <input-form label="Password" type="password" name="password"></input-form>
-                    
-                    <button id="registerSubmit" class="form__button form__button--submit" type="submit">Register</button>
-                </form>
 
                 <form id="loginForm" class="form">
                     <input-form label='E-mail' type='email' name='email'></input-form>
                     <input-form label="Password" type="password" name="password"></input-form>
 
                     <button id="loginSubmit" class="form__button form__button--submit" type="submit">Log in</button>
+                </form>
+                
+                <form id="registerForm" class="form">
+                    <input-form label='Full name' type='text' name='fullname'></input-form>
+                    <input-form label='E-mail' type='email' name='email'></input-form>
+                    <input-form label="Password" type="password" name="password"></input-form>
+                    
+                    <button id="registerSubmit" class="form__button form__button--submit" type="submit">Register</button>
                 </form>
             </div>
         `
