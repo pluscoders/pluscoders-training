@@ -1,71 +1,79 @@
 $desktop: 1024px
 $tablet: 768px
 $mobile: 600px
+$mobileSx: 380px
 
-@mixin containerBoxesStyling($width $columnWidth $rowHeight)
+@mixin defineGrid($width, $columnWidth, $rowHeight)
     width: $width
     margin: 0 auto
     display: grid
     grid-template-columns: repeat(3, $columnWidth)
     grid-template-rows: repeat(6, $rowHeight)
-    grid-template-areas: "box1 box2 box2" "box1 box3 box3" "box4 box4 box6" "box5 box5 box6" "box7 box8 box8" "box7 box9 box9"
+    grid-template-areas: "area1 area2 area2" "area1 area3 area3" "area4 area4 area6" "area5 area5 area6" "area7 area8 area8" "area7 area9 area9"
     column-gap: .6rem
     row-gap: .6rem
 
+.mosaic
+  width: 350px
+  margin: 0 auto
+.mosaic__item
+  display: grid
+  grid-template-columns: max-content
+  grid-template-rows: 135px
+  margin-bottom: .6rem
 
-@media screen and (max-width: $mobile)
-    .container--box
-        margin: 0 auto
-        margin-bottom: .4rem
-        width: 20rem
-        height: 8.125rem
-        border: 1px solid red
+@media screen and (max-width: $mobileSx)
+  .mosaic
+    width: 90%
 
-@media screen and (min-width: $mobile+1)
-    .container--boxes
-        @include containerBoxesStyling(80%, 14.063rem, 12.188rem)
-
-@media screen and (min-width: $desktop)
-    .container--boxes
-        @include containerBoxesStyling(90%, 21.875rem, 18.75rem)      
+@media screen and (min-width: $tablet)
+  .mosaic
+    @include defineGrid(80%, 14.063rem, 12.188rem )
+  .mosaic__item
+    margin-bottom: 0
   
+@media screen and (min-width: $desktop)
+  .mosaic
+    @include defineGrid(90%, 21.875rem, 18.75rem )
+  .mosaic__item
+    margin-bottom: 0
 
-.container--box__1
-  grid-area: box1
+.mosaic__item--1
+  grid-area: area1
   background-color: grey
 
-.container--box__2
-  grid-area: box2
+.mosaic__item--2
+  grid-area: area2
   background-color: purple
 
-.container--box__3
-  grid-area: box3
+.mosaic__item--3
+  grid-area: area3
   background-color: orange
 
-.container--box__4
-  grid-area: box4
+.mosaic__item--4
+  grid-area: area4
   background-color: grey
 
 
-.container--box__5
-  grid-area: box5
+.mosaic__item--5
+  grid-area: area5
   background-color: purple
 
-.container--box__6
-  grid-area: box6
+.mosaic__item--6
+  grid-area: area6
   background-color: orange
 
-.container--box__7
-  grid-area: box7
+.mosaic__item--7
+  grid-area: area7
   background-color: grey
 
 
-.container--box__8
-  grid-area: box8
+.mosaic__item--8
+  grid-area: area8
   background-color: purple
 
-.container--box__9
-  grid-area: box9
+.mosaic__item--9
+  grid-area: area9
   background-color: orange
 
 

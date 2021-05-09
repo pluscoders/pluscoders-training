@@ -1,90 +1,107 @@
-@media screen and (max-width: 600px) {
-  .container--box {
-    margin: 0 auto;
-    margin-bottom: .4rem;
-    width: 20rem;
-    height: 8.125rem;
-    border: 1px solid red;
+.mosaic {
+  width: 350px;
+  margin: 0 auto;
+}
+
+.mosaic__item {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: max-content;
+      grid-template-columns: -webkit-max-content;
+      grid-template-columns: max-content;
+  -ms-grid-rows: 135px;
+      grid-template-rows: 135px;
+  margin-bottom: .6rem;
+}
+
+@media screen and (max-width: 380px) {
+  .mosaic {
+    width: 90%;
   }
 }
 
-@media screen and (min-width: 601px) {
-  .container--boxes {
+@media screen and (min-width: 768px) {
+  .mosaic {
     width: 80%;
     margin: 0 auto;
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: (14.063)[3];
-        grid-template-columns: repeat(3, 14.063);
+    -ms-grid-columns: (14.063rem)[3];
+        grid-template-columns: repeat(3, 14.063rem);
     -ms-grid-rows: (12.188rem)[6];
         grid-template-rows: repeat(6, 12.188rem);
-        grid-template-areas: "box1 box2 box2" "box1 box3 box3" "box4 box4 box6" "box5 box5 box6" "box7 box8 box8" "box7 box9 box9";
+        grid-template-areas: "area1 area2 area2" "area1 area3 area3" "area4 area4 area6" "area5 area5 area6" "area7 area8 area8" "area7 area9 area9";
     -webkit-column-gap: .6rem;
             column-gap: .6rem;
     row-gap: .6rem;
+  }
+  .mosaic__item {
+    margin-bottom: 0;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .container--boxes {
+  .mosaic {
     width: 90%;
     margin: 0 auto;
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: (21.875)[3];
-        grid-template-columns: repeat(3, 21.875);
+    -ms-grid-columns: (21.875rem)[3];
+        grid-template-columns: repeat(3, 21.875rem);
     -ms-grid-rows: (18.75rem)[6];
         grid-template-rows: repeat(6, 18.75rem);
-        grid-template-areas: "box1 box2 box2" "box1 box3 box3" "box4 box4 box6" "box5 box5 box6" "box7 box8 box8" "box7 box9 box9";
+        grid-template-areas: "area1 area2 area2" "area1 area3 area3" "area4 area4 area6" "area5 area5 area6" "area7 area8 area8" "area7 area9 area9";
     -webkit-column-gap: .6rem;
             column-gap: .6rem;
     row-gap: .6rem;
   }
+  .mosaic__item {
+    margin-bottom: 0;
+  }
 }
 
-.container--box__1 {
-  grid-area: box1;
+.mosaic__item--1 {
+  grid-area: area1;
   background-color: grey;
-  width: 21.875;
 }
 
-.container--box__2 {
-  grid-area: box2;
+.mosaic__item--2 {
+  grid-area: area2;
   background-color: purple;
 }
 
-.container--box__3 {
-  grid-area: box3;
+.mosaic__item--3 {
+  grid-area: area3;
   background-color: orange;
 }
 
-.container--box__4 {
-  grid-area: box4;
+.mosaic__item--4 {
+  grid-area: area4;
   background-color: grey;
 }
 
-.container--box__5 {
-  grid-area: box5;
+.mosaic__item--5 {
+  grid-area: area5;
   background-color: purple;
 }
 
-.container--box__6 {
-  grid-area: box6;
+.mosaic__item--6 {
+  grid-area: area6;
   background-color: orange;
 }
 
-.container--box__7 {
-  grid-area: box7;
+.mosaic__item--7 {
+  grid-area: area7;
   background-color: grey;
 }
 
-.container--box__8 {
-  grid-area: box8;
+.mosaic__item--8 {
+  grid-area: area8;
   background-color: purple;
 }
 
-.container--box__9 {
-  grid-area: box9;
+.mosaic__item--9 {
+  grid-area: area9;
   background-color: orange;
 }
 /*# sourceMappingURL=style.css.map */
