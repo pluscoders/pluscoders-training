@@ -1,9 +1,7 @@
 function spell(txt){
-    var i = "";
-    var text = txt;
-    for (let i of text) {
+    for (var i of txt) {
       console.log(i);
   }
 }
   
-spell("Hello world")
+spell("Hello World")
