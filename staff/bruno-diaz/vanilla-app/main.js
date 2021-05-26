@@ -67,14 +67,14 @@ function goToAccessControlScreen() {
     var page = document.getElementById('account')
     if (page) page.remove()
 
-    document.body.append(controlAccessPanel)
+    // document.body.append(controlAccessPanel)
 }
 
 
 function goToSessionScreen() {
     retrieveUser(sessionStorage.token, function(feedback, user) {
         if (feedback === null) {
-            var page = document.querySelector('access-panel')
+            var page = document.querySelector('.accessPanel')
             if (page) page.remove()
 
             renderSessionScreen(user)
@@ -113,14 +113,14 @@ function renderSessionScreen(user) {
                     updateUser(type, dataOne, dataTwo, function(feedback) {
                         if (feedback === null) {
                             // TODO bring styles to css
-                            var feedbackWrapper = modalEditProfile.querySelector('.form')
-                            feedbackWrapper.innerText = 'Data update'
-                            feedbackWrapper.style.color = 'white'
-                            feedbackWrapper.style.backgroundColor = 'green'
-                            feedbackWrapper.style.width = '50%'
-                            feedbackWrapper.style.heigth = '239px'
-                            feedbackWrapper.style.margin = '0 auto'
-                            feedbackWrapper.style.padding = '24px'
+                            // var feedbackWrapper = modalEditProfile.querySelector('.form')
+                            // feedbackWrapper.innerText = 'Data update'
+                            // feedbackWrapper.style.color = 'white'
+                            // feedbackWrapper.style.backgroundColor = 'green'
+                            // feedbackWrapper.style.width = '50%'
+                            // feedbackWrapper.style.heigth = '239px'
+                            // feedbackWrapper.style.margin = '0 auto'
+                            // feedbackWrapper.style.padding = '24px'
 
                             setTimeout(function() {
                                 var modal = document.querySelector(".modal--editProfile")

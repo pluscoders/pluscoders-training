@@ -15,4 +15,7 @@
   --color-cta-darken: hsl(var(--hue), var(--saturation), calc(var(--light) - 10%));
   /* Base color darkest using calc */
   --color-cta-darkest: hsl(var(--hue), var(--saturation), calc(var(--light) - 15%));
+
+
+  --color-text: #181818;
 }

@@ -1,22 +1,32 @@
 function createAccessControlPanel(onRegister, onLogin) {
 
-    var accessPanel = document.createElement('access-panel')
+    var accessPanel = document.createElement('div')
+    accessPanel.classList.add("accessPanel")
+    document.body.append(accessPanel)
 
-    accessPanel.onSubmit = function(event) {
+    var labelTabs = "['Log in', 'Register']"
+
+    var contentTabsLogin = "<form id='loginForm'><input-form label='E-mail' type='email' name='email'></input-form><input-form label='Password' type='password' name='password'></input-form><button class='button button__cta'>Log in</button></form>"
+    var contentTabsRegister = "<form id='registerForm'><input-form label='Full name' type='text' name='fullname'></input-form><input-form label='E-mail' type='email' name='email'></input-form><input-form label='Password' type='password' name='password'></input-form><button class='button button__cta'>Register</button></form>"
+    var contentTabs = [contentTabsLogin, contentTabsRegister]
+
+    accessPanel.innerHTML = `<tabs-panel labeltabs="${labelTabs}" contenttabs="${contentTabs}"></tabs-panel>`
+
+    var form = accessPanel.querySelector('form')
+    
+    form.addEventListener("submit", function(event) {
         event.preventDefault()
 
         var email = event.target.email.value
         var password = event.target.password.value
 
-        if (event.target.id === 'registerForm') {
+        if (event.target.id === 'loginForm') {
+            onLogin(email, password)
+        } else {
             var fullname = event.target.fullname.value
-
             onRegister(fullname, email, password)
         }
-        else if (event.target.id === 'loginForm') {
-            onLogin(email, password)
-        }
-    }
+    })
 
     return accessPanel
 }
@@ -30,43 +40,39 @@ function createEditProfile(user, onUpdate, onDelete) {
     modal.titleModal = "Edit account"
     document.body.append(modal)
 
+    var labelTabs = "['Information', 'Password', 'Account']"
+
+    var contentTabsInformation = "<form id='informationForm'><input-form label='Fullname' type='text' name='fullname'></input-form><input-form label='E-mail' type='email' name='email'></input-form><button class='button button__cta'>Save changes</button></form>"
+    var contentTabsPassword = "<form id='passwordForm'><input-form label='Password' type='password' name='password'></input-form><input-form label='New password' type='password' name='newpassword'></input-form><button class='button button__cta'>Save password</button></form>"
+    var contentTabsAccount = "<form id='accountForm'><input-form label='Password' type='password' name='password'></input-form><button class='button button__cta'>Delete account</button></form>"
+    var contentTabs = [contentTabsInformation, contentTabsPassword, contentTabsAccount]
+
     var modalContent = modal.querySelector('#modalContent')
+    modalContent.innerHTML = `<tabs-panel labeltabs="${labelTabs}" contenttabs="${contentTabs}"></tabs-panel>`
 
-    var editProfile = document.createElement('edit-profile')
-    editProfile.style.width = '400px'
-    editProfile.style.display = 'block'
-    editProfile.style.margin = '0 auto'
-    modalContent.append(editProfile)
-
-    var fullnameInput = editProfile.querySelector('input[name="fullname"]')
+    var fullnameInput = modalContent.querySelector('input[name="fullname"]')
     fullnameInput.value = user.fullname
-    var emailInput = editProfile.querySelector('input[name="email"]')
+    var emailInput = modalContent.querySelector('input[name="email"]')
     emailInput.value = user.username
 
-    console.log(user)
-
-    editProfile.onSubmit = function(event) {
+    var form = modalContent.querySelector('form')
+    
+    form.addEventListener("submit", function(event) {
         event.preventDefault()
 
-        var email = event.target.email.value
-        var password = event.target.password.value
-
-        if (event.target.id === 'informationForm') {
-            var email = event.target.email.value
+        if (event.target.id === "informationForm") {
             var fullname = event.target.fullname.value
-
+            var email = event.target.email.value
             onUpdate('info', fullname, email)
-        } else if (event.target.id === 'loginForm') {
+        } else if (event.target.id === "passwordForm") {
             var password = event.target.password.value
             var newpassword = event.target.newpassword.value
-
-            onUpdate('info', fullname, email)
-        } else if (event.target.id === 'accountForm') {
+            onUpdate('password', password, newpassword)
+        } else if (event.target.id === "passwordForm") {
             var password = event.target.password.value
-
             onDelete(password)
         }
-    }
+    })
 }
 
 
@@ -137,6 +143,7 @@ function setLoading() {
     var loading = document.createElement('div')
     loading.id = 'loading'
     loading.classList.add('loading')
+    document.body.append(loading)
 
     var loadingSpinner = document.createElement('div')
     loadingSpinner.classList.add('loading__spinner')
@@ -230,59 +237,3 @@ function createResults(searchResults, page, onPage) {
 
     return resultsWrapper
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// class TabsElement extends HTMLElement {
-//     constructor() {
-//         super()
-        
-//         this.elements
-//     }
-
-//     connectedCallback() {
-//         this.classList.add('switchButtons')
-//     }
-// }
-// customElements.define('tabs-element', TabsElement)
