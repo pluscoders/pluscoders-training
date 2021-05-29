@@ -1,0 +1,80 @@
+$desktop: 1024px
+$tablet: 768px
+$mobile: 600px
+$mobileSx: 380px
+
+@mixin defineGrid($width, $columnWidth, $rowHeight)
+    width: $width
+    margin: 0 auto
+    display: grid
+    grid-template-columns: repeat(3, $columnWidth)
+    grid-template-rows: repeat(6, $rowHeight)
+    grid-template-areas: "area1 area2 area2" "area1 area3 area3" "area4 area4 area6" "area5 area5 area6" "area7 area8 area8" "area7 area9 area9"
+    column-gap: .6rem
+    row-gap: .6rem
+
+.mosaic
+  width: 350px
+  margin: 0 auto
+.mosaic__item
+  display: grid
+  grid-template-columns: max-content
+  grid-template-rows: 135px
+  margin-bottom: .6rem
+
+@media screen and (max-width: $mobileSx)
+  .mosaic
+    width: 90%
+
+@media screen and (min-width: $tablet)
+  .mosaic
+    @include defineGrid(80%, 14.063rem, 12.188rem )
+  .mosaic__item
+    margin-bottom: 0
+  
+@media screen and (min-width: $desktop)
+  .mosaic
+    @include defineGrid(90%, 21.875rem, 18.75rem )
+  .mosaic__item
+    margin-bottom: 0
+
+.mosaic__item--1
+  grid-area: area1
+  background-color: grey
+
+.mosaic__item--2
+  grid-area: area2
+  background-color: purple
+
+.mosaic__item--3
+  grid-area: area3
+  background-color: orange
+
+.mosaic__item--4
+  grid-area: area4
+  background-color: grey
+
+
+.mosaic__item--5
+  grid-area: area5
+  background-color: purple
+
+.mosaic__item--6
+  grid-area: area6
+  background-color: orange
+
+.mosaic__item--7
+  grid-area: area7
+  background-color: grey
+
+
+.mosaic__item--8
+  grid-area: area8
+  background-color: purple
+
+.mosaic__item--9
+  grid-area: area9
+  background-color: orange
+
+
+
