@@ -1,16 +1,23 @@
-function longestWord(string) {
-    let str = string.split(" ");
-    let countWords = 0;
-    let word = "";
-    str.forEach(function(str) {
-      if(str.length > countWords) {
-        countWords = str.length;
+function longestWords(text) {
+    var words = text.split(' ');
+    var maxLength = 0;
+    var word = '';
+    
+    for (var i = 0; i < words.length; i++) {
+      var word = words[i]
+
+
+    }
+
+    words.forEach(function(str) {
+      if(str.length > maxLength) {
+        maxLength = str.length;
         word = str;
       }
     });
     return word;
   }
   
-  console.log(longestWord("Hi there ! How are you today ?"));
+  console.log(longestWords('Hi there ! How are you today ?'));
 
   //Si vale pero no consigo llegar yo solo.

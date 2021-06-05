@@ -1,5 +1,8 @@
-function repeateThis(text, count) {
-	console.log(text.repeat(count));
+function repeat(text, count) {
+    var repeated = ''
+    for(var i = 0; i < count; i++){
+    repeated += text
 }
-
-repeateThis("hola", 6)
+return repeated
+}
+repeat('hola', 3)

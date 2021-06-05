@@ -1,6 +1,9 @@
-function concat(text1, text2, text3, text4) {
-    var res = text1.concat(text2, text3, text4);
-    console.log(res);
+function concat(...args){
+  var conc = ''
+  for(var i = 0; i < args.length; i++){
+conc += args[i]
   }
-  
-  concat()
+return conc
+}
+
+concat()

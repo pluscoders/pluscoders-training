@@ -1,6 +1,10 @@
-function stringToArray(text){
-	var res = Array.from(text);
-  console.log(res);
+function stringToArray(text) {
+  var arr = '';
+  var i = 0;
+  while(i < text.length) {
+    arr += text[i] + ","; i++;
+  }
+  console.log(arr);
 }
 
-stringToArray("Hello world")
+stringToArray('Bo dia')

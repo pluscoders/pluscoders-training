@@ -1,6 +1,8 @@
 function stringToArray(text){
-	var res = text.split("");
-  console.log(res);
+  var arr = text;
+  for(var i = 0; i < text.length; i++){
+    return [arr]
+  };
+  console.log(arr);
 }
-
-stringToArray("Hello world")
+stringToArray('hello world')

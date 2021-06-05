@@ -1,7 +1,6 @@
-function spell(txt){
-    for (var i of txt) {
-      console.log(i);
+function spell(text){
+  for(var i = 0; i < text.length; i++){
+    console.log(text[i]);
   }
 }
-  
-spell("Hello World")
+spell('cacarruta')
