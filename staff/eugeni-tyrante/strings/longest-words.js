@@ -1,23 +1,38 @@
 function longestWords(text) {
-    var words = text.split(' ');
-    var maxLength = 0;
-    var word = '';
-    
-    for (var i = 0; i < words.length; i++) {
-      var word = words[i]
+    var arr = []
+    var res = ''
+    var ref = 0
+    var count = 0
+    for (var i = 0; i < text.length; i++) {
 
-
+        if (text[i] != ' ' && text[i] != ',' && text[i] != '.' && text[i] != '!' && text[i] != '?' && text[i] != ':' && text[i] != ')') {
+            res += text[i]
+        }
+        else {
+            if (res.length > ref) {
+                arr = []
+                count = 0
+                arr[count] = res
+                count++
+                ref = res.length
+                res = ''
+            }
+            else if (ref == res.length) {
+                arr[count] = res
+                count++
+                res = ''
+            }
+            else {
+                res = ''
+            }
+        }
+        if (i == text.length - 1) {
+            if (res != '') {
+                arr[count] = res
+            }
+        }
     }
+    return arr
+}
 
-    words.forEach(function(str) {
-      if(str.length > maxLength) {
-        maxLength = str.length;
-        word = str;
-      }
-    });
-    return word;
-  }
-  
-  console.log(longestWords('Hi there ! How are you today ?'));
-
-  //Si vale pero no consigo llegar yo solo.
+longestWords("Hello, Hello, cagarruta!")
