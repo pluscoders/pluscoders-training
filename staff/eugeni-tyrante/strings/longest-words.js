@@ -1,7 +1,7 @@
 function longestWords(text) {
     var arr = []
     var res = ''
-    var ref = 0
+    var ref = 1
     var count = 0
     for (var i = 0; i < text.length; i++) {
 
@@ -34,5 +34,3 @@ function longestWords(text) {
     }
     return arr
 }
-
-longestWords("Hello, Hello, cagarruta!")

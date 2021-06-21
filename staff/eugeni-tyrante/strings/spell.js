@@ -3,4 +3,3 @@ function spell(text){
     console.log(text[i]);
   }
 }
-spell('cacarruta')

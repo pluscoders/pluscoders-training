@@ -5,4 +5,3 @@ function repeat(text, count) {
 }
 return repeated
 }
-repeat('hola', 3)

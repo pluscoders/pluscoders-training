@@ -1,8 +1,10 @@
-function stringToArray(text){
-  var arr = text;
-  for(var i = 0; i < text.length; i++){
-    return [arr]
-  };
-  console.log(arr);
+var arr = []
+var count = 0
+function stringToArray(text) {
+    for (var i = 0; i < text.length; i++) {
+        arr[i] = text[i]
+  }
+return arr
 }
-stringToArray('hello world')
+
+stringToArray('Hello World')

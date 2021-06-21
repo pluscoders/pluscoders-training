@@ -26,5 +26,3 @@ function search(text, pattern) {
       return -1
   }
 }
-
-search("He W o W o W o o W oWo", "Wo")
