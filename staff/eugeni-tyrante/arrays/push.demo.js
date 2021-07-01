@@ -2,12 +2,16 @@
 
 // 1
 
-var a = []
+var a = ['pigs', 'goats', 'sheep']
 
-push(a, 'element1', 'element2', 1, 2)
-    console.log(a)
+var count = a.push('chickens', 'cats', 'dogs');
+console.log(count); // (6)
+
+push(a, ['chickens', 'cats', 'dogs']) // (6)
 
 // 2
 
-push(a, 'element3', 'element4')
-    console.log(a)
+a.push('chickens', 'cats', 'dogs');
+console.log(animals); // (6) ["pigs", "goats", "sheep", "chickens", "cats", "dogs"]
+
+push(a, ['chickens', 'cats', 'dogs']) // (6) ["pigs", "goats", "sheep", "chickens", "cats", "dogs"]

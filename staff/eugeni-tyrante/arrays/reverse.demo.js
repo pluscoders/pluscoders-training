@@ -3,15 +3,15 @@
 // 1
 
 var array = ['element0', 'element1', 'element2']
-var result = []
 
 reverse(array)
-console.log(result)
+
+// (3) ["element2", "element1", "element0"]
 
 // 2
 
-var array = ['element3', 'element4', 'element5']
-var result = []
+var array = ['element0']
 
 reverse(array)
-console.log(result)
+
+// ["element0"]

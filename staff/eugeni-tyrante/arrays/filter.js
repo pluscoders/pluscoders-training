@@ -1,15 +1,11 @@
 // filter.js
 
 function filter(array, callback) {
+    var checked = []
     for (var i = 0; i < array.length; i++) {
-        var element = 5
-        callback(element)
-        if (array[i].length > element) {
+        if (callback(element, i, array)) {
             checked[checked.length] = array[i]
         }
     }
-    return checked
+return checked
 }
-
-filter(array1, function(element) {
-})

@@ -1,10 +1,47 @@
 // indexOf.demo.js
 
-var beasts = ['ant', 'bison', 'camel', 'duck', 'bison']
+// indexOf without fromIndex
 
-indexOf(beasts, 'bison', 2)
-4
-indexOf(beasts, 'bison', 5)
-undefined
-indexOf(beasts, 'ant', 2)
-undefined
+// 1
+
+var beasts = ['ant', 'bison', 'camel', 'duck', 'seal']
+
+indexOf(beasts, 'bison')
+1
+
+// 2
+
+var beasts = ['ant', 'bison', 'camel', 'duck', 'seal']
+
+indexOf(beasts, 'dino')
+-1
+
+// indexOf with fromIndex
+
+// 1
+
+var beasts = ['ant', 'bison', 'camel', 'duck', 'seal']
+
+indexOf(beasts, 'bison', 1)
+1
+
+// 2
+
+var beasts = ['ant', 'bison', 'camel', 'duck', 'seal']
+
+indexOf(beasts, 'bison', 3)
+-1
+
+// 3
+
+var beasts = ['ant', 'bison', 'camel', 'duck', 'seal']
+
+indexOf(beasts, 'dino', 1)
+-1
+
+// 4
+
+var beasts = ['ant', 'bison', 'camel', 'duck', 'seal']
+
+indexOf(beasts, 'dino', 7)
+-1

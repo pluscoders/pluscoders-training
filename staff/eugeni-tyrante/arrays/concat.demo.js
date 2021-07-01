@@ -2,26 +2,17 @@
 
 // 1
 
-var array1 = ['a', 'b', 'c']
-var array2 = ['d', 'e', 'f', 'e', 'g', 'h']
-var array3 = [4]
-var array4 = [5, 6, 7, 'hola mundo']
-var result = []
+var array1 = ['a', 'b', 'c'];
+var array2 = ['d', 'e', 'f'];
 
-concat(array1, result)
-concat(array2, result)
-console.log(result)
+concat(array1, array2)
+(6) ["a", "b", "c", "d", "e", "f"]
 
 // 2
 
-concat(array3, result)
-concat(array4, result)
-console.log(result)
+var array1 = ['a', 'b', 'c'];
+var array2 = ['d', 'e', 'f'];
+var array3 = ['g', 'h', 'i'];
 
-// 3
-
-concat(array1, result)
-concat(array2, result)
-concat(array3, result)
-concat(array4, result)
-console.log(result)
+concat(array1, array2, array3)
+(9) ["a", "b", "c", "d", "e", "f", "g", "h", "i"]

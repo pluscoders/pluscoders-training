@@ -1,8 +1,42 @@
 // includes.demo.js
 
-var pets = ['cat', 'dog', 'bat', 'pig', 'crocodile']
+// includes without fromIndex
 
-includes(pets, 'pig', 2)
+
+// 1
+
+var animals = ["pigs", "goats", "sheep", "chickens", "cats", "dogs"]
+
+includes(animals, 'goats')
 true
-includes(pets, 'pig', 4)
+
+// 2
+
+var animals = ["pigs", "goats", "sheep", "chickens", "cats", "dogs"]
+
+includes(animals, 'dinosaur')
+false
+
+// includes with fromIndex
+
+
+// 1
+
+var animals = ["pigs", "goats", "sheep", "chickens", "cats", "dogs"]
+
+includes(animals, 'goats', 2)
+false
+
+// 2
+
+var animals = ["pigs", "goats", "sheep", "chickens", "cats", "dogs"]
+
+includes(animals, 'goats', 1)
+true
+
+// 3
+
+var animals = ["pigs", "goats", "sheep", "chickens", "cats", "dogs"]
+
+includes(animals, 'dinosaur', 1)
 false
