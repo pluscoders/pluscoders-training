@@ -122,6 +122,12 @@
 
 /* -------------------------------------------------------------- Search results */
 
+#resultsWrapper {
+  width: 90%;
+  max-width: 991px;
+  margin: 0 auto;
+}
+
 .resultsItem {
   margin: 24px 0;
 }
@@ -136,3 +142,4 @@
   font-size: 14px;
   opacity: .8;
 }
+

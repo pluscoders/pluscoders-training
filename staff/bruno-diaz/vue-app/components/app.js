@@ -1,64 +1,4 @@
-const Home = {
-    template: `<main id="session">
-        <section id="searchComponent">
-            <h2 class="searchComponent__title">Start to look for all you want</h2>
-            <form class="searchComponent__form" @submit="searchByQuery">
-                <select v-model="searcher" class="searchComponent__select">
-                    <option v-for="option in options" :value="option.value">{{option.label}}</option>
-                </select>
-                <input type="text" v-model="query" class="searchComponent__input">
-                <button type="submit" class="searchComponent__submit">Search</button>
-            </form>
-        </section>
-            
-        <section id="resultsWrapper" v-if="searchResults">
-            <ul>
-                <li v-for="result in searchResults" class="resultsItem">
-                    <a :href="url" target="_blank">
-                        <p class="resultsItem__title">{{result.title}}</p>
-                        <p class="resultsItem__preview">{{result.preview}}</p>
-                    </a>
-                </li>
-            </ul>
-        </section>
-    </main>`,
-  
-    data() {
-        return {
-            searcher: "all",
-            options: [
-                { value: "all", label: "All" },
-                { value: "google", label: "Google" },
-                { value: "yahoo", label: "Yahoo" },
-                { value: "bing", label: "Bing" },
-            ],
-            query: "",
-            page: undefined,
-            searchResults: null,
-        };
-    },
-  
-    methods: {
-        searchByQuery: function (event) {
-            event.preventDefault();
-    
-            if (!this.page) this.page = 1;
-    
-            searchInGoogle(this.query, this.page, function (searchResults, page) {
-                // setLoading('stop')
-    
-                console.log(searchResults);
-    
-                // createResults(searchResults, page, function(page) {
-                //     searchByQuery(searcher, query, page)
-                // })
-            });
-        }
-    }
-}
-
-
-var App = {
+const App = {
   el: "#app",
   router: new VueRouter(),
   template: `<main>
@@ -93,13 +33,13 @@ var App = {
         path: "/",
         component: Home,
         name: "home",
-      }
-    ]
+      },
+    ],
   }),
 
   data: {
     username: null,
-    feedback: "hola mundo",
+    // feedback: "hola mundo",
     active: false,
     loggedIn: false || !!sessionStorage.token,
   },
@@ -118,18 +58,21 @@ var App = {
     }
   },
 
+  props: ["feedback"],
+
   methods: {
     onLogin(email, password) {
       try {
         authenticateUser(email, password, (error, token) => {
-          if (error) return (this.feedback = error.message);
+          if (error) return this.feedback.push("Hola Mundo");
+          // if (error) return (this.feedback = error.message);
 
           sessionStorage.token = token;
 
           this.loggedIn = true;
 
           retrieveUser(token, (error, user) => {
-            if (error) return (this.feedback = error.message);
+            // if (error) return (this.feedback = error.message);
 
             this.username = user.fullname;
 
@@ -171,6 +114,6 @@ var App = {
       sessionStorage.clear();
       this.active = false;
       this.$router.push({ name: "login" });
-    }
-  }
-}
+    },
+  },
+};

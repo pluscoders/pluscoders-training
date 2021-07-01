@@ -1,6 +1,6 @@
 const LoginView = {
     template: `<form id='loginForm' @submit.prevent="onLogin">
-        <span v-if="feedback">
+        <span v-if="feedback.lenght">
             {feedback}
         </span>
         <span class="form__element">
@@ -26,18 +26,19 @@ const LoginView = {
         <button type="submit" class='button button__cta'>Log in</button>
     </form>`,
 
-    props: ["feedback"],
+    // props: ["feedback"],
 
     data() {
         return {
             email: null,
             password: null,
+            feedback: []
         };
     },
 
     methods: {
         onLogin() {
-            // this.feedback = null;
+            // this.feedback = [];
 
             this.$emit("onLogin", this.email, this.password);
         }
@@ -48,7 +49,7 @@ const LoginView = {
 const RegisterView = {
     template: `<form id='RegisterForm' @submit.prevent="onRegister">
         <span v-if="feedback">
-            {feedback}
+            {this.feedback}
         </span>
         <span class="form__element">
             <label for="#fullname">Fullname</label>

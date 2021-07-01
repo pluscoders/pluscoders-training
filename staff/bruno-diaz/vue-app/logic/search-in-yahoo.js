@@ -1,15 +1,12 @@
-function searchInYahoo(query, page, callback) {
-  if (typeof query !== "string")
-    throw new TypeError(query + " is not a string");
+function searchInYahoo(query, page) {
+  if (typeof query !== "string") throw new TypeError(query + " is not a string");
   if (typeof page !== "number") throw new TypeError(page + " is not a number");
-  if (typeof callback !== "function")
-    throw new TypeError(callback + " is not a function");
 
   var pageUrl = "&b=";
 
   var pageRef = (page - 1) * 10 + 1;
 
-  fetch(
+  return fetch(
     "https://b00tc4mp.herokuapp.com/proxy?url=https://es.search.yahoo.com/search?p=" +
       query +
       pageUrl +
@@ -19,26 +16,24 @@ function searchInYahoo(query, page, callback) {
       return response.text();
     })
     .then(function (html) {
-      var parser = new DOMParser();
+      const parser = new DOMParser();
 
-      var doc = parser.parseFromString(html, "text/html");
+      const doc = parser.parseFromString(html, "text/html");
 
-      var searchResults = [];
+      const searchResults = [];
 
-      var resultsList = [];
+      const resultsList = doc.querySelectorAll("#web > ol > li > .dd.algo");
 
-      resultsList = doc.querySelectorAll("#web > ol > li > .dd.algo");
+      for (let i = 0; i < resultsList.length; i++) {
+        const result = resultsList[i];
 
-      for (var i = 0; i < resultsList.length; i++) {
-        var result = resultsList[i];
+        const url = result.querySelector("a").href;
 
-        var url = result.querySelector("a").href;
+        const title = result.querySelector("h3").innerText;
 
-        var title = result.querySelector("h3").innerText;
+        const preview = result.querySelector(".compText > p").innerText;
 
-        var preview = result.querySelector(".compText > p").innerText;
-
-        var searchResult = {
+        const searchResult = {
           title: title,
           url: url,
           preview: preview,
@@ -47,6 +42,6 @@ function searchInYahoo(query, page, callback) {
         searchResults.push(searchResult);
       }
 
-      callback(searchResults, page);
+      return { results: searchResults, page };
     });
 }
