@@ -1,5 +1,5 @@
 // pop.js
 
 function pop() {
-    a.length = a.length - 1
+    array.length = array.length - 1
 }

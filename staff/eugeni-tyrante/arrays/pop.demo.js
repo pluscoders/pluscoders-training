@@ -5,9 +5,4 @@
 var a = ['element0', 'element1', 'element2']
 
 pop()
-    console.log(a)
-
-// 2
-
-pop('element3', 'element4')
-    console.log(a)
+    console.log(array)

@@ -1,6 +1,6 @@
 // push.js
 
-function push(...element) {
+function push(array, element) {
     for (var i = 0; i < element.length; i++)
-        a[a.length] = element[i]
+        array[array.length] = element[i]
 }

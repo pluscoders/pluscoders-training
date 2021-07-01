@@ -2,16 +2,16 @@
 
 // 1
 
-var a = ['element0', 'element1', 'element2']
-var b = []
+var array = ['element0', 'element1', 'element2']
+var result = []
 
-reverse(a)
-console.log(b)
+reverse(array)
+console.log(result)
 
 // 2
 
-var a = ['element3', 'element4', 'element5']
-var b = []
+var array = ['element3', 'element4', 'element5']
+var result = []
 
-reverse(a)
-console.log(b)
+reverse(array)
+console.log(result)
