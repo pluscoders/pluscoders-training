@@ -1,16 +1,14 @@
 // splice.js
 
-var array = ['Jan', 'Feb', 'March', 'April', 'June', 'July']
-var removed = []
-var count = array.length
-
 function splice(start, deleteCount, element) {
+    var removed = []
+    var count = array.length
     for (var i = start; i < array.length + 1; i++) {
         if (deleteCount > 0 && i === start) {
             removed[removed.length] = array[i]
             array[i] = element
         }            
-        if (deleteCount > 0 && i > start && i < array.length) {
+        if (deleteCount > 0 && i > start && i < array.length && removed.length < deleteCount) {
             removed[removed.length] = array[i]
             array[i] = array[i + deleteCount - 1]
         }
@@ -28,7 +26,5 @@ function splice(start, deleteCount, element) {
             array[start] = element
         }
     }
-return array
+return removed
 }
-
-splice(1, 2, 'monthRandom')
