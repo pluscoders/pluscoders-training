@@ -1,9 +1,13 @@
-describe("authenticateUser", function () {
+describe("authenticateUser", () => {
+    let email, password
+
+    beforeEach(() => {
+        email = getRandomString() + "@" + getRandomString() + ".com";
+        password = getRandomString("password");
+    })
 
     it("should succeed on authenticate user", async () => {
         const fullname = getRandomString();
-        const email = getRandomString() + "@" + getRandomString() + ".com";
-        const password = getRandomString("password");
 
         await fetch("https://b00tc4mp.herokuapp.com/api/v2/users/", {
             method: "post",
@@ -37,9 +41,6 @@ describe("authenticateUser", function () {
     });
 
     it("should fail when user is no exist", async () => {
-        const email = getRandomString() + "@" + getRandomString() + ".com";
-        const password = getRandomString("password");
-
         let _error
 
         try {
@@ -52,35 +53,15 @@ describe("authenticateUser", function () {
         expect(_error.message).toEqual(`username and/or password wrong`);
     });
 
-    it('should fail when no email', async () => {
-        const email = undefined
-        const password = getRandomString('password')
+    it('should fail when no email', () => {
+        email = undefined
 
-        let _error
-
-        try {
-            await authenticateUser(email, password);
-        } catch(error) {
-            _error = error
-        }
-
-        expect(_error).toBeDefined()
-        expect(_error.message).toEqual(`${email} is not a string`)
+        expect(() => authenticateUser(email, password)).toThrowError(TypeError, `${email} is not a string`)
     })
 
-    it('should fail when no password', async () => {
-        const email = getRandomString() + '@' + getRandomString() + '.com'
-        const password = undefined
+    it('should fail when no password', () => {
+        password = undefined
 
-        let _error
-
-        try {
-            await authenticateUser(email, password);
-        } catch(error) {
-            _error = error
-        }
-
-        expect(_error).toBeDefined()
-        expect(_error.message).toEqual(`${password} is not a string`)
+        expect(() => authenticateUser(email, password)).toThrowError(TypeError, `${password} is not a string`)
     })
 });

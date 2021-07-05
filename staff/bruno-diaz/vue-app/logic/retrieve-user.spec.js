@@ -1,6 +1,6 @@
 describe("retrieveUser", function () {
 
-    it("should succeed on retrieve user", async () => {
+    it("should succeed on existing user", async () => {
         const fullname = getRandomString();
         const email = getRandomString() + "@" + getRandomString() + ".com";
         const password = getRandomString("password");
@@ -22,7 +22,8 @@ describe("retrieveUser", function () {
         const user = await retrieveUser(token);
 
         expect(user.fullname).toEqual(fullname);
-        expect(user.username).toEqual(email);
+        expect(user.email).toEqual(email);
+        expect(user.password).toBeUndefined()
 
         await fetch("https://b00tc4mp.herokuapp.com/api/v2/users", {
             method: "DELETE",
