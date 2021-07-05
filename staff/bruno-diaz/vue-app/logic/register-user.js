@@ -19,7 +19,7 @@ function registerUser(fullname, email, password) {
     );
 
   return fetch("https://b00tc4mp.herokuapp.com/api/v2/users/", {
-    method: "post",
+    method: "POST",
     headers: { "Content-Type": "application/json" },
     body: `{ "fullname": "${fullname}", "username": "${email}", "password": "${password}" }`,
   })

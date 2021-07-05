@@ -1,20 +1,17 @@
-function retrieveUser(token, callback) {
-  fetch("https://b00tc4mp.herokuapp.com/api/v2/users/", {
+function retrieveUser(token) {
+  return fetch("https://b00tc4mp.herokuapp.com/api/v2/users/", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + token
     },
-  }).then(function (response) {
-    if (response.status === 200)
-      return response.json().then(function (user) {
-        callback(null, user);
+  })
+    .then(response => {
+      // debugger
+      return response.json().then(response => {
+        if (response.error) throw new Error(response.error)
+        const user = response
+        return user
       });
-    else
-      return response.json().then(function (response) {
-        var error = response.error;
-
-        callback(new Error(error));
-      });
-  });
+    });
 }

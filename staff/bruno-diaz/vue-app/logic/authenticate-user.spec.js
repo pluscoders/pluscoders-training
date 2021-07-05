@@ -1,129 +1,86 @@
-describe('authenticateUser', function () {
+describe("authenticateUser", function () {
 
-  xit('should succeed on valid instance with data', function () {
-    var userIndex = Math.floor(Math.random() * users.length)
+    it("should succeed on authenticate user", async () => {
+        const fullname = getRandomString();
+        const email = getRandomString() + "@" + getRandomString() + ".com";
+        const password = getRandomString("password");
 
-    var email = users[userIndex].email
-    var password = users[userIndex].password
+        await fetch("https://b00tc4mp.herokuapp.com/api/v2/users/", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: `{ "fullname": "${fullname}", "username": "${email}", "password": "${password}" }`
+        });
 
-    authenticateUser(email, password, (error, token) => {
-        console.log("Error 1 : " + error)
-        console.log("Token 1 : " + token)
-        expect(error).toBe(false);
-        expect(token).toBeDefined();
-        expect(token).toEqual('string');
+        const token = await authenticateUser(email, password);
+
+        const response = await fetch(
+        "https://b00tc4mp.herokuapp.com/api/v2/users", {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const { fullname: fullname2, username: email2 } = await response.json();
+
+        expect(fullname2).toEqual(fullname);
+        expect(email2).toEqual(email);
+
+        await fetch("https://b00tc4mp.herokuapp.com/api/v2/users", {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`
+            },
+            body: `{ "password": "${password}" }`
+        })
+        .then(response => {
+            expect(response.ok).toBeDefined()
+        });
     });
-  })
 
-  xit('should fail on valid instance but is not in data', function () {
-    var email = getRandomString() + '@' + getRandomString() + '.com'
-    var password = getRandomString('password')
+    it("should fail when user is no exist", async () => {
+        const email = getRandomString() + "@" + getRandomString() + ".com";
+        const password = getRandomString("password");
 
-    //   expect(function() {
-    //       authenticateUser(email, password)
-    //   }).toThrowError(Error, 'There is no registered user with those credentials')
-  })
+        let _error
 
-  xit('should fail on valid instance but email is not in data', function () {
-      var userIndex = Math.floor(Math.random() * users.length)
+        try {
+            await authenticateUser(email, password);
+        } catch (error) {
+            _error = error;
+        }
 
-      var email = getRandomString() + '@' + getRandomString() + '.com'
-      var password = users[userIndex].password
+        expect(_error).toBeDefined();
+        expect(_error.message).toEqual(`username and/or password wrong`);
+    });
 
-      // APPLY & TEST
+    it('should fail when no email', async () => {
+        const email = undefined
+        const password = getRandomString('password')
 
-      expect(function() {
-          authenticateUser(email, password)
-      }).toThrowError(Error, 'There is no registered user with those credentials')
-  })
+        let _error
 
-  it('should fail on valid email but wrong password', function () {
-    var userIndex = Math.floor(Math.random() * users.length)
+        try {
+            await authenticateUser(email, password);
+        } catch(error) {
+            _error = error
+        }
 
-    var email = users[userIndex].email
-    var password = getRandomString('password')
+        expect(_error).toBeDefined()
+        expect(_error.message).toEqual(`${email} is not a string`)
+    })
 
-    authenticateUser(email, password, expect(function() {
-        return error.message
-    }).toThrowError(Error, 'username and/or password wrong'))
+    it('should fail when no password', async () => {
+        const email = getRandomString() + '@' + getRandomString() + '.com'
+        const password = undefined
 
-    // authenticateUser(email, password, (error, token) => {
-    //     expect(error.message).toEqual('username and/or password wrong')
-    //     expect(typeof toke).toEqual('undefined')
-    // });
-  })
+        let _error
 
-  xit('should fail on valid instance but user.email and user.password are from differents users', function () {
-      var userIndex1 = Math.floor(Math.random() * users.length * 1/2)
-      var userIndex2 = Math.floor(Math.random() * users.length * 1/2) + Math.floor(users.length * 1/2)
-      
-      var email = users[userIndex1].email
-      var password = users[userIndex2].password
+        try {
+            await authenticateUser(email, password);
+        } catch(error) {
+            _error = error
+        }
 
-      // APPLY & TEST
-
-      expect(function() {
-          authenticateUser(email, password)
-      }).toThrowError(Error, 'There is no registered user with those credentials')
-  })
-
-  xit('should fail on valid instance but password is diferent', function () {
-      var userIndex = Math.floor(Math.random() * users.length)
-
-      var email = getRandomString() + '@' + getRandomString() + '.com'
-      var password = users[userIndex].password
-
-      var email = getRandomString() + '@' + getRandomString() + '.com'
-      var password = getRandomString('password')
-
-
-      expect(function() {
-          authenticateUser(email, password)
-      }).toThrowError(Error, 'There is no registered user with those credentials')
-  })
-
-  it('should fail on invalid email format: no email', function () {
-      var email
-      var password = getRandomString('password')
-
-      expect(function() {
-          authenticateUser(email, password)
-      }).toThrowError(TypeError, email + ' is not a string')
-  })
-
-  it('should fail on invalid email format: no @', function () {
-      var email = getRandomString() + getRandomString() + '.com'
-      var password = getRandomString('password')
-
-      expect(function() {
-          authenticateUser(email, password)
-      }).toThrowError(Error, email + ' is not an e-mail')
-  })
-
-  it('should fail on invalid email format: wrong username', function () {
-      var email = '@' + getRandomString() + '.com'
-      var password = getRandomString('password')
-
-      expect(function() {
-          authenticateUser(email, password)
-      }).toThrowError(Error, email + ' is not an e-mail')
-  })
-
-  it('should fail on invalid email instance: no organitation domain', function () {
-      var email = getRandomString() + '@' + '.com'
-      var password = getRandomString('password')
-
-      expect(function() {
-          authenticateUser(email, password)
-      }).toThrowError(Error, email + ' is not an e-mail')
-  })
-
-  it('should fail on invalid email instance: no extention domain', function () {
-      var email = getRandomString() + '@' + getRandomString()
-      var password = getRandomString('password')
-
-      expect(function() {
-          authenticateUser(email, password)
-      }).toThrowError(Error, email + ' is not an e-mail')
-  })
-})
+        expect(_error).toBeDefined()
+        expect(_error.message).toEqual(`${password} is not a string`)
+    })
+});

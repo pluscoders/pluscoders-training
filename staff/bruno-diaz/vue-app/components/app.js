@@ -39,72 +39,63 @@ const App = {
 
   data: {
     username: null,
-    // feedback: "hola mundo",
     active: false,
     loggedIn: false || !!sessionStorage.token,
   },
 
   created() {
     if (!this.loggedIn) {
-      this.$router.push({ path: "/login" });
+      if (this.$router.path !== "/login")
+        this.$router.push({ path: "/login" });
     } else {
-      retrieveUser(sessionStorage.token, (error, user) => {
-        if (error) return (this.feedback = error.message);
-
-        this.username = user.fullname;
-
-        this.$router.push({ path: "/" }).catch(() => {});
-      });
+      const user = retrieveUser(sessionStorage.token)
+      .then( user => {
+        this.username = user.fullname
+        if (this.$router.path !== "/") this.$router.push({ path: "/" });
+      })      
     }
   },
 
   props: ["feedback"],
 
   methods: {
-    onLogin(email, password) {
+    async onLogin(email, password) {
       try {
-        authenticateUser(email, password, (error, token) => {
-          if (error) return this.feedback.push("Hola Mundo");
-          // if (error) return (this.feedback = error.message);
+        const token = await authenticateUser(email, password);
+        
+        var user = await retrieveUser(token)
 
+        if (user) {
           sessionStorage.token = token;
 
           this.loggedIn = true;
 
-          retrieveUser(token, (error, user) => {
-            // if (error) return (this.feedback = error.message);
+          this.username = user.fullname;
 
-            this.username = user.fullname;
-
-            this.$router.push({ path: "/" });
-          });
-        });
+          if (this.$router.path !== "/") this.$router.push({ path: "/" });
+        }
       } catch (error) {
         this.feedback = error.message;
       }
     },
 
-    onRegister(fullname, email, password) {
+    async onRegister(fullname, email, password) {
       try {
-        registerUser(fullname, email, password, (error, token) => {
-          if (error) return (this.feedback = error.message);
+        await registerUser(fullname, email, password);
 
-          authenticateUser(email, password, (error, token) => {
-            if (error) return (this.feedback = error.message);
+        const token = await authenticateUser(email, password);
+        
+        var user = await retrieveUser(token)
 
-            sessionStorage.token = token;
+        if (user) {
+          sessionStorage.token = token;
 
-            this.loggedIn = true;
+          this.loggedIn = true;
 
-            retrieveUser(token, (error, user) => {
-              if (error) return (this.feedback = error.message);
+          this.username = user.fullname;
 
-              this.username = user.fullname;
-
-              this.$router.push({ path: "/" });
-            });
-          });
-        });
+          if (this.$router.path !== "/") this.$router.push({ path: "/" });
+        }        
       } catch (error) {
         this.feedback = error.message;
       }
@@ -113,7 +104,9 @@ const App = {
     onLogout() {
       sessionStorage.clear();
       this.active = false;
-      this.$router.push({ name: "login" });
+      this.loggedIn = false
+      if (this.$router.path !== "/login")
+        this.$router.push({ path: "/login" });
     },
   },
 };

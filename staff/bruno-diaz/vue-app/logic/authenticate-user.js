@@ -1,4 +1,4 @@
-function authenticateUser(email, password, callback) {
+function authenticateUser(email, password) {
   if (typeof email !== "string")
     throw new TypeError(email + " is not a string");
   if (typeof password !== "string")
@@ -14,18 +14,10 @@ function authenticateUser(email, password, callback) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: '{ "username" : "' + email + '", "password": "' + password + '" }',
-  }).then(function (response) {
-    if (response.status === 200)
-      return response.json().then(function (response) {
-        var token = response.token;
-
-        callback(null, token);
-      });
-    else
-      return response.json().then(function (response) {
-        var error = response.error;
-
-        callback(new Error(error));
+  }).then(response => {
+      return response.json().then(response => {
+        if (!response.token) throw new Error(response.error)
+        return response.token
       });
   });
 }
