@@ -1,0 +1,6 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+hello-world,com.logger,LoggerBuilder,0,42,0,0,0,11,0,6,0,6
+hello-world,com.logger,LoggerDemo,15,0,0,0,4,0,2,0,2,0
+hello-world,com.logger,Logger,0,21,0,0,0,6,0,3,0,3
+hello-world,com.hello,HelloDemo,8,0,0,0,3,0,2,0,2,0
+hello-world,com.hello,Hello,3,11,0,0,1,1,1,1,1,1
