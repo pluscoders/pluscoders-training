@@ -24,13 +24,14 @@ function registerUser(fullname, email, password) {
     body: `{ "fullname": "${fullname}", "username": "${email}", "password": "${password}" }`,
   })
     .then(response => {
-      if (response.ok) return;
-      else
-        return response.json()
-          .then(response => {
-            const error = response.error;
+      if (response.ok) return
 
-            throw new Error(error);
-          });
+      const { headers } = response
+
+      if (headers.get('Content-Type').includes('application/json'))
+        return response.json()
+          .then(({ error }) => { throw new Error(error) })
+
+      throw new Error('server error')
     });
 }

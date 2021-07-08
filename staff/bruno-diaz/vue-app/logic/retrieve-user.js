@@ -9,16 +9,24 @@ function retrieveUser(token) {
     },
   })
     .then(response => {
-      // debugger
-      return response.json().then(response => {
-        if (response.error) throw new Error(response.error)
-        const user = response
+      if (response.ok)
+        return response.json()
+          .then((response) => {
+            const user = response
 
-        user.email = user.username
+            user.email = user.username
 
-        delete user.username
+            delete user.username
 
-        return user
-      });
+            return user
+          });
+
+      const { headers } = response
+
+      if (headers.get('Content-Type').includes('application/json'))
+        return response.json()
+          .then(({ error }) => { throw new Error(error) })
+
+      throw new Error('server error')
     });
 }
