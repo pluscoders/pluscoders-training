@@ -2,15 +2,16 @@
  * Searches a pattern in a text
  *
  * @param text {string} - The text to explore
- * @param pattern {string} - The pattern to find
+ * @param pattern {*} - The pattern to find
  *
  * @returns {number} - The index where the pattern is located in the text (if found, otherwise -1)
  *
- * @throws {TypeError} - If any of the parameters is not string
+ * @throws {TypeError} - If the text parameter is not string
  */
  function search(text, pattern) {
     if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
-    if (typeof pattern !== 'string') throw new TypeError(pattern + ' is not a string')
+
+    pattern = pattern.toString()
 
     var j = 0
 
