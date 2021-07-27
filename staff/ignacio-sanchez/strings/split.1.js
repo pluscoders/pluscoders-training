@@ -1,7 +1,7 @@
 /**
  * Splits a text into parts by a pattern
  * 
- * @param {srting} text The text to split
+ * @param {string} text The text to split
  * @param {*} pattern The pattern to find (a single character a string)
  * 
  * @returns {Array} The text parts (divided by pattern)
