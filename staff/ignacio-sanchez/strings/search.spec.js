@@ -1,3 +1,5 @@
+console.log('SPEC search()')
+
 // 1
 
 var spec = 'should find "hola" in "hola mundo" returning 0'

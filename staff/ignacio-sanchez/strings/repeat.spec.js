@@ -1,3 +1,5 @@
+console.log('SPEC repeat()')
+
 // 1
 
 var spec = 'should repeat the string 2 times'

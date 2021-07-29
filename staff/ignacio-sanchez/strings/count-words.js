@@ -3,7 +3,7 @@
  *
  * @param text {string} - The text to explore
  *
- * @returns {number} - The number of words founded
+ * @returns {number} - The number of words found
  *
  * @throws {TypeError} - If the text parameter is not string
  */

@@ -1,14 +1,10 @@
-debugger
 function reverse(text) {
-    var nuevoTexto = "";
+    var result = '';
+
     for (var i = text.length - 1; i >= 0; i--) {
-        nuevoTexto += text[i];
+        result += text[i];
     }
-    return nuevoTexto;
+
+    return result;
 }
-reverse("dog")
-
-reverse("Hello,World")
-
-reverse("0123456789")
 
