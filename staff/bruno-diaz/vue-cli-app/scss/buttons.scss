@@ -1,0 +1,33 @@
+.button {
+  cursor: pointer;
+  height: 33px;
+  margin: 8px;
+  padding: 8px 24px;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+
+  & > i {
+    font-size: 15px;
+    margin-right: 8px;
+  }
+}
+
+
+/* Types of buttons */
+
+.button__cta {
+  background-color: $color-cta;
+  color: white;
+
+  &:hover {
+    background-color: $color-cta-light;
+  }
+}
