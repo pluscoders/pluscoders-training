@@ -1,1 +1,0 @@
-spell('Hello World')

@@ -1,4 +1,4 @@
-console.log('SPEC search()')
+describe('search()')
 
 // 1
 
@@ -9,10 +9,7 @@ var pattern = 'hola'
 
 var res = search(text, pattern)
 
-if (res === 0)
-    console.log(spec)
-else
-    console.error(spec)
+assert (res === 0,spec)
 
 // 2
 
@@ -23,10 +20,7 @@ var pattern = 'la mu'
 
 var res = search(text, pattern)
 
-if (res === 2)
-    console.log(spec)
-else
-    console.error(spec)
+assert (res === 2,spec)
 
 // 3
 
@@ -37,7 +31,4 @@ var pattern = 'la mo'
 
 var res = search(text, pattern)
 
-if (res === -1)
-    console.log(spec)
-else
-    console.error(spec)
+assert (res === -1,spec)

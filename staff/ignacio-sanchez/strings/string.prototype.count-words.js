@@ -1,3 +1,8 @@
+/**
+ * Count the words in a text.
+ *
+ * @returns {number} - The number of words found.
+ */
 String.prototype.countWords = function () {
     var count = 0
 

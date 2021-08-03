@@ -1,3 +1,4 @@
+describe('countWords()')
 // 1
 
 var spec = 'should count the numbers of words in "Hello World" '
@@ -30,7 +31,7 @@ else
     console.error(spec)
 // 4
 
-var spec = 'should count the numbers of words in "\t\nhol\n \n     \t \n\n \t a\n \ta \n  \ta\n   \t" '
+var spec = 'should count the numbers of words in "\\t\\nhol\\n \\n     \\t \\n\\n \\t a\\n \\ta \\n  \\ta\\n   \\t" '
 
 var count = countWords('\t\nhol\n \n     \t \n\n \t a\n \ta \n  \ta\n   \t')
 

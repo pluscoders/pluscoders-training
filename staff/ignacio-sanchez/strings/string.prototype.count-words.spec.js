@@ -17,3 +17,13 @@ var s = "a b c d e"
 var res = s.countWords()
 
 assert(res === 5, spec)
+
+// 3
+
+var spec = 'should return 2 for string " the movie  "'
+
+var s = " the movie  "
+
+var res = s.countWords()
+
+assert(res === 2, spec)

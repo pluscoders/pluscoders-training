@@ -1,33 +1,28 @@
+describe('split()')
 // 1
 
 var spec = 'should split "Hello World" into ["Hello", "World"]'
 
 var result = split('Hello World', ' ')
 
-if (result[0] === 'Hello' && result[1] === 'World')
-    console.log(spec)
-else
-    console.error(spec)
+assert (result[0] === 'Hello' && result[1] === 'World',spec)
+
 // 2
 
 var spec = 'should split "hola mundo" into ["h","la mund"," "]'
 
 var result = split('hola mundo', 'o')
 
-if (result[0] === 'h' && result[1] === 'la mund'&& result[2] === '')
-    console.log(spec)
-else
-    console.error(spec)
-// 1
+assert (result[0] === 'h' && result[1] === 'la mund'&& result[2] === '',spec)
 
-var spec = 'should split "Hello World" into ["Hello", "World"]'
+// 3
 
-var result = split('Hello World', ' ')
+var spec = 'should split "hola mundo" into ["hol", " mundo"]'
 
-if (result[0] === 'Hello' && result[1] === 'World')
-    console.log(spec)
-else
-    console.error(spec)
+var result = split('hola mundo', 'a')
+
+assert (result[0] === 'hol' && result[1] === ' mundo',spec)
+
 
 
 

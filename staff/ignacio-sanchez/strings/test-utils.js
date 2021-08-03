@@ -1,5 +1,5 @@
 function describe(title) {
-    console.log('%cSPEC ' + title, 'font-weight: bold; font-size: 12px')
+    console.log('%c' + title, 'font-weight: bold; font-size: 12px')
 }
 
 function TODO(desc) {

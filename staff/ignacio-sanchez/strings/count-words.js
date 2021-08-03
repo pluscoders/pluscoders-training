@@ -1,11 +1,11 @@
 /**
- * Count the words in a text
+ * Count the words in a text.
  *
- * @param text {string} - The text to explore
+ * @param text {string} - The text to explore.
  *
- * @returns {number} - The number of words found
+ * @returns {number} - The number of words found.
  *
- * @throws {TypeError} - If the text parameter is not string
+ * @throws {TypeError} - If the text parameter is not string.
  */
  function countWords(text) {
     if (typeof text !== 'string') throw new TypeError(text + ' is not a string')
