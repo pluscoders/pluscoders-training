@@ -4,7 +4,9 @@ describe('String.prototype.countWords()')
 
 var spec = 'should return 3 for string "hello nice world"'
 
-var res = "hello nice world".countWords()
+var s = "hello nice world"
+
+var res = s.countWords()
 
 assert(res === 3, spec)
 

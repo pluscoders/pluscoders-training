@@ -5,10 +5,13 @@
  * @param times {string} - The number of times that text repeat.
  *
  * @returns [string] - The text repeated.
+ * 
+ * @throws {TypeError} - If the string parameter is not string.
+ * @throws {TypeError} - If the number parameter is not number.
  */
 function repeat(string, times) {
-    // TODO validate string is a string
-    // TODO validate times is a number
+    if (typeof string !== 'string') throw new TypeError(string + ' is not a string')
+    if (typeof times !== 'number') throw new TypeError(times + ' is not a number')
 
     var repeatedString = '';
 
