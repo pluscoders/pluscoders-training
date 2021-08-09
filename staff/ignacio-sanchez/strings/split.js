@@ -6,9 +6,10 @@
  * 
  * @returns {Array} The text parts (divided by pattern)
  * 
- * * @throws {TypeError} - If the text parameter is not string
+ * @throws {TypeError} - If the text parameter is not string
  * 
  * @author Iñaki Sanchez
+ * 
  * @version 2.0.0
  */
 function split(text, pattern) {

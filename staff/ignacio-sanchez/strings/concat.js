@@ -4,8 +4,6 @@
  * @param () {string} - The text(s) to send as parameter.
  *
  * @returns [string] - The text concatenated.
- *
- * 
  */
 function concat() {
     var concatenated = '';

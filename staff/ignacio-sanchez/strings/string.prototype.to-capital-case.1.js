@@ -74,3 +74,4 @@ String.prototype.toCapitalCase = function () {
     return result
 }
 
+

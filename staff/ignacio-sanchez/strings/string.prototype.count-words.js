@@ -1,5 +1,5 @@
 /**
- * Count the words in a text.
+ * Count the words in the string.
  *
  * @returns {number} - The number of words found.
  */

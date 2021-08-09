@@ -1,10 +1,9 @@
 /**
 * Reverse the characters in a text.
 *
-* @param text {string} - The text to explore.
+* @param text {string} - The text to reverse.
 *
-* @returns {string} - The reverse text.
-*
+* @returns {string} - The reversed text.
 */
 function reverse(text) {
     var result = '';

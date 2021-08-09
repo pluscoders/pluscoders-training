@@ -50,7 +50,7 @@
 }
 
 //countWords('  hol     \t \n a    ')
-countWords(' \t\nhol\n \n     \t \n\n \t a\n \ta \n  \ta\n   \t ')
+//countWords(' \t\nhol\n \n     \t \n\n \t a\n \ta \n  \ta\n   \t ')
 //countWords(' hol\t     \t \n a  .   \t')
 
 
@@ -106,5 +106,5 @@ function countWords(text) {
 }
 
 //countWords('  hol     \t \n a    ')
-countWords(' \t\nhol\n \n     \t \n\n \t a\n \ta \n  \ta\n   \t ')
+//countWords(' \t\nhol\n \n     \t \n\n \t a\n \ta \n  \ta\n   \t ')
 //countWords(' hol\t     \t \n a  .   \t')
