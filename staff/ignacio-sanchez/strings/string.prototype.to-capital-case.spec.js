@@ -29,3 +29,33 @@ var s = 'TODO comprar leche'
 var result = s.toCapitalCase()
 
 assert(result === 'TODO Comprar Leche', spec)
+
+// 4
+
+var spec = 'should return "\\tHola Mu\\nNdo" for string "\\thola mu\\nndo"'
+
+var s = '\thola mu\nndo'
+
+var result = s.toCapitalCase()
+
+assert(result === '\tHola Mu\nNdo', spec)
+
+// 5
+
+var spec = 'should return "\\t \\nHo\\nLa Mund\\nO" for string "\\t \\nho\\nla mund\\no"'
+
+var s = '\t \nho\nla mund\no'
+
+var result = s.toCapitalCase()
+
+assert(result === '\t \nHo\nLa Mund\nO', spec)
+
+// 6
+
+var spec = 'should return "  \\t \\nHo\\nLa Mund\\nO " for string "\\t \\nho\\nla mund\\no "'
+
+var s = '  \t \nho\nla mund\no '
+
+var result = s.toCapitalCase()
+
+assert(result === '  \t \nHo\nLa Mund\nO ', spec)

@@ -39,3 +39,13 @@ var s = 'hOla MunDO'
 var result = s.invertCase()
 
 assert(result === 'HoLA mUNdo', spec)
+
+// 5
+
+var spec = 'should return "HoL\\tA \\nmUNdo" for string "hOl\\ta \\nMunDO"'
+
+var s = 'hOl\ta \nMunDO'
+
+var result = s.invertCase()
+
+assert(result === 'HoL\tA \nmUNdo', spec)
