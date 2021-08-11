@@ -5,7 +5,7 @@
  * 
  * @author Ignacio Sanchez
  * 
- * @version 1.0.0
+ * @version 1.0.1
  */
 String.prototype.toCapitalCase = function () {
     var result = ''
@@ -15,83 +15,36 @@ String.prototype.toCapitalCase = function () {
 
         var prev = this[i - 1]
 
-        if (curr !== ' '
-            && curr !== '\t'
-            && curr !== '\n'
-            && /[A-Z0-9]/.test(curr)
-            && (prev === undefined
-                || prev === ' '
-                || prev === '\t'
-                || prev === '\n')) {
+        if (isNotVoid(curr)) {
+            if (isUpperCase(curr)
+                && (isUndefined(prev) || isVoid(prev))) {
+                result += curr //= word + curr
+            } else {
+                if (isNotVoid(prev)) {
+                    if (isUndefined(prev)) {
+                        result += curr.toUpperCase() //= word + curr
+                    } else if ((isNotUndefined(prev))) {
+                        result += curr //= word + curr
+                    } else if (isNotUndefined(prev)) {
+                        result += curr //= word + curr
+                    }
+                } else if (isSpace(prev)
+                    && !isTab(prev)
+                    && !isNewLine(prev)) {
+                    result += curr.toUpperCase() //= word + curr
+                } else if ((isTab(prev)
+                    || isNewLine(prev))) {
+                    result += curr.toUpperCase() //= word + curr
+                }
+            }
+        } else if (isVoid(curr) && result) {
+            result += curr //= word + curr
+        } else if (isSpace(curr)
+            || isTab(curr)
+            || !isNewLine(curr)
+            && isUndefined(prev)) {
             result += curr //= word + curr
         }
-        else if (/[a-z0-9]/.test(curr)
-            && curr !== '\t'
-            && curr !== '\n'
-            && /[a-z0-9]/.test(curr)
-            && (prev === undefined
-                && prev !== ' '
-                && prev !== '\t'
-                && prev !== '\n')) {
-            result += curr.toUpperCase() //= word + curr
-        }
-        else if (curr !== ' '
-            && curr !== '\t'
-            && curr !== '\n'
-            && /[a-z0-9]/.test(curr)
-            && (prev === undefined
-                && prev !== ' '
-                && prev !== '\t'
-                && prev !== '\n')) {
-            result += curr.toUpperCase() //= word + curr
-        }
-        else if (curr !== ' '
-            && curr !== '\t'
-            && curr !== '\n'
-            && /[a-z0-9]/.test(curr)
-            && (prev === ' '
-                && prev !== '\t'
-                && prev !== '\n')) {
-            result += curr.toUpperCase() //= word + curr
-        }
-
-        else if (curr !== ' '
-            && curr !== '\t'
-            && curr !== '\n'
-            && /[a-z0-9]/.test(curr)
-            && (prev !== undefined
-                && prev !== ' '
-                && prev !== '\t'
-                && prev !== '\n')) {
-            result += curr //= word + curr
-        }
-        else if (curr !== ' '
-            && (prev !== undefined
-                && prev !== ' '
-                && prev !== '\t'
-                && prev !== '\n')) {
-            result += curr //= word + curr
-        }
-        else if ((curr === ' '
-            || curr === '\t'
-            || curr === '\n'
-        )
-            && result) {
-            result += curr //= word + curr
-        }
-        else if (curr === ' '
-            || curr === '\t'
-            || curr !== '\n'
-            && (prev == undefined
-            )) {
-            result += curr //= word + curr
-        }
-            else if (/[a-z0-9]/.test(curr)
-            && (prev === '\t'
-                || prev === '\n')) {
-            result += curr.toUpperCase() //= word + curr
-        }
-        
     }
     return result
 }
