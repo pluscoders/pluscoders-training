@@ -5,7 +5,7 @@
  * 
  * @author Ignacio Sanchez
  * 
- * @version 1.0.1
+ * @version 1.0.2
  */
 String.prototype.toCapitalCase = function () {
     var result = ''

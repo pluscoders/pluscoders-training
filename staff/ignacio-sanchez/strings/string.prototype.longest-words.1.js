@@ -5,9 +5,9 @@
 * 
  * @author Ignacio Sanchez
  * 
- * @version 1.0.1
+ * @version 1.0.0
  */
-String.prototype.longestWords = function () {
+ String.prototype.longestWords = function () {
     var word = ''
     var words = []
 
@@ -16,18 +16,28 @@ String.prototype.longestWords = function () {
 
         var prev = this[i - 1]
 
-        if (isNotVoid(curr)
-            && (isUndefined(prev)
-                || isVoid(prev))) {
+        if (curr !== ' '
+            && curr !== '\t'
+            && curr !== '\n'
+            && (prev === undefined
+                || prev === ' '
+                || prev === '\t'
+                || prev === '\n')) {
             word += curr //= word + curr
         }
-        else if (isNotVoid(curr)
-            && (isNotUndefined(prev)
-                && isNotVoid(prev))) {
+        else if (curr !== ' '
+            && curr !== '\t'
+            && curr !== '\n'
+            && (prev !== undefined
+                && prev !== ' '
+                && prev !== '\t'
+                && prev !== '\n')) {
             word += curr //= word + curr
         }
 
-        if ((isVoid(curr)
+        if ((curr === ' '
+            || curr === '\t'
+            || curr === '\n'
             || i === this.length - 1)
             && word) {
             if (words.length) {
