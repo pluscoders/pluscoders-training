@@ -7,6 +7,8 @@ function TODO(desc) {
 }
 
 function assert(condition, spec) {
-    if (!condition)
+    if (condition)
+        console.log('%c' + spec + ' ✔', 'color: green')
+    else
         console.error(spec + ' ✖')
 }
