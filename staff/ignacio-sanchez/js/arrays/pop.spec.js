@@ -10,3 +10,5 @@ var last = pop(arr)
 
 assert(last === 'vegetable', spec)
 assert(arr.length === 2, spec)
+assert(arr[0] === 'onion', spec)
+assert(arr[1] === 'carrot', spec)

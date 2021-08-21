@@ -22,3 +22,4 @@ var spec = 'should conact "if", "there", "is", "a", "new", "world" into "ifthere
 var result = concat('if', 'there', 'is', 'a', 'new', 'world')
 
 assert (result === 'ifthereisanewworld',spec)
+

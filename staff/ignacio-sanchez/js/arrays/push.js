@@ -1,12 +1,21 @@
 /**
- * @param {Array} arr - The array
+ * Adds one or more elements to an array.
  * 
- * @param {Array} element - The element(s) to add to the end of the array.  
+ * @param {Array} array - The array to add elements to.
+ * 
+ * @param {*} element - The element(s) to add to the array.  
+ * 
+ * @returns [number] - The length of the array.
+ * 
+ * @throws {TypeError} - If the array parameter is not array.
  */
+function push(array, element) {
 
-function push(arr, element) {
-    for (var i = 0; i < addElement.length; i++) {
-        arr[arr.length] = addElement[i]
+    if (typeof Array.isArray(array) === false ) throw new TypeError(array + ' is not a array')
+
+    for (var i = 1; i < arguments.length; i++) {
+        array[array.length] = arguments[i]
     }
-    return arr.length
+
+    return array.length
 }

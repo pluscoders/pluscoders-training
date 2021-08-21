@@ -1,13 +1,15 @@
 /**
- * TODO
+ * TODO ...
  * 
- * @param {Array} arr - The array
+ * @param {Array} array - The array ...
  */
-function pop(arr) {
-    var lastIndex = arr.length - 1
-    var lastElement = arr[lastIndex]
+function pop(array) {
+    // TODO validate array parameter is an array
+    
+    var lastIndex = array.length - 1
+    var lastElement = array[lastIndex]
 
-    arr.length--
+    array.length--
 
     return lastElement
 }
