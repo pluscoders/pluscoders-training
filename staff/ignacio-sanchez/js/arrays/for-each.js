@@ -1,11 +1,13 @@
 /**
- * TODO
+ * Execute a provided function once for each array element.
  * 
- * @param {*} array 
- * @param {*} callback 
+ * @param {*} array - The array parameter for the function.
+ * @param {*} callback - The function to execute on each element in an array.
+ * 
+ * @throws {TypeError} - If the function parameter is not a function.
  */
 function forEach(array, callback) {
-    // TODO validate arr is array and callback is a function
+    if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
 
     for (var i = 0; i < array.length; i++) {
         var element = array[i]
