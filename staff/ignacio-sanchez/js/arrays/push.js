@@ -5,13 +5,12 @@
  * 
  * @param {*} element - The element(s) to add to the array.  
  * 
- * @returns [number] - The length of the array.
+ * @returns {number} - The length of the array.
  * 
  * @throws {TypeError} - If the array parameter is not array.
  */
-function push(array, element) {
-
-    if (typeof Array.isArray(array) === false ) throw new TypeError(array + ' is not a array')
+function push(array) {
+    if (!Array.isArray(array)) throw new TypeError(array + ' is not a array')
 
     for (var i = 1; i < arguments.length; i++) {
         array[array.length] = arguments[i]

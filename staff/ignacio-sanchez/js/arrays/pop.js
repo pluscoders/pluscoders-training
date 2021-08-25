@@ -1,19 +1,21 @@
 /**
- * Removes the last element from an array nad returns that element.
+ * Removes the last element from an array and returns that element.
  * 
- * @param {Array} array - The array to remove elements to.
+ * @param {Array} array - The array to remove the last element from.
  * 
- * @returns {string} - The removed element from the array.
+ * @returns {*} - The removed last element from the array.
  * 
  * @throws {TypeError} - If the array parameter is not array.
  */
 function pop(array) {
-    if (typeof Array.isArray(array) === false ) throw new TypeError(array + ' is not a array')
+    if (!Array.isArray(array)) throw new TypeError(array + ' is not a array')
     
-    var lastIndex = array.length - 1
-    var lastElement = array[lastIndex]
-
-    array.length--
-
-    return lastElement
+    if (array.length) {
+        var lastIndex = array.length - 1
+        var lastElement = array[lastIndex]
+    
+        array.length--
+    
+        return lastElement
+    }
 }
