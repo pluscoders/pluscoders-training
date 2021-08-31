@@ -3,11 +3,10 @@
 // 1
 
 var array1 = [1, 5, 10, 20]
-var element = 6
 
-var r = map(array1, function(element, index, array) {
-    console.log(element, index, array)
-})
+var r = map(array1, function callback(array, i, element) {
+    return array[i] * element
+}, 6)
 
 console.assert(r instanceof Array)
 console.assert(r .length === array1.length)
@@ -19,11 +18,10 @@ console.assert(r[3] === 120)
 // 2
 
 var array1 = [1, 5, 10, 20]
-var element = -1
 
-var r = map(array1, function(element, index, array) {
-    console.log(element, index, array)
-})
+var r = map(array1, function callback(array, i, element) {
+    return array[i] * element
+}, -1)
 
 console.assert(r instanceof Array)
 console.assert(r .length === array1.length)

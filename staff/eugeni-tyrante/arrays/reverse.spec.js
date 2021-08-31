@@ -15,7 +15,6 @@ console.assert(r[2] === 'chickens')
 console.assert(r[3] === 'sheep')
 console.assert(r[4] === 'goats')
 console.assert(r[5] === 'pigs')
-console.assert(r != animals)
 
 // 2
 
