@@ -1,5 +1,4 @@
 export default function(email, password) {
-  /* eslint-disable no-debugger */
   if (typeof email !== "string")
     throw new TypeError(email + " is not a string");
   if (typeof password !== "string")

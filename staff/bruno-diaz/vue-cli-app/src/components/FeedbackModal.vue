@@ -1,52 +1,58 @@
 <template>
-  <div class="modal">
-    <div class="modal__wrapper">
-      <h4 class="modal__title">Error</h4>
-      <p class="modal__text">{{ text }}</p>
-      <button class="modal__button" @click="$emit('close')">OK</button>
-    </div>
+  <div class="feedback">
+      <p class="feedback__text">{{ $store.state.alert }}</p>
+      <button class="feedback__button" @click="$emit('closeFeedback')">X</button>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "FeedbackModal",
   props: ['text'],
+
+  mounted() {
+		setTimeout(() => { 
+        this.$emit('closeFeedback'); 
+    }, 2500);
+	},
+
+  computed: mapState({
+    user: (state) => state.user,
+    feedback: (state) => state.feedback,
+  }),
 };
 </script>
 
 <style scoped lang="scss">
-.modal {
-  position: absolute;
+.feedback {
+  position: fixed;
   top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0,0,0,0.25);
+  left: 16px;
+  right: 16px;
+  background-color: rgba(255, 250, 179, .95);
+  border: 1px solid #BAB9A7;
+  border-top: none;
+  border-radius: 0 0 20px 20px;
+  padding: 16px;
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
   z-index: 10;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
-  &__wrapper{
-    max-width: 500px;
-    width: 50%;
-    background-color: #FFFFFF;
-    padding: 24px;
-  }
-
-  &__title {
-    padding-bottom: 8px;
-    margin-bottom: 8px;
-    border-bottom: 1px solid pink;
-  }
-
   &__text {
-    margin-bottom: 24px;
+    color: #5A5846;
   }
 
   &__button {
-    padding: 4px 16px;
+    background-color: transparent;
+    border: 0;
+    color: #7B7962;
+    &:hover {
+      color: #000000;
+    }
   }
 }
 </style>

@@ -36,15 +36,20 @@ export default {
 
   data() {
     return {
-      fullname: null,
-      email: null,
+      fullname: this.$store.state.user.fullname,
+      email: this.$store.state.user.email,
     };
   },
 
   methods: {
     async onSaving() {
-      console.log('It Works!')
-    }
+      const { fullname, email } = this;
+
+      await this.$store.dispatch("update", { fullname, email });
+
+      this.$store.state.user.fullname = fullname;
+      this.$store.state.user.email = email;
+    },
   },
 
   computed: mapState({

@@ -31,3 +31,12 @@
     background-color: $color-cta-light;
   }
 }
+
+.button__danger {
+  background-color: indianred;
+  color: white;
+
+  &:hover {
+    background-color: lighten(indianred, 10%);;
+  }
+}

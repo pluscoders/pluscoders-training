@@ -3,22 +3,23 @@
     <header id="header">
       <h1 class="header__logo">Icon</h1>
       <span
+        id="dropdown"
         class="dropdownMenu"
         v-if="user"
-        :class="{ dropdownMenu__opened: active }"
+        :class="{ dropdownMenu__opened: dropdownOpened }"
       >
-        <span class="dropdownMenu__link" @click="active = !active">
+        <span class="dropdownMenu__link" @click="toogleDropdown">
           Hola {{ this.user && this.user.fullname }}
           <i class="fa fa-angle-down"></i>
         </span>
         <nav class="dropdownMenu__menu">
-          <div class="dropdownMenu__item" @click="showEditAccount = true">
+          <div id="dropdown_editaccount" class="dropdownMenu__item" @click="showEditAccount = true">
             Edit account
-            <!-- <i class="fa fa-pencil-square-o"></i> -->
+            <i class="fa fa-pencil-square-o"></i>
           </div>
-          <div class="dropdownMenu__item" @click="onLogout">
+          <div id="dropdown_logout" class="dropdownMenu__item" @click="onLogout">
             Log out
-            <!-- <i class="fa fa-sign-out"></i> -->
+            <i class="fa fa-sign-out"></i>
           </div>
         </nav>
       </span>
@@ -27,8 +28,8 @@
     <router-view />
 
     <Loading v-if="this.$store.state.loading" />
-    <!-- <FeedbackModal v-if="this.$store.state.feedback" @close="this.$store.state.feedback = null" :text="this.$store.state.feedback" /> -->
-    <EditAccount v-if="showEditAccount" @closeEditAccount="showEditAccount = null" />
+    <EditAccount v-if="showEditAccount && this.$store.state.user" @closeEditAccount="showEditAccount = null" />
+    <FeedbackModal v-if="this.$store.state.alert" @closeFeedback="closeFeedbackModal()" />
     <Modal v-if="showModal" @closeModal="showModal = null" />
   </main>
 </template>
@@ -36,39 +37,38 @@
 <script>
 import { mapState } from "vuex";
 import Loading from '@/components/Loading.vue';
-// import FeedbackModal from '@/components/FeedbackModal.vue';
 import EditAccount from '@/components/EditAccount.vue';
+import FeedbackModal from '@/components/FeedbackModal.vue';
 import Modal from '@/components/Modal.vue';
 
 export default {
   components: {
     Loading,
-    // FeedbackModal,
     EditAccount,
+    FeedbackModal,
     Modal,
   },
 
   data() {
     return {
-      active: false,
+      dropdownOpened: false,
       showEditAccount: false,
+      showFeedback: false,
       showModal: false,
     };
   },
 
   async beforeCreate() {
-    if (!sessionStorage.token) {
-      this.$router.replace("login");
-    } else {
-      if (!this.user) {
-        try {
-          const { token } = sessionStorage
-          await this.$store.dispatch("retrieveUser", { token });
-        } catch {
-          sessionStorage.clear();
-          this.$router.replace("login");
-        }
+    if (!this.user && sessionStorage.token) {
+      try {
+        const { token } = sessionStorage
+        await this.$store.dispatch("retrieveUser", { token });
+      } catch {
+        sessionStorage.clear();
+        this.$router.replace("login");
       }
+    } else {
+      this.$router.replace("login");
     }
     /* eslint-disable no-debugger */
     // debugger
@@ -78,11 +78,28 @@ export default {
 
   methods: {
     onLogout() {
+      if (this.dropdownOpened) {
+        this.dropdownOpened = false;
+        document.removeEventListener('click', this.closeDropdown);
+      }
       sessionStorage.clear();
-      this.active = false;
       this.$store.state.user = null;
       this.$router.push({ path: "/login" });
     },
+    toogleDropdown() {
+      this.dropdownOpened = !this.dropdownOpened;
+      if (this.dropdownOpened) document.addEventListener('click', this.closeDropdown);
+      else document.removeEventListener('click', this.closeDropdown);
+    },
+    closeDropdown(event) {
+      if (!document.getElementById('dropdown').contains(event.target) || document.getElementById('dropdown_editaccount').contains(event.target)) {
+        this.dropdownOpened = false;
+        document.removeEventListener('click', this.closeDropdown);
+      }
+    },
+    closeFeedbackModal() {
+      this.$store.state.alert = null;
+    }
   },
 
   computed: mapState({
