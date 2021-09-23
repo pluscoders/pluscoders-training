@@ -8,14 +8,15 @@
  * 
  * @throws {TypeError} - If the array parameter is not array.
  */
-function map(array, callback) { // WARN use arguments to support n input arrays!
+function map(array, callback) {
     if (!Array.isArray(array)) throw new TypeError(array + ' is not a array')
 
     var newArray = []
-debugger
+
     for (var i = 0; i < array.length; i++) {
         var element = array[i]
         callback(element, index, array)
+        newArray[newArray.length] = newElement
     }
 
     return newArray
