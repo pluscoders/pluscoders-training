@@ -1,62 +1,60 @@
-describe('indexOf()')
+describe('indexOf()', function () {
+    it('should find "bison" into the array ["ant", "bison", "camel", "duck", "bison"] returning index 5', function () {
 
-// 1
+        var arr = ['ant', 'bison', 'camel', 'duck', 'bison']
 
-var spec = 'should find "bison" into the array ["ant", "bison", "camel", "duck", "bison"] returning index 5'
+        var index = indexOf(arr, 'bison')
 
-var arr = ['ant', 'bison', 'camel', 'duck', 'bison']
+        expect(index).toBe(1)
+        expect(arr[0]).toBe('ant')
+        expect(arr[1]).toBe('bison')
+        expect(arr[2]).toBe('camel')
+        expect(arr[3]).toBe('duck')
+        expect(arr[4]).toBe('bison')
+    })
 
-var index = indexOf(arr, 'bison')
+    it('should find "camel" into the array ["ant", "bison", "camel", "duck", "bison"] returning index 2', function () {
 
-assert(index === 1, spec)
-assert(arr[0] === 'ant', spec)
-assert(arr[1] === 'bison', spec)
-assert(arr[2] === 'camel', spec)
-assert(arr[3] === 'duck', spec)
-assert(arr[4] === 'bison', spec)
+        var arr = ['ant', 'bison', 'camel', 'duck', 'bison']
 
-// 2
+        var index = indexOf(arr, 'camel', 0)
 
-var spec = 'should find "camel" into the array ["ant", "bison", "camel", "duck", "bison"] returning index 2'
+        expect(index).toBe(2)
+        expect(arr[0]).toBe('ant')
+        expect(arr[1]).toBe('bison')
+        expect(arr[2]).toBe('camel')
+        expect(arr[3]).toBe('duck')
+        expect(arr[4]).toBe('bison')
+    })
 
-var arr = ['ant', 'bison', 'camel', 'duck', 'bison']
+    it('should find "camel" into the array ["ant", "bison", "camel", "duck", "bison"] returning index 2', function () {
 
-var index = indexOf(arr, 'camel', 0)
+        var arr = ['ant', 'bison', 'camel', 'duck', 'bison']
 
-assert(index === 2, spec)
-assert(arr[0] === 'ant', spec)
-assert(arr[1] === 'bison', spec)
-assert(arr[2] === 'camel', spec)
-assert(arr[3] === 'duck', spec)
-assert(arr[4] === 'bison', spec)
+        var index = indexOf(arr, 'camel', 2)
 
-// 3
+        expect(index).toBe(2)
+        expect(arr[0]).toBe('ant')
+        expect(arr[1]).toBe('bison')
+        expect(arr[2]).toBe('camel')
+        expect(arr[3]).toBe('duck')
+        expect(arr[4]).toBe('bison')
+    })
 
-var spec = 'should find "camel" into the array ["ant", "bison", "camel", "duck", "bison"] returning index 2'
+    it('should find "camel" into the array ["ant", "bison", "camel", "duck", "bison"] returning index 2', function () {
 
-var arr = ['ant', 'bison', 'camel', 'duck', 'bison']
+        var arr = ['ant', 'bison', 'camel', 'duck', 'bison']
 
-var index = indexOf(arr, 'camel', 2)
+        var index = indexOf(arr, 'radio', 0)
 
-assert(index === 2, spec)
-assert(arr[0] === 'ant', spec)
-assert(arr[1] === 'bison', spec)
-assert(arr[2] === 'camel', spec)
-assert(arr[3] === 'duck', spec)
-assert(arr[4] === 'bison', spec)
+        expect(index).toBe(-1)
+        expect(arr[0]).toBe('ant')
+        expect(arr[1]).toBe('bison')
+        expect(arr[2]).toBe('camel')
+        expect(arr[3]).toBe('duck')
+        expect(arr[4]).toBe('bison')
+    })
+})
 
-// 4
 
-var spec = 'should find "camel" into the array ["ant", "bison", "camel", "duck", "bison"] returning index 2'
-
-var arr = ['ant', 'bison', 'camel', 'duck', 'bison']
-
-var index = indexOf(arr, 'radio', 0)
-
-assert(index === -1, spec)
-assert(arr[0] === 'ant', spec)
-assert(arr[1] === 'bison', spec)
-assert(arr[2] === 'camel', spec)
-assert(arr[3] === 'duck', spec)
-assert(arr[4] === 'bison', spec)
 

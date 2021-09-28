@@ -1,24 +1,23 @@
-describe('join()')
+describe('join()', function () {
+    it('should concatenating ["Fire", "Air", "Water"] and return a new string [FireAirWater]', function () {
 
-// 1
+        var array = ['Fire', 'Air', 'Water'];
+        var string = ''
 
-var spec = 'should concatenating ["Fire", "Air", "Water"] and return a new string [FireAirWater]'
+        var string = join(array, '')
 
-var array = ['Fire','Air','Water'];
-var string = ''
+        expect(string).toBe('FireAirWater')
+    })
 
-var string = join(array,'') 
+    it('should concatenating ["Fire", "Air", "Water"] and return a new string [Fire+Air+Water]', function () {
 
-assert(string === 'FireAirWater', spec)
+        var array = ['Fire', 'Air', 'Water'];
+        var string = ''
 
-// 2
-debugger
-var spec = 'should concatenating ["Fire", "Air", "Water"] and return a new string [FireAirWater]'
+        var string = join(array, '+')
 
-var array = ['Fire','Air','Water'];
-var string = ''
+        expect(string).toBe('Fire+Air+Water')
+    })
 
-var string = join(array,'+') 
-
-assert(string === 'Fire+Air+Water', spec)
+})
 

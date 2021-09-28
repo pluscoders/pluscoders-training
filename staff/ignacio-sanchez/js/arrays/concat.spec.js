@@ -1,103 +1,102 @@
-describe('concat()')
+describe('concat()', function () {
+    it('should concatenate ["a", "b", "c"] and ["d", "e", "f"] into a new array and return ["a", "b", "c","d", "e", "f"]', function () {
 
-// 1
+        var array1 = ['a', 'b', 'c'];
+        var array2 = ['d', 'e', 'f'];
 
-var spec = 'should concatenate ["a", "b", "c"] and ["d", "e", "f"] into a new array and return ["a", "b", "c","d", "e", "f"]'
+        var newArray = concat(array1, array2)
 
-var array1 = ['a', 'b', 'c'];
-var array2 = ['d', 'e', 'f'];
+        expect(newArray[0]).toBe(array1[0])
+        expect(newArray[1]).toBe(array1[1])
+        expect(newArray[2]).toBe(array1[2])
+        expect(newArray[3]).toBe(array2[0])
+        expect(newArray[4]).toBe(array2[1])
+        expect(newArray[5]).toBe(array2[2])
 
-var newArray = concat(array1, array2)
+    })
 
-assert(newArray[0] === array1[0], spec)
-assert(newArray[1] === array1[1], spec)
-assert(newArray[2] === array1[2], spec)
-assert(newArray[3] === array2[0], spec)
-assert(newArray[4] === array2[1], spec)
-assert(newArray[5] === array2[2], spec)
+    it('should concatenate [1, 2, 3] and [4, 5, 6] into a new array and return [1,2,3,4,5,6]', function () {
 
-// 2
+        var array1 = [1, 2, 3]
+        var array2 = [4, 5, 6]
 
-var spec = 'should concatenate [1, 2, 3] and [4, 5, 6] into a new array and return [1,2,3,4,5,6]'
+        var newArray = concat(array1, array2)
 
-var array1 = [1, 2, 3]
-var array2 = [4, 5, 6]
+        expect(newArray[0]).toBe(array1[0])
+        expect(newArray[1]).toBe(array1[1])
+        expect(newArray[2]).toBe(array1[2])
+        expect(newArray[3]).toBe(array2[0])
+        expect(newArray[4]).toBe(array2[1])
+        expect(newArray[5]).toBe(array2[2])
+    })
+
+    it('should concatenate ["a", "b", "c"] , ["d", "e", "f"] and "music" into a new array and return ["a", "b", "c","d", "e", "f","music"]', function () {
+
+        var array5 = ['a', 'b', 'c']
+        var array6 = ['d', 'e', 'f']
+
+        var newArray = concat(array5, array6, 'music')
+
+        expect(newArray[0]).toBe(array5[0])
+        expect(newArray[1]).toBe(array5[1])
+        expect(newArray[2]).toBe(array5[2])
+        expect(newArray[3]).toBe(array6[0])
+        expect(newArray[4]).toBe(array6[1])
+        expect(newArray[5]).toBe(array6[2])
+        expect(newArray[6]).toBe('music')
+
+    })
+
+    it('should concatenate [1, 2, 3]  and true into a new array and return [1,2,3,true]', function () {
+
+        var array1 = [1, 2, 3]
+
+        var newArray = concat(array1, true)
+
+        expect(newArray[0]).toBe(array1[0])
+        expect(newArray[1]).toBe(array1[1])
+        expect(newArray[2]).toBe(array1[2])
+        expect(newArray[3]).toBe(true)
+
+    })
 
 
-var newArray = concat(array1, array2)
+    it('should concatenate [1, 2, 3]  and true into a new array and return [1,2,3,true,false]',function() {
+        
+        var array1 = [1, 2, 3]
+    
+        var newArray = concat(array1, true, false)
+    
+        expect(newArray[0]).toBe(array1[0])
+        expect(newArray[1]).toBe(array1[1])
+        expect(newArray[2]).toBe(array1[2])
+        expect(newArray[3]).toBe(true)
+        expect(newArray[4]).toBe(false)
 
-assert(newArray[0] === array1[0], spec)
-assert(newArray[1] === array1[1], spec)
-assert(newArray[2] === array1[2], spec)
-assert(newArray[3] === array2[0], spec)
-assert(newArray[4] === array2[1], spec)
-assert(newArray[5] === array2[2], spec)
+    })
 
+    it('should concatenate [1, 2, 3] and [4, 5, 6] and [7,8,9] and true, and false and "hola mundo" into a new array and return [1,2,3,true,false]',function(){
+        
+        var array1 = [1, 2, 3]
+        var array2 = [4, 5, 6]
+    
+        var newArray = concat(array1, array2, [7, 8, 9], true, false, "hola mundo")
+    
+        expect(newArray[0]).toBe(array1[0])
+        expect(newArray[1]).toBe(array1[1])
+        expect(newArray[2]).toBe(array1[2])
+        expect(newArray[3]).toBe(array2[0])
+        expect(newArray[4]).toBe(array2[1])
+        expect(newArray[5]).toBe(array2[2])
+        expect(newArray[6]).toBe(7)
+        expect(newArray[7]).toBe(8)
+        expect(newArray[8]).toBe(9)
+        expect(newArray[9]).toBe(true)
+        expect(newArray[10]).toBe(false)
+        expect(newArray[11]).toBe('hola mundo')
 
-// 3
+    })
 
-var spec = 'should concatenate ["a", "b", "c"] , ["d", "e", "f"] and "music" into a new array and return ["a", "b", "c","d", "e", "f","music"]'
-
-var array5 = ['a', 'b', 'c']
-var array6 = ['d', 'e', 'f']
-
-var newArray = concat(array5, array6, 'music')
-
-assert(newArray[0] === array5[0], spec)
-assert(newArray[1] === array5[1], spec)
-assert(newArray[2] === array5[2], spec)
-assert(newArray[3] === array6[0], spec)
-assert(newArray[4] === array6[1], spec)
-assert(newArray[5] === array6[2], spec)
-assert(newArray[6] === 'music', spec)
-
-// 4
-
-var spec = 'should concatenate [1, 2, 3]  and true into a new array and return [1,2,3,true]'
-
-var array1 = [1, 2, 3]
-
-var newArray = concat(array1, true)
-
-assert(newArray[0] === array1[0], spec)
-assert(newArray[1] === array1[1], spec)
-assert(newArray[2] === array1[2], spec)
-assert(newArray[3] === true, spec)
-
-// 5
-
-var spec = 'should concatenate [1, 2, 3]  and true into a new array and return [1,2,3,true,false]'
-
-var array1 = [1, 2, 3]
-
-var newArray = concat(array1, true,false)
-
-assert(newArray[0] === array1[0], spec)
-assert(newArray[1] === array1[1], spec)
-assert(newArray[2] === array1[2], spec)
-assert(newArray[3] === true, spec)
-assert(newArray[4] === false, spec)
-
-// 6
-
-var spec = 'should concatenate [1, 2, 3] and [4, 5, 6] and [7,8,9] and true, and false and "hola mundo" into a new array and return [1,2,3,true,false]'
-
-var array1 = [1, 2, 3]
-var array2 = [4, 5, 6]
-
-var newArray = concat(array1,array2,[7,8,9], true,false,"hola mundo")
-
-assert(newArray[0] === array1[0], spec)
-assert(newArray[1] === array1[1], spec)
-assert(newArray[2] === array1[2], spec)
-assert(newArray[3] === array2[0], spec)
-assert(newArray[4] === array2[1], spec)
-assert(newArray[5] === array2[2], spec)
-assert(newArray[6] === 7, spec)
-assert(newArray[7] === 8, spec)
-assert(newArray[8] === 9, spec)
-assert(newArray[9] === true, spec)
-assert(newArray[10] === false, spec)
-assert(newArray[11] === 'hola mundo', spec)
+})
 
 

@@ -2,7 +2,8 @@
  * Creates and return a new string by concatenating all of the elements in an array, 
  * separated by commas or a specefied separator string.
  * 
- * @param {separator} - Specifies a string to separate each pair of adjacent elements ot the array.
+ * @param {Array} array - ...
+ * @param {*} separator - Specifies a string to separate each pair of adjacent elements ot the array.
  * 
  * @returns {string} - A string with all array elements joined.
  * 
@@ -14,7 +15,8 @@ function join(array, separator) {
     var string = ''
 
     for (var i = 0; i < array.length; i++) {
-        string += (array[i])
+        string += array[i]
+
         if (i < array.length -1)
             string += separator
     }

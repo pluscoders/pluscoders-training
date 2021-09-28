@@ -1,52 +1,50 @@
-describe('pop()')
+describe('pop()', function () {
 
-// 1
+    it('should iterate on ["onion", "carrot", "vegetable"] and remove and return  ["vegetable"]', function () {
 
-var spec = 'should iterate on ["onion", "carrot", "vegetable"] and remove and return  ["vegetable"]'
+        var arr = ['onion', 'carrot', 'vegetable']
 
-var arr = ['onion', 'carrot', 'vegetable']
+        var last = pop(arr)
 
-var last = pop(arr)
+        expect(last).toBe('vegetable')
+        expect(arr.length).toBe(2)
+        expect(arr[0]).toBe('onion')
+        expect(arr[1]).toBe('carrot')
+    })
 
-assert(last === 'vegetable', spec)
-assert(arr.length === 2, spec)
-assert(arr[0] === 'onion', spec)
-assert(arr[1] === 'carrot', spec)
+    it('should iterate on ["trail", 1, "bit "] and remove and return  ["bit "]', function () {
 
-// 2
+        var arr = ['trail', 1, 'bit']
 
-var spec = 'should iterate on ["trail", 1, "bit "] and remove and return  ["bit "]'
+        var last = pop(arr)
 
-var arr = ['trail', 1 , 'bit']
+        expect(last).toBe('bit')
+        expect(arr.length).toBe(2)
+        expect(arr[0]).toBe('trail')
+        expect(arr[1]).toBe(1)
+    })
 
-var last = pop(arr)
+    it('should iterate on [22 , "binance"] and remove and return ["binance"]', function () {
 
-assert(last === 'bit', spec)
-assert(arr.length === 2, spec)
-assert(arr[0] === 'trail', spec)
-assert(arr[1] === 1, spec)
+        var arr = [22, 'binance']
 
-// 3
+        var last = pop(arr)
 
-var spec = 'should iterate on [22 , "binance"] and remove and return ["binance"]'
+        expect(last).toBe('binance')
+        expect(arr.length).toBe(1)
+        expect(arr[0]).toBe(22)
+    })
 
-var arr = [22, 'binance']
+    it('should iterate on ["space", "script", "performance"] and remove and return  ["bit "]', function () {
 
-var last = pop(arr)
+        var arr = ['space', 'script', 'performance']
 
-assert(last === 'binance', spec)
-assert(arr.length === 1, spec)
-assert(arr[0] === 22, spec)
+        var last = pop(arr)
 
-// 4
+        expect(last).toBe('performance')
+        expect(arr.length).toBe(2)
+        expect(arr[0]).toBe('space')
+        expect(arr[1]).toBe('script')
+    })
 
-var spec = 'should iterate on ["space", "script", "performance"] and remove and return  ["bit "]'
-
-var arr = ['space', 'script', 'performance']
-
-var last = pop(arr)
-
-assert(last === 'performance', spec)
-assert(arr.length === 2, spec)
-assert(arr[0] === 'space', spec)
-assert(arr[1] === 'script', spec)
+})
