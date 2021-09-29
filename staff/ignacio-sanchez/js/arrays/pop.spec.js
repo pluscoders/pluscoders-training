@@ -1,9 +1,7 @@
 describe('pop()', function () {
 
     it('should iterate on ["onion", "carrot", "vegetable"] and remove and return  ["vegetable"]', function () {
-
         var arr = ['onion', 'carrot', 'vegetable']
-
         var last = pop(arr)
 
         expect(last).toBe('vegetable')
@@ -13,9 +11,7 @@ describe('pop()', function () {
     })
 
     it('should iterate on ["trail", 1, "bit "] and remove and return  ["bit "]', function () {
-
         var arr = ['trail', 1, 'bit']
-
         var last = pop(arr)
 
         expect(last).toBe('bit')
@@ -25,9 +21,7 @@ describe('pop()', function () {
     })
 
     it('should iterate on [22 , "binance"] and remove and return ["binance"]', function () {
-
         var arr = [22, 'binance']
-
         var last = pop(arr)
 
         expect(last).toBe('binance')
@@ -36,9 +30,7 @@ describe('pop()', function () {
     })
 
     it('should iterate on ["space", "script", "performance"] and remove and return  ["bit "]', function () {
-
         var arr = ['space', 'script', 'performance']
-
         var last = pop(arr)
 
         expect(last).toBe('performance')

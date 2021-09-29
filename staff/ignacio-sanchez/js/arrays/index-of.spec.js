@@ -1,6 +1,5 @@
 describe('indexOf()', function () {
     it('should find "bison" into the array ["ant", "bison", "camel", "duck", "bison"] returning index 5', function () {
-
         var arr = ['ant', 'bison', 'camel', 'duck', 'bison']
 
         var index = indexOf(arr, 'bison')
@@ -14,7 +13,6 @@ describe('indexOf()', function () {
     })
 
     it('should find "camel" into the array ["ant", "bison", "camel", "duck", "bison"] returning index 2', function () {
-
         var arr = ['ant', 'bison', 'camel', 'duck', 'bison']
 
         var index = indexOf(arr, 'camel', 0)
@@ -28,7 +26,6 @@ describe('indexOf()', function () {
     })
 
     it('should find "camel" into the array ["ant", "bison", "camel", "duck", "bison"] returning index 2', function () {
-
         var arr = ['ant', 'bison', 'camel', 'duck', 'bison']
 
         var index = indexOf(arr, 'camel', 2)
@@ -42,7 +39,6 @@ describe('indexOf()', function () {
     })
 
     it('should find "camel" into the array ["ant", "bison", "camel", "duck", "bison"] returning index 2', function () {
-
         var arr = ['ant', 'bison', 'camel', 'duck', 'bison']
 
         var index = indexOf(arr, 'radio', 0)
