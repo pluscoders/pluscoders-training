@@ -1,6 +1,6 @@
-describe('Yayay', function() {
-    describe('constructor', function() {
-        it('should instantiate a Yayay with length 0 by default', function() {
+describe('Yayay', function () {
+    describe('constructor', function () {
+        it('should instantiate a Yayay with length 0 by default', function () {
             var y = new Yayay
 
             expect(y instanceof Yayay).toBeTrue()
@@ -8,8 +8,8 @@ describe('Yayay', function() {
         })
     })
 
-    describe('push', function() {
-        it('should push one element', function() {
+    describe('push', function () {
+        it('should push one element', function () {
             var y = new Yayay
 
             y.push('hola mundo')
@@ -19,8 +19,8 @@ describe('Yayay', function() {
         })
     })
 
-    describe('pop', function() {
-        it('should pop one element', function() {
+    describe('pop', function () {
+        it('should pop one element', function () {
             var y = new Yayay
 
             y[0] = 'hola'
@@ -35,37 +35,59 @@ describe('Yayay', function() {
         })
     })
 
-    describe('forEach', function() {        
-        it('should iterate the same function for each element',function(){
+    describe('forEach', function () {
+        it('should iterate the same function for each element', function () {
             var y = new Yayay
-            
+
             y[0] = 'paper'
             y[1] = 'shirt'
             y[2] = 'ovni'
-            
+
             var callback = y.forEach
 
             expect(y[0]).toEqual('paper')
             expect(y[1]).toEqual('shirt')
             expect(y[2]).toEqual('ovni')
         })
-    })    
+    })
 
-    describe('concat', function() {        
-        it('should merge two or more arrays into a new array',function(){
+    describe('concat', function () {
+        it('should merge two or more arrays into a new array', function () {
             var y = new Yayay
 
-            var array1 = ['a', 'b', 'c'];
-            var array2 = ['d', 'e', 'f'];
-    
-            newArray = y.concat([array1],[array2])
-    
-            expect(newArray[0]).toBe(array1[0])
-            expect(newArray[1]).toBe(array1[1])
-            expect(newArray[2]).toBe(array1[2])
-            expect(newArray[3]).toBe(array2[0])
-            expect(newArray[4]).toBe(array2[1])
-            expect(newArray[5]).toBe(array2[2])
+            y[0] = 'a'
+            y[1] = 'b'
+            y[2] = 'c'
+            y[3] = 'd'
+            y[4] = 'e'
+            y[5] = 'f'
+            y.length = 6
+
+            var newYayay = y.concat()
+
+            expect(newYayay).toBe('a, b, c, d, e, f')
+
         })
-    })    
+    })
+
+    describe('find', function () {
+        it('should return the value of the first element in the provided array that satisfies the provided testing function', function () {
+            var y = new Yayay
+            debugger
+            y[0] = '5'
+            y[1] = '12'
+            y[2] = '8'
+            y[3] = '130'
+            y[4] = '44'
+            y[5] = '53'
+            y.length = 6
+
+            var found = y.find(function (element){
+                return element > 10
+        })
+
+        expect(found).toBe('12')
+
+    })
+})    
 })
