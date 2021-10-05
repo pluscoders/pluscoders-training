@@ -3,8 +3,8 @@ function Yayay() {
 }
 
 Yayay.prototype.forEach = function(callback) {
-    // TODO validate callback
-    
+
+    if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
     for (var i = 0; i < this.length; i++)
         callback(this[i])
 }
@@ -24,3 +24,4 @@ Yayay.prototype.pop = function() {
 
     return last
 }
+
