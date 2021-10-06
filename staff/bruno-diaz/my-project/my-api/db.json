@@ -1,0 +1,14 @@
+{
+    "cities": [
+        { "id": "abc123", "name" : "Barcelona", "coords": [41.48263319699386, 2.1405572738902805], "province": "Barcelona", "description": "Bla bla bla" },
+        { "id": "def456", "name" : "Santander", "coords": [43.463897278605735, -3.809077215869119], "province": "Cantabria", "description": "Lis lis lis" }
+    ],
+    "pois": [
+      { "id": "ghi789", "title": "La Sagrada Familia", "coords": [41.40376944359228, 2.1743230955762516], "city": "abc123" },
+      { "id": "jkl012", "title": "Castillo de Montjuic", "coords": [41.36364501719401, 2.165132723571201], "city": "abc123" },
+      { "id": "mno345", "title": "Fuente Mágica", "coords": [41.371344763726796, 2.1517483979368683], "city": "abc123" },
+      { "id": "pqr678", "title": "Palacio de la Magdalena", "coords": [43.46957421558969, -3.766189513637748], "city": "def456" },
+      { "id": "stu901", "title": "Centro Botín", "coords": [43.46053895465243, -3.8040342289815143], "city": "def456" },
+      { "id": "vwx234", "title": "Faro de Cabo Mayor", "coords": [43.49069895362086, -3.7908072173392107], "city": "def456" }
+    ]
+  }
