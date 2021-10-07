@@ -42,12 +42,28 @@ describe('Yayay', function () {
             y[0] = 'paper'
             y[1] = 'shirt'
             y[2] = 'ovni'
+            y.length = 3
 
-            var callback = y.forEach
+            var elements = []
+            var yayays = []
 
+            y.forEach(function(element, index, yayay) {
+                elements[index] = element
+                yayays[index] = yayay
+            })
+
+            expect(y.length).toEqual(3)
             expect(y[0]).toEqual('paper')
             expect(y[1]).toEqual('shirt')
             expect(y[2]).toEqual('ovni')
+
+            expect(elements[0]).toEqual('paper')
+            expect(elements[1]).toEqual('shirt')
+            expect(elements[2]).toEqual('ovni')
+
+            expect(yayays[0]).toEqual(y)
+            expect(yayays[1]).toEqual(y)
+            expect(yayays[2]).toEqual(y)
         })
     })
 
@@ -73,21 +89,67 @@ describe('Yayay', function () {
     describe('find', function () {
         it('should return the value of the first element in the provided array that satisfies the provided testing function', function () {
             var y = new Yayay
-            debugger
-            y[0] = '5'
-            y[1] = '12'
-            y[2] = '8'
-            y[3] = '130'
-            y[4] = '44'
-            y[5] = '53'
+
+            y[0] = 5
+            y[1] = 12
+            y[2] = 8
+            y[3] = 130
+            y[4] = 44
+            y[5] = 53
             y.length = 6
 
-            var found = y.find(function (element){
+            var found = y.find(function (element) {
                 return element > 10
+            })
+
+            expect(found).toBe(12)
+
         })
 
-        expect(found).toBe('12')
+    })
+
+    describe('indexOf', function () {
+        it('should return the index within the calling string object of the first occurrance of the specified value, starting at fromIndex', function () {
+            var y = new Yayay
+
+            y[0] = 'ant'
+            y[1] = 'bison'
+            y[2] = 'camel'
+            y[3] = 'duck'
+            y[4] = 'bison'
+            y.length = 5
+
+            var index = y.indexOf('bison', 0)
+
+            expect(index).toBe(1)
+            expect(y[0]).toBe('ant')
+            expect(y[1]).toBe('bison')
+            expect(y[2]).toBe('camel')
+            expect(y[3]).toBe('duck')
+            expect(y[4]).toBe('bison')
+
+        })
 
     })
-})    
+
+    describe('map', function () {
+        it('should create a new array with the results of a calling provided function', function () {
+            var y = new Yayay
+
+            y[0] = 2
+            y[1] = 4
+            y[2] = 8
+            y.length = 3
+
+            var newYayay = y.map(function (element){
+                return element * 2
+            })
+   
+            expect(newYayay[0]).toBe(4)
+            expect(newYayay[1]).toBe(8)
+            expect(newYayay[2]).toBe(16)
+
+        })
+
+    })
 })
