@@ -47,7 +47,7 @@ describe('Yayay', function () {
             var elements = []
             var yayays = []
 
-            y.forEach(function(element, index, yayay) {
+            y.forEach(function (element, index, yayay) {
                 elements[index] = element
                 yayays[index] = yayay
             })
@@ -81,7 +81,7 @@ describe('Yayay', function () {
 
             var newYayay = y.concat()
 
-            expect(newYayay).toBe('a, b, c, d, e, f')
+            expect(newYayay).toBe('a,b,c,d,e,f')
 
         })
     })
@@ -136,15 +136,16 @@ describe('Yayay', function () {
         it('should create a new array with the results of a calling provided function', function () {
             var y = new Yayay
 
+
             y[0] = 2
             y[1] = 4
             y[2] = 8
             y.length = 3
 
-            var newYayay = y.map(function (element){
+            var newYayay = y.map(function (element) {
                 return element * 2
             })
-   
+
             expect(newYayay[0]).toBe(4)
             expect(newYayay[1]).toBe(8)
             expect(newYayay[2]).toBe(16)
@@ -152,4 +153,27 @@ describe('Yayay', function () {
         })
 
     })
+
+    describe('join', function () {
+        it('Creates and return a new string by concatenating all of the elements in an array, separated by a specefied separator string.', function () {
+            var y = new Yayay
+debugger
+            var string = ''
+
+            y[0] = 'Fire'
+            y[1] = 'Air'
+            y[2] = 'Water'
+            y.length = 3
+
+            var string = y.join('+')
+
+            expect(string).toBe('Fire+Air+Water')
+            expect(y.length).toEqual(3)
+        })
+
+    })
+
 })
+
+
+

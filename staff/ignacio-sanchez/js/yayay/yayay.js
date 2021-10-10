@@ -32,7 +32,7 @@ Yayay.prototype.concat = function () {
         newYayay += this[i]
 
         if (i < this.length - 1)
-            newYayay += ', '
+            newYayay += ','
     }
 
     return newYayay
@@ -69,19 +69,26 @@ Yayay.prototype.map = function (callback) {
     for (var i = 0; i < this.length; i++) {
         var element = this[i]
 
-        newYayay += callback(this[i])
-
-        if (i < this.length - 1)
-            newYayay += ', '
-
-
+        newYayay[i] = callback(element, i, this)
     }
 
     return newYayay
 }
 
-Yayay.prototype.join = function () {
+Yayay.prototype.join = function (separator) {
+    var string = ''
 
+    for (var i = 0; i < this.length; i++) {
+        string += this[i]
+
+        if (i < this.length - 1)
+            string += separator
+    }
+
+    return string
 }
+
+
+
 
 // TODO reduce (do it standalone with arrays first, then reproduce it here with Yayay)
