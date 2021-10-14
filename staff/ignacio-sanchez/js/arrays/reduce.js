@@ -9,30 +9,18 @@
  * 
  * @throws {TypeError} - If the array parameter is not array.
  */
-function reduce(array, callback, initialValue, currentIndex) {
-    //if (!Array.isArray(array)) throw new TypeError(array + ' is not a array')
+function reduce(array, callback, initialValue) {
+    if (!Array.isArray(array)) throw new TypeError(array + ' is not a array')
 
     if (initialValue === undefined) {
-        initialValue = array[0]
         var accumulator = array[0]
 
         for (var i = 1; i < array.length; i++) {
             var currentValue = array[i]
-            accumulator = callback(accumulator, currentValue, currentIndex, array)
+
+            accumulator = callback(accumulator, currentValue, i, array)
         }
+
         return accumulator
     }
-    // else {
-    //     accumulator = initialValue
-
-    //     for (var i = 0; i < array.length; i++) {
-    //         var currentValue = array[i]
-    //         accumulator = callback(accumulator, currentValue, currentIndex, array)
-    //     }
-    //     return accumulator
-    // }
-}
-
-function callback(accumulator, currentValue, i, array){
-    return accumulator + currentValue
 }
