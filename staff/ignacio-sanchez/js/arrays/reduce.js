@@ -23,4 +23,14 @@ function reduce(array, callback, initialValue) {
 
         return accumulator
     }
+
+    else {
+        accumulator = initialValue
+
+        for (var i = 0; i < array.length; i++) {
+            var currentValue = array[i]
+            accumulator = callback(accumulator, currentValue, i, array)
+        }
+        return accumulator
+    }
 }

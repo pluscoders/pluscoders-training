@@ -12,7 +12,7 @@ describe('reduce()', function () {
 
     })
 
-    it('should add [1,2,3] and return the result 6', function () {
+    it('should multiply [1,2,3] and return the result 6', function () {
 
         var arr = [1, 2, 3]
 
@@ -32,7 +32,7 @@ describe('reduce()', function () {
             return accumulator * currentValue
         })
 
-        expect(resul).toBe(11.71875)
+        expect(resul).toBe(1.25 * 2.50 * 3.75)
 
     })
 
