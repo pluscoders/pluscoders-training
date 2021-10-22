@@ -5,6 +5,8 @@ describe('concat()', function () {
 
         var newArray = concat(array1, array2)
 
+        expect(newArray instanceof Array).toBeTrue()
+        expect(newArray.length).toBe(array1.length + array2.length)
         expect(newArray[0]).toBe(array1[0])
         expect(newArray[1]).toBe(array1[1])
         expect(newArray[2]).toBe(array1[2])

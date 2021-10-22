@@ -12,20 +12,27 @@
 function reduce(array, callback, initialValue) {
     if (!Array.isArray(array)) throw new TypeError(array + ' is not a array')
 
-    // var accumulator
+    if (initialValue === undefined) {
+        var accumulator = array[0]
 
-    // if (initialValue === undefined)
-    //     accumulator = array[0]
-    // else
-    //     accumulator = initialValue
+        for (var i = 1; i < array.length; i++) {
+            var currentValue = array[i]
 
-    var accumulator = initialValue === undefined? array[0] : initialValue
+            accumulator = callback(accumulator, currentValue, i, array)
+        }
 
-    for (var i = initialValue === undefined? 1 : 0; i < array.length; i++) {
-        var currentValue = array[i]
-
-        accumulator = callback(accumulator, currentValue, i, array)
+        return accumulator
     }
 
-    return accumulator
+    else {
+        accumulator = initialValue
+
+        for (var i = 0; i < array.length; i++) {
+            var currentValue = array[i]
+
+            accumulator = callback(accumulator, currentValue, i, array)
+        }
+        
+        return accumulator
+    }
 }
