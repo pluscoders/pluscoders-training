@@ -1,5 +1,4 @@
 Yayay.prototype.reduce = function (callback, initialValue) {
-
     if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
 
     if (initialValue === undefined) {

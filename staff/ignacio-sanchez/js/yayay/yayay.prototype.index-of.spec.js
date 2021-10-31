@@ -17,7 +17,5 @@ describe('indexOf', function () {
         expect(y[2]).toBe('camel')
         expect(y[3]).toBe('duck')
         expect(y[4]).toBe('bison')
-
     })
-
 })
