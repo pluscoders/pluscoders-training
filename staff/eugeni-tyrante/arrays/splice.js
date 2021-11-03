@@ -1,9 +1,9 @@
 /**
  * Returns a new array with the elements from an original array indexed between the start and end value and introduces a new element to the original array
  *
- * @param {Number} start  - The array position where the splice will start and 
- * @param {Number} [start]  - This value indicates where will start the function
- * @param {Number} [end] - This value indicates where will end the function
+ * @param {Number} start  - The array position where the splice will start
+ * @param {Number} [deleteCount]  - This value indicates the number of elements in the array to remove from start
+ * @param {Number} [element] - The elements to put in the array starting from start
  *
  * @returns {Array} - A new array with the elements between start and end or undefined if the values doesn't match
  *

@@ -4,9 +4,9 @@
 
 var array1 = [1, 5, 10, 20]
 
-var r = map(array1, function callback(array, i, element) {
-    return array[i] * element
-}, 6)
+var r = map(array1, function (element, i, array) {
+    return array[i] * 2
+})
 
 console.assert(r instanceof Array)
 console.assert(r .length === array1.length)
@@ -19,9 +19,9 @@ console.assert(r[3] === 120)
 
 var array1 = [1, 5, 10, 20]
 
-var r = map(array1, function callback(array, i, element) {
-    return array[i] * element
-}, -1)
+var r = map(array1, function callback(element, i, array) {
+    return array[i] * -1
+})
 
 console.assert(r instanceof Array)
 console.assert(r .length === array1.length)

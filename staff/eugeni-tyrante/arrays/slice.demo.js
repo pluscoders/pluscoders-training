@@ -1,9 +1,5 @@
 // slice.demo.js
 
-// 1
-
-// slice.demo.js
-
 var a = [1, 2, 3]
 
 // 1

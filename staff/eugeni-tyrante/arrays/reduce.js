@@ -8,11 +8,10 @@
  *
  * @throws {TypeError} - When any of the input parameters does not match the expected type
  */
-function reduce(callback, initialValue) {
+function reduce(array, callback, initialValue) {
     if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
 
     if (initialValue === undefined) {
-        initialValue = array[0]
         var accumulator = array[0]
 
         for (var i = 1; i < array.length; i++) {
@@ -21,10 +20,7 @@ function reduce(callback, initialValue) {
         }
 
         return accumulator
-
-    }
-
-    else {
+    } else {
         accumulator = initialValue
 
         for (var i = 0; i < array.length; i++) {
@@ -33,10 +29,5 @@ function reduce(callback, initialValue) {
         }
 
         return accumulator
-
     }
-}
-
-function callback(accumulator, currentValue, i, array) {
-    return accumulator + currentValue
 }

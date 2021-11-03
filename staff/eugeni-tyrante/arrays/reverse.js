@@ -12,9 +12,14 @@ function reverse(array) {
 
     for (var i = 0; i < array.length / 2; i++) {
 
-        if (array[i] != array[array.length - i - 1]) {
-            [array[i], array[array.length - i - 1]] = [array[array.length - i - 1], array[i]]
+        var val1 = array(i)
+        var val2 = array(array.length - i - 1)
+
+        if (array[i] !== array[array.length - i - 1]) {
+            array(i) = val2
+            array(array.length - i - 1) = val1
         }
+        
     }
 
     return array
