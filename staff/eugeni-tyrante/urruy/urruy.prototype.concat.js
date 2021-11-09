@@ -9,15 +9,8 @@ Urruy.prototype.concat = function () {
 
             for (var j = 0; j < trurruy.length; j++) {
                 var curruy = trurruy[j]
-
-                if (curruy != undefined) {
-                    concatenated[concatenated.length] = curruy
-                    concatenated.length++
-                }
-
-                else {
-                    j++
-                }
+                concatenated[concatenated.length] = curruy
+                concatenated.length++
             }
         }
         else {
