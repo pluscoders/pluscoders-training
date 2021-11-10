@@ -1,7 +1,9 @@
 Yayay.prototype.push = function (element) {
-    this[this.length] = element
-
-    this.length++
+    for (var i = 0; i < arguments.length; i++) {
+        this[this.length] = arguments[i]
+        this.length++
+    }
+    return this
 }
 
 

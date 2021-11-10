@@ -18,4 +18,23 @@ describe('indexOf', function () {
         expect(y[3]).toBe('duck')
         expect(y[4]).toBe('bison')
     })
+    it('should return -1 if the given element cant be found in the array', function () {
+        var y = new Yayay
+
+        y[0] = 'ant'
+        y[1] = 'bison'
+        y[2] = 'camel'
+        y[3] = 'duck'
+        y[4] = 'bison'
+        y.length = 5
+
+        var index = y.indexOf('radio', 0)
+
+        expect(index).toBe(-1)
+        expect(y[0]).toBe('ant')
+        expect(y[1]).toBe('bison')
+        expect(y[2]).toBe('camel')
+        expect(y[3]).toBe('duck')
+        expect(y[4]).toBe('bison')
+    })
 })

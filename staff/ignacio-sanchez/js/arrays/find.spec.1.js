@@ -1,7 +1,7 @@
 describe('find()')
 
 // 1
-debugger
+
 var spec = 'should found the element [12] as the first element higher than [10] in the array [5,12,8,130,44] and return true'
 
 var array = [5, 12, 8, 130, 44];

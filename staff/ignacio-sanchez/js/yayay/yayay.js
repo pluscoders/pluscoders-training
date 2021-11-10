@@ -12,4 +12,7 @@ function Yayay() {
             this.length++
         }
     }
+    if (i = arguments.length , typeof arguments[i-1] === "number" ) {
+        this.length = arguments[i - 1]
+    }
 }
