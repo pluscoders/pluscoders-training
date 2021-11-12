@@ -2,24 +2,24 @@ Yayay.prototype.reduce = function (callback, initialValue) {
     if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
 
     if (initialValue === undefined) {
-        var accumulator = this[0]
+        var previousValue = this[0]
 
         for (var i = 1; i < this.length; i++) {
             var currentValue = this[i]
 
-            accumulator = callback(accumulator, currentValue, i, this)
+            previousValue = callback(previousValue, currentValue, i, this)
         }
 
-        return accumulator
+        return previousValue
     }
 
     else {
-        accumulator = initialValue
+        previousValue = initialValue
 
         for (var i = 0; i < this.length; i++) {
             var currentValue = this[i]
-            accumulator = callback(accumulator, currentValue, i, this)
+            previousValue = callback(previousValue, currentValue, i, this)
         }
-        return accumulator
+        return previousValue
     }
 }
