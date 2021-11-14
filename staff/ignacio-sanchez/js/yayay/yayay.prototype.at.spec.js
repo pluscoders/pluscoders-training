@@ -16,7 +16,7 @@ describe('at', function () {
     })
     it('should return the index of an integer', function () {
         var y = new Yayay
-debugger
+
         y[0] = 5
         y[1] = 12
         y[2] = 8
