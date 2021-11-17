@@ -7,5 +7,6 @@ Yayay.prototype.some = function (callback) {
         if (callback(element, i, this))
             return true
     }
+    
     return false
 }

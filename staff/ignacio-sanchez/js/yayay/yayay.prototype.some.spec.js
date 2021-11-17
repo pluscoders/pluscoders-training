@@ -13,8 +13,10 @@ describe('some', function () {
             if (element % 2 === 0)
                 return true
         })
-        expect(found).toBe(true)
+
+        expect(found).toBeTrue()
     })
+
     it('should return false after at least one element in the array passes the test implemented by the provided function', function () {
         var y = new Yayay
 
@@ -29,6 +31,7 @@ describe('some', function () {
             if (element % 6 === 0)
                 return true
         })
-        expect(found).toBe(false)
+
+        expect(found).toBeFalse()
     })
 })

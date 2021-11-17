@@ -1,4 +1,4 @@
-describe('includes', function () {
+xdescribe('includes', function () {
     it('should return true or false whether an array includes a certain value among it entries', function () {
         var y = new Yayay
 
@@ -7,11 +7,11 @@ describe('includes', function () {
         y[2] = 3
         y.length = 3
 
-       found = y.includes(2)
+        var found = y.includes(2)
 
         expect(found).toBe(true)
-
     })
+
     it('should return true or false whether an array includes a certain value among it entries', function () {
         var y = new Yayay
 
@@ -20,11 +20,11 @@ describe('includes', function () {
         y[2] = 'bat'
         y.length = 3
 
-        found= y.includes('cat')
+        var found = y.includes('cat')
 
         expect(found).toBe(true)
-
     })
+
     it('should return true or false whether an array includes a certain value among it entries', function () {
         var y = new Yayay
 
@@ -33,11 +33,11 @@ describe('includes', function () {
         y[2] = 'bat'
         y.length = 3
 
-        found= y.includes('at')
+        var found = y.includes('at')
 
         expect(found).toBe(false)
-
     })
+
     it('should return true or false whether an array includes a certain value among it entries', function () {
         var y = new Yayay
 
@@ -46,10 +46,21 @@ describe('includes', function () {
         y[2] = 'bat'
         y.length = 3
 
-        found= y.includes('cat',100)
+        var found = y.includes('cat', 100)
 
         expect(found).toBe(false)
-
     })
 
+    it('should return true or false whether an array includes a certain value among it entries', function () {
+        var y = new Yayay
+
+        y[0] = 'cat'
+        y[1] = 'dog'
+        y[2] = 'bat'
+        y.length = 3
+
+        var found = y.includes('cat', -100)
+
+        expect(found).toBe(false)
+    })
 })
