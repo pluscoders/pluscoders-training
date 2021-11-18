@@ -23,7 +23,7 @@ describe('reverse', function () {
         y[3] = 'four'
         y[4] = 'five'
         y.length = 5
-
+debugger
         y.reverse()
 
         expect(y.length).toEqual(5)

@@ -11,9 +11,10 @@ Yayay.prototype.fill = function (value, start, end) {
     }
     if (start === undefined) {
         start = 0
+    
     }
-    if (start < 0) {
-        start = this.length + start
+    if (this.length + start < 0) {
+        start = 0
     }
     for (var i = start; i < end; i++) {
         this[i] = value

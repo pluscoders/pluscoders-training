@@ -1,4 +1,4 @@
-xdescribe('sort', function () {
+describe('sort', function () {
     it('should sort an array in place', function () {
         var y = new Yayay
 

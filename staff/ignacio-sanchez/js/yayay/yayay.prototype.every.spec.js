@@ -1,4 +1,4 @@
-xdescribe('every', function () {
+describe('every', function () {
     it('should return a boolean value if all the elements in the array pass the test implemented by the provided function', function (){
         var y = new Yayay
 
@@ -30,5 +30,6 @@ xdescribe('every', function () {
             return element < 30
         })
         expect(found).toBe(false)
+        
     })
 })

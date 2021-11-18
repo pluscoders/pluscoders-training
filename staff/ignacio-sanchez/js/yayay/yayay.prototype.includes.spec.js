@@ -1,4 +1,4 @@
-xdescribe('includes', function () {
+describe('includes', function () {
     it('should return true or false whether an array includes a certain value among it entries', function () {
         var y = new Yayay
 
@@ -61,6 +61,6 @@ xdescribe('includes', function () {
 
         var found = y.includes('cat', -100)
 
-        expect(found).toBe(false)
+        expect(found).toBe(true)
     })
 })

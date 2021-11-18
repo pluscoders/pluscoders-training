@@ -3,12 +3,11 @@ Yayay.prototype.includes = function (searchElement, fromIndex) {
         fromIndex = 0
     }
 
-    if (fromIndex < 0) {
-        fromIndex = this.length + fromIndex
+    if (this.length + fromIndex < 0) {
+        fromIndex = 0
     }
 
     for (var i = fromIndex; i < this.length; i++) {
-        console.log(i)
 
         if (this[i] === searchElement){
             return true
