@@ -1,0 +1,80 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+  background-color: rgba(78, 78, 78, 0.8);
+}
+
+.page__container {
+  background-image: url('old-paper-texture-1.jpg');
+  width: 60%;
+
+}
+
+.page__header {
+  grid-area: header;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page__header-image {
+  max-width: 30%;
+  border-radius: 5px;
+}
+
+.page__header-title {
+  font-family: Montserrat, sans-serif;
+  font-weight: 4 em;
+  line-height: 1.2em;
+  font-stretch: extra-expanded;
+  margin: 1em 1em 1em 1em;
+  background-color: rgba(255, 203, 105, 0.438);
+  text-align: left border;
+  letter-spacing: 10px;
+}
+
+.page__section {
+  grid-area: main;
+  font-family: Georgia, verdana, sans-serifs;
+}
+
+.page__section-title {
+  color: black;
+  border-left: 6px solid red;
+  background-color: rgba(211, 211, 211, 0.418);
+  border-radius: 5px;
+  margin: 20px 5px 5px;
+  max-width: 100%;
+  padding: 5px 10px 5px 10px;
+  letter-spacing: 1px;
+}
+
+a:link, a:visited {
+  color: black;
+  padding: 3px 3px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  color: white;
+}
+
+.fa-envelope-open, .fa-phone-square-alt {
+  margin-right: 1rem;
+}
+
+.title {
+  font-family: Verdana, sans-serif;
+  padding-left: 20px;
+  border-radius: 5px;
+}
+
+.image {
+  flex-basis: 15em;
+}

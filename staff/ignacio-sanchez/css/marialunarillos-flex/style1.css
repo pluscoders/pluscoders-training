@@ -1,0 +1,29 @@
+.flex-container {
+    display: flex;
+    background-color: bisque;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 70%;
+    margin: 0 auto;
+    padding: 7.5px;
+    position: relative;
+    justify-content: center;
+}
+
+.flex-container__box {
+    background-color: brown;
+    margin: 3px;
+    color: white;
+    flex-basis: 300px;
+    line-height: 1.8;
+    height: 200px;
+}
+
+@media (max-width: 672px) {
+    .flex-container {
+        flex-direction: column;
+    }
+    .flex-container__box {
+        flex-basis: 100%;
+    }
+
