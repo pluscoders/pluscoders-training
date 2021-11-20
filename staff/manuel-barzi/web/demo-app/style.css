@@ -1,0 +1,13 @@
+.login {
+    display: none;
+    border: 1px solid black;
+}
+
+.register {
+    display: none;
+    border: 1px solid red;
+}
+
+.home {
+    display: block;
+}
