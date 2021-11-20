@@ -1,0 +1,47 @@
+.page {
+    background-color: tan;
+    font: 12px/1.55 'Source Sans Pro', sans-serif;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.page__container {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    width: 70%;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.page__section1 {
+    background-color: rgb(89, 89, 13);
+    border: 4px solid #222 
+    margin: 5px;
+    max-height: 200px;
+    width: 400px;
+}
+
+.page__section2 {
+    background-color: rgb(154, 154, 139);
+    border: 4px solid #222 
+    margin: 5px;
+    max-height: 200px;
+    width: 400px;
+}
+
+.page__section3 {
+    background-color: rgb(232, 232, 66);
+    border: 4px solid #222 
+    margin: 5px;
+    max-height: 200px;
+    width: 400px;
+}
+
+/*tablet styles*/
+
+@media (max-width: 300px) {
+    .page__container {
+        flex-direction: column;
+    }
+}

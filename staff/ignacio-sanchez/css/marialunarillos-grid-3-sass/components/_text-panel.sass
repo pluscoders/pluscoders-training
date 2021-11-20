@@ -1,0 +1,52 @@
+=text-panel-tablet($height,$width,$bottom,$left)
+    height: $height
+    width: $width
+    bottom: $bottom
+    left: $left
+
+=text-panel-desktop($border-bottom,$border-right,$width,$background-color,$display,$bottom,$right,$left)
+    border-bottom: $border-bottom
+    border-right: $border-right
+    width: $width
+    background-color: $background-color
+    display: $display
+    bottom: $bottom
+    right: $right
+    left: $left
+
+.text-panel
+    position: relative
+    box-sizing: border-box
+    display: flex
+    flex-direction: column
+    justify-content: center
+    background-color: rgba(255, 255, 255, 0.591)
+    color: black
+    width: 50%
+    height: 100px
+    bottom: -100px
+
+    @media (max-width: 680px)
+        &__display
+            display: none
+
+    @media (min-width: 680px) and (max-width: 940px)
+        &--1
+            +text-panel-tablet(50%,100%,-50%,0%)
+
+        &--2
+            +text-panel-tablet(100%,50%,0%,0%)
+
+        &--3
+            +text-panel-tablet(100%,50%,0%,50%)
+
+    @media (min-width: 940px)
+
+        &--1
+            +text-panel-desktop(104px solid rgba(255, 255, 255, 0.591),78.5px solid transparent,320px,transparent,inline-block,-314px,null,null)
+
+        &--2
+            +text-panel-desktop(104px solid rgba(255, 255, 255, 0.591),78.5px solid transparent,320px,transparent,inline-block,null,160px,null)
+
+        &--3
+            +text-panel-desktop(104px solid rgba(255, 255, 255, 0.591),78.5px solid transparent,320px,transparent,inline-block,null,null,160px)

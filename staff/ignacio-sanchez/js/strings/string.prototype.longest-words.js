@@ -1,0 +1,49 @@
+/**
+ * Finds the longest(s) word(s) in the string.
+ *
+ * @returns [{string}] - The longest words found in the string.
+* 
+ * @author Ignacio Sanchez
+ * 
+ * @version 1.0.1
+ */
+String.prototype.longestWords = function () {
+    var word = ''
+    var words = []
+
+    for (var i = 0; i < this.length; i++) {
+        var curr = this[i]
+
+        var prev = this[i - 1]
+
+        if (isNotVoid(curr)
+            && (isUndefined(prev)
+                || isVoid(prev))) {
+            word += curr //= word + curr
+        }
+        else if (isNotVoid(curr)
+            && (isNotUndefined(prev)
+                && isNotVoid(prev))) {
+            word += curr //= word + curr
+        }
+
+        if ((isVoid(curr)
+            || i === this.length - 1)
+            && word) {
+            if (words.length) {
+                var first = words[0]
+
+                if (word.length > first.length) {
+                    words.length = 0
+
+                    words[words.length] = word
+                } else if (word.length === first.length)
+                    words[words.length] = word
+            } else words[words.length] = word
+
+            word = ''
+        }
+    }
+
+    return words
+}
