@@ -1,0 +1,14 @@
+ .login {
+     display: block;
+     border: 1px solix black;
+ }
+
+ .register {
+     display: none;
+     border: 1px solird red;
+ }
+
+ .home {
+     display: none;
+     border: 1px solird red;
+ }
