@@ -3,14 +3,6 @@
      margin: 0;
  }
 
- .logo {
-     text-align: center;
-     width: 10em;
-     height: 10em;
-
-
-
- }
 
  h1 {
      font-family: sans-serif;
@@ -41,7 +33,6 @@
      /* display: flex; */
      border: 1px solix black;
      display: grid;
-     /*grid*/
      grid-template-columns: auto;
      grid-auto-rows: minmax(10px, auto);
      grid-template-areas: 'box-1';
