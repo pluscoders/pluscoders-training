@@ -30,7 +30,6 @@
  }
 
  .login {
-     /* display: flex; */
      border: 1px solix black;
      display: grid;
      grid-template-columns: auto;
