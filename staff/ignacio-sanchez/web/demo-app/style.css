@@ -22,6 +22,16 @@
      border: 3px solid black;
  }
 
+ .title-container {
+     display: flex;
+     align-items: center;
+ }
+
+ img.animated-gif {
+     width: 129px;
+     height: 66px;
+ }
+
  .subtitle_14 {
      font-family: sans-serif;
      margin: 1em 1em 1em 1em;
@@ -118,7 +128,7 @@
  }
 
  @media (min-width: 940px) {
-     .login, .register{
+     .login, .register {
          grid-template-areas: 'box-1';
          grid-auto-rows: minmax(200px);
          grid-template-columns: 500px;
