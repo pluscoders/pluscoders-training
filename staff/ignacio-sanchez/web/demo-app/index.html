@@ -8,17 +8,18 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="style.css">
+    <script src="main.js"> </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    <!-- <img class="logo" src="byc.gif"></img> -->
     <div class="login">
 
         <div class="card">
             <h1>Welcome to buyYourCar</h1>
             <img class="card__img" src="byc.gif" alt="logo">
         </div>
-        <button type="submit">Sign up your account</button>
+        <button class="button button--signin" type="submit">Sign up your account</button>
         <div class="form-divider">
             <p></p>
         </div>
@@ -43,7 +44,7 @@
         </div>
     </div>
 
-    <div class="register">
+    <div class="register" id="register">
         <div class="card">
             <h1>Register</h1>
             <img class="card__img" src="byc.gif" alt="logo">
@@ -78,14 +79,87 @@
 
     <div class="home">
         <div class="card">
-            <h1>Welcome user!</h1>
+            <h1>BuyYourCar home</h1>
+            <img class="card__img" src="byc.gif" alt="logo">
+        </div>
+        <h2>Search new cars by brand and model</h2>
+        <div class="topnav">
+            <a href="#home" class="active">Hello Ignacio Sanchez!</a>
+            <!-- Navigation links (hidden by default) -->
+            <div id="myLinks">
+                <a href="#profile">Profile</a>
+                <a href="#contact">Contact</a>
+                <a href="#signout">Sign out</a>
+            </div>
+            <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        <div class="form-divider">
+            <p></p>
+        </div>
+        <p class="subtitle_14"> Please fill in everything.</p>
+
+
+        <div class="container">
+            <label for="trade" label class="font-size-14"> <b>Brand</b></label>
+            <input type="search" placeholder="Enter brand" name="Brand" required>
+
+            <label for="model"><b>Model</b></label>
+            <input type="search" placeholder="Enter model" name="Model" required>
+
+            <button type="submit">Search</button>
+
+            <p></p>
+        </div>
+        <div class="form-divider"> </div>
+        <div class="cars_list">
+            <div class="carsBrands_list">
+                <div class="content_make">
+                    <div class="content-make__image"><a href="/hyundai-cars/santro/">
+                            <div><img width="170" title="Santro" alt="Santro" src="santro.webp">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="content_make__txtblock">
+                        <div class="content_make__bolt-title">
+                            <h3 class="*"><a class="*" href="/hyundai-cars/santro/"
+                                    title="Hyundai Santro Details">Hyundai
+                                    Santro</a></h3>
+                        </div>
+                        <div class="content_make__pull-left">
+                            <div class="content_make__pull-left_specs">
+                                <span class="content_make__model-specs">Hatchback|Petrol,CNG|Manual,AMT</span>
+                            </div>
+                            <div class="*">
+                                <span>22.000 €</span>
+                            </div>
+                            <div class="*"> Avg. Ex-Showroom price </div>
+                            <div class="*"><a class="*"
+                                    onclick="checkOnRoadPrice('/hyundai-cars/santro/')">Check
+                                    On Road Price</a></div>
+
+                        </div>
+
+
+                        <!-- TODO implement login panel mobile first (como arrancaría ese e-commerce de venta de productos )-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile" id=profile>
+        <div class="card">
+            <h1>Edit your profile</h1>
             <img class="card__img" src="byc.gif" alt="logo">
         </div>
         <h2>Welcome. Glad to see you.</h2>
         <div class="form-divider">
             <p></p>
         </div>
-        <p class="subtitle_14"> Please fill in everything.</p>
+        <p class="subtitle_14"> Edit your personal info.</p>
 
         <div class="container">
             <label for="firstName" label class="font-size-14"> <b>First name</b></label>
@@ -100,12 +174,11 @@
             <label for="password"><b>Password</b></label>
             <input type="password" placeholder="Enter password" name="password" required>
 
-            <button type="submit">Next</button>
+            <button type="submit">Update</button>
 
             <p></p>
         </div>
         <div class="form-divider"> </div>
-        <!-- TODO implement login panel mobile first (como arrancaría ese e-commerce de venta de productos )-->
     </div>
 
 
