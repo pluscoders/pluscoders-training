@@ -1,13 +1,37 @@
-.login {
-    display: none;
+/* generics */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.container--vertical {
+    flex-direction: column;
+}
+
+.container--bordered {
     border: 1px solid black;
 }
 
-.register {
+.input {
+    margin: .1rem;
+}
+
+/* utils */
+
+.off {
     display: none;
-    border: 1px solid red;
+}
+
+/* custom */
+
+.login {
+}
+
+.register {
 }
 
 .home {
-    display: block;
 }
