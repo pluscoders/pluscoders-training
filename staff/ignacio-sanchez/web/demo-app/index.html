@@ -26,13 +26,15 @@
         <p class="subtitle_14">Sign in with your buyYourCar account</p>
 
         <div class="container">
-            <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
+            <form>
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="email" required>
 
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-
-            <button type="submit">Sign in</button>
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+              
+                <button type="submit" class="center">Sign in</button>
+            </form>
             <label>
                 <input type="checkbox" checked="checked" name="remember"> Save your login details in this browser.
             </label>
@@ -56,26 +58,24 @@
         <p class="subtitle_14"> Please fill in everything.</p>
 
         <div class="container">
-            <label for="firstName" label class="font-size-14"> <b>First name</b></label>
-            <input type="text" placeholder="Enter first name" name="First Name" required>
+            <form>
+                <label for="firstName" label class="font-size-14"> <b>First name</b></label>
+                <input type="text" placeholder="Enter first name" name="First Name" required>
 
-            <label for="lastName"><b>Last name</b></label>
-            <input type="text" placeholder="Enter last name" name="lastName" required>
+                <label for="lastName"><b>Last name</b></label>
+                <input type="text" placeholder="Enter last name" name="lastName" required>
 
-            <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter your email" name="email" required>
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter your email" name="email" required>
 
-            <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter password" name="password" required>
-
-            <button type="submit">Next</button>
-
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter password" name="password" required>
+                <button type="submit">Next</button>
+            </form>
             <p></p>
         </div>
         <div class="form-divider"> </div>
     </div>
-
-
 
     <div class="home">
         <div class="card">
@@ -85,13 +85,11 @@
         <h2>Search new cars by brand and model</h2>
         <div class="topnav">
             <a href="#home" class="active">Hello Ignacio Sanchez!</a>
-            <!-- Navigation links (hidden by default) -->
             <div id="myLinks">
                 <a href="#profile">Profile</a>
                 <a href="#contact">Contact</a>
                 <a href="#signout">Sign out</a>
             </div>
-            <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>
             </a>
@@ -120,7 +118,6 @@
                     <div class="content-make__image"><a href="/hyundai-cars/santro/">
                             <div><img width="170" title="Santro" alt="Santro" src="santro.webp">
                             </div>
-                        </a>
                     </div>
                     <div class="content_make__txtblock">
                         <div class="content_make__bolt-title">
@@ -136,18 +133,14 @@
                                 <span>22.000 €</span>
                             </div>
                             <div class="*"> Avg. Ex-Showroom price </div>
-                            <div class="*"><a class="*"
-                                    onclick="checkOnRoadPrice('/hyundai-cars/santro/')">Check
+                            <div class="*"><a class="*" onclick="checkOnRoadPrice('/hyundai-cars/santro/')">Check
                                     On Road Price</a></div>
-
                         </div>
-
-
-                        <!-- TODO implement login panel mobile first (como arrancaría ese e-commerce de venta de productos )-->
                     </div>
                 </div>
             </div>
         </div>
+        <div class="form-divider"> </div>
     </div>
 
     <div class="profile" id=profile>
