@@ -8,7 +8,8 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="style.css">
-    <script src="main.js"> </script>
+
+    <script src="nav.js"> </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -19,34 +20,32 @@
             <h1>Welcome to buyYourCar</h1>
             <img class="card__img" src="byc.gif" alt="logo">
         </div>
-        <button class="button button--signin" type="submit">Sign up your account</button>
+        <button class="button button--signin" id="a" type="submit">Sign up your account</button>
         <div class="form-divider">
             <p></p>
         </div>
         <p class="subtitle_14">Sign in with your buyYourCar account</p>
 
-        <div class="container">
-            <form>
-                <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" required>
+        <form class="container container--vertical container--bordered">
+            <label for="email"><b>Email</b></label>
+            <input class="input" type="text" placeholder="Enter Email" name="email" required>
 
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-              
-                <button type="submit" class="center">Sign in</button>
-            </form>
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Save your login details in this browser.
-            </label>
-            <p></p>
-            <div class="psw">Forgot your password <a href="#">click here?</a></div>
-        </div>
+            <label for="password"><b>Password</b></label>
+            <input class="input" type="password" placeholder="Enter Password" name="password" required>
+
+            <button type="submit" class="center">Sign in</button>
+        </form>
+        <label>
+            <input class="input" type="checkbox" checked="checked" name="remember"> Save your login details in this browser.
+        </label>
+        <p></p>
+        <div class="psw">Forgot your password <a href="#">click here?</a></div>
         <div class="form-divider">
 
         </div>
     </div>
 
-    <div class="register" id="register">
+    <div class="register off" id="register">
         <div class="card">
             <h1>Register</h1>
             <img class="card__img" src="byc.gif" alt="logo">
@@ -57,27 +56,28 @@
         </div>
         <p class="subtitle_14"> Please fill in everything.</p>
 
-        <div class="container">
-            <form>
+            <form class="container container--vertical container--bordered">
                 <label for="firstName" label class="font-size-14"> <b>First name</b></label>
-                <input type="text" placeholder="Enter first name" name="First Name" required>
+                <input type="text" placeholder="Enter first name" name="firstname" required>
 
                 <label for="lastName"><b>Last name</b></label>
-                <input type="text" placeholder="Enter last name" name="lastName" required>
+                <input type="text" placeholder="Enter last name" name="lastname" required>
 
                 <label for="email"><b>Email</b></label>
                 <input type="text" placeholder="Enter your email" name="email" required>
 
                 <label for="password"><b>Password</b></label>
                 <input type="password" placeholder="Enter password" name="password" required>
+                
                 <button type="submit">Next</button>
+                <p>Or</p>
+                <button type="submit" class="button button--signin" href="#">Sign in</button>
             </form>
             <p></p>
-        </div>
         <div class="form-divider"> </div>
     </div>
 
-    <div class="home">
+    <div class="home off">
         <div class="card">
             <h1>BuyYourCar home</h1>
             <img class="card__img" src="byc.gif" alt="logo">
@@ -99,8 +99,7 @@
         </div>
         <p class="subtitle_14"> Please fill in everything.</p>
 
-
-        <div class="container">
+        <div class="container container--vertical">
             <label for="trade" label class="font-size-14"> <b>Brand</b></label>
             <input type="search" placeholder="Enter brand" name="Brand" required>
 
@@ -143,7 +142,7 @@
         <div class="form-divider"> </div>
     </div>
 
-    <div class="profile" id=profile>
+    <div class="profile off" id=profile>
         <div class="card">
             <h1>Edit your profile</h1>
             <img class="card__img" src="byc.gif" alt="logo">
@@ -154,30 +153,27 @@
         </div>
         <p class="subtitle_14"> Edit your personal info.</p>
 
-        <div class="container">
-            <label for="firstName" label class="font-size-14"> <b>First name</b></label>
-            <input type="text" placeholder="Enter first name" name="First Name" required>
+            <form class="container container--vertical">
+                <label for="firstName" label class="font-size-14"> <b>First name</b></label>
+                <input type="text" placeholder="Enter first name" name="First Name" required>
 
-            <label for="lastName"><b>Last name</b></label>
-            <input type="text" placeholder="Enter last name" name="lastName" required>
+                <label for="lastName"><b>Last name</b></label>
+                <input type="text" placeholder="Enter last name" name="lastName" required>
 
-            <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter your email" name="email" required>
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter your email" name="email" required>
 
-            <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter password" name="password" required>
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter password" name="password" required>
 
-            <button type="submit">Update</button>
+                <button type="submit">Update</button>
+            </form>
 
             <p></p>
-        </div>
         <div class="form-divider"> </div>
     </div>
 
-
-
-
-
+    <script src="main.js"> </script>
 </body>
 
 </html>

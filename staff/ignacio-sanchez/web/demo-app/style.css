@@ -1,12 +1,11 @@
  * {
      font-family: sans-serif;
-     margin: 0;
  }
 
+ /* custom */
  .login, .register, .home, .profile {
      display: block;
      display: grid;
-     border: 1px solird red;
      grid-template-columns: auto;
      grid-auto-rows: minmax(10px, auto);
      grid-template-areas: 'box-1';
@@ -17,6 +16,35 @@
      row-gap: 10px;
      column-gap: 10px;
  }
+
+ /*utils */
+ .off{
+    display: none;
+}
+
+/* generics */ 
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+.container--vertical {
+    flex-direction: column;
+}
+
+.container--bordered {
+    border: 1px solid grey;
+}
+
+.container--spacing {
+    justify-content: space-between;
+}
+
+.input {
+    margin: 0.1rem;
+}
 
  h1 {
      font-family: sans-serif;
@@ -100,10 +128,6 @@
      opacity: 0.5;
  }
 
- .container {
-     padding: 20px;
-     /* border: 3px solid black; */
- }
 
  .topnav {
      overflow: hidden;
