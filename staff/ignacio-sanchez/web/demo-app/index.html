@@ -86,7 +86,7 @@
         <div class="topnav">
             <a href="#home" class="active">Hello Ignacio Sanchez!</a>
             <div id="myLinks">
-                <a href="#profile">Profile</a>
+                <a href="#profile" id="profile">Profile</a>
                 <a href="#contact">Contact</a>
                 <a href="#signout">Sign out</a>
             </div>
@@ -153,7 +153,7 @@
         </div>
         <p class="subtitle_14"> Edit your personal info.</p>
 
-            <form class="container container--vertical">
+            <form class="container container--vertical" id="profile">
                 <label for="firstName" label class="font-size-14"> <b>First name</b></label>
                 <input type="text" placeholder="Enter first name" name="First Name" required>
 
@@ -166,7 +166,7 @@
                 <label for="password"><b>Password</b></label>
                 <input type="password" placeholder="Enter password" name="password" required>
 
-                <button type="submit">Update</button>
+                <button type="submit" id="update">Update</button>
             </form>
 
             <p></p>

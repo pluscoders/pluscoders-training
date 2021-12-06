@@ -7,6 +7,7 @@ var users = []
 var loginView = document.querySelector('.login')
 var registerView = document.querySelector('.register')
 var homeView = document.querySelector('.home')
+var profileView = document.querySelector('.profile')
 
 var loginRegisterLink = loginView.querySelector('.button--signin')
 
@@ -37,7 +38,7 @@ registerForm.onsubmit = function (event) {
   var email = registerForm.email.value
   var password = registerForm.password.value
 
-  console.log(firstname,lastname,email,password)
+  console.log(firstname, lastname, email, password)
 
   var user = {
     firstname: firstname,
@@ -64,7 +65,7 @@ loginForm.onsubmit = function (event) {
 
   console.log(email, password)
 
-  var user = users.find(function(user) {
+  var user = users.find(function (user) {
     return user.email === email && user.password === password
   })
 
@@ -78,5 +79,26 @@ loginForm.onsubmit = function (event) {
     homeTitle.innerText = 'Hello,' + user.firstname + '!'
 
     homeView.classList.remove('off')
+  }
+
+  var homeProfileLink = homeView.querySelector('#myLinks #profile')
+
+  homeProfileLink.onclick = function (event) {
+    event.preventDefault()
+
+    homeView.classList.add('off')
+
+    profileView.classList.remove('off')
+  }
+
+  var profileHomeLink = profileView.querySelector('#profile #update')
+
+  profileHomeLink.onclick = function (event) {
+    event.preventDefault()
+
+    profileView.classList.add('off')
+ 
+    homeView.classList.remove('off')
+
   }
 }
