@@ -17,7 +17,7 @@
     <div class="login">
 
         <div class="card">
-            <h1>Welcome to buyYourCar</h1>
+           <h1 class="card__title">Welcome to buyYourCar</h1>
             <img class="card__img" src="byc.gif" alt="logo">
         </div>
         <button class="button button--signin" id="a" type="submit">Sign up your account</button>
@@ -36,18 +36,18 @@
             <button type="submit" class="center">Sign in</button>
         </form>
         <label>
-            <input class="input" type="checkbox" checked="checked" name="remember"> Save your login details in this browser.
+            <input class="input" type="checkbox" checked="checked" name="remember"> Save your login details in this
+            browser.
         </label>
         <p></p>
         <div class="psw">Forgot your password <a href="#">click here?</a></div>
         <div class="form-divider">
-
         </div>
     </div>
 
-    <div class="register off" id="register">
+    <div class="register _off" id="register">
         <div class="card">
-            <h1>Register</h1>
+           <h1 class="card__title">Register</h1>
             <img class="card__img" src="byc.gif" alt="logo">
         </div>
         <h2>Welcome. Glad to see you.</h2>
@@ -56,30 +56,30 @@
         </div>
         <p class="subtitle_14"> Please fill in everything.</p>
 
-            <form class="container container--vertical container--bordered">
-                <label for="firstName" label class="font-size-14"> <b>First name</b></label>
-                <input type="text" placeholder="Enter first name" name="firstname" required>
+        <form class="container container--vertical container--bordered">
+            <label for="firstName" label class="font-size-14"> <b>First name</b></label>
+            <input type="text" placeholder="Enter first name" name="firstname" required>
 
-                <label for="lastName"><b>Last name</b></label>
-                <input type="text" placeholder="Enter last name" name="lastname" required>
+            <label for="lastName"><b>Last name</b></label>
+            <input type="text" placeholder="Enter last name" name="lastname" required>
 
-                <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter your email" name="email" required>
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter your email" name="email" required>
 
-                <label for="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter password" name="password" required>
-                
-                <button type="submit">Next</button>
-                <p>Or</p>
-                <button type="submit" class="button button--signin" href="#">Sign in</button>
-            </form>
-            <p></p>
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter password" name="password" required>
+
+            <button type="submit">Next</button>
+            <p>Or</p>
+            <button type="submit" class="button button--signin" href="#">Sign in</button>
+        </form>
+        <p></p>
         <div class="form-divider"> </div>
     </div>
 
-    <div class="home off">
+    <div class="home _off">
         <div class="card">
-            <h1>BuyYourCar home</h1>
+           <h1 class="card__title">BuyYourCar home</h1>
             <img class="card__img" src="byc.gif" alt="logo">
         </div>
         <h2>Search new cars by brand and model</h2>
@@ -111,18 +111,34 @@
             <p></p>
         </div>
         <div class="form-divider"> </div>
-        <div class="cars_list">
+       
+        <div class="block--cars container--bordered">
+            <div class="Image">
+                <img class="content-make__image" _width="170" title="Santro" alt="Santro" src="santro.webp">
+            </div>
+            <div class="Title">
+                <p class="*"><a class="*" href="/hyundai-cars/santro/"
+                    title="Hyundai Santro Details">Hyundai
+                    Santro</a></p>
+            </div>
+            <div class="Description">
+                <span class="content_make__model-specs">Hatchback|Petrol,CNG|Manual,AMT</span>
+                <span>22.000 €</span>
+            </div>
+          </div>
+
+        <!-- <div class="cars_list">
             <div class="carsBrands_list">
                 <div class="content_make">
                     <div class="content-make__image"><a href="/hyundai-cars/santro/">
-                            <div><img width="170" title="Santro" alt="Santro" src="santro.webp">
+                            <div><img class="content-make__image" _width="170" title="Santro" alt="Santro" src="santro.webp">
                             </div>
                     </div>
                     <div class="content_make__txtblock">
                         <div class="content_make__bolt-title">
-                            <h3 class="*"><a class="*" href="/hyundai-cars/santro/"
+                            <p class="*"><a class="*" href="/hyundai-cars/santro/"
                                     title="Hyundai Santro Details">Hyundai
-                                    Santro</a></h3>
+                                    Santro</a></p>
                         </div>
                         <div class="content_make__pull-left">
                             <div class="content_make__pull-left_specs">
@@ -131,20 +147,17 @@
                             <div class="*">
                                 <span>22.000 €</span>
                             </div>
-                            <div class="*"> Avg. Ex-Showroom price </div>
-                            <div class="*"><a class="*" onclick="checkOnRoadPrice('/hyundai-cars/santro/')">Check
-                                    On Road Price</a></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="form-divider"> </div>
-    </div>
+    </div> -->
 
-    <div class="profile off" id=profile>
+    <div class="profile _off" id=profile>
         <div class="card">
-            <h1>Edit your profile</h1>
+           <h1 class="card__title">Edit your profile</h1>
             <img class="card__img" src="byc.gif" alt="logo">
         </div>
         <h2>Welcome. Glad to see you.</h2>
@@ -153,23 +166,23 @@
         </div>
         <p class="subtitle_14"> Edit your personal info.</p>
 
-            <form class="container container--vertical" id="profile">
-                <label for="firstName" label class="font-size-14"> <b>First name</b></label>
-                <input type="text" placeholder="Enter first name" name="First Name" required>
+        <form class="container container--vertical" id="profile">
+            <label for="firstName" label class="font-size-14"> <b>First name</b></label>
+            <input type="text" placeholder="Enter first name" name="First Name" required>
 
-                <label for="lastName"><b>Last name</b></label>
-                <input type="text" placeholder="Enter last name" name="lastName" required>
+            <label for="lastName"><b>Last name</b></label>
+            <input type="text" placeholder="Enter last name" name="lastName" required>
 
-                <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter your email" name="email" required>
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter your email" name="email" required>
 
-                <label for="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter password" name="password" required>
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter password" name="password" required>
 
-                <button type="submit" id="update">Update</button>
-            </form>
+            <button type="submit" id="update">Update</button>
+        </form>
 
-            <p></p>
+        <p></p>
         <div class="form-divider"> </div>
     </div>
 
