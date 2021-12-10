@@ -1,9 +1,33 @@
+// console.dir(document)
+
+console.log(document.all)
+
 // data 
 
 var users = []
 
+var cars = [
+  {
+    id: '123',
+    brand: 'Ford',
+    model: 'Mustang',
+    description: 'blah blah',
+    year: 1960
+  },
+  {
+    id: '124',
+    brand: 'Ford',
+    model: 'T',
+    description: 'blah blah',
+    year: 1950
+  }
+]
+
 
 //presentation
+
+var user
+
 var loginView = document.querySelector('.login')
 var registerView = document.querySelector('.register')
 var homeView = document.querySelector('.home')
@@ -65,7 +89,7 @@ loginForm.onsubmit = function (event) {
 
   console.log(email, password)
 
-  var user = users.find(function (user) {
+  user = users.find(function (user) {
     return user.email === email && user.password === password
   })
 
@@ -88,17 +112,40 @@ loginForm.onsubmit = function (event) {
 
     homeView.classList.add('off')
 
+    var profileForm = profileView.querySelector('form')
+
+    profileForm.firstname.value = user.firstname
+    profileForm.lastname.value = user.lastname
+    profileForm.email.value = user.email
+
     profileView.classList.remove('off')
   }
+}
 
-  var profileHomeLink = profileView.querySelector('#profile #update')
+var profileForm = profileView.querySelector('form')
 
-  profileHomeLink.onclick = function (event) {
-    event.preventDefault()
+profileForm.onsubmit = function (event) {
+  event.preventDefault()
 
-    profileView.classList.add('off')
- 
-    homeView.classList.remove('off')
+  var firstname = profileForm.firstname.value
+  var lastname = profileForm.lastname.value
+  var email = profileForm.email.value
+  var password = profileForm.password.value
 
-  }
+  console.log(firstname, lastname, email, password)
+
+  // update user
+
+  user.firstname = firstname
+  user.lastname = lastname
+  user.email = email
+  user.password = password
+
+  profileView.classList.add('off')
+
+  var homeTitle = homeView.querySelector('a')
+
+  homeTitle.innerText = 'Hello,' + user.firstname + '!'
+
+  homeView.classList.remove('off')
 }
