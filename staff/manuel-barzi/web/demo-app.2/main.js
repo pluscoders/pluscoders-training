@@ -1,4 +1,6 @@
-// TODO add feedback to register
+// data
+
+var users = []
 
 // presentation
 
@@ -13,11 +15,6 @@ loginRegisterLink.onclick = function (event) {
 
     loginForm.username.value = ''
     loginForm.password.value = ''
-
-    var feedback = loginForm.querySelector('.feedback')
-
-    feedback.innerText = ''
-    feedback.classList.add('off')
 
     loginView.classList.add('off')
 
@@ -134,28 +131,20 @@ loginForm.onsubmit = function (event) {
     var username = loginForm.username.value
     var password = loginForm.password.value
 
-    var feedback = loginForm.querySelector('.feedback')
-
     if (!isNaN(username)) {
-        feedback.innerText = 'username cannot be a number'
-
-        feedback.classList.remove('off')
+        alert('username cannot be a number')
 
         return
     }
 
     if (username.length < 6) {
-        feedback.innerText = 'username has less than 6 characters'
-
-        feedback.classList.remove('off')
+        alert('username has less than 6 characters')
 
         return
     }
 
     if (password.length < 8) {
-        feedback.innerText = 'password has less than 8 characters'
-
-        feedback.classList.remove('off')
+        alert('password has less than 8 characters')
 
         return
     }
@@ -164,11 +153,9 @@ loginForm.onsubmit = function (event) {
         return user.username === username && user.password === password
     })
 
-    if (!user) {
-        feedback.innerText = 'user not found'
-
-        feedback.classList.remove('off')
-    } else {
+    if (!user)
+        alert('user not found')
+    else {
         loginForm.username.value = ''
         loginForm.password.value = ''
 
@@ -180,20 +167,4 @@ loginForm.onsubmit = function (event) {
 
         homeView.classList.remove('off')
     }
-}
-
-var searchForm = homeView.querySelector('form')
-
-searchForm.onsubmit = function(event) {
-    event.preventDefault()
-
-    var query = searchForm.query.value
-
-    var filtered = vehicles.filter(function(vehicle) {
-        return vehicle.name.includes(query)
-    })
-
-    debugger
-
-    // TODO list filtered vehicles in ul / lis
 }

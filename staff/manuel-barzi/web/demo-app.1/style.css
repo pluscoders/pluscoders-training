@@ -19,22 +19,6 @@
     margin: .1rem;
 }
 
-.feedback {
-    font-weight: bold;
-}
-
-.feedback--success {
-    color: green;
-}
-
-.feedback--warning {
-    color: goldenrod;
-}
-
-.feedback--error {
-    color: red;
-}
-
 /* utils */
 
 .off {
