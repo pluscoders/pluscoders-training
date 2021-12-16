@@ -11,15 +11,25 @@ var cars = [
     id: '123',
     brand: 'Ford',
     model: 'Mustang',
-    description: 'blah blah',
-    year: 1960
+    description: 'Is a battery electric compact crossover SUV',
+    year: 2020,
+    engine: 'Permanent magnet synchronous motor'
   },
   {
     id: '124',
-    brand: 'Ford',
-    model: 'T',
-    description: 'blah blah',
-    year: 1950
+    brand: 'Ferrari',
+    model: 'F8',
+    description: 'Is a mid-engine sport car',
+    year: 2019,
+    engine: '3.9 L F154 CD twin-turbo V8'
+  },
+  {
+    id: '125',
+    brand: 'Volkswagen',
+    model: 'ID.3',
+    description: 'Is a compact (C-segment) electric car',
+    year: 2019,
+    engine: 'APP 310 Permanent Magnet Brushless motor'
   }
 ]
 
@@ -59,14 +69,18 @@ registerForm.onsubmit = function (event) {
 
   var firstname = registerForm.firstname.value
   var lastname = registerForm.lastname.value
+  var city = registerForm.city.value
+  var country = registerForm.country.value
   var email = registerForm.email.value
   var password = registerForm.password.value
 
-  console.log(firstname, lastname, email, password)
+  console.log(firstname, lastname,city, country, email, password)
 
   var user = {
     firstname: firstname,
     lastname: lastname,
+    city: city,
+    country: country,
     email: email,
     password: password,
   }
@@ -116,6 +130,8 @@ loginForm.onsubmit = function (event) {
 
     profileForm.firstname.value = user.firstname
     profileForm.lastname.value = user.lastname
+    profileForm.city.value = user.city
+    profileForm.country.value = user.country
     profileForm.email.value = user.email
 
     profileView.classList.remove('off')
@@ -129,15 +145,19 @@ profileForm.onsubmit = function (event) {
 
   var firstname = profileForm.firstname.value
   var lastname = profileForm.lastname.value
+  var city = profileForm.city.value
+  var country = profileForm.country.value
   var email = profileForm.email.value
   var password = profileForm.password.value
 
-  console.log(firstname, lastname, email, password)
+  console.log(firstname, lastname,city, country, email, password)
 
   // update user
 
   user.firstname = firstname
   user.lastname = lastname
+  user.city = city
+  user.country = country
   user.email = email
   user.password = password
 
@@ -149,3 +169,32 @@ profileForm.onsubmit = function (event) {
 
   homeView.classList.remove('off')
 }
+
+
+// search form
+
+// function function1() {
+//   var ul = document.getElementById("list_cars");
+//   var li = document.createElement("li");
+//   li.appendChild(document.createTextNode("Four"));
+//   ul.appendChild(li);
+// }
+
+  var list_cars = document.getElementById("list_cars");
+  
+  const fragment = document.createDocumentFragment()
+
+  cars.forEach(function(car) {
+    const li = document.createElement('li')
+
+    li.innerText = car.brand
+
+    fragment.appendChild(li)
+    
+  })
+
+  list_cars.appendChild(fragment)
+
+
+
+

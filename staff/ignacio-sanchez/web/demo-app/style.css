@@ -33,6 +33,22 @@
      margin: none;
  }
 
+ .feedback {
+    font-weight: bold;
+}
+
+.feedback--success {
+    color: green;
+}
+
+.feedback--warning {
+    color: goldenrod;
+}
+
+.feedback--error {
+    color: red;
+}
+
 
  /* custom */
  .login, .register, .home, .profile {
