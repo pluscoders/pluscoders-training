@@ -17,7 +17,7 @@
     <div class="login">
 
         <div class="card">
-           <h1 class="card__title">Welcome to buyYourCar</h1>
+            <h1 class="card__title">Welcome to buyYourCar</h1>
             <img class="card__img" src="byc.gif" alt="logo">
         </div>
         <button class="button button--signin" id="a" type="submit">Sign up your account</button>
@@ -34,9 +34,12 @@
             <input class="input" type="password" placeholder="Enter Password" name="password" required>
 
             <button type="submit" class="center">Sign in</button>
+
+            <p class="feedback feedback--error off"></p>
         </form>
         <label class="input input--left">
-            <input class="input input--left" type="checkbox" checked="checked" name="remember"> Save your login details in this
+            <input class="input input--left" type="checkbox" checked="checked" name="remember"> Save your login details
+            in this
             browser.
         </label>
 
@@ -47,7 +50,7 @@
 
     <div class="register off" id="register">
         <div class="card">
-           <h1 class="card__title">Register</h1>
+            <h1 class="card__title">Register</h1>
             <img class="card__img" src="byc.gif" alt="logo">
         </div>
         <h2>Welcome. Glad to see you.</h2>
@@ -83,9 +86,9 @@
         <div class="form-divider"> </div>
     </div>
 
-    <div class="home off">
+    <div class="home _off">
         <div class="card">
-           <h1 class="card__title">BuyYourCar home</h1>
+            <h1 class="card__title">BuyYourCar home</h1>
             <img class="card__img" src="byc.gif" alt="logo">
         </div>
         <h2>Search new cars by brand and model</h2>
@@ -105,35 +108,48 @@
         </div>
         <p class="subtitle"> Please fill in everything.</p>
 
-        <div class="container container--vertical">
-            <label for="trade" > <b>Brand</b></label>
-            <input type="search" placeholder="Enter brand" name="brand" required>
+        <div class="search">
+            <form class="container container--vertical">
+                <label for="trade"> <b>Brand</b></label>
+                <input type="search" placeholder="Enter brand" name="brand" required>
 
-            <label for="model"><b>Model</b></label>
-            <input type="search" placeholder="Enter model" name="model" required>
+                <label for="model"><b>Model</b></label>
+                <input type="search" placeholder="Enter model" name="model" required>
 
-            <button type="submit">Search</button>
+                <button type="submit">Search</button>
 
-            <ul id="list_cars">
 
-            </ul>
+                <ul id="list_cars">
+
+                </ul>
+            </form>
         </div>
-        <div class="form-divider"> </div>
-       
+        <!-- <div class="form-divider"> </div>
+        <div class="home container container--vertical _off">
+            <h1>Hello, Peter!</h1>
+
+            <div class="search">
+                <form class="container container--bordered">
+                    <input class="input" type="text" name="query" placeholder="criteria">
+
+                    <button class="input">Search</button>
+                </form>
+            </div>
+        </div> -->
+
         <div class="block_cars container--bordered">
             <div class="block_cars__image">
                 <img class="content-make__image" _width="170" title="Santro" alt="Santro" src="santro.webp">
             </div>
             <div class="block_cars__title">
-                <p class="*"><a class="*" href="/hyundai-cars/santro/"
-                    title="Hyundai Santro Details">Hyundai
-                    Santro</a></p>
+                <p class="*"><a class="*" href="/hyundai-cars/santro/" title="Hyundai Santro Details">Hyundai
+                        Santro</a></p>
             </div>
             <div class="block_cars__description">
                 <span class="content_make__model-specs">Hatchback|Petrol,CNG|Manual,AMT</span>
                 <span>22.000 €</span>
             </div>
-          </div>
+        </div>
 
 
         <div class="form-divider"> </div>
@@ -141,7 +157,7 @@
 
     <div class="profile off" id=profile>
         <div class="card">
-           <h1 class="card__title">Edit your profile</h1>
+            <h1 class="card__title">Edit your profile</h1>
             <img class="card__img" src="byc.gif" alt="logo">
         </div>
         <h2>Welcome. Glad to see you.</h2>
@@ -176,6 +192,7 @@
         <div class="form-divider"> </div>
     </div>
 
+    <script src="data.js"> </script>
     <script src="main.js"> </script>
 </body>
 

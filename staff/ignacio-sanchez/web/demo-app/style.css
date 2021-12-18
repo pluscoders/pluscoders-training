@@ -34,20 +34,20 @@
  }
 
  .feedback {
-    font-weight: bold;
-}
+     font-weight: bold;
+ }
 
-.feedback--success {
-    color: green;
-}
+ .feedback--success {
+     color: green;
+ }
 
-.feedback--warning {
-    color: goldenrod;
-}
+ .feedback--warning {
+     color: goldenrod;
+ }
 
-.feedback--error {
-    color: red;
-}
+ .feedback--error {
+     color: red;
+ }
 
 
  /* custom */
