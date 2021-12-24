@@ -105,21 +105,25 @@ registerForm.onsubmit = function (event) {
         return
     }
 
-    try {
-        registerUser(name, city, country, username, password)
-
-        registerForm.name.value = ''
-        registerForm.city.value = ''
-        registerForm.country.value = ''
-        registerForm.username.value = ''
-        registerForm.password.value = ''
-
-        registerView.classList.add('off')
-
-        loginView.classList.remove('off')
-    } catch (error) {
-        alert(error.message)
+    var user = {
+        name: name,
+        city: city,
+        country: country,
+        username: username,
+        password: password
     }
+
+    users.push(user)
+
+    registerForm.name.value = ''
+    registerForm.city.value = ''
+    registerForm.country.value = ''
+    registerForm.username.value = ''
+    registerForm.password.value = ''
+
+    registerView.classList.add('off')
+
+    loginView.classList.remove('off')
 }
 
 var loginForm = loginView.querySelector('form')
@@ -156,9 +160,15 @@ loginForm.onsubmit = function (event) {
         return
     }
 
-    try {
-        var user = authenticateUser(username, password)
+    var user = users.find(function (user) {
+        return user.username === username && user.password === password
+    })
 
+    if (!user) {
+        feedback.innerText = 'user not found'
+
+        feedback.classList.remove('off')
+    } else {
         loginForm.username.value = ''
         loginForm.password.value = ''
 
@@ -169,48 +179,21 @@ loginForm.onsubmit = function (event) {
         homeTitle.innerText = 'Hello, ' + user.name + '!'
 
         homeView.classList.remove('off')
-    } catch(error) {
-        feedback.innerText = error.message
-
-        feedback.classList.remove('off')
     }
 }
 
 var searchForm = homeView.querySelector('form')
 
-searchForm.onsubmit = function (event) {
+searchForm.onsubmit = function(event) {
     event.preventDefault()
-
-    var results = homeView.querySelector('.results')
-    results.innerHTML = ''
 
     var query = searchForm.query.value
 
-    var filtered = searchVehicles(query)
+    var filtered = vehicles.filter(function(vehicle) {
+        return vehicle.name.includes(query)
+    })
 
-    if (filtered.length) {
-        var list = document.createElement('ul')
+    debugger
 
-        filtered.forEach(function (vehicle) {
-            var item = document.createElement('li')
-
-            var title = document.createElement('h3')
-            var image = document.createElement('img')
-            var price = document.createElement('span')
-
-            title.innerText = vehicle.name
-            image.src = vehicle.thumbnail
-            price.innerText = vehicle.price + ' $'
-
-            item.append(title, image, price)
-
-            list.append(item)
-        })
-
-        results.append(list)
-    } else {
-        // TODO feedback "no results"
-    }
-
-    results.classList.remove('off')
+    // TODO list filtered vehicles in ul / lis
 }

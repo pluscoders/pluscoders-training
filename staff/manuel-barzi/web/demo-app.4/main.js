@@ -105,21 +105,17 @@ registerForm.onsubmit = function (event) {
         return
     }
 
-    try {
-        registerUser(name, city, country, username, password)
+    registerUser(name, city, country, username, password)
 
-        registerForm.name.value = ''
-        registerForm.city.value = ''
-        registerForm.country.value = ''
-        registerForm.username.value = ''
-        registerForm.password.value = ''
+    registerForm.name.value = ''
+    registerForm.city.value = ''
+    registerForm.country.value = ''
+    registerForm.username.value = ''
+    registerForm.password.value = ''
 
-        registerView.classList.add('off')
+    registerView.classList.add('off')
 
-        loginView.classList.remove('off')
-    } catch (error) {
-        alert(error.message)
-    }
+    loginView.classList.remove('off')
 }
 
 var loginForm = loginView.querySelector('form')
@@ -156,9 +152,13 @@ loginForm.onsubmit = function (event) {
         return
     }
 
-    try {
-        var user = authenticateUser(username, password)
+    var user = authenticateUser(username, password)
 
+    if (!user) {
+        feedback.innerText = 'user not found'
+
+        feedback.classList.remove('off')
+    } else {
         loginForm.username.value = ''
         loginForm.password.value = ''
 
@@ -169,16 +169,12 @@ loginForm.onsubmit = function (event) {
         homeTitle.innerText = 'Hello, ' + user.name + '!'
 
         homeView.classList.remove('off')
-    } catch(error) {
-        feedback.innerText = error.message
-
-        feedback.classList.remove('off')
     }
 }
 
 var searchForm = homeView.querySelector('form')
 
-searchForm.onsubmit = function (event) {
+searchForm.onsubmit = function(event) {
     event.preventDefault()
 
     var results = homeView.querySelector('.results')
@@ -191,7 +187,7 @@ searchForm.onsubmit = function (event) {
     if (filtered.length) {
         var list = document.createElement('ul')
 
-        filtered.forEach(function (vehicle) {
+        filtered.forEach(function(vehicle) {
             var item = document.createElement('li')
 
             var title = document.createElement('h3')
