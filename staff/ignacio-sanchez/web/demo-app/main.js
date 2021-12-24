@@ -257,6 +257,9 @@ var searchForm = homeView.querySelector('form')
 searchForm.onsubmit = function (event) {
   event.preventDefault()
 
+  const results = homeView.querySelector('.results')
+  results.innerHTML = ''
+
   var query = searchForm.brand.value
   var model = searchForm.model.value
 
@@ -264,39 +267,30 @@ searchForm.onsubmit = function (event) {
     return vehicle.name.includes(query) && vehicle.name.includes(model)
   })
 
-  // TODO show "no results" feedback panel when no cars match the search criteria
+  if (filtered.length) {
+    const list = document.createElement('ul')
 
-  debugger
+    filtered.forEach(function (car) {
+      const result = document.createElement('li')
 
-  const results = homeView.querySelector('.results')
+      const name = document.createElement('h3')
+      const thumbnail = document.createElement('img')
+      const price = document.createElement('span')
 
-  results.innerHTML = ''
+      name.innerText = car.name + ' (' + car.id + ')'
+      thumbnail.src = car.thumbnail
+      price.innerText = car.price + ' $'
 
-  filtered.forEach(function (car) {
-    const result = document.createElement('li')
+      result.append(name, thumbnail, price)
 
-    const name = document.createElement('h3')
-    const thumbnail = document.createElement('img')
-    const price = document.createElement('span')
+      list.append(result)
+    })
 
-    name.innerText = car.name + ' (' + car.id + ')'
-    thumbnail.src = car.thumbnail
-    price.innerText = car.price + ' $'
-
-    result.append(name, thumbnail, price)
-
-    results.append(result)
-  })
+    results.append(list)
+  } else {
+    // TODO show "no results" feedback (<p>)
+  }
 
   results.classList.remove('off')
-
 }
-
-
-  // function function1() {
-  //   var ul = document.getElementById("filtered");
-  //   var li = document.createElement("li");
-  //   list_cars.appendChild(document.createTextNode("Four"));
-  //   ul.appendChild(list_cars);
-  // }
 
