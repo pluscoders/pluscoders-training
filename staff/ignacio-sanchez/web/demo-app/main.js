@@ -108,30 +108,23 @@ registerForm.onsubmit = function (event) {
 
     return
   }
+  try {
+    registerUser(firstname, lastname, city, country, email, password)
 
-  var user = {
-    firstname: firstname,
-    lastname: lastname,
-    city: city,
-    country: country,
-    email: email,
-    password: password,
+    registerForm.firstname.value = ''
+    registerForm.lastname.value = ''
+    registerForm.city.value = ''
+    registerForm.country.value = ''
+    registerForm.email.value = ''
+    registerForm.password.value = ''
+
+    registerView.classList.add('off')
+
+    loginView.classList.remove('off')
+  } catch (error) {
+    alert(error.message)
   }
 
-  users.push(user)
-
-
-  registerForm.firstname.value = ''
-  registerForm.lastname.value = ''
-  registerForm.city.value = ''
-  registerForm.country.value = ''
-  registerForm.email.value = ''
-  registerForm.password.value = ''
-
-
-  registerView.classList.add('off')
-
-  loginView.classList.remove('off')
 
 }
 
@@ -171,15 +164,9 @@ loginForm.onsubmit = function (event) {
     return
   }
 
-  var user = users.find(function (user) {
-    return user.email === email && user.password === password
-  })
+  try {
+    var user = authenticateUser(email, password)
 
-  if (!user) {
-    feedback.innerText = 'user not found'
-
-    feedback.classList.remove('off')
-  } else {
     loginForm.email.value = ''
     loginForm.password.value = ''
 
@@ -190,6 +177,10 @@ loginForm.onsubmit = function (event) {
     homeTitle.innerText = 'Hello,' + user.firstname + '!'
 
     homeView.classList.remove('off')
+  } catch (error) {
+    feedback.innerText = error.message
+
+    feedback.classList.remove('off')
   }
 }
 
@@ -263,9 +254,7 @@ searchForm.onsubmit = function (event) {
   var query = searchForm.brand.value
   var model = searchForm.model.value
 
-  var filtered = vehicles.filter(function (vehicle) {
-    return vehicle.name.includes(query) && vehicle.name.includes(model)
-  })
+  var filtered = searchVehicles(query, model)
 
   if (filtered.length) {
     const list = document.createElement('ul')
@@ -288,7 +277,12 @@ searchForm.onsubmit = function (event) {
 
     results.append(list)
   } else {
-    // TODO show "no results" feedback (<p>)
+
+    const error = document.createElement('p')
+
+    error.innerText = 'No matches found with brand ' + searchForm.brand.value + " and model " + searchForm.model.value
+
+    results.append(error)
   }
 
   results.classList.remove('off')
