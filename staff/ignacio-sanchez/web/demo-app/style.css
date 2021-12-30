@@ -132,7 +132,18 @@
      width: 90%;
      border-radius: 24px;
  }
-
+ .button--small {
+     background-color: #04AA6D;
+     background: linear-gradient(278deg, #73d861, #76d4ff);
+     color: white;
+     padding: 10px 20px;
+     margin: 8px 0;
+     border: none;
+     cursor: pointer;
+     width: 40%;
+     border-radius: 24px;
+ }
+ 
  button:hover {
      opacity: 0.5;
  }

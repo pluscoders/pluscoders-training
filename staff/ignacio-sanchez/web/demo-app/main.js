@@ -265,12 +265,15 @@ searchForm.onsubmit = function (event) {
       const name = document.createElement('h3')
       const thumbnail = document.createElement('img')
       const price = document.createElement('span')
+      const button = document.createElement('button')
+      button.classList.add('button--small')
 
       name.innerText = car.name + ' (' + car.id + ')'
       thumbnail.src = car.thumbnail
       price.innerText = car.price + ' $'
+      button.innerText = 'Add to basket'
 
-      result.append(name, thumbnail, price)
+      result.append(name, thumbnail, price, button)
 
       list.append(result)
     })
