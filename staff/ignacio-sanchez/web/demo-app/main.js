@@ -165,7 +165,7 @@ loginForm.onsubmit = function (event) {
   }
 
   try {
-    var user = authenticateUser(email, password)
+    user = authenticateUser(email, password)
 
     loginForm.email.value = ''
     loginForm.password.value = ''
@@ -219,28 +219,32 @@ profileForm.onsubmit = function (event) {
 
   // update user
 
-  user.firstname = firstname
-  user.lastname = lastname
-  user.city = city
-  user.country = country
-  user.email = email
-  user.password = password
+  // user.firstname = firstname
+  // user.lastname = lastname
+  // user.city = city
+  // user.country = country
+  // user.email = email
+  // user.password = password
 
-  profileForm.password.value = ''
+  try {
+    updateUser(firstname, lastname, city, country, email, password)
 
-  profileView.classList.add('off')
+    profileForm.password.value = ''
 
-  var homeTitle = homeView.querySelector('a')
+    profileView.classList.add('off')
 
-  homeTitle.innerText = 'Hello,' + user.firstname + '!'
+    var homeTitle = homeView.querySelector('a')
 
-  homeView.classList.remove('off')
+    homeTitle.innerText = 'Hello,' + user.firstname + '!'
+
+    homeView.classList.remove('off')
+  } catch (error) {
+    // TODO show feedback message from error
+  }
 }
 
 
 // search form
-
-
 
 
 var searchForm = homeView.querySelector('form')
@@ -290,4 +294,27 @@ searchForm.onsubmit = function (event) {
 
   results.classList.remove('off')
 }
+
+
+var cart = homeView.getElementsByClassName('button--small')
+
+
+cart.onclick = function (event) {
+  event.preventDefault()
+
+  const cartResult = homeView.querySelector('.cartResult')
+  cartResult.innerHTML = ''
+
+  var counter = counterCart()
+
+}
+
+// var counts = 0;
+// (".button--small").click(function () {
+//   counts += +1;
+//   (".cart-counter").animate({
+//     (this).text(counts)
+// });
+
+
 
