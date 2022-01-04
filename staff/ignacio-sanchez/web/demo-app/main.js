@@ -217,6 +217,60 @@ profileForm.onsubmit = function (event) {
 
   console.log(firstname, lastname, city, country, email, password)
 
+  if (!isNaN(firstname)) {
+    alert('First name cannot be a number')
+
+    return
+  }
+
+  if (firstname.length < 2) {
+    alert('First name has less than 2 characters')
+
+    return
+  }
+
+  if (!isNaN(city)) {
+    alert('City cannot be a number')
+
+    return
+  }
+
+  if (city.length < 2) {
+    alert('City has less than 2 characters')
+
+    return
+  }
+
+  if (!isNaN(country)) {
+    alert('Country cannot be a number')
+
+    return
+  }
+
+  if (country.length < 2) {
+    alert('Country has less than 2 characters')
+
+    return
+  }
+
+  if (!isNaN(email)) {
+    alert('Email cannot be a number')
+
+    return
+  }
+
+  if (email.length < 6) {
+    alert('Email has less than 6 characters')
+
+    return
+  }
+
+  if (password.length < 8) {
+    alert('Password has less than 8 characters')
+
+    return
+  }
+
   // update user
 
   // user.firstname = firstname
@@ -227,7 +281,7 @@ profileForm.onsubmit = function (event) {
   // user.password = password
 
   try {
-    updateUser(firstname, lastname, city, country, email, password)
+    user = updateUser(firstname, lastname, city, country, email, password)
 
     profileForm.password.value = ''
 

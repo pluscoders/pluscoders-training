@@ -36,6 +36,21 @@ function authenticateUser(email, password) {
 - update properties in user
 */
 
+function updateUser(firstname, lastname, city, country, email, password) {
+    var user = users.some(function (user) {
+        return user.email === email
+    })
+
+    var user = {
+        firstname: firstname,
+        lastname: lastname,
+        city: city,
+        country: country,
+        email: email,
+        password: password,
+    }
+    return user
+}
 
 // vehicles
 
