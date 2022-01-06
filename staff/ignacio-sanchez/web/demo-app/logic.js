@@ -1,6 +1,13 @@
 // users
 
-function registerUser(firstname, lastname, city, country, email, password) {
+function registerUser(firstname, lastName, city, country, email, password) {
+    validateFirstName(firstname)
+    validateLastName(lastName)
+    validateCity(city)
+    validateCountry(country)
+    validateEmail(email)
+    validatePassword(password)
+
     var user = users.some(function (user) {
         return user.email === email
     })
@@ -9,7 +16,7 @@ function registerUser(firstname, lastname, city, country, email, password) {
 
     var user = {
         firstname: firstname,
-        lastname: lastname,
+        lastname: lastName,
         city: city,
         country: country,
         email: email,
@@ -20,6 +27,9 @@ function registerUser(firstname, lastname, city, country, email, password) {
 }
 
 function authenticateUser(email, password) {
+    validateEmail(email)
+    validatePassword(password)
+
     var user = users.find(function (user) {
         return user.email === email && user.password === password
     })
@@ -36,20 +46,26 @@ function authenticateUser(email, password) {
 - update properties in user
 */
 
-function updateUser(firstname, lastname, city, country, email, password) {
-    var user = users.some(function (user) {
+function updateUser(firstname, lastName, city, country, email, password) {
+    validateFirstName(firstname)
+    validateLastName(lastName)
+    validateCity(city)
+    validateCountry(country)
+    validateEmail(email)
+    validatePassword(password)
+
+    var user = users.find(function (user) {
         return user.email === email
     })
 
-    var user = {
-        firstname: firstname,
-        lastname: lastname,
-        city: city,
-        country: country,
-        email: email,
-        password: password,
-    }
-    return user
+    if(!user) throw new Error('user not found') 
+
+    user.firstname = firstname
+    user.lastname = lastName
+    user.city = city
+    user.country = country
+    user.email = email
+    user.password = password
 }
 
 // vehicles

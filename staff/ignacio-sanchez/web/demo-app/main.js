@@ -46,6 +46,7 @@ var registerForm = registerView.querySelector('form')
 registerForm.onsubmit = function (event) {
   event.preventDefault()
 
+
   var firstname = registerForm.firstname.value
   var lastname = registerForm.lastname.value
   var city = registerForm.city.value
@@ -53,61 +54,11 @@ registerForm.onsubmit = function (event) {
   var email = registerForm.email.value
   var password = registerForm.password.value
 
-  console.log(firstname, lastname, city, country, email, password)
+  //console.log(firstname, lastname, city, country, email, password)
 
-  if (!isNaN(firstname)) {
-    alert('First name cannot be a number')
+  var feedbackRegister = registerForm.querySelector('.registerFeedback')
+  
 
-    return
-  }
-
-  if (firstname.length < 2) {
-    alert('First name has less than 2 characters')
-
-    return
-  }
-
-  if (!isNaN(city)) {
-    alert('City cannot be a number')
-
-    return
-  }
-
-  if (city.length < 2) {
-    alert('City has less than 2 characters')
-
-    return
-  }
-
-  if (!isNaN(country)) {
-    alert('Country cannot be a number')
-
-    return
-  }
-
-  if (country.length < 2) {
-    alert('Country has less than 2 characters')
-
-    return
-  }
-
-  if (!isNaN(email)) {
-    alert('Email cannot be a number')
-
-    return
-  }
-
-  if (email.length < 6) {
-    alert('Email has less than 6 characters')
-
-    return
-  }
-
-  if (password.length < 8) {
-    alert('Password has less than 8 characters')
-
-    return
-  }
   try {
     registerUser(firstname, lastname, city, country, email, password)
 
@@ -122,9 +73,10 @@ registerForm.onsubmit = function (event) {
 
     loginView.classList.remove('off')
   } catch (error) {
-    alert(error.message)
-  }
+    feedbackRegister.innerText = error.message
 
+    feedbackRegister.classList.remove('off')
+  }
 
 }
 
@@ -139,30 +91,6 @@ loginForm.onsubmit = function (event) {
   console.log(email, password)
 
   var feedback = loginForm.querySelector('.feedback')
-
-  if (!isNaN(email)) {
-    feedback.innerText = 'Email cannot be a number'
-
-    feedback.classList.remove('off')
-
-    return
-  }
-
-  if (email.length < 6) {
-    feedback.innerText = 'Email has less than 6 characters'
-
-    feedback.classList.remove('off')
-
-    return
-  }
-
-  if (password.length < 8) {
-    feedback.innerText = 'Password has less than 8 characters'
-
-    feedback.classList.remove('off')
-
-    return
-  }
 
   try {
     user = authenticateUser(email, password)
@@ -208,6 +136,11 @@ var profileForm = profileView.querySelector('form')
 profileForm.onsubmit = function (event) {
   event.preventDefault()
 
+  var feedbackProfile = profileForm.querySelector('.feedbackProfile')
+
+  feedbackProfile.innerText = ' '
+  feedbackProfile.classList.add('off')
+
   var firstname = profileForm.firstname.value
   var lastname = profileForm.lastname.value
   var city = profileForm.city.value
@@ -215,73 +148,9 @@ profileForm.onsubmit = function (event) {
   var email = profileForm.email.value
   var password = profileForm.password.value
 
-  console.log(firstname, lastname, city, country, email, password)
-
-  if (!isNaN(firstname)) {
-    alert('First name cannot be a number')
-
-    return
-  }
-
-  if (firstname.length < 2) {
-    alert('First name has less than 2 characters')
-
-    return
-  }
-
-  if (!isNaN(city)) {
-    alert('City cannot be a number')
-
-    return
-  }
-
-  if (city.length < 2) {
-    alert('City has less than 2 characters')
-
-    return
-  }
-
-  if (!isNaN(country)) {
-    alert('Country cannot be a number')
-
-    return
-  }
-
-  if (country.length < 2) {
-    alert('Country has less than 2 characters')
-
-    return
-  }
-
-  if (!isNaN(email)) {
-    alert('Email cannot be a number')
-
-    return
-  }
-
-  if (email.length < 6) {
-    alert('Email has less than 6 characters')
-
-    return
-  }
-
-  if (password.length < 8) {
-    alert('Password has less than 8 characters')
-
-    return
-  }
-
-  // update user
-
-  // user.firstname = firstname
-  // user.lastname = lastname
-  // user.city = city
-  // user.country = country
-  // user.email = email
-  // user.password = password
 
   try {
-    user = updateUser(firstname, lastname, city, country, email, password)
+    updateUser(firstname, lastname, city, country, email, password)
 
     profileForm.password.value = ''
 
@@ -294,6 +163,9 @@ profileForm.onsubmit = function (event) {
     homeView.classList.remove('off')
   } catch (error) {
     // TODO show feedback message from error
+    feedbackProfile.innerText = error.message
+
+    feedbackProfile.classList.remove('off')
   }
 }
 
