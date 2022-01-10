@@ -24,8 +24,17 @@
      justify-content: space-between;
  }
 
+ .container--top {
+     padding: 1rem;
+ }
+
  .input {
      margin: 0.1rem;
+ }
+
+ .input--checkbox {
+     width: 20%;
+     align-items: center;
  }
 
  .input--left {
@@ -132,6 +141,7 @@
      width: 90%;
      border-radius: 24px;
  }
+
  .button--small {
      background-color: #04AA6D;
      background: linear-gradient(278deg, #73d861, #76d4ff);
@@ -143,7 +153,7 @@
      width: 40%;
      border-radius: 24px;
  }
- 
+
  button:hover {
      opacity: 0.5;
  }
@@ -152,6 +162,16 @@
      background-color: #04AA6D;
      background: linear-gradient(278deg, #61d8d6, #f83030);
      color: white;
+     animation: pulse 3000ms 3;
+ }
+
+ @keyframes pulse {
+     0% {
+         box-shadow: #ff69b4 0 0 0 0;
+     }
+     75% {
+         box-shadow :#ff69b400 0 0 0 12px;
+     }
  }
 
 

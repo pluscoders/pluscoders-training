@@ -1,13 +1,15 @@
 // presentation
 
+let id // user id
+
 var user
 
-var loginView = document.querySelector('.login')
-var registerView = document.querySelector('.register')
-var homeView = document.querySelector('.home')
-var profileView = document.querySelector('.profile')
+const loginView = document.querySelector('.login')
+const registerView = document.querySelector('.register')
+const homeView = document.querySelector('.home')
+const profileView = document.querySelector('.profile')
 
-var loginRegisterLink = loginView.querySelector('.button--signin')
+const loginRegisterLink = loginView.querySelector('.button--signin')
 
 loginRegisterLink.onclick = function (event) {
   event.preventDefault()
@@ -15,7 +17,7 @@ loginRegisterLink.onclick = function (event) {
   loginForm.email.value = ''
   loginForm.password.value = ''
 
-  var feedback = loginForm.querySelector('.feedback')
+  const feedback = loginForm.querySelector('.feedback')
 
   feedback.innerText = ''
   feedback.classList.add('off')
@@ -31,7 +33,7 @@ loginRegisterLink.onclick = function (event) {
 
   registerView.classList.remove('off')
 }
-var registerLoginLink = registerView.querySelector('.button--signin')
+const registerLoginLink = registerView.querySelector('.button--signin')
 
 registerLoginLink.onclick = function (event) {
   event.preventDefault()
@@ -41,23 +43,22 @@ registerLoginLink.onclick = function (event) {
   loginView.classList.remove('off')
 }
 
-var registerForm = registerView.querySelector('form')
+const registerForm = registerView.querySelector('form')
 
 registerForm.onsubmit = function (event) {
   event.preventDefault()
 
 
-  var firstname = registerForm.firstname.value
-  var lastname = registerForm.lastname.value
-  var city = registerForm.city.value
-  var country = registerForm.country.value
-  var email = registerForm.email.value
-  var password = registerForm.password.value
+  const firstname = registerForm.firstname.value
+  const lastname = registerForm.lastname.value
+  const city = registerForm.city.value
+  const country = registerForm.country.value
+  const email = registerForm.email.value
+  const password = registerForm.password.value
 
   //console.log(firstname, lastname, city, country, email, password)
 
-  var feedbackRegister = registerForm.querySelector('.registerFeedback')
-  
+  const feedback = registerForm.querySelector('.feedback')
 
   try {
     registerUser(firstname, lastname, city, country, email, password)
@@ -73,34 +74,36 @@ registerForm.onsubmit = function (event) {
 
     loginView.classList.remove('off')
   } catch (error) {
-    feedbackRegister.innerText = error.message
+    feedback.innerText = error.message
 
-    feedbackRegister.classList.remove('off')
+    feedback.classList.remove('off')
   }
 
 }
 
-var loginForm = loginView.querySelector('form')
+const loginForm = loginView.querySelector('form')
 
 loginForm.onsubmit = function (event) {
   event.preventDefault()
 
-  var email = loginForm.email.value
-  var password = loginForm.password.value
+  const email = loginForm.email.value
+  const password = loginForm.password.value
 
   console.log(email, password)
 
-  var feedback = loginForm.querySelector('.feedback')
+  const feedback = loginForm.querySelector('.feedback')
 
   try {
-    user = authenticateUser(email, password)
+    id = authenticateUser(email, password)
+
+    const user = retriveUser(id)
 
     loginForm.email.value = ''
     loginForm.password.value = ''
 
     loginView.classList.add('off')
 
-    var homeTitle = homeView.querySelector('a')
+    const homeTitle = homeView.querySelector('a')
 
     homeTitle.innerText = 'Hello,' + user.firstname + '!'
 
@@ -112,68 +115,98 @@ loginForm.onsubmit = function (event) {
   }
 }
 
-var homeProfileLink = homeView.querySelector('#myLinks #profile')
+const homeProfileLink = homeView.querySelector('#myLinks #profile')
 
 homeProfileLink.onclick = function (event) {
   event.preventDefault()
 
-  homeView.classList.add('off')
+  try {
 
-  var profileForm = profileView.querySelector('form')
+    const user = retriveUser(id)
 
-  profileForm.firstname.value = user.firstname
-  profileForm.lastname.value = user.lastname
-  profileForm.city.value = user.city
-  profileForm.country.value = user.country
-  profileForm.email.value = user.email
+    const profileForm = profileView.querySelector('form')
 
-  profileView.classList.remove('off')
+    profileForm.firstname.value = user.firstname
+    profileForm.lastname.value = user.lastname
+    profileForm.city.value = user.city
+    profileForm.country.value = user.country
+    profileForm.email.value = user.email
+
+    homeView.classList.add('off')
+
+    profileView.classList.remove('off')
+  } catch (error) {
+    alert(error.message)
+  }
+
 }
 
+const homeSignoutLink = homeView.querySelector('#myLinks #signout')
 
-var profileForm = profileView.querySelector('form')
+homeSignoutLink.onclick = function (event) {
+  event.preventDefault()
+
+  id = undefined
+
+  homeView.classList.add('off')
+
+  loginView.classList.remove('off')
+
+}
+
+const profileForm = profileView.querySelector('form')
 
 profileForm.onsubmit = function (event) {
   event.preventDefault()
 
-  var feedbackProfile = profileForm.querySelector('.feedbackProfile')
+  const feedback = profileForm.querySelector('.feedback')
 
-  feedbackProfile.innerText = ' '
-  feedbackProfile.classList.add('off')
+  feedback.innerText = ' '
+  feedback.classList.add('off')
 
-  var firstname = profileForm.firstname.value
-  var lastname = profileForm.lastname.value
-  var city = profileForm.city.value
-  var country = profileForm.country.value
-  var email = profileForm.email.value
-  var password = profileForm.password.value
+  const firstname = profileForm.firstname.value
+  const lastname = profileForm.lastname.value
+  const city = profileForm.city.value
+  const country = profileForm.country.value
+  const email = profileForm.email.value
+  const password = profileForm.password.value
 
 
   try {
-    updateUser(firstname, lastname, city, country, email, password)
+    updateUser(id, firstname, lastname, city, country, email, password)
 
     profileForm.password.value = ''
 
     profileView.classList.add('off')
 
-    var homeTitle = homeView.querySelector('a')
+    const user = retriveUser(id)
+
+    const homeTitle = homeView.querySelector('a')
 
     homeTitle.innerText = 'Hello,' + user.firstname + '!'
 
     homeView.classList.remove('off')
   } catch (error) {
-    // TODO show feedback message from error
-    feedbackProfile.innerText = error.message
+    feedback.innerText = error.message
 
-    feedbackProfile.classList.remove('off')
+    feedback.classList.remove('off')
   }
+}
+
+const profileBackButton = profileView.querySelector('.profile__back-button')
+
+profileBackButton.onclick = function () {
+  profileView.classList.add('off')
+
+  homeView.classList.remove('off')
+
 }
 
 
 // search form
 
 
-var searchForm = homeView.querySelector('form')
+const searchForm = homeView.querySelector('form')
 
 searchForm.onsubmit = function (event) {
   event.preventDefault()
@@ -181,10 +214,10 @@ searchForm.onsubmit = function (event) {
   const results = homeView.querySelector('.results')
   results.innerHTML = ''
 
-  var query = searchForm.brand.value
-  var model = searchForm.model.value
+  const query = searchForm.brand.value
+  const model = searchForm.model.value
 
-  var filtered = searchVehicles(query, model)
+  const filtered = searchVehicles(query, model)
 
   if (filtered.length) {
     const list = document.createElement('ul')
@@ -222,7 +255,7 @@ searchForm.onsubmit = function (event) {
 }
 
 
-var cart = homeView.getElementsByClassName('button--small')
+const cart = homeView.getElementsByClassName('button--small')
 
 
 cart.onclick = function (event) {
@@ -231,11 +264,11 @@ cart.onclick = function (event) {
   const cartResult = homeView.querySelector('.cartResult')
   cartResult.innerHTML = ''
 
-  var counter = counterCart()
+  const counter = counterCart()
 
 }
 
-// var counts = 0;
+// const counts = 0;
 // (".button--small").click(function () {
 //   counts += +1;
 //   (".cart-counter").animate({
