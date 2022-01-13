@@ -2,11 +2,14 @@
 
 // presentation
 
-var loginView = document.querySelector('.login')
-var registerView = document.querySelector('.register')
-var homeView = document.querySelector('.home')
+let id // user id
 
-var loginRegisterLink = loginView.querySelector('a')
+const loginView = document.querySelector('.login')
+const registerView = document.querySelector('.register')
+const homeView = document.querySelector('.home')
+const profileView = document.querySelector('.profile')
+
+const loginRegisterLink = loginView.querySelector('a')
 
 loginRegisterLink.onclick = function (event) {
     event.preventDefault()
@@ -14,7 +17,7 @@ loginRegisterLink.onclick = function (event) {
     loginForm.username.value = ''
     loginForm.password.value = ''
 
-    var feedback = loginForm.querySelector('.feedback')
+    const feedback = loginForm.querySelector('.feedback')
 
     feedback.innerText = ''
     feedback.classList.add('off')
@@ -24,7 +27,7 @@ loginRegisterLink.onclick = function (event) {
     registerView.classList.remove('off')
 }
 
-var registerLoginLink = registerView.querySelector('a')
+const registerLoginLink = registerView.querySelector('a')
 
 registerLoginLink.onclick = function (event) {
     event.preventDefault()
@@ -40,163 +43,95 @@ registerLoginLink.onclick = function (event) {
     loginView.classList.remove('off')
 }
 
-var registerForm = registerView.querySelector('form')
+const registerForm = registerView.querySelector('form')
 
 registerForm.onsubmit = function (event) {
     event.preventDefault()
 
-    var name = registerForm.name.value
-    var city = registerForm.city.value
-    var country = registerForm.country.value
-    var username = registerForm.username.value
-    var password = registerForm.password.value
-
-    if (!isNaN(name)) {
-        alert('name cannot be a number')
-
-        return
-    }
-
-    if (name.length < 2) {
-        alert('name has less than 2 characters')
-
-        return
-    }
-
-    if (!isNaN(city)) {
-        alert('city cannot be a number')
-
-        return
-    }
-
-    if (city.length < 2) {
-        alert('city has less than 2 characters')
-
-        return
-    }
-
-    if (!isNaN(country)) {
-        alert('country cannot be a number')
-
-        return
-    }
-
-    if (country.length < 2) {
-        alert('country has less than 2 characters')
-
-        return
-    }
-
-    if (!isNaN(username)) {
-        alert('username cannot be a number')
-
-        return
-    }
-
-    if (username.length < 6) {
-        alert('username has less than 6 characters')
-
-        return
-    }
-
-    if (password.length < 8) {
-        alert('password has less than 8 characters')
-
-        return
-    }
+    const name = registerForm.name.value
+    const city = registerForm.city.value
+    const country = registerForm.country.value
+    const username = registerForm.username.value
+    const password = registerForm.password.value
 
     try {
-        registerUser(name, city, country, username, password)
+        registerUser(name, city, country, username, password, error => {
+            if (error) return alert(error.message)
 
-        registerForm.name.value = ''
-        registerForm.city.value = ''
-        registerForm.country.value = ''
-        registerForm.username.value = ''
-        registerForm.password.value = ''
+            registerForm.name.value = ''
+            registerForm.city.value = ''
+            registerForm.country.value = ''
+            registerForm.username.value = ''
+            registerForm.password.value = ''
 
-        registerView.classList.add('off')
+            registerView.classList.add('off')
 
-        loginView.classList.remove('off')
+            loginView.classList.remove('off')
+        })
     } catch (error) {
         alert(error.message)
     }
 }
 
-var loginForm = loginView.querySelector('form')
+const loginForm = loginView.querySelector('form')
 
 loginForm.onsubmit = function (event) {
     event.preventDefault()
 
-    var username = loginForm.username.value
-    var password = loginForm.password.value
+    const username = loginForm.username.value
+    const password = loginForm.password.value
 
-    var feedback = loginForm.querySelector('.feedback')
-
-    if (!isNaN(username)) {
-        feedback.innerText = 'username cannot be a number'
-
-        feedback.classList.remove('off')
-
-        return
-    }
-
-    if (username.length < 6) {
-        feedback.innerText = 'username has less than 6 characters'
-
-        feedback.classList.remove('off')
-
-        return
-    }
-
-    if (password.length < 8) {
-        feedback.innerText = 'password has less than 8 characters'
-
-        feedback.classList.remove('off')
-
-        return
-    }
+    const feedback = loginForm.querySelector('.feedback')
 
     try {
-        var user = authenticateUser(username, password)
+        //id = authenticateUser(username, password)
 
-        loginForm.username.value = ''
-        loginForm.password.value = ''
+        //const user = retrieveUser(id)
 
-        loginView.classList.add('off')
+        authenticateUser(username, password, (error, token) => {
+            if (error) return alert(error.message)
 
-        var homeTitle = homeView.querySelector('h1')
+            console.log(token)
 
-        homeTitle.innerText = 'Hello, ' + user.name + '!'
+            loginForm.username.value = ''
+            loginForm.password.value = ''
 
-        homeView.classList.remove('off')
-    } catch(error) {
+            loginView.classList.add('off')
+
+            const homeTitle = homeView.querySelector('h1')
+
+            //homeTitle.innerText = 'Hello, ' + user.name + '!'
+
+            homeView.classList.remove('off')
+        })
+    } catch (error) {
         feedback.innerText = error.message
 
         feedback.classList.remove('off')
     }
 }
 
-var searchForm = homeView.querySelector('form')
+const searchForm = homeView.querySelector('form')
 
 searchForm.onsubmit = function (event) {
     event.preventDefault()
 
-    var results = homeView.querySelector('.results')
+    const results = homeView.querySelector('.results')
     results.innerHTML = ''
 
-    var query = searchForm.query.value
+    const query = searchForm.query.value
 
-    var filtered = searchVehicles(query)
+    const filtered = searchVehicles(query)
 
     if (filtered.length) {
-        var list = document.createElement('ul')
+        const list = document.createElement('ul')
 
         filtered.forEach(function (vehicle) {
-            var item = document.createElement('li')
+            const item = document.createElement('li')
 
-            var title = document.createElement('h3')
-            var image = document.createElement('img')
-            var price = document.createElement('span')
+            const title = document.createElement('h3')
+            const image = document.createElement('img')
+            const price = document.createElement('span')
 
             title.innerText = vehicle.name
             image.src = vehicle.thumbnail
@@ -213,4 +148,71 @@ searchForm.onsubmit = function (event) {
     }
 
     results.classList.remove('off')
+}
+
+const homeProfileButton = homeView.querySelector('.home__profile-button')
+
+homeProfileButton.onclick = function () {
+    try {
+        const user = retrieveUser(id)
+
+        const profileForm = profileView.querySelector('form')
+
+        profileForm.name.value = user.name
+        profileForm.city.value = user.city
+        profileForm.country.value = user.country
+        profileForm.username.value = user.username
+
+        homeView.classList.add('off')
+
+        profileView.classList.remove('off')
+    } catch (error) {
+        alert(error.message)
+    }
+}
+
+const profileBackButton = profileView.querySelector('.profile__back-button')
+
+profileBackButton.onclick = function () {
+    profileView.classList.add('off')
+
+    homeView.classList.remove('off')
+}
+
+const profileForm = profileView.querySelector('form')
+
+profileForm.onsubmit = function (event) {
+    event.preventDefault()
+
+    const name = profileForm.name.value
+    const city = profileForm.city.value
+    const country = profileForm.country.value
+    const username = profileForm.username.value
+    const password = profileForm.password.value
+
+    try {
+        updateUser(id, name, city, country, username, password)
+
+        const user = retrieveUser(id)
+
+        const homeTitle = homeView.querySelector('h1')
+
+        homeTitle.innerText = 'Hello, ' + user.name + '!'
+
+        profileView.classList.add('off')
+
+        homeView.classList.remove('off')
+    } catch (error) {
+        alert(error.message)
+    }
+}
+
+const homeLogoutButton = homeView.querySelector('.home__logout-button')
+
+homeLogoutButton.onclick = function () {
+    id = undefined
+
+    homeView.classList.add('off')
+
+    loginView.classList.remove('off')
 }

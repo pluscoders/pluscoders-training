@@ -1,33 +1,120 @@
-function registerUser(name, city, country, username, password) {
-    var exists = users.some(function(user) {
-        return user.username === username
+function registerUser(name, city, country, username, password, callback) {
+    validateName(name)
+    validateCity(city)
+    validateCountry(country)
+    validateUsername(username)
+    validatePassword(password)
+    validateCallback(callback)
+
+    const xhr = new XMLHttpRequest
+
+    xhr.addEventListener('load', () => {
+        const status = xhr.status
+
+        if (status === 201) {
+            callback(null)
+        } else if (status >= 400 && status < 500) {
+            callback(new Error('client error'))
+        } else {
+            callback(new Error('server error'))
+        }
     })
 
-    if (exists) throw new Error('user already exists')
+    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users')
 
-    var user = {
-        name: name,
-        city: city,
-        country: country,
-        username: username,
-        password: password
-    }
+    xhr.setRequestHeader('Content-Type', 'application/json')
 
-    users.push(user)
+    const data = { name, city, country, username, password }
+
+    const json = JSON.stringify(data)
+
+    xhr.send(json)
 }
 
-function authenticateUser(username, password) {
-    var user = users.find(function (user) {
-        return user.username === username && user.password === password
+function authenticateUser(username, password, callback) {
+    validateUsername(username)
+    validatePassword(password)
+    validateCallback(callback)
+
+    const xhr = new XMLHttpRequest
+
+    xhr.addEventListener('load', () => {
+        const status = xhr.status
+
+        if (status === 200) {
+            const json = xhr.responseText
+
+            const data = JSON.parse(json)
+
+            const token = data.token
+
+            callback(null, token)
+        } else if (status >= 400 && status < 500) {
+            callback(new Error('client error'))
+        } else {
+            callback(new Error('server error'))
+        }
     })
 
-    if (!user) throw new Error('wrong credentials')
+    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users/auth')
 
-    return user
+    xhr.setRequestHeader('Content-Type', 'application/json')
+
+    const data = { username, password }
+
+    const json = JSON.stringify(data)
+
+    xhr.send(json)
+}
+
+function retrieveUser(id) {
+    validateId(id)
+
+    const user = users.find(function (user) {
+        return user.id === id
+    })
+
+    if (!user) throw new Error('user not found')
+
+    return {
+        name: user.name,
+        username: user.username,
+        city: user.city,
+        country: user.country
+    }
+}
+
+function updateUser(id, name, city, country, username, password) {
+    validateId(id)
+    validateName(name)
+    validateCity(city)
+    validateCountry(country)
+    validateUsername(username)
+    validatePassword(password)
+
+    const user = users.find(function (user) {
+        return user.id === id
+    })
+
+    if (!user) throw new Error('user already exists')
+
+    if (username !== user.username) {
+        const exists = users.some(function(user) {
+            return user.username === username
+        })
+
+        if (exists) throw new Error('username already exists')
+    }
+
+    user.name = name
+    user.city = city
+    user.country = country
+    user.username = username
+    user.password = password
 }
 
 function searchVehicles(query) {
-    var filtered = vehicles.filter(function(vehicle) {
+    const filtered = vehicles.filter(function (vehicle) {
         return vehicle.name.includes(query)
     })
 

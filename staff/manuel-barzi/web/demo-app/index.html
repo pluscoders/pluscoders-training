@@ -13,8 +13,8 @@
         <h1>Login</h1>
         
         <form class="container container--vertical container--bordered">
-            <input class="input" type="text" name="username" placeholder="username">
-            <input class="input" type="password" name="password" placeholder="password">
+            <input class="input" type="text" name="username" placeholder="username" required>
+            <input class="input" type="password" name="password" placeholder="password" required>
             <button class="input">Login</button>
 
             <p class="feedback feedback--error off"></p>
@@ -27,11 +27,11 @@
         <h1>Register</h1>
         
         <form class="container container--vertical container--bordered">
-            <input class="input" type="text" name="name" placeholder="name">
-            <input class="input" type="text" name="city" placeholder="city">
-            <input class="input" type="text" name="country" placeholder="country">
-            <input class="input" type="text" name="username" placeholder="username">
-            <input class="input" type="password" name="password" placeholder="password">
+            <input class="input" type="text" name="name" placeholder="name" required>
+            <input class="input" type="text" name="city" placeholder="city" required>
+            <input class="input" type="text" name="country" placeholder="country" required>
+            <input class="input" type="text" name="username" placeholder="username" required>
+            <input class="input" type="password" name="password" placeholder="password" required>
             <button class="input">Register</button>
 
             <p>or <a href="#">Login</a></p>
@@ -40,6 +40,9 @@
 
     <div class="home container container--vertical off">
         <h1>Hello, Peter!</h1>
+
+        <button class="home__profile-button">Profile</button>
+        <button class="home__logout-button">Logout</button>
         
         <div class="search">
             <form class="container container--bordered">
@@ -53,8 +56,25 @@
 
         </div>
     </div>
+
+    <div class="profile container container--vertical off">
+        <h1>Profile</h1>
+        
+        <button class="profile__back-button">< Back</button>
+
+        <form class="container container--vertical container--bordered">
+            <input class="input" type="text" name="name" placeholder="name" required>
+            <input class="input" type="text" name="city" placeholder="city" required>
+            <input class="input" type="text" name="country" placeholder="country" required>
+            <input class="input" type="text" name="username" placeholder="username" required>
+            <input class="input" type="password" name="password" placeholder="password" required>
+
+            <button class="input">Update</button>
+        </form>
+    </div>
     
     <script src="data.js"></script>
+    <script src="validators.js"></script>
     <script src="logic.js"></script>
     <script src="main.js"></script>
 </body>
