@@ -8,13 +8,13 @@ function registerUser(firstname, lastName, city, country, email, password) {
     validateEmail(email)
     validatePassword(password)
 
-    const user = users.some(function (user) {
+    let user = users.some(function (user) {
         return user.email === email
     })
 
     if (user) throw new Error('user alredy exists')
 
-       user = {
+    user = {
         id: generateId(),
         firstname: firstname,
         lastname: lastName,
@@ -35,7 +35,7 @@ function authenticateUser(email, password) {
         return user.email === email && user.password === password
     })
 
-    if (!user) throw new Error ('wrong credentials')
+    if (!user) throw new Error('wrong credentials')
 
     return user.id
 }
@@ -46,14 +46,14 @@ function retriveUser(id) {
         return user.id === id
     })
 
-    if (!user) throw new Error ('user not found')
+    if (!user) throw new Error('user not found')
 
     return {
         firstname: user.firstname,
         lastname: user.lastname,
         city: user.city,
         country: user.country,
-        email : user.email,
+        email: user.email,
     }
 }
 
@@ -77,14 +77,14 @@ function updateUser(id, firstname, lastName, city, country, email, password) {
         return user.id === id
     })
 
-    if(!user) throw new Error('user not found') 
+    if (!user) throw new Error('user not found')
 
-    if(email !== user.email) {
-        const exists = users.some(function(user){
+    if (email !== user.email) {
+        const exists = users.some(function (user) {
             return user.email === email
         })
 
-        if (exists) throw new Error ('email already exists')
+        if (exists) throw new Error('email already exists')
     }
 
     user.firstname = firstname
