@@ -1,3 +1,13 @@
 .title {
-    color: yellowgreen;
+    color: dodgerblue;
+}
+
+.board {
+    background-color: goldenrod;
+}
+
+.board__cell {
+    border: 2px solid black;
+    width: 100px;
+    height: 100px;
 }
