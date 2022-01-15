@@ -89,20 +89,40 @@ loginForm.onsubmit = function (event) {
         //const user = retrieveUser(id)
 
         authenticateUser(username, password, (error, token) => {
-            if (error) return alert(error.message)
+            if (error) {
+                feedback.innerText = error.message
 
-            console.log(token)
+                feedback.classList.remove('off')
 
-            loginForm.username.value = ''
-            loginForm.password.value = ''
+                return
+            }
 
-            loginView.classList.add('off')
+            try {
+                retrieveUser(token, (error, user) => {
+                    if (error) {
+                        feedback.innerText = error.message
 
-            const homeTitle = homeView.querySelector('h1')
+                        feedback.classList.remove('off')
 
-            //homeTitle.innerText = 'Hello, ' + user.name + '!'
+                        return
+                    }
 
-            homeView.classList.remove('off')
+                    loginForm.username.value = ''
+                    loginForm.password.value = ''
+
+                    loginView.classList.add('off')
+
+                    const homeTitle = homeView.querySelector('h1')
+
+                    homeTitle.innerText = 'Hello, ' + user.name + '!'
+
+                    homeView.classList.remove('off')
+                })
+            } catch (error) {
+                feedback.innerText = error.message
+
+                feedback.classList.remove('off')
+            }
         })
     } catch (error) {
         feedback.innerText = error.message

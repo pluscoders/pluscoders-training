@@ -67,21 +67,33 @@ function authenticateUser(username, password, callback) {
     xhr.send(json)
 }
 
-function retrieveUser(id) {
-    validateId(id)
+function retrieveUser(token, callback) {
+    validateToken(token)
+    validateCallback(callback)
 
-    const user = users.find(function (user) {
-        return user.id === id
-    })
+    const xhr = new XMLHttpRequest
 
-    if (!user) throw new Error('user not found')
+    xhr.onload = () => {
+        const { status } = xhr
+        
+        if (status === 200) {
+            const { responseText: json } = xhr
 
-    return {
-        name: user.name,
-        username: user.username,
-        city: user.city,
-        country: user.country
+            const user = JSON.parse(json)
+
+            callback(null, user)
+        } else if (status >= 400 && status < 500) {
+            callback(new Error('client error'))
+        } else if (status >= 500) {
+            callback(new Error('server error'))
+        }
     }
+
+    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+    xhr.send()
 }
 
 function updateUser(id, name, city, country, username, password) {

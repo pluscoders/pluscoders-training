@@ -35,3 +35,20 @@ function validatePassword(password) {
 function validateCallback(callback) {
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 }
+
+function validateToken(token) {
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+
+    const parts = token.split('.')
+
+    const [header, payload, signature] = parts
+
+    if (!header) throw new Error('header not present in token')
+    if (!header.trim()) throw new Error('header is empty or blank')
+
+    if (!payload) throw new Error('payload not present in token')
+    if (!payload.trim()) throw new Error('payload is empty or blank')
+
+    if (!signature) throw new Error('signature not present in token')
+    if (!signature.trim()) throw new Error('signature is empty or blank')
+}
