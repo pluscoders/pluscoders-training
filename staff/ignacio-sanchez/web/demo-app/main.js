@@ -61,18 +61,20 @@ registerForm.onsubmit = function (event) {
   const feedback = registerForm.querySelector('.feedback')
 
   try {
-    registerUser(firstname, lastname, city, country, email, password)
+    registerUser(firstname, lastname, city, country, email, password, error => {
+      if (error) return alert(error.message)
 
-    registerForm.firstname.value = ''
-    registerForm.lastname.value = ''
-    registerForm.city.value = ''
-    registerForm.country.value = ''
-    registerForm.email.value = ''
-    registerForm.password.value = ''
+      registerForm.firstname.value = ''
+      registerForm.lastname.value = ''
+      registerForm.city.value = ''
+      registerForm.country.value = ''
+      registerForm.email.value = ''
+      registerForm.password.value = ''
 
-    registerView.classList.add('off')
+      registerView.classList.add('off')
 
-    loginView.classList.remove('off')
+      loginView.classList.remove('off')
+    })
   } catch (error) {
     feedback.innerText = error.message
 
@@ -89,25 +91,33 @@ loginForm.onsubmit = function (event) {
   const email = loginForm.email.value
   const password = loginForm.password.value
 
+  const username = loginForm.email.value
+
   console.log(email, password)
 
   const feedback = loginForm.querySelector('.feedback')
 
   try {
-    id = authenticateUser(email, password)
+    //id = authenticateUser(email, password)
 
-    const user = retriveUser(id)
+    //const user = retriveUser(id)
 
-    loginForm.email.value = ''
-    loginForm.password.value = ''
+    authenticateUser(email, password, (error, token) => {
+      if (error) return alert(error.message)
 
-    loginView.classList.add('off')
+      console.log(token)
 
-    const homeTitle = homeView.querySelector('a')
+      loginForm.email.value = ''
+      loginForm.password.value = ''
 
-    homeTitle.innerText = 'Hello,' + user.firstname + '!'
+      loginView.classList.add('off')
 
-    homeView.classList.remove('off')
+      const homeTitle = homeView.querySelector('a')
+
+      //homeTitle.innerText = 'Hello,' + user.firstname + '!'
+
+      homeView.classList.remove('off')
+    })
   } catch (error) {
     feedback.innerText = error.message
 

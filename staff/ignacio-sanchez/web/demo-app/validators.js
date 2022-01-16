@@ -36,3 +36,7 @@ function validatePassword(password) {
     if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (password.length < 8) throw new Error('password has less than 8 characters')
 }
+
+function validateCallback(callback) {
+    if (typeof callback !== 'function') throw new TypeError('callback is not function')
+}

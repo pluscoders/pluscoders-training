@@ -1,43 +1,74 @@
 // users
 
-function registerUser(firstname, lastName, city, country, email, password) {
+function registerUser(firstname, lastName, city, country, email, password, callback) {
     validateFirstName(firstname)
     validateLastName(lastName)
     validateCity(city)
     validateCountry(country)
     validateEmail(email)
     validatePassword(password)
+    validateCallback(callback)
 
-    let user = users.some(function (user) {
-        return user.email === email
+    const xhr = new XMLHttpRequest
+
+    xhr.addEventListener('load', () => {
+        const status = xhr.status
+
+        if (status == 201) {
+            callback(null)
+        } else if (status >= 400 && status < 500) {
+            callback(new Error('client error'))
+        } else {
+            callback(new Error('server error'))
+        }
     })
 
-    if (user) throw new Error('user alredy exists')
+    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users')
 
-    user = {
-        id: generateId(),
-        firstname: firstname,
-        lastname: lastName,
-        city: city,
-        country: country,
-        email: email,
-        password: password,
-    }
+    xhr.setRequestHeader('Content-Type', 'application/json')
 
-    users.push(user)
+    const data = { firstname, lastName, city, country, username: email, password }
+
+    const json = JSON.stringify(data)
+
+    xhr.send(json)
 }
 
-function authenticateUser(email, password) {
+function authenticateUser(email, password, callback) {
     validateEmail(email)
     validatePassword(password)
 
-    const user = users.find(function (user) {
-        return user.email === email && user.password === password
+    validateCallback(callback)
+
+    const xhr = new XMLHttpRequest
+
+    xhr.addEventListener('load', () => {
+        const status = xhr.status
+
+        if (status == 200) {
+            const json = xhr.responseText
+
+            const data = JSON.parse(json)
+
+            const token = data.token
+
+            callback(null, token)
+        } else if (status >= 400 && status < 500) {
+            callback(new Error('client error'))
+        } else {
+            callback(new Error('server error'))
+        }
     })
 
-    if (!user) throw new Error('wrong credentials')
+    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users/auth')
 
-    return user.id
+    xhr.setRequestHeader('Content-Type', 'application/json')
+
+    const data = { username: email, password }
+
+    const json = JSON.stringify(data)
+
+    xhr.send(json)
 }
 function retriveUser(id) {
     validateId(id)
