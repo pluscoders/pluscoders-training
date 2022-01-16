@@ -70,30 +70,35 @@ function authenticateUser(email, password, callback) {
 
     xhr.send(json)
 }
-function retriveUser(id) {
-    validateId(id)
 
-    const user = users.find(function (user) {
-        return user.id === id
-    })
+function retriveUser(token, callback) {
+    validateToken(token)
+    validateCallback(callback)
 
-    if (!user) throw new Error('user not found')
+    const xhr = new XMLHttpRequest
 
-    return {
-        firstname: user.firstname,
-        lastname: user.lastname,
-        city: user.city,
-        country: user.country,
-        email: user.email,
+    xhr.onload = () => {
+        const { status } = xhr
+        if (status === 200) {
+            const { responseText: json } = xhr
+
+            const user = JSON.parse(json)
+
+            callback(null, user)
+        } else if (status >= 4000 && status < 500) {
+            callback (new Error('client error'))
+        } else if (stauts >= 500) {
+            callback(new Error('server error'))
+        }
     }
+
+    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+    xhr.send()
 }
 
-// TODO function updateUser
-/*
-- validate properties (firstname, lastname, city, ....) (stand-by)
-- find user by e-mail in users
-- update properties in user
-*/
 
 function updateUser(id, firstname, lastName, city, country, email, password) {
     validateId(id)
