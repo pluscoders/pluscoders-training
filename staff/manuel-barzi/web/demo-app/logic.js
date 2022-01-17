@@ -194,6 +194,10 @@ function updateUserPassword(token, oldPassword, password, callback) {
     xhr.send(json)
 }
 
+function unregisterUser(token, password, callback) {
+    // TODO implement me
+}
+
 function searchVehicles(query) {
     const filtered = vehicles.filter(function (vehicle) {
         return vehicle.name.includes(query)
