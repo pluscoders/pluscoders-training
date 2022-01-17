@@ -14,7 +14,13 @@ function registerUser(name, city, country, username, password, callback) {
         if (status === 201) {
             callback(null)
         } else if (status >= 400 && status < 500) {
-            callback(new Error('client error'))
+            const { responseText: json } = xhr
+
+            const payload = JSON.parse(json)
+
+            const { error } = payload
+
+            callback(new Error(error))
         } else {
             callback(new Error('server error'))
         }
@@ -24,9 +30,9 @@ function registerUser(name, city, country, username, password, callback) {
 
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const data = { name, city, country, username, password }
+    const payload = { name, city, country, username, password }
 
-    const json = JSON.stringify(data)
+    const json = JSON.stringify(payload)
 
     xhr.send(json)
 }
@@ -44,13 +50,19 @@ function authenticateUser(username, password, callback) {
         if (status === 200) {
             const json = xhr.responseText
 
-            const data = JSON.parse(json)
+            const payload = JSON.parse(json)
 
-            const token = data.token
+            const token = payload.token
 
             callback(null, token)
         } else if (status >= 400 && status < 500) {
-            callback(new Error('client error'))
+            const { responseText: json } = xhr
+
+            const payload = JSON.parse(json)
+
+            const { error } = payload
+
+            callback(new Error(error))
         } else {
             callback(new Error('server error'))
         }
@@ -60,9 +72,9 @@ function authenticateUser(username, password, callback) {
 
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const data = { username, password }
+    const payload = { username, password }
 
-    const json = JSON.stringify(data)
+    const json = JSON.stringify(payload)
 
     xhr.send(json)
 }
@@ -75,7 +87,7 @@ function retrieveUser(token, callback) {
 
     xhr.onload = () => {
         const { status } = xhr
-        
+
         if (status === 200) {
             const { responseText: json } = xhr
 
@@ -83,7 +95,13 @@ function retrieveUser(token, callback) {
 
             callback(null, user)
         } else if (status >= 400 && status < 500) {
-            callback(new Error('client error'))
+            const { responseText: json } = xhr
+
+            const payload = JSON.parse(json)
+
+            const { error } = payload
+
+            callback(new Error(error))
         } else if (status >= 500) {
             callback(new Error('server error'))
         }
@@ -96,33 +114,84 @@ function retrieveUser(token, callback) {
     xhr.send()
 }
 
-function updateUser(id, name, city, country, username, password) {
-    validateId(id)
+function updateUser(token, name, city, country, username, callback) {
+    validateToken(token)
     validateName(name)
     validateCity(city)
     validateCountry(country)
     validateUsername(username)
-    validatePassword(password)
+    validateCallback(callback)
 
-    const user = users.find(function (user) {
-        return user.id === id
+    const xhr = new XMLHttpRequest
+
+    xhr.addEventListener('load', () => {
+        const { status } = xhr
+
+        if (status === 204) {
+            callback(null)
+        } else if (status >= 400 && status < 500) {
+            const { responseText: json } = xhr
+
+            const payload = JSON.parse(json)
+
+            const { error } = payload
+
+            callback(new Error(error))
+        } else {
+            callback(new Error('server error'))
+        }
     })
 
-    if (!user) throw new Error('user already exists')
+    xhr.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
 
-    if (username !== user.username) {
-        const exists = users.some(function(user) {
-            return user.username === username
-        })
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
-        if (exists) throw new Error('username already exists')
-    }
+    xhr.setRequestHeader('Content-Type', 'application/json')
 
-    user.name = name
-    user.city = city
-    user.country = country
-    user.username = username
-    user.password = password
+    const payload = { name, city, country, username }
+
+    const json = JSON.stringify(payload)
+
+    xhr.send(json)
+}
+
+function updateUserPassword(token, oldPassword, password, callback) {
+    validateToken(token)
+    validateOldPassword(oldPassword)
+    validatePassword(password)
+    validateCallback(callback)
+
+    const xhr = new XMLHttpRequest
+
+    xhr.addEventListener('load', () => {
+        const { status } = xhr
+
+        if (status === 204) {
+            callback(null)
+        } else if (status >= 400 && status < 500) {
+            const { responseText: json } = xhr
+
+            const payload = JSON.parse(json)
+
+            const { error } = payload
+
+            callback(new Error(error))
+        } else {
+            callback(new Error('server error'))
+        }
+    })
+
+    xhr.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+    xhr.setRequestHeader('Content-Type', 'application/json')
+
+    const payload = { oldPassword, password }
+
+    const json = JSON.stringify(payload)
+
+    xhr.send(json)
 }
 
 function searchVehicles(query) {
