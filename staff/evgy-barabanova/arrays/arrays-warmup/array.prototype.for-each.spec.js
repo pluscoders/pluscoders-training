@@ -1,5 +1,5 @@
 describe('Array.prototype.forEach', () => {
-  describe('calculate things', () => {
+  describe('iterate things', () => {
     let nums
 
     beforeEach(() => {

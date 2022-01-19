@@ -1,5 +1,5 @@
 describe('Array.prototype.map', () => {
-  describe('calculate things', () => {
+  describe('map things', () => {
     let nums
 
     beforeEach(() => {
