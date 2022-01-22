@@ -4,10 +4,13 @@ let id // user id
 
 var user
 
+let _token
+
 const loginView = document.querySelector('.login')
 const registerView = document.querySelector('.register')
 const homeView = document.querySelector('.home')
 const profileView = document.querySelector('.profile')
+const passwordView = document.querySelector('.password')
 
 const loginRegisterLink = loginView.querySelector('.button--signin')
 
@@ -121,7 +124,9 @@ loginForm.onsubmit = function (event) {
             return
           }
 
-          console.log(token)
+          _token = token
+
+          //console.log(token)
 
           loginForm.email.value = ''
           loginForm.password.value = ''
@@ -134,6 +139,7 @@ loginForm.onsubmit = function (event) {
 
           homeView.classList.remove('off')
 
+
         })
       } catch (error) {
         feedback.innerText = error.message
@@ -141,13 +147,14 @@ loginForm.onsubmit = function (event) {
         feedback.classList.remove('off')
       }
 
-
     })
+
   } catch (error) {
     feedback.innerText = error.message
 
     feedback.classList.remove('off')
   }
+
 }
 
 const homeProfileLink = homeView.querySelector('#myLinks #profile')
@@ -155,25 +162,89 @@ const homeProfileLink = homeView.querySelector('#myLinks #profile')
 homeProfileLink.onclick = function (event) {
   event.preventDefault()
 
+  //const user = retriveUser(id)
+  const token = _token
+
   try {
+    retriveUser(token, (error, user) => {
+      if (error) {
+        feedback.innerText = error.message
 
-    const user = retriveUser(id)
+        feedback.classList.remove('off')
 
-    const profileForm = profileView.querySelector('form')
+        return
+      }
 
-    profileForm.firstname.value = user.firstname
-    profileForm.lastname.value = user.lastname
-    profileForm.city.value = user.city
-    profileForm.country.value = user.country
-    profileForm.email.value = user.email
+      const profileForm = profileView.querySelector('form')
 
-    homeView.classList.add('off')
+      profileForm.firstname.value = user.firstname
+      profileForm.lastname.value = user.lastName
+      profileForm.city.value = user.city
+      profileForm.country.value = user.country
+      // profileForm.email.value = user.username
 
-    profileView.classList.remove('off')
+      homeView.classList.add('off')
+
+      profileView.classList.remove('off')
+    })
   } catch (error) {
     alert(error.message)
   }
 
+}
+
+const profilePasswordLink = profileView.querySelector('.profile__password-button')
+
+profilePasswordLink.onclick = function (event) {
+  event.preventDefault()
+
+  profileView.classList.add('off')
+
+  passwordView.classList.remove('off')
+
+}
+
+const passwordProfileLink = passwordView.querySelector('form')
+
+passwordProfileLink.onsubmit = function (event) {
+  event.preventDefault()
+
+  // passwordForm.oldPassword.value = ''
+  // passwordForm.password.value = ''
+
+  const passwordForm = passwordView.querySelector('form')
+
+  passwordForm.onsubmit = function (event) {
+    event.preventDefault()
+
+    const oldPassword = passwordForm.oldPassword.value
+    const password = passwordForm.password.value
+
+    //const user = retriveUser(id)
+    const token = _token
+
+    try {
+      retriveUser(token, oldPassword, password, (error, user) => {
+        if (error) {
+          feedback.innerText = error.message
+
+          feedback.classList.remove('off')
+
+          return
+        }
+
+        const passwordForm = passwordView.querySelector('form')
+
+
+        profileView.classList.add('off')
+
+        passwordView.classList.remove('off')
+      })
+    } catch (error) {
+      alert(error.message)
+    }
+
+  }
 }
 
 const homeSignoutLink = homeView.querySelector('#myLinks #signout')
@@ -309,6 +380,4 @@ cart.onclick = function (event) {
 //   (".cart-counter").animate({
 //     (this).text(counts)
 // });
-
-
 
