@@ -39,7 +39,7 @@ function validatePassword(password) {
 
 function validateOldPassword(oldPassword) {
     if (typeof oldPassword !== 'string') throw new TypeError('old password is not a string')
-    if (password.length < 8) throw new Error('old password has less than 8 characters')
+    if (oldPassword.length < 8) throw new Error('old password has less than 8 characters')
 }
 
 function validateCallback(callback) {

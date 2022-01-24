@@ -117,12 +117,13 @@ function retriveUser(token, callback) {
 }
 
 
-function updateUser(token, name, city, country, username, callback) {
+function updateUser(token, firstname,lastName, city, country, email, callback) {
     validateToken(token)
-    validateName(name)
+    validateFirstName(firstname)
+    validateLastName(lastName)
     validateCity(city)
     validateCountry(country)
-    validateUsername(username)
+    validateEmail(email)
     validateCallback(callback)
 
     const xhr = new XMLHttpRequest
@@ -151,7 +152,7 @@ function updateUser(token, name, city, country, username, callback) {
 
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const payload = { name, city, country, username: email }
+    const payload = { firstname, lastName, country, username: email }
 
     const json = JSON.stringify(payload)
 
@@ -198,7 +199,41 @@ function updateUserPassword(token, oldPassword, password, callback) {
 }
 
 function unregisterUser(token, password, callback) {
-    // TODO implement me
+    validateToken(token)
+    validatePassword(password)
+    validateCallback(callback)
+
+    const xhr = new XMLHttpRequest
+
+    xhr.addEventListener('load', () => {
+        const { status } = xhr
+
+        if (status === 204) {
+            callback(null)
+        } else if (status >= 400 && status < 500) {
+            const { responseText: json } = xhr
+
+            const payload = JSON.parse(json)
+
+            const { error } = payload
+
+            callback(new Error(error))
+        } else {
+            callback(new Error('server error'))
+        }
+    })
+
+    xhr.open('DELETE', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+    xhr.setRequestHeader('Content-Type', 'application/json')
+
+    const payload = { password }
+
+    const json = JSON.stringify(payload)
+
+    xhr.send(json)
 }
 
 // vehicles

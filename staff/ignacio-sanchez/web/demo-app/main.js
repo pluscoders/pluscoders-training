@@ -181,7 +181,8 @@ homeProfileLink.onclick = function (event) {
       profileForm.lastname.value = user.lastName
       profileForm.city.value = user.city
       profileForm.country.value = user.country
-      // profileForm.email.value = user.username
+      profileForm.email.value = user.username
+      profileForm.password.value = user.password
 
       homeView.classList.add('off')
 
@@ -204,48 +205,49 @@ profilePasswordLink.onclick = function (event) {
 
 }
 
-const passwordProfileLink = passwordView.querySelector('form')
+const passwordForm = passwordView.querySelector('form')
 
-passwordProfileLink.onsubmit = function (event) {
+passwordForm.onsubmit = function (event) {
   event.preventDefault()
 
-  // passwordForm.oldPassword.value = ''
-  // passwordForm.password.value = ''
+  const oldPassword = passwordForm.oldPassword.value
+  const password = passwordForm.password.value
 
-  const passwordForm = passwordView.querySelector('form')
+  const token = _token
 
-  passwordForm.onsubmit = function (event) {
-    event.preventDefault()
+  try {
+    updateUserPassword(token, oldPassword, password, (error, user) => {
+      if (error) {
+        feedback.innerText = error.message
 
-    const oldPassword = passwordForm.oldPassword.value
-    const password = passwordForm.password.value
+        feedback.classList.remove('off')
 
-    //const user = retriveUser(id)
-    const token = _token
+        return
+      }
 
-    try {
-      retriveUser(token, oldPassword, password, (error, user) => {
-        if (error) {
-          feedback.innerText = error.message
-
-          feedback.classList.remove('off')
-
-          return
-        }
-
-        const passwordForm = passwordView.querySelector('form')
+      const passwordForm = passwordView.querySelector('form')
 
 
-        profileView.classList.add('off')
+      profileView.classList.remove('off')
 
-        passwordView.classList.remove('off')
-      })
-    } catch (error) {
-      alert(error.message)
-    }
-
+      passwordView.classList.add('off')
+    })
+  } catch (error) {
+    alert(error.message)
   }
 }
+
+const passwordProfileLink = password.querySelector('.password__back-button')
+
+passwordProfileLink.onclick = function (event) {
+  event.preventDefault()
+
+  passwordView.classList.add('off')
+
+  profileView.classList.remove('off')
+
+}
+
 
 const homeSignoutLink = homeView.querySelector('#myLinks #signout')
 
@@ -270,28 +272,59 @@ profileForm.onsubmit = function (event) {
   feedback.innerText = ' '
   feedback.classList.add('off')
 
+  const token = _token
+
   const firstname = profileForm.firstname.value
   const lastname = profileForm.lastname.value
   const city = profileForm.city.value
   const country = profileForm.country.value
   const email = profileForm.email.value
-  const password = profileForm.password.value
+  // const password = profileForm.password.value
 
 
   try {
-    updateUser(id, firstname, lastname, city, country, email, password)
+    updateUser(token, firstname, lastname, city, country, email, error => {
+      if (error) return alert(error.message)
 
-    profileForm.password.value = ''
+      //profileView.classList.add('off')
 
-    profileView.classList.add('off')
+      //const user = retriveUser(id)
 
-    const user = retriveUser(id)
+      const homeTitle = homeView.querySelector('a')
 
-    const homeTitle = homeView.querySelector('a')
+      //homeTitle.innerText = 'Hello,' + user.firstname + '!'
 
-    homeTitle.innerText = 'Hello,' + user.firstname + '!'
+      //homeView.classList.remove('off')
+    })
+  } catch (error) {
+    feedback.innerText = error.message
 
-    homeView.classList.remove('off')
+    feedback.classList.remove('off')
+  }
+}
+
+const unregisterProfileForm = profileView.querySelector('.profile__unregister-button')
+
+unregisterProfileForm.onclick = function (event) {
+  event.preventDefault()
+
+  const feedback = profileForm.querySelector('.feedback')
+
+  feedback.innerText = ' '
+  feedback.classList.add('off')
+
+  const token = _token
+
+  const password = profileForm.password.value
+
+  try {
+    unregisterUser(token, password, error => {
+      if (error) return alert(error.message)
+      else {
+        return alert('user unregistred')
+      }
+
+    })
   } catch (error) {
     feedback.innerText = error.message
 
@@ -304,7 +337,25 @@ const profileBackButton = profileView.querySelector('.profile__back-button')
 profileBackButton.onclick = function () {
   profileView.classList.add('off')
 
-  homeView.classList.remove('off')
+  const token = _token
+
+  retriveUser(token, (error, user) => {
+    if (error) {
+      feedback.innerText = error.message
+
+      feedback.classList.remove('off')
+
+      return
+    }
+
+    const homeTitle = homeView.querySelector('a')
+
+    homeTitle.innerText = 'Hello,' + user.firstname + '!'
+
+    homeView.classList.remove('off')
+
+
+  })
 
 }
 
