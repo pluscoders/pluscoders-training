@@ -10,7 +10,7 @@ describe('Array.prototype.find', () => {
 
       const res = names.find(item => item === 'Aaron Swartz')
 
-      expect(res).toContain('Aaron Swartz')
+      expect(res).toBe('Aaron Swartz')
     })
   })
 })
