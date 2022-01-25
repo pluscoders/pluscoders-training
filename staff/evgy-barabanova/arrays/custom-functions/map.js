@@ -6,7 +6,8 @@ function map(array, callback) {
 
     const result = callback(element)
 
-    mapped.push(result)
+    //mapped.push(result)
+    mapped[i] = result
   }
 
   return mapped
