@@ -1,17 +1,21 @@
 describe('Array.prototype.forEach', () => {
-  describe('iterate things', () => {
+  describe('print things', () => {
     let nums
 
     beforeEach(() => {
       nums = [1, 2, 3, 4, 5]
     })
 
-    it('should loop for all nums, multiple by 10, and put results in new array', () => {
-      const res = []
+    it('should loop for all nums and print each num', () => {
+      let times = 0
 
-      nums.forEach((num, index) => res[index] = num * 10)
+      nums.forEach(num => {
+        console.log(num)
 
-      expect(res).toContain(10, 20, 30, 40, 50)
+        times++
+      })
+
+      expect(times).toBe(5)
     })
   })
 })
