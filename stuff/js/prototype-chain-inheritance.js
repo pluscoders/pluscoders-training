@@ -1,3 +1,5 @@
+// demo 1
+
 function Person(name) {
     this.name = name
 }
@@ -52,3 +54,30 @@ console.log(peter.fart())
 //man? true
 //person? true
 //Peter: 💨
+
+// demo 2
+
+function FormatError(message) {
+    Error.call(this, message)
+
+    if (Error.captureStackTrace)
+        Error.captureStackTrace(this, FormatError)
+
+    this.name = FormatError.name    
+}
+
+FormatError.prototype = Object.create(Error.prototype)
+FormatError.prototype.constructor = FormatError
+
+var error = new Error('this is a normal error')
+var formatError = new FormatError('this is a format error')
+
+var log = console.log
+
+log('error')
+log(error instanceof Error)
+log(error instanceof FormatError)
+
+log('format error')
+log(formatError instanceof Error)
+log(formatError instanceof FormatError)
