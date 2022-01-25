@@ -1,11 +1,11 @@
 function validateId(id) {
     if (typeof id !== 'string') throw new TypeError('id is not a string')
-    if (id.length !== 10) throw new Error('id does not have 10 characters')
+    if (id.length !== 10) throw new FormatError('id does not have 10 characters')
 }
 
 function validateName(name) {
     if (typeof name !== 'string') throw new TypeError('name is not a string')
-    if (/\d+/.test(name)) throw new Error('name contains numbers')
+    if (/\d+/.test(name)) throw new FormatError('name contains numbers')
     if (name.length < 2) throw new Error('name has less than 2 characters')
 }
 

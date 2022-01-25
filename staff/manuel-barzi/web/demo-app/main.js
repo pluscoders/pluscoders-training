@@ -84,13 +84,12 @@ loginForm.onsubmit = function (event) {
     const feedback = loginForm.querySelector('.feedback')
 
     try {
-        //id = authenticateUser(username, password)
-
-        //const user = retrieveUser(id)
-
         authenticateUser(username, password, (error, token) => {
             if (error) {
-                feedback.innerText = error.message
+                if (error instanceof ServerError)
+                    feedback.innerText = 'Sorry, there was an error and we will fix it as soon as possible'
+                else
+                    feedback.innerText = error.message
 
                 feedback.classList.remove('off')
 

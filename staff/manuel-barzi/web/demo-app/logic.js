@@ -20,9 +20,9 @@ function registerUser(name, city, country, username, password, callback) {
 
             const { error } = payload
 
-            callback(new Error(error))
+            callback(new ClientError(error))
         } else {
-            callback(new Error('server error'))
+            callback(new ServerError('server error'))
         }
     })
 
@@ -62,9 +62,9 @@ function authenticateUser(username, password, callback) {
 
             const { error } = payload
 
-            callback(new Error(error))
+            callback(new ClientError(error))
         } else {
-            callback(new Error('server error'))
+            callback(new ServerError('server error'))
         }
     })
 
