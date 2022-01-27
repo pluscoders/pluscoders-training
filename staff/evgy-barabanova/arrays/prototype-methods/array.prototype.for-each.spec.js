@@ -7,10 +7,11 @@ describe('Array.prototype.forEach', () => {
     })
 
     it('should loop for all nums and print each num', () => {
+      debugger
       let times = 0
 
       nums.forEach(num => {
-        console.log(num)
+        //console.log(num)
 
         times++
       })
