@@ -82,7 +82,7 @@ function authenticateUser(email, password, callback) {
     xhr.send(json)
 }
 
-function retriveUser(token, callback) {
+function retrieveUser(token, callback) {
     validateToken(token)
     validateCallback(callback)
 

@@ -151,7 +151,7 @@
             <h1 class="card__title">Edit your profile</h1>
             <img class="card__img" src="byc.gif" alt="logo">
         </div>
-        <h2>Welcome. Glad to see you.</h2>
+        <h2>Profile</h2>
         <div class="form-divider">
             <p></p>
         </div>
@@ -173,8 +173,8 @@
             <label for="email"><b>Email</b></label>
             <input type="text" placeholder="Enter your email" name="email" required>
             
-            <label for="password"><b>Password</b></label>
-            <input type="text" placeholder="Enter your password" name="password" required>
+            <!-- <label for="password"><b>Password</b></label>
+            <input type="text" placeholder="Enter your password" name="password" required> -->
 
             <button type="submit">Update</button>
             <button class="profile__password-button">Change password</button>
@@ -192,7 +192,7 @@
             <h1 class="card__title">Edit your profile</h1>
             <img class="card__img" src="byc.gif" alt="logo">
         </div>
-        <h2>Welcome. Glad to see you.</h2>
+        <h2>Change password</h2>
         <div class="form-divider">
             <p></p>
         </div>
@@ -207,6 +207,31 @@
 
             <button type="submit">Update</button>
             <button class="password__back-button">Back</button>
+
+            <p class="feedback feedback--error off"></p>
+        </form>
+
+        <div class="form-divider"> </div>
+    </div>
+
+    <div class="unregister off">
+        <div class="card">
+            <h1 class="card__title">Edit your profile</h1>
+            <img class="card__img" src="byc.gif" alt="logo">
+        </div>
+        <h2>Unregister</h2>
+        <div class="form-divider">
+            <p></p>
+        </div>
+        <p class="subtitle"> Please, enter your password for unregister.</p>
+
+        <form class="container container--vertical" id="unregister">
+
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter password" name="password" required>
+
+            <button type="submit">Unregister</button>
+            <button class="unregister__back-button">Back</button>
 
             <p class="feedback feedback--error off"></p>
         </form>
