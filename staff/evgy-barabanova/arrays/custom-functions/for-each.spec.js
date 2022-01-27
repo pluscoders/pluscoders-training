@@ -1,6 +1,5 @@
 const forEach = require('./for-each')
 
-
 describe('forEach', () => {
   describe('forEach nums', () => {
     let nums
@@ -13,7 +12,7 @@ describe('forEach', () => {
       let times = 0
 
       forEach(nums, num => {
-        console.log(num)
+        //console.log(num)
 
         times++
       })

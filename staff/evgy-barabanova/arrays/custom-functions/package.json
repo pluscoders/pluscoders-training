@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test-inspect": "node --inspect-brk node_modules/.bin/jest"
   },
   "keywords": [],
   "author": "",
