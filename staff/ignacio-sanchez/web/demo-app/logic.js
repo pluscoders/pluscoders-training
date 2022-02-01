@@ -23,9 +23,9 @@ function registerUser(firstname, lastName, city, country, email, password, callb
 
             const { error } = payload
 
-            callback(new Error(error))
+            callback(new ClientError(error))
         } else {
-            callback(new Error('server error'))
+            callback(new ServerError('server error'))
         }
     })
 
@@ -65,9 +65,9 @@ function authenticateUser(email, password, callback) {
 
             const { error } = payload
 
-            callback(new Error(error))
+            callback(new ClientError(error))
         } else {
-            callback(new Error('server error'))
+            callback(new ServerError('server error'))
         }
     })
 
@@ -96,16 +96,16 @@ function retrieveUser(token, callback) {
             const user = JSON.parse(json)
 
             callback(null, user)
-        } else if (status >= 4000 && status < 500) {
+        } else if (status >= 400 && status < 500) {
             const { responseText: json } = xhr
 
             const payload = JSON.parse(json)
 
             const { error } = payload
 
-            callback(new Error(error))
-        } else if (stauts >= 500) {
-            callback(new Error('server error'))
+            callback(new ClientError(error))
+        } else {
+            callback(new ServerError('server error'))
         }
     }
 
@@ -117,7 +117,7 @@ function retrieveUser(token, callback) {
 }
 
 
-function updateUser(token, firstname,lastName, city, country, email, callback) {
+function updateUser(token, firstname, lastName, city, country, email, callback) {
     validateToken(token)
     validateFirstName(firstname)
     validateLastName(lastName)
@@ -140,9 +140,9 @@ function updateUser(token, firstname,lastName, city, country, email, callback) {
 
             const { error } = payload
 
-            callback(new Error(error))
+            callback(new ClientError(error))
         } else {
-            callback(new Error('server error'))
+            callback(new ServerError('server error'))
         }
     })
 
@@ -238,10 +238,50 @@ function unregisterUser(token, password, callback) {
 
 // vehicles
 
-function searchVehicles(query, model) {
-    const filtered = vehicles.filter(function (vehicle) {
-        return vehicle.name.includes(query) && vehicle.name.includes(model)
-    })
+// function searchVehicles(query, model) {
+//     const filtered = vehicles.filter(function (vehicle) {
+//         return vehicle.name.includes(query) && vehicle.name.includes(model)
+//     })
 
-    return filtered
+//     return filtered
+// }
+
+function searchVehicles(query, callback) {
+    validateQuery(query)
+    validateCallback(callback)
+
+    const xhr = new XMLHttpRequest
+
+    xhr.onload = () => {
+        const { status } = xhr
+        if (status === 200) {
+            const { responseText: json } = xhr
+
+            const user = JSON.parse(json)
+
+            callback(null, user)
+        } else if (status >= 400 && status < 500) {
+            const { responseText: json } = xhr
+
+            const payload = JSON.parse(json)
+
+            const { error } = payload
+
+            callback(new ClientError(error))
+        } else {
+            callback(new ServerError('server error'))
+        }
+    }
+
+    const url = new URL("https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles?")
+    url.searchParams.set('q', query)
+
+    xhr.open('GET', url)
+
+    xhr.send()
+
+}
+
+function retrieveVehicle(id, callback) {
+
 }

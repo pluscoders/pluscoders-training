@@ -108,7 +108,10 @@ loginForm.onsubmit = function (event) {
 
     authenticateUser(email, password, (error, token) => {
       if (error) {
-        feedback.innerText = error.message
+        if (error instanceof ServerError)
+          feedback.innerText = 'Sorry, the was an error an we will fix it as soon as possible'
+        else
+          feedback.innerText = error.message
 
         feedback.classList.remove('off')
 
@@ -335,7 +338,7 @@ unregisterForm.onsubmit = function (event) {
 
   try {
     unregisterUser(token, password, error => {
-      if (error){
+      if (error) {
         return alert(error.message)
       }
       else {
@@ -343,11 +346,11 @@ unregisterForm.onsubmit = function (event) {
 
       }
 
-      
+
     })
     unregisterView.classList.add('off')
     loginView.classList.remove('off')
-    
+
   } catch (error) {
     feedback.innerText = error.message
 
