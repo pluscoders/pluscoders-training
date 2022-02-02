@@ -14,6 +14,16 @@ landingLoginLink.onclick = event => {
   loginView.classList.remove('off')
 }
 
+const landingRegisterLink = landingView.querySelector('.landing__register-link')
+
+landingRegisterLink.onclick = event => {
+  event.preventDefault()
+
+  landingView.classList.add('off')
+
+  registerView.classList.remove('off')
+}
+
 const loginForm = loginView.querySelector('.login__form')
 
 loginForm.onsubmit = event => {
