@@ -6,7 +6,6 @@ registerForm.onsubmit = event => {
   const nameInput = registerForm.querySelector('.register__name-input')
   const name = nameInput.value
 
-
   const usernameInput = registerForm.querySelector('.register__username-input')
   const username = usernameInput.value
 

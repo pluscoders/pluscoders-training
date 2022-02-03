@@ -4,17 +4,18 @@ loginForm.onsubmit = event => {
   event.preventDefault()
 
   const usernameInput = loginForm.querySelector('.login__username-input')
-
   const username = usernameInput.value
 
-  console.log(username)
 
-  // TODO same for password
   const passwordInput = loginForm.querySelector('.login__password-input')
-
   const password = passwordInput.value
 
-  console.log(password)
+  const result = authenticateUser(username, password)
+
+  if (result) {
+    loginView.classList.add('off')
+    homeView.classList.remove('off')
+  }
 }
 
 const loginRegisterLink = loginView.querySelector('.login__register-link')

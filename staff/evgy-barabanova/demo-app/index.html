@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="components/landing.css">
   <link rel="stylesheet" href="components/login.css">
   <link rel="stylesheet" href="components/register.css">
+  <link rel="stylesheet" href="components/home.css">
   <link rel="stylesheet" href="index.css">
 </head>
 
@@ -38,12 +39,17 @@
     </form>
   </div>
 
+  <div class="home off">
+    <h1>Hello, World!</h1>
+  </div>
+
   <!-- data layer (models, arrays, ...) -->
   <script src="data/models/user.js"></script>
   <script src="data/users.js"></script>
 
   <!-- business logic layer (logic functions)-->
   <script src="logic/register-user.js"></script>
+  <script src="logic/authenticate-user.js"></script>
 
   <!-- presentation layer (views, panels, ...)-->
   <script src="components/app.js"></script>
