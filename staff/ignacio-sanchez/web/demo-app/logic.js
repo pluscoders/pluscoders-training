@@ -257,9 +257,9 @@ function searchVehicles(query, callback) {
         if (status === 200) {
             const { responseText: json } = xhr
 
-            const user = JSON.parse(json)
+            const vehicles = JSON.parse(json)
 
-            callback(null, user)
+            callback(null, vehicles)
         } else if (status >= 400 && status < 500) {
             const { responseText: json } = xhr
 

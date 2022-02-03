@@ -404,17 +404,18 @@ searchForm.onsubmit = function (event) {
 
   try {
 
-    searchVehicles(query, model(error, filtered) => {
-      if(error) {
+    searchVehicles(query, ((error, vehicles) => {
+      if (error) {
         feedback.innerText = error.message
 
         feedback.classList.remove('off')
 
         return
       }
-        const list = document.createElement('ul'){
+      
+      const list = document.createElement('ul')
 
-      filtered.forEach(function (car) {
+      vehicles.forEach(function (car) {
         const result = document.createElement('li')
 
         const name = document.createElement('h3')
@@ -433,15 +434,15 @@ searchForm.onsubmit = function (event) {
         list.append(result)
 
         results.append(list)
-      }
+      })
 
-      }
-      }
-  })
+    }))
+      
+  }
 
-} catch (error) {
+ catch (error) {
 
-  const error = document.createElement('p')
+  error = document.createElement('p')
 
   error.innerText = 'No matches found with brand ' + searchForm.brand.value + " and model " + searchForm.model.value
 
