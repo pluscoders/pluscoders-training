@@ -109,7 +109,7 @@ loginForm.onsubmit = function (event) {
     authenticateUser(email, password, (error, token) => {
       if (error) {
         if (error instanceof ServerError)
-          feedback.innerText = 'Sorry, the was an error an we will fix it as soon as possible'
+          feedback.innerText = 'Sorry, there was an error an we will fix it as soon as possible'
         else
           feedback.innerText = error.message
 
@@ -400,42 +400,58 @@ searchForm.onsubmit = function (event) {
   const query = searchForm.brand.value
   const model = searchForm.model.value
 
-  const filtered = searchVehicles(query, model)
+  //const filtered = searchVehicles(query, model)
 
-  if (filtered.length) {
-    const list = document.createElement('ul')
+  try {
 
-    filtered.forEach(function (car) {
-      const result = document.createElement('li')
+    searchVehicles(query, model(error, filtered) => {
+      if(error) {
+        feedback.innerText = error.message
 
-      const name = document.createElement('h3')
-      const thumbnail = document.createElement('img')
-      const price = document.createElement('span')
-      const button = document.createElement('button')
-      button.classList.add('button--small')
+        feedback.classList.remove('off')
 
-      name.innerText = car.name + ' (' + car.id + ')'
-      thumbnail.src = car.thumbnail
-      price.innerText = car.price + ' $'
-      button.innerText = 'Add to basket'
+        return
+      }
+        const list = document.createElement('ul'){
 
-      result.append(name, thumbnail, price, button)
+      filtered.forEach(function (car) {
+        const result = document.createElement('li')
 
-      list.append(result)
-    })
+        const name = document.createElement('h3')
+        const thumbnail = document.createElement('img')
+        const price = document.createElement('span')
+        const button = document.createElement('button')
+        button.classList.add('button--small')
 
-    results.append(list)
-  } else {
+        name.innerText = car.name + ' (' + car.id + ')'
+        thumbnail.src = car.thumbnail
+        price.innerText = car.price + ' $'
+        button.innerText = 'Add to basket'
 
-    const error = document.createElement('p')
+        result.append(name, thumbnail, price, button)
 
-    error.innerText = 'No matches found with brand ' + searchForm.brand.value + " and model " + searchForm.model.value
+        list.append(result)
 
-    results.append(error)
-  }
+        results.append(list)
+      }
 
-  results.classList.remove('off')
+      }
+      }
+  })
+
+} catch (error) {
+
+  const error = document.createElement('p')
+
+  error.innerText = 'No matches found with brand ' + searchForm.brand.value + " and model " + searchForm.model.value
+
+  results.append(error)
 }
+
+results.classList.remove('off')
+}
+
+
 
 
 const cart = homeView.getElementsByClassName('button--small')

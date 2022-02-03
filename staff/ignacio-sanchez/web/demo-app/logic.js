@@ -273,10 +273,7 @@ function searchVehicles(query, callback) {
         }
     }
 
-    const url = new URL("https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles?")
-    url.searchParams.set('q', query)
-
-    xhr.open('GET', url)
+    xhr.open('GET', `https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles?q=${query}`)
 
     xhr.send()
 
