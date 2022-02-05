@@ -126,6 +126,7 @@
             </form>
             <!-- TODO Apply Bem for styles -->
             <div class="results off"></div>
+            <div class="detail off"></div>
         </div>
 
         <div class="block_cars container--bordered">
@@ -239,10 +240,23 @@
         <div class="form-divider"> </div>
     </div>
 
+    <!-- utils, helpers, commons ... -->
     <script src="errors.js"> </script>
-    <script src="data.js"> </script>
     <script src="validators.js"></script>
+
+    <!-- data layer -->
+    <script src="data.js"> </script>
+
+    <!-- business (logic) layer -->
     <script src="logic.js"> </script>
+    <script src="logic/register-user.js"></script>
+
+    <!-- presentation layer -->
+    <script src="components/app.js"></script>
+    <script src="components/login.js"></script>
+    <script src="components/register.js"></script>
+    <!--script src="components/home.js"></script-->
+
     <script src="main.js"> </script>
 </body>
 

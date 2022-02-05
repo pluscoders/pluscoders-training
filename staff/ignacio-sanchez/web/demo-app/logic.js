@@ -1,45 +1,3 @@
-// users
-
-function registerUser(firstname, lastName, city, country, email, password, callback) {
-    validateFirstName(firstname)
-    validateLastName(lastName)
-    validateCity(city)
-    validateCountry(country)
-    validateEmail(email)
-    validatePassword(password)
-    validateCallback(callback)
-
-    const xhr = new XMLHttpRequest
-
-    xhr.addEventListener('load', () => {
-        const status = xhr.status
-
-        if (status == 201) {
-            callback(null)
-        } else if (status >= 400 && status < 500) {
-            const { responseText: json } = xhr
-
-            const payload = JSON.parse(json)
-
-            const { error } = payload
-
-            callback(new ClientError(error))
-        } else {
-            callback(new ServerError('server error'))
-        }
-    })
-
-    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    const payload = { firstname, lastName, city, country, username: email, password }
-
-    const json = JSON.stringify(payload)
-
-    xhr.send(json)
-}
-
 function authenticateUser(email, password, callback) {
     validateEmail(email)
     validatePassword(password)
@@ -246,8 +204,7 @@ function unregisterUser(token, password, callback) {
 //     return filtered
 // }
 
-function searchVehicles(query, callback) {
-    validateQuery(query)
+function searchVehicles(brand, model, callback) {
     validateCallback(callback)
 
     const xhr = new XMLHttpRequest
@@ -273,12 +230,40 @@ function searchVehicles(query, callback) {
         }
     }
 
-    xhr.open('GET', `https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles?q=${query}`)
+    xhr.open('GET', `https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles?maker=${brand}&q=${model}`)
 
     xhr.send()
 
 }
 
 function retrieveVehicle(id, callback) {
+    validateCallback(callback)
 
+    const xhr = new XMLHttpRequest
+
+    xhr.onload = () => {
+        const { status } = xhr
+        if (status === 200) {
+            const { responseText : json} = xhr
+
+            const vehicles = JSON.parse(json)
+
+            callback(null, vehicles)
+
+        } else if (status >= 400 && status < 500) {
+            const { responseText : json} = xhr 
+
+            const payload = JSON.parse(json)
+
+            const { error } = payload
+
+            callback(new ClientError(error))
+        } else {
+            callback(new ServerError('server error'))
+        }
+    }
+
+    xhr.open('GET', `https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles/${id}`)
+
+    xhr.send()
 }

@@ -1,166 +1,3 @@
-// presentation
-
-let id // user id
-
-var user
-
-let _token
-
-const loginView = document.querySelector('.login')
-const registerView = document.querySelector('.register')
-const homeView = document.querySelector('.home')
-const profileView = document.querySelector('.profile')
-const passwordView = document.querySelector('.password')
-const unregisterView = document.querySelector('.unregister')
-
-const loginRegisterLink = loginView.querySelector('.button--signin')
-
-loginRegisterLink.onclick = function (event) {
-  event.preventDefault()
-
-  loginForm.email.value = ''
-  loginForm.password.value = ''
-
-  const feedback = loginForm.querySelector('.feedback')
-
-  feedback.innerText = ''
-  feedback.classList.add('off')
-
-  registerForm.firstname.value = ''
-  registerForm.lastname.value = ''
-  registerForm.city.value = ''
-  registerForm.country.value = ''
-  registerForm.email.value = ''
-  registerForm.password.value = ''
-
-  loginView.classList.add('off')
-
-  registerView.classList.remove('off')
-}
-const registerLoginLink = registerView.querySelector('.button--signin')
-
-registerLoginLink.onclick = function (event) {
-  event.preventDefault()
-
-  registerView.classList.add('off')
-
-  loginView.classList.remove('off')
-}
-
-const registerForm = registerView.querySelector('form')
-
-registerForm.onsubmit = function (event) {
-  event.preventDefault()
-
-
-  const firstname = registerForm.firstname.value
-  const lastname = registerForm.lastname.value
-  const city = registerForm.city.value
-  const country = registerForm.country.value
-  const email = registerForm.email.value
-  const password = registerForm.password.value
-
-  //console.log(firstname, lastname, city, country, email, password)
-
-  const feedback = registerForm.querySelector('.feedback')
-
-  try {
-    registerUser(firstname, lastname, city, country, email, password, error => {
-      if (error) return alert(error.message)
-
-      registerForm.firstname.value = ''
-      registerForm.lastname.value = ''
-      registerForm.city.value = ''
-      registerForm.country.value = ''
-      registerForm.email.value = ''
-      registerForm.password.value = ''
-
-      registerView.classList.add('off')
-
-      loginView.classList.remove('off')
-    })
-  } catch (error) {
-    feedback.innerText = error.message
-
-    feedback.classList.remove('off')
-  }
-
-}
-
-const loginForm = loginView.querySelector('form')
-
-loginForm.onsubmit = function (event) {
-  event.preventDefault()
-
-  const email = loginForm.email.value
-  const password = loginForm.password.value
-
-  const username = loginForm.email.value
-
-  console.log(email, password)
-
-  const feedback = loginForm.querySelector('.feedback')
-
-  try {
-    //id = authenticateUser(email, password)
-
-    //const user = retrieveUser(id)
-
-    authenticateUser(email, password, (error, token) => {
-      if (error) {
-        if (error instanceof ServerError)
-          feedback.innerText = 'Sorry, there was an error an we will fix it as soon as possible'
-        else
-          feedback.innerText = error.message
-
-        feedback.classList.remove('off')
-
-        return
-      }
-
-      try {
-        retrieveUser(token, (error, user) => {
-          if (error) {
-            feedback.innerText = error.message
-
-            feedback.classList.remove('off')
-
-            return
-          }
-
-          _token = token
-
-          //console.log(token)
-
-          loginForm.email.value = ''
-          loginForm.password.value = ''
-
-          loginView.classList.add('off')
-
-          const homeTitle = homeView.querySelector('a')
-
-          homeTitle.innerText = 'Hello,' + user.firstname + '!'
-
-          homeView.classList.remove('off')
-
-
-        })
-      } catch (error) {
-        feedback.innerText = error.message
-
-        feedback.classList.remove('off')
-      }
-
-    })
-
-  } catch (error) {
-    feedback.innerText = error.message
-
-    feedback.classList.remove('off')
-  }
-
-}
-
 const homeProfileLink = homeView.querySelector('#myLinks #profile')
 
 homeProfileLink.onclick = function (event) {
@@ -397,14 +234,14 @@ searchForm.onsubmit = function (event) {
   const results = homeView.querySelector('.results')
   results.innerHTML = ''
 
-  const query = searchForm.brand.value
+  const brand = searchForm.brand.value
   const model = searchForm.model.value
 
   //const filtered = searchVehicles(query, model)
 
   try {
 
-    searchVehicles(query, ((error, vehicles) => {
+    searchVehicles(brand, model, ((error, vehicles) => {
       if (error) {
         feedback.innerText = error.message
 
@@ -433,8 +270,16 @@ searchForm.onsubmit = function (event) {
 
         list.append(result)
 
-        results.append(list)
+        result.onclick = event => {
+          retrieveVehicle(car.id, (error, car) => {
+            console.log(car)
+          // TODO create elements for the detail (h2, img, p, ...) and put them in the container (detail)
+          // TODO switch results off, turn detail on
+          })
+        }
       })
+      
+      results.append(list)
 
     }))
       
