@@ -1,6 +1,6 @@
 const profilePasswordLink = profileView.querySelector('.profile__password-button')
 
-profilePasswordLink.onclick = function (event) {
+profilePasswordLink.onclick = event => {
   event.preventDefault()
 
   profileView.classList.add('off')
@@ -11,7 +11,7 @@ profilePasswordLink.onclick = function (event) {
 
 const profileForm = profileView.querySelector('form')
 
-profileForm.onsubmit = function (event) {
+profileForm.onsubmit = event => {
   event.preventDefault()
 
   const feedback = profileForm.querySelector('.feedback')
@@ -44,7 +44,7 @@ profileForm.onsubmit = function (event) {
 
 const profileUnregisterLink = profileView.querySelector('.profile__unregister-button')
 
-profileUnregisterLink.onclick = function (event) {
+profileUnregisterLink.onclick = event => {
   event.preventDefault()
 
   profileView.classList.add('off')

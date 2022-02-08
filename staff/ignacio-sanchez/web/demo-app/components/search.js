@@ -1,18 +1,16 @@
 const searchForm = homeView.querySelector('form')
 
-searchForm.onsubmit = function (event) {
+searchForm.onsubmit =  event => {
   event.preventDefault()
 
-  const results = homeView.querySelector('.results')
-  const detail = homeView.querySelector('.detail')
-  results.innerHTML = ''
-  detail.innerHTML = ''
+  const resultsView = homeView.querySelector('.results')
+  const detailView = homeView.querySelector('.detail')
 
-  const brand = searchForm.brand.value
-  const model = searchForm.model.value
+  //const brand = searchForm.brand.value
+  //const model = searchForm.model.value
+  const { brand: { value: brand }, model: { value: model }} = searchForm
 
   try {
-
     searchVehicles(brand, model, ((error, vehicles) => {
       if (error) {
         feedback.innerText = error.message
@@ -24,7 +22,7 @@ searchForm.onsubmit = function (event) {
 
       const list = document.createElement('ul')
 
-      vehicles.forEach(function (car) {
+      vehicles.forEach(car => {
         const result = document.createElement('li')
 
         const name = document.createElement('h3')
@@ -33,9 +31,9 @@ searchForm.onsubmit = function (event) {
         const button = document.createElement('button')
         button.classList.add('button--small')
 
-        name.innerText = car.name + ' (' + car.id + ')'
+        name.innerText = `${car.name} (${car.id})`
         thumbnail.src = car.thumbnail
-        price.innerText = car.price + ' $'
+        price.innerText = `${car.price} $`
         button.innerText = 'Add to basket'
 
         result.append(name, thumbnail, price, button)
@@ -44,11 +42,13 @@ searchForm.onsubmit = function (event) {
 
         result.onclick = event => {
           retrieveVehicle(car.id, (error, vehicles) => {
-            console.log(vehicles)
-            // TODO create elements for the detail (h2, img, p, ...) and put them in the container (detail)
-            const detailed = document.createElement('li')
+            if (error) {
+              feedback.innerText = error.message
 
-            //vehicles.forEach(function (car){
+              feedback.classList.remove('off')
+      
+              return
+            }
 
             const id = document.createElement('p')
             const name = document.createElement('h3')
@@ -62,36 +62,36 @@ searchForm.onsubmit = function (event) {
             const price = document.createElement('p')
             const url = document.createElement('p')
 
-            id.innerText = 'Car ID: ' + vehicles.id
-            name.innerText = 'Name: ' + vehicles.name
+            id.innerText = `Car ID: ${vehicles.id}`
+            name.innerText = `Name: ${vehicles.name}`
             image.src = vehicles.image
-            year.innerText = 'Year: ' + vehicles.year
-            color.innerText = 'Color: ' + vehicles.color
-            maker.innerText = 'Brand: ' + vehicles.maker
-            collection.innerText = 'Collection: ' + vehicles.collection
-            style.innerText = 'Style: ' + vehicles.style
-            description.innerText = 'Description: ' + vehicles.description
-            price.innerText = 'Price: ' + vehicles.price
+            year.innerText = `Year: ${vehicles.year}`
+            color.innerText = `Color: ${vehicles.color}`
+            maker.innerText = `Brand: ${vehicles.maker}`
+            collection.innerText = `Collection: ${vehicles.collection}`
+            style.innerText = `Style: ${vehicles.style}`
+            description.innerText = `Description: ${vehicles.description}`
+            price.innerText = `Price: ${vehicles.price}`
             url.innerText = vehicles.url
 
-            result.append(id, name, image, year, color, maker, collection, style, description, price, url)
+            detailView.innerHTML = ''
 
-            list.append(result)
+            detailView.append(id, name, image, year, color, maker, collection, style, description, price, url)
 
-            detail.append(list)
+            resultsView.classList.add('off')
 
-            detail.classList.remove('off')
-
-            results.classList.add('off')
-
-
-            // TODO switch results off, turn detail on
+            detailView.classList.remove('off')
           })
         }
       })
 
-      results.append(list)
+      resultsView.innerHTML = ''
 
+      resultsView.append(list)
+
+      detailView.classList.add('off')
+
+      resultsView.classList.remove('off')
     }))
 
   }
@@ -102,8 +102,8 @@ searchForm.onsubmit = function (event) {
 
     error.innerText = 'No matches found with brand ' + searchForm.brand.value + " and model " + searchForm.model.value
 
-    results.append(error)
+    resultsView.append(error)
   }
-    results.classList.remove('off')
+    resultsView.classList.remove('off')
 
 }

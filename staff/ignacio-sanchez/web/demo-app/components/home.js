@@ -1,9 +1,8 @@
 const homeProfileLink = homeView.querySelector('#myLinks #profile')
 
-homeProfileLink.onclick = function (event) {
+homeProfileLink.onclick = event => {
   event.preventDefault()
 
-  //const user = retrieveUser(id)
   const token = _token
 
   try {
@@ -36,7 +35,7 @@ homeProfileLink.onclick = function (event) {
 
 const homeSignoutLink = homeView.querySelector('#myLinks #signout')
 
-homeSignoutLink.onclick = function (event) {
+homeSignoutLink.onclick = event => {
   event.preventDefault()
 
   id = undefined

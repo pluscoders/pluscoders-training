@@ -1,6 +1,6 @@
 const loginRegisterLink = loginView.querySelector('.button--signin')
 
-loginRegisterLink.onclick = function (event) {
+loginRegisterLink.onclick = event => {
   event.preventDefault()
 
   loginForm.email.value = ''
@@ -25,7 +25,7 @@ loginRegisterLink.onclick = function (event) {
 
 const loginForm = loginView.querySelector('form')
 
-loginForm.onsubmit = function (event) {
+loginForm.onsubmit = event => {
   event.preventDefault()
 
   const email = loginForm.email.value
@@ -38,10 +38,6 @@ loginForm.onsubmit = function (event) {
   const feedback = loginForm.querySelector('.feedback')
 
   try {
-    //id = authenticateUser(email, password)
-
-    //const user = retrieveUser(id)
-
     authenticateUser(email, password, (error, token) => {
       if (error) {
         if (error instanceof ServerError)
@@ -65,8 +61,6 @@ loginForm.onsubmit = function (event) {
           }
 
           _token = token
-
-          //console.log(token)
 
           loginForm.email.value = ''
           loginForm.password.value = ''

@@ -1,6 +1,6 @@
 const registerLoginLink = registerView.querySelector('.button--signin')
 
-registerLoginLink.onclick = function (event) {
+registerLoginLink.onclick = event => {
   event.preventDefault()
 
   registerView.classList.add('off')
@@ -10,7 +10,7 @@ registerLoginLink.onclick = function (event) {
 
 const registerForm = registerView.querySelector('form')
 
-registerForm.onsubmit = function (event) {
+registerForm.onsubmit = event => {
   event.preventDefault()
 
 

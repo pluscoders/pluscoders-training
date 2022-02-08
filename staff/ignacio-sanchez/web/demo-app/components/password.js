@@ -1,6 +1,6 @@
 const passwordForm = passwordView.querySelector('form')
 
-passwordForm.onsubmit = function (event) {
+passwordForm.onsubmit = event => {
   event.preventDefault()
 
   const oldPassword = passwordForm.oldPassword.value
@@ -32,7 +32,7 @@ passwordForm.onsubmit = function (event) {
 
 const passwordProfileLink = password.querySelector('.password__back-button')
 
-passwordProfileLink.onclick = function (event) {
+passwordProfileLink.onclick = event => {
   event.preventDefault()
 
   passwordView.classList.add('off')

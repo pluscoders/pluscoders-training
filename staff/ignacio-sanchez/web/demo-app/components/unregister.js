@@ -1,6 +1,6 @@
 const unregisterProfileLink = unregisterView.querySelector('.unregister__back-button')
 
-unregisterProfileLink.onclick = function (event) {
+unregisterProfileLink.onclick = event => {
   event.preventDefault()
 
   unregisterView.classList.add('off')
@@ -12,7 +12,7 @@ unregisterProfileLink.onclick = function (event) {
 
 const unregisterForm = unregisterView.querySelector('form')
 
-unregisterForm.onsubmit = function (event) {
+unregisterForm.onsubmit = event => {
   event.preventDefault()
 
   const feedback = unregisterForm.querySelector('.feedback')
