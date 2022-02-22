@@ -1,6 +1,6 @@
 const searchForm = homeView.querySelector('form')
 
-searchForm.onsubmit =  event => {
+searchForm.onsubmit = event => {
   event.preventDefault()
 
   const resultsView = homeView.querySelector('.results')
@@ -8,14 +8,18 @@ searchForm.onsubmit =  event => {
 
   //const brand = searchForm.brand.value
   //const model = searchForm.model.value
-  const { brand: { value: brand }, model: { value: model }} = searchForm
+  const { brand: { value: brand }, model: { value: model } } = searchForm
 
   try {
     searchVehicles(brand, model, ((error, vehicles) => {
-      if (error) {
-        feedback.innerText = error.message
+      if (vehicles.length == 0 ) {
+        error = document.createElement('p')
 
-        feedback.classList.remove('off')
+        resultsView.innerHTML = ''
+
+        error.innerText = 'No matches found with brand ' + searchForm.brand.value + " and model " + searchForm.model.value
+    
+        resultsView.append(error)
 
         return
       }
@@ -29,60 +33,63 @@ searchForm.onsubmit =  event => {
         const thumbnail = document.createElement('img')
         const price = document.createElement('span')
         const button = document.createElement('button')
+        const buttonFav = document.createElement('button')
         button.classList.add('button--small')
+        buttonFav.classList.add('button--small_fav')
 
         name.innerText = `${car.name} (${car.id})`
         thumbnail.src = car.thumbnail
         price.innerText = `${car.price} $`
         button.innerText = 'Add to basket'
+        buttonFav.innerText = 'Add to Fav'
 
-        result.append(name, thumbnail, price, button)
+        result.append(name, thumbnail, price, button, buttonFav)
 
         list.append(result)
 
-        result.onclick = event => {
-          retrieveVehicle(car.id, (error, vehicles) => {
-            if (error) {
-              feedback.innerText = error.message
+        // result.onclick = event => {
+        //   retrieveVehicle(car.id, (error, vehicles) => {
+        //     if (error) {
+        //       feedback.innerText = error.message
 
-              feedback.classList.remove('off')
-      
-              return
-            }
+        //       feedback.classList.remove('off')
 
-            const id = document.createElement('p')
-            const name = document.createElement('h3')
-            const image = document.createElement('img')
-            const year = document.createElement('p')
-            const color = document.createElement('p')
-            const maker = document.createElement('p')
-            const collection = document.createElement('p')
-            const style = document.createElement('p')
-            const description = document.createElement('p')
-            const price = document.createElement('p')
-            const url = document.createElement('p')
+        //       return
+        //     }
 
-            id.innerText = `Car ID: ${vehicles.id}`
-            name.innerText = `Name: ${vehicles.name}`
-            image.src = vehicles.image
-            year.innerText = `Year: ${vehicles.year}`
-            color.innerText = `Color: ${vehicles.color}`
-            maker.innerText = `Brand: ${vehicles.maker}`
-            collection.innerText = `Collection: ${vehicles.collection}`
-            style.innerText = `Style: ${vehicles.style}`
-            description.innerText = `Description: ${vehicles.description}`
-            price.innerText = `Price: ${vehicles.price}`
-            url.innerText = vehicles.url
+        //     const id = document.createElement('p')
+        //     const name = document.createElement('h3')
+        //     const image = document.createElement('img')
+        //     const year = document.createElement('p')
+        //     const color = document.createElement('p')
+        //     const maker = document.createElement('p')
+        //     const collection = document.createElement('p')
+        //     const style = document.createElement('p')
+        //     const description = document.createElement('p')
+        //     const price = document.createElement('p')
+        //     const url = document.createElement('p')
 
-            detailView.innerHTML = ''
+        //     id.innerText = `Car ID: ${vehicles.id}`
+        //     name.innerText = `Name: ${vehicles.name}`
+        //     image.src = vehicles.image
+        //     year.innerText = `Year: ${vehicles.year}`
+        //     color.innerText = `Color: ${vehicles.color}`
+        //     maker.innerText = `Brand: ${vehicles.maker}`
+        //     collection.innerText = `Collection: ${vehicles.collection}`
+        //     style.innerText = `Style: ${vehicles.style}`
+        //     description.innerText = `Description: ${vehicles.description}`
+        //     price.innerText = `Price: ${vehicles.price}`
+        //     url.innerText = vehicles.url
 
-            detailView.append(id, name, image, year, color, maker, collection, style, description, price, url)
+        //     detailView.innerHTML = ''
 
-            resultsView.classList.add('off')
+        //     detailView.append(id, name, image, year, color, maker, collection, style, description, price, url)
 
-            detailView.classList.remove('off')
-          })
-        }
+        //     resultsView.classList.add('off')
+
+        //     detailView.classList.remove('off')
+        //   })
+        // }
       })
 
       resultsView.innerHTML = ''
@@ -93,10 +100,7 @@ searchForm.onsubmit =  event => {
 
       resultsView.classList.remove('off')
     }))
-
-  }
-
-  catch (error) {
+  } catch (error) {
 
     error = document.createElement('p')
 
@@ -104,6 +108,25 @@ searchForm.onsubmit =  event => {
 
     resultsView.append(error)
   }
-    resultsView.classList.remove('off')
+  resultsView.classList.remove('off')
+
+}
+
+const searchFav = resultsView.querySelector('.button--small_fav')
+
+searchFav.onclick = event => {
+  event.preventDefault()
+
+  try {
+     toggleFavVehicle (token, vehicleId, error => {
+      if (error) return alert(error.message)
+
+      const homeTitle = homeView.querySelector('a')
+    })
+  } catch (error) {
+    feedback.innerText = error.message
+
+    feedback.classList.remove('off')
+  }
 
 }

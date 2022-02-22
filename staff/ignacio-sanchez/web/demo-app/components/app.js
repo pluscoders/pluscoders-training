@@ -4,6 +4,7 @@ const homeView = document.querySelector('.home')
 const profileView = document.querySelector('.profile')
 const passwordView = document.querySelector('.password')
 const unregisterView = document.querySelector('.unregister')
+const resultsView = document.querySelector('.results')
 
 // state
 let id // user id
