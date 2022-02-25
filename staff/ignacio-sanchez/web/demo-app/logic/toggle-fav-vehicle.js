@@ -4,10 +4,6 @@ function toggleFavVehicle(token, vehicleId, callback) {
     // TODO add/remove vehicle to the favs
     // TODO patch user in api to update favs
 
-    //validateVehicleId(vehicleId)
-    //validateToken(token)
-    //validateCallback(callback)
-
     // retrieve user api call
     const xhr = new XMLHttpRequest
 
