@@ -45,3 +45,60 @@ homeSignoutLink.onclick = event => {
   loginView.classList.remove('off')
 
 }
+
+const homeFavouritesLink = homeView.querySelector('#myLinks #favourites')
+
+homeFavouritesLink.onclick = event => {
+  event.preventDefault()
+
+  const token = _token
+
+  const favouritesView = homeView.querySelector('.favourites')
+
+  id = undefined
+
+  const feedback = searchForm.querySelector('.feedback')
+
+  feedback.innerText = ''
+  //feedback.classList.add('off')
+
+  homeView.classList.add('off')
+
+  favouritesView.classList.remove('off')
+
+  try {
+    retrieveFavVehicles(token, vehicles, error => {
+      if (vehicles.length == 0) {
+        error = document.createElement('p')
+
+        resultsView.innerHTML = ''
+
+        error.innerText = 'No favourites found '
+
+        resultsView.append(error)
+
+        return
+      }
+
+      const id = document.createElement('p')
+      const name = document.createElement('h3')
+
+      id.innerText = `Car ID: ${vehicles.id}`
+      name.innerText = `Name: ${vehicles.name}`
+
+      detailView.innerHTML = ''
+
+      detailView.append(id, name)
+
+      resultsView.classList.add('off')
+
+      favouritesView.classList.remove('off')
+
+    })
+  } catch (error) {
+    feedback.innerText = error.message
+
+    feedback.classList.remove('off')
+  }
+}
+

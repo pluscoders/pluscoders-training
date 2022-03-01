@@ -102,6 +102,8 @@
             <div id="myLinks">
                 <a href="#profile" id="profile">Profile</a>
                 <a href="#contact">Contact</a>
+                <a href="#basket" id="basket">Basket</a>
+                <a href="#favourites" id="favourites">Favourites</a>
                 <a href="#signout" id="signout">Sign out</a>
             </div>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -128,9 +130,11 @@
             <!-- TODO Apply Bem for styles -->
             <div class="results off"></div>
             <div class="detail off"></div>
+            <div class="favourites off"></div>
+            
         </div>
 
-        <div class="block_cars container--bordered">
+        <!-- <div class="block_cars container--bordered">
             <div class="block_cars__image">
                 <img class="content-make__image" _width="170" title="Santro" alt="Santro" src="santro.webp">
             </div>
@@ -142,7 +146,7 @@
                 <span class="content_make__model-specs">Hatchback|Petrol,CNG|Manual,AMT</span>
                 <span>22.000 €</span>
             </div>
-        </div>
+        </div> -->
 
 
         <div class="form-divider"> </div>
@@ -188,6 +192,29 @@
 
         <div class="form-divider"> </div>
     </div>
+
+    <!-- <div class="favourites off">
+        <div class="card">
+            <h1 class="card__title">Favourite cars</h1>
+            <img class="card__img" src="byc.gif" alt="logo">
+        </div>
+        <div class="form-divider">
+            <p></p>
+        </div>
+        <p class="subtitle"> List of favourite cars.</p>
+
+        <form class="container container--vertical" id="favourites">
+            <label for="firstName"> <b>First name</b></label>
+            <input type="text" placeholder="Enter first name" name="firstname" required>
+
+            <label for="lastName"><b>Last name</b></label>
+            <input type="text" placeholder="Enter last name" name="lastname" required>
+
+            <p class="feedback feedback--error off"></p>
+        </form>
+
+        <div class="form-divider"> </div>
+    </div> -->
 
     <div class="password off">
         <div class="card">
@@ -253,7 +280,7 @@
     <script src="logic/authenticate-user.js"></script>
     <script src="logic/register-user.js"></script>
     <script src="logic/remove-vehicle-from-cart.js"></script>
-    <script src="logic/retrieve-fav-vehicle.js"></script>
+    <script src="logic/retrieve-fav-vehicles.js"></script>
     <script src="logic/retrieve-user.js"></script>
     <script src="logic/retrieve-vehicle.js"></script>
     <script src="logic/search-vehicles.js"></script>

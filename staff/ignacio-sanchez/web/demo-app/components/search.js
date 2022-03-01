@@ -47,49 +47,50 @@ searchForm.onsubmit = event => {
 
         list.append(result)
 
-        // result.onclick = event => {
-        //   retrieveVehicle(car.id, (error, vehicles) => {
-        //     if (error) {
-        //       feedback.innerText = error.message
+        result.onclick = event => {
+          retrieveVehicle(car.id, (error, vehicles) => {
+            if (error) {
+              feedback.innerText = error.message
 
-        //       feedback.classList.remove('off')
+              feedback.classList.remove('off')
 
-        //       return
-        //     }
+              return
+            }
 
-        //     const id = document.createElement('p')
-        //     const name = document.createElement('h3')
-        //     const image = document.createElement('img')
-        //     const year = document.createElement('p')
-        //     const color = document.createElement('p')
-        //     const maker = document.createElement('p')
-        //     const collection = document.createElement('p')
-        //     const style = document.createElement('p')
-        //     const description = document.createElement('p')
-        //     const price = document.createElement('p')
-        //     const url = document.createElement('p')
+            const id = document.createElement('p')
+            const name = document.createElement('h3')
+            const image = document.createElement('img')
+            const year = document.createElement('p')
+            const color = document.createElement('p')
+            const maker = document.createElement('p')
+            const collection = document.createElement('p')
+            const style = document.createElement('p')
+            const description = document.createElement('p')
+            const price = document.createElement('p')
+            const url = document.createElement('p')
 
-        //     id.innerText = `Car ID: ${vehicles.id}`
-        //     name.innerText = `Name: ${vehicles.name}`
-        //     image.src = vehicles.image
-        //     year.innerText = `Year: ${vehicles.year}`
-        //     color.innerText = `Color: ${vehicles.color}`
-        //     maker.innerText = `Brand: ${vehicles.maker}`
-        //     collection.innerText = `Collection: ${vehicles.collection}`
-        //     style.innerText = `Style: ${vehicles.style}`
-        //     description.innerText = `Description: ${vehicles.description}`
-        //     price.innerText = `Price: ${vehicles.price}`
-        //     url.innerText = vehicles.url
+            id.innerText = `Car ID: ${vehicles.id}`
+            name.innerText = `Name: ${vehicles.name}`
+            image.src = vehicles.image
+            year.innerText = `Year: ${vehicles.year}`
+            color.innerText = `Color: ${vehicles.color}`
+            maker.innerText = `Brand: ${vehicles.maker}`
+            collection.innerText = `Collection: ${vehicles.collection}`
+            style.innerText = `Style: ${vehicles.style}`
+            description.innerText = `Description: ${vehicles.description}`
+            price.innerText = `Price: ${vehicles.price}`
+            url.innerText = vehicles.url
 
-        //     detailView.innerHTML = ''
+            detailView.innerHTML = ''
 
-        //     detailView.append(id, name, image, year, color, maker, collection, style, description, price, url)
+            detailView.append(id, name, image, year, color, maker, collection, style, description, price, url)
 
-        //     resultsView.classList.add('off')
+            resultsView.classList.add('off')
 
-        //     detailView.classList.remove('off')
-        //   })
-        // }
+            detailView.classList.remove('off')
+          })
+        }
+
       })
 
       resultsView.innerHTML = ''
