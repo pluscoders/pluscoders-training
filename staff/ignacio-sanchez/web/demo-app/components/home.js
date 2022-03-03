@@ -67,7 +67,7 @@ homeFavouritesLink.onclick = event => {
   favouritesView.classList.remove('off')
 
   try {
-    retrieveFavVehicles(token, vehicles, error => {
+    retrieveFavVehicles(token, ((error, vehicles) => {
       if (vehicles.length == 0) {
         error = document.createElement('p')
 
@@ -80,21 +80,34 @@ homeFavouritesLink.onclick = event => {
         return
       }
 
-      const id = document.createElement('p')
-      const name = document.createElement('h3')
+      const list = document.createElement('ul')
 
-      id.innerText = `Car ID: ${vehicles.id}`
-      name.innerText = `Name: ${vehicles.name}`
+      vehicles.forEach (car => {
 
-      detailView.innerHTML = ''
+        const result = document.createElement('li')
+        
+        const id = document.createElement('p')
+        const name = document.createElement('h3')
+  
+        id.innerText = `Car ID: ${car.id}`
+        name.innerText = `Name: ${car.name}`
 
-      detailView.append(id, name)
+        result.append(id, name)
+
+        list.append(result)
+
+      })
+
+
+      favouritesView.innerHTML = ''
+
+      favouritesView.append(list)
 
       resultsView.classList.add('off')
 
       favouritesView.classList.remove('off')
 
-    })
+    }))
   } catch (error) {
     feedback.innerText = error.message
 
