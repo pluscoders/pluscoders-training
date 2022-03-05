@@ -12,13 +12,13 @@ searchForm.onsubmit = event => {
 
   try {
     searchVehicles(brand, model, ((error, vehicles) => {
-      if (vehicles.length == 0 ) {
+      if (vehicles.length == 0) {
         error = document.createElement('p')
 
         resultsView.innerHTML = ''
 
         error.innerText = 'No matches found with brand ' + searchForm.brand.value + " and model " + searchForm.model.value
-    
+
         resultsView.append(error)
 
         return
@@ -27,7 +27,7 @@ searchForm.onsubmit = event => {
       const list = document.createElement('ul')
 
       vehicles.forEach(car => {
-        const result = document.createElement('li')
+        const item = document.createElement('li')
 
         const name = document.createElement('h3')
         const thumbnail = document.createElement('img')
@@ -41,13 +41,35 @@ searchForm.onsubmit = event => {
         thumbnail.src = car.thumbnail
         price.innerText = `${car.price} $`
         button.innerText = 'Add to basket'
-        buttonFav.innerText = 'Add to Fav'
+        buttonFav.innerText = `Toggle Fav ${car.isFav ? '💜' : '🤍'}`
 
-        result.append(name, thumbnail, price, button, buttonFav)
+        button.onclick = event => {
+          event.stopPropagation()
 
-        list.append(result)
+          // TODO addVehicleToCart
+        }
 
-        result.onclick = event => {
+        buttonFav.onclick = event => {
+          event.stopPropagation()
+
+          // TODO toggleFavVehicle
+          try {
+            toggleFavVehicle(_token, car.id, error => {
+              if (error) return alert(error.message)
+
+            })
+          } catch (error) {
+            f//eedback.innerText = error.message
+
+            //feedback.classList.remove('off')
+          }
+        }
+
+        item.append(name, thumbnail, price, button, buttonFav)
+
+        list.append(item)
+
+        item.onclick = event => {
           retrieveVehicle(car.id, (error, vehicles) => {
             if (error) {
               feedback.innerText = error.message
@@ -110,24 +132,5 @@ searchForm.onsubmit = event => {
     resultsView.append(error)
   }
   resultsView.classList.remove('off')
-
-}
-
-const searchFav = resultsView.querySelector('.button--small_fav')
-
-searchFav.onclick = event => {
-  event.preventDefault()
-
-  try {
-     toggleFavVehicle (token, vehicleId, error => {
-      if (error) return alert(error.message)
-
-      const homeTitle = homeView.querySelector('a')
-    })
-  } catch (error) {
-    feedback.innerText = error.message
-
-    feedback.classList.remove('off')
-  }
 
 }

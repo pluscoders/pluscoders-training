@@ -62,7 +62,7 @@ homeFavouritesLink.onclick = event => {
   feedback.innerText = ''
   //feedback.classList.add('off')
 
-  homeView.classList.add('off')
+  //homeView.classList.add('off')
 
   favouritesView.classList.remove('off')
 

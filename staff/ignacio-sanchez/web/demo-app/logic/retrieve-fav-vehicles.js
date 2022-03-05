@@ -41,7 +41,7 @@ function retrieveFavVehicles(token, callback) {
                             count++
 
                             // if (vehicles.length === favs.length) {
-                            if (count == favs.length) {
+                            if (count === favs.length) {
                                 // console.log(vehicles)
 
                                 callback(null, vehicles)
