@@ -46,3 +46,4 @@ app.get('/users', async (req, res) => {
 app.listen(PORT ?? 3100, () => {
   console.log(`Server started ${PORT}`);
 });
+
