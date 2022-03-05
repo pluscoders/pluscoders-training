@@ -1,4 +1,6 @@
-commands
+## commands
+
+```sh
 npm init -y
 npx create-gitignore node
 npm i express hbs morgan nodemon
@@ -9,3 +11,4 @@ npm i -D sequelize sequelize-cli pg
 npx sequelize init
 npx sequelize db:create
 npx sequelize model:generate --name User --attributes name:string,age:integer
+```
