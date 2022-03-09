@@ -82,17 +82,21 @@ homeFavouritesLink.onclick = event => {
 
       const list = document.createElement('ul')
 
-      vehicles.forEach (car => {
+      vehicles.forEach(car => {
 
         const result = document.createElement('li')
-        
-        const id = document.createElement('p')
-        const name = document.createElement('h3')
-  
-        id.innerText = `Car ID: ${car.id}`
-        name.innerText = `Name: ${car.name}`
 
-        result.append(id, name)
+        const id = document.createElement('h3')
+        const name = document.createElement('p')
+        const maker = document.createElement('p')
+        const image = document.createElement('img')
+
+        id.innerText = `Car ID: ${car.id}`
+        maker.innerText = `Brand: ${car.maker}`
+        name.innerText = `Name: ${car.name}`
+        image.src = car.image
+
+        result.append(id, maker, name, image)
 
         list.append(result)
 

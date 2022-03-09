@@ -13,8 +13,6 @@ function toggleFavVehicle(token, vehicleId, callback) {
         if (status === 200) {
             const { responseText: json } = xhr
 
-            debugger
-
             const user = JSON.parse(json)
 
             // const favs = user.favs || []

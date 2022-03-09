@@ -11,8 +11,8 @@ searchForm.onsubmit = event => {
   const { brand: { value: brand }, model: { value: model } } = searchForm
 
   try {
-    searchVehicles(brand, model, ((error, vehicles) => {
-      if (vehicles.length == 0) {
+    searchVehicles(_token, brand, model, ((error, vehicles) => {
+      if (vehicles.length === 0) {
         error = document.createElement('p')
 
         resultsView.innerHTML = ''
@@ -59,7 +59,7 @@ searchForm.onsubmit = event => {
 
             })
           } catch (error) {
-            f//eedback.innerText = error.message
+            //feedback.innerText = error.message
 
             //feedback.classList.remove('off')
           }
