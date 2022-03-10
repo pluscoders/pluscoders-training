@@ -1,4 +1,4 @@
-function searchVehicles(_token, brand, model, callback) {
+function searchVehicles(token, brand, model, callback) {
     // TODO function searchVehicles(token, brand, model, callback) {
     // TODO call api to get user
     // TODO extract favs from user
@@ -8,109 +8,63 @@ function searchVehicles(_token, brand, model, callback) {
 
     const xhr = new XMLHttpRequest
 
-
     xhr.onload = () => {
         const { status } = xhr
+
         if (status === 200) {
             const { responseText: json } = xhr
 
-            const vehicles = JSON.parse(json)
+            const user = JSON.parse(json)
 
-            if (vehicles.length) {
+            const { favs = [] } = user
+
+            {
                 const xhr = new XMLHttpRequest
 
                 xhr.onload = () => {
                     const { status } = xhr
-
-                    let count = 0
-            
                     if (status === 200) {
                         const { responseText: json } = xhr
-            
-                        const user = JSON.parse(json)
-            
-                        // const favs = user.favs || []
-                        const { favs = [] } = user
 
+                        const vehicles = JSON.parse(json)
 
-                        const isFav = []
+                        let count = 0
 
-                        let index = count
-            
-                        vehicles.forEach(car => {
-                            if (car.id === favs[index])
-                            isFav.push(favs[index])
+                        if (vehicles.length) {
+                            // TODO mark fav vehicles with property isFav
 
-                            count++
-                        
-                        })
+                            let index = count
 
-            
-                        /*
-                        mirar si en favs contiene vehicleId
-                        si lo tiene entonces quitarlo de favs
-                        si no, añadirlo a favs
-            
-                        llamar a api para actualizar favs en el usuario (patch)    
-                        */
-                        
-                        {
-                            // update user api call
-                            const xhr = new XMLHttpRequest
-                            
-                            xhr.onload = () => {
-                                const { status } = xhr
-                
-                                if (status === 204) {
-                                    callback(null)
-                                } else if (status >= 400 && status < 500) {
-                                    const { responseText: json } = xhr
-                        
-                                    const payload = JSON.parse(json)
-                        
-                                    const { error } = payload
-                        
-                                    callback(new ClientError(error))
-                                } else {
-                                    callback(new ServerError('server error'))
+                            vehicles.forEach(car => {
+                                if (favs.includes(car.id)) {
+                                    car.isFav = true
+                                    count++
                                 }
-                            }
-                
-                            xhr.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-                
-                            xhr.setRequestHeader('Authorization', `Bearer ${_token}`)
-                
-                            xhr.setRequestHeader('Content-Type', 'application/json')
-                
-                            const payload = { isFav }
-                
-                            const json = JSON.stringify(payload)
-                
-                            xhr.send(json)
-                        }
+                                else {
+                                    car.isFav = false
+                                    count++
+                                }
+                            })
 
-                        callback(null, vehicles)
-                    } else if (status >= 400 && status < 500) {
-                        const { responseText: json } = xhr
-            
-                        const payload = JSON.parse(json)
-            
-                        const { error } = payload
-            
-                        callback(new ClientError(error))
-                    } else {
-                        callback(new ServerError('server error'))
+                            callback(null, vehicles)
+                        } else if (status >= 400 && status < 500) {
+                            const { responseText: json } = xhr
+
+                            const payload = JSON.parse(json)
+
+                            const { error } = payload
+
+                            callback(new ClientError(error))
+                        } else {
+                            callback(new ServerError('server error'))
+                        }
                     }
                 }
-            
-                xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-            
-                xhr.setRequestHeader('Authorization', `Bearer ${_token}`)
-            
+
+                xhr.open('GET', `https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles?maker=${brand}&q=${model}`)
+
                 xhr.send()
             }
-
-            callback(null, vehicles)
         } else if (status >= 400 && status < 500) {
             const { responseText: json } = xhr
 
@@ -124,8 +78,9 @@ function searchVehicles(_token, brand, model, callback) {
         }
     }
 
-    xhr.open('GET', `https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles?maker=${brand}&q=${model}`)
+    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
     xhr.send()
-
 }

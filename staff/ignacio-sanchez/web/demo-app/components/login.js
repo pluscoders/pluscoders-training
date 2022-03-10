@@ -33,8 +33,6 @@ loginForm.onsubmit = event => {
 
   const username = loginForm.email.value
 
-  console.log(email, password)
-
   const feedback = loginForm.querySelector('.feedback')
 
   try {
