@@ -11,7 +11,7 @@ searchForm.onsubmit = event => {
   const { brand: { value: brand }, model: { value: model } } = searchForm
 
   try {
-    searchVehicles(_token, brand, model, ((error, vehicles) => {
+    searchVehicles(_token, brand, model, (error, vehicles) => {
       if (vehicles.length === 0) {
         error = document.createElement('p')
 
@@ -26,51 +26,53 @@ searchForm.onsubmit = event => {
 
       const list = document.createElement('ul')
 
-      vehicles.forEach(car => {
+      vehicles.forEach(vehicle => {
         const item = document.createElement('li')
 
         const name = document.createElement('h3')
         const thumbnail = document.createElement('img')
         const price = document.createElement('span')
-        const button = document.createElement('button')
-        const buttonFav = document.createElement('button')
-        button.classList.add('button--small')
-        buttonFav.classList.add('button--small_fav')
+        const cartButton = document.createElement('button')
+        const favButton = document.createElement('button')
+        cartButton.classList.add('button--small')
+        favButton.classList.add('button--small_fav')
 
-        name.innerText = `${car.name} (${car.id})`
-        thumbnail.src = car.thumbnail
-        price.innerText = `${car.price} $`
-        button.innerText = 'Add to basket'
-        buttonFav.innerText = `Toggle Fav ${car.isFav ? '💜' : '🤍'}`
+        name.innerText = `${vehicle.name} (${vehicle.id})`
+        thumbnail.src = vehicle.thumbnail
+        price.innerText = `${vehicle.price} $`
+        cartButton.innerText = 'Add to basket'
+        favButton.innerText = `${vehicle.isFav ? '💜' : '🤍'}`
 
-        button.onclick = event => {
+        cartButton.onclick = event => {
           event.stopPropagation()
 
           // TODO addVehicleToCart
         }
 
-        buttonFav.onclick = event => {
+        favButton.onclick = event => {
           event.stopPropagation()
 
           // TODO toggleFavVehicle
           try {
-            toggleFavVehicle(_token, car.id, error => {
+            toggleFavVehicle(_token, vehicle.id, error => {
               if (error) return alert(error.message)
 
+              favButton.innerText = favButton.innerText === '💜' ? '🤍' : '💜'
             })
           } catch (error) {
+            alert(error.message)
             //feedback.innerText = error.message
 
             //feedback.classList.remove('off')
           }
         }
 
-        item.append(name, thumbnail, price, button, buttonFav)
+        item.append(name, thumbnail, price, cartButton, favButton)
 
         list.append(item)
 
         item.onclick = event => {
-          retrieveVehicle(car.id, (error, vehicles) => {
+          retrieveVehicle(_token, vehicle.id, (error, vehicle) => {
             if (error) {
               feedback.innerText = error.message
 
@@ -91,17 +93,19 @@ searchForm.onsubmit = event => {
             const price = document.createElement('p')
             const url = document.createElement('p')
 
-            id.innerText = `Car ID: ${vehicles.id}`
-            name.innerText = `Name: ${vehicles.name}`
-            image.src = vehicles.image
-            year.innerText = `Year: ${vehicles.year}`
-            color.innerText = `Color: ${vehicles.color}`
-            maker.innerText = `Brand: ${vehicles.maker}`
-            collection.innerText = `Collection: ${vehicles.collection}`
-            style.innerText = `Style: ${vehicles.style}`
-            description.innerText = `Description: ${vehicles.description}`
-            price.innerText = `Price: ${vehicles.price}`
-            url.innerText = vehicles.url
+            // TODO add fav button and mechanise toggleFavVehicle
+
+            id.innerText = `Car ID: ${vehicle.id}`
+            name.innerText = `Name: ${vehicle.name}`
+            image.src = vehicle.image
+            year.innerText = `Year: ${vehicle.year}`
+            color.innerText = `Color: ${vehicle.color}`
+            maker.innerText = `Brand: ${vehicle.maker}`
+            collection.innerText = `Collection: ${vehicle.collection}`
+            style.innerText = `Style: ${vehicle.style}`
+            description.innerText = `Description: ${vehicle.description}`
+            price.innerText = `Price: ${vehicle.price}`
+            url.innerText = vehicle.url
 
             detailView.innerHTML = ''
 
@@ -122,7 +126,7 @@ searchForm.onsubmit = event => {
       detailView.classList.add('off')
 
       resultsView.classList.remove('off')
-    }))
+    })
   } catch (error) {
 
     error = document.createElement('p')

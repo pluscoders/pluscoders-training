@@ -23,41 +23,25 @@ function searchVehicles(token, brand, model, callback) {
 
                 xhr.onload = () => {
                     const { status } = xhr
+
                     if (status === 200) {
                         const { responseText: json } = xhr
 
                         const vehicles = JSON.parse(json)
 
-                        let count = 0
+                        vehicles.forEach(vehicle => vehicle.isFav = favs.includes(vehicle.id))
 
-                        if (vehicles.length) {
-                            // TODO mark fav vehicles with property isFav
+                        callback(null, vehicles)
+                    } else if (status >= 400 && status < 500) {
+                        const { responseText: json } = xhr
 
-                            let index = count
+                        const payload = JSON.parse(json)
 
-                            vehicles.forEach(car => {
-                                if (favs.includes(car.id)) {
-                                    car.isFav = true
-                                    count++
-                                }
-                                else {
-                                    car.isFav = false
-                                    count++
-                                }
-                            })
+                        const { error } = payload
 
-                            callback(null, vehicles)
-                        } else if (status >= 400 && status < 500) {
-                            const { responseText: json } = xhr
-
-                            const payload = JSON.parse(json)
-
-                            const { error } = payload
-
-                            callback(new ClientError(error))
-                        } else {
-                            callback(new ServerError('server error'))
-                        }
+                        callback(new ClientError(error))
+                    } else {
+                        callback(new ServerError('server error'))
                     }
                 }
 

@@ -1,31 +1,37 @@
-function retrieveVehicle(id, callback) {
+function retrieveVehicle(token, vehicleId, callback) {
+    // TODO validate input arguments (token, vehicleId)
     validateCallback(callback)
 
-    const xhr = new XMLHttpRequest
+    {
+        const xhr = new XMLHttpRequest
 
-    xhr.onload = () => {
-        const { status } = xhr
-        if (status === 200) {
-            const { responseText : json} = xhr
+        xhr.onload = () => {
+            const { status } = xhr
+            if (status === 200) {
+                const { responseText: json } = xhr
 
-            const vehicles = JSON.parse(json)
+                const vehicle = JSON.parse(json)
 
-            callback(null, vehicles)
+                // TODO check if vehicle is in favs
+                // vehicle.isFav = favs.includes(vehicle.id)
 
-        } else if (status >= 400 && status < 500) {
-            const { responseText : json} = xhr 
+                callback(null, vehicle)
 
-            const payload = JSON.parse(json)
+            } else if (status >= 400 && status < 500) {
+                const { responseText: json } = xhr
 
-            const { error } = payload
+                const payload = JSON.parse(json)
 
-            callback(new ClientError(error))
-        } else {
-            callback(new ServerError('server error'))
+                const { error } = payload
+
+                callback(new ClientError(error))
+            } else {
+                callback(new ServerError('server error'))
+            }
         }
+
+        xhr.open('GET', `https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles/${vehicleId}`)
+
+        xhr.send()
     }
-
-    xhr.open('GET', `https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles/${id}`)
-
-    xhr.send()
 }
