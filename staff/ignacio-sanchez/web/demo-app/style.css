@@ -130,6 +130,11 @@
      box-sizing: border-box;
  }
 
+ .image-detail {
+     width: 50%;
+
+ }
+
  button {
      background-color: #04AA6D;
      background: linear-gradient(278deg, #61d8d6, #ae76ff);
@@ -151,6 +156,17 @@
      border: none;
      cursor: pointer;
      width: 40%;
+     border-radius: 24px;
+ }
+ .button--small_fav {
+     background-color: #04AA6D;
+     background: linear-gradient(278deg, #d89761, #ffb876);
+     color: white;
+     padding: 3px 3px;
+     margin: 8px 10px;
+     border: none;
+     cursor: pointer;
+     width: 10%;
      border-radius: 24px;
  }
 

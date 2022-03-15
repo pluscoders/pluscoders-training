@@ -46,6 +46,18 @@ searchForm.onsubmit = event => {
         cartButton.onclick = event => {
           event.stopPropagation()
 
+          // TODO toggleFavVehicle
+          try {
+            addVehicleToCart(_token, vehicle.id, error => {
+              if (error) return alert(error.message)
+            })
+          } catch (error) {
+            alert(error.message)
+            //feedback.innerText = error.message
+
+            //feedback.classList.remove('off')
+          }
+
           // TODO addVehicleToCart
         }
 
@@ -84,6 +96,9 @@ searchForm.onsubmit = event => {
             const id = document.createElement('p')
             const name = document.createElement('h3')
             const image = document.createElement('img')
+            image.classList.add('image-detail')
+            const favButton = document.createElement('button')
+            favButton.classList.add('button--small_fav')
             const year = document.createElement('p')
             const color = document.createElement('p')
             const maker = document.createElement('p')
@@ -98,6 +113,7 @@ searchForm.onsubmit = event => {
             id.innerText = `Car ID: ${vehicle.id}`
             name.innerText = `Name: ${vehicle.name}`
             image.src = vehicle.image
+            favButton.innerText = `${vehicle.isFav ? '💜' : '🤍'}`
             year.innerText = `Year: ${vehicle.year}`
             color.innerText = `Color: ${vehicle.color}`
             maker.innerText = `Brand: ${vehicle.maker}`
@@ -109,7 +125,25 @@ searchForm.onsubmit = event => {
 
             detailView.innerHTML = ''
 
-            detailView.append(id, name, image, year, color, maker, collection, style, description, price, url)
+            favButton.onclick = event => {
+              event.stopPropagation()
+    
+              // TODO toggleFavVehicle
+              try {
+                toggleFavVehicle(_token, vehicle.id, error => {
+                  if (error) return alert(error.message)
+    
+                  favButton.innerText = favButton.innerText === '💜' ? '🤍' : '💜'
+                })
+              } catch (error) {
+                alert(error.message)
+                //feedback.innerText = error.message
+    
+                //feedback.classList.remove('off')
+              }
+            }
+
+            detailView.append(id, name, image, favButton, year, color, maker, collection, style, description, price, url)
 
             resultsView.classList.add('off')
 

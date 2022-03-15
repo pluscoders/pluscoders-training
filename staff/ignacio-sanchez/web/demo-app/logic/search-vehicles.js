@@ -1,9 +1,9 @@
 function searchVehicles(token, brand, model, callback) {
-    // TODO function searchVehicles(token, brand, model, callback) {
-    // TODO call api to get user
-    // TODO extract favs from user
-    // TODO call api to search vehicles (following search criteria: model, brand)
-    // TODO on response from search, mark the vehicles that are fav ones (set property isFav to each vehicle)
+    // DONE function searchVehicles(token, brand, model, callback) {
+    // DONE call api to get user
+    // DONE extract favs from user
+    // DONE call api to search vehicles (following search criteria: model, brand)
+    // DONE on response from search, mark the vehicles that are fav ones (set property isFav to each vehicle)
     validateCallback(callback)
 
     const xhr = new XMLHttpRequest
@@ -17,6 +17,7 @@ function searchVehicles(token, brand, model, callback) {
             const user = JSON.parse(json)
 
             const { favs = [] } = user
+
 
             {
                 const xhr = new XMLHttpRequest
