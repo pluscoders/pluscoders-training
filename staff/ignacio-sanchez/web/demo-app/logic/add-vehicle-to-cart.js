@@ -7,7 +7,7 @@ function addVehicleToCart(token, vehicleId, callback) {
     // retrieve user api call
     const xhr = new XMLHttpRequest
 
-    debugger
+    
 
     xhr.onload = () => {
         const { status } = xhr
@@ -19,17 +19,14 @@ function addVehicleToCart(token, vehicleId, callback) {
 
             const { cart = [] } = user
 
-            let index = -1
+            const index = cart.findIndex(x => x.id === vehicleId)
 
-            let qty = 0
-            //user.forEach(cart => cart.find(x => x.id === vehicleId),index++)
-
-            if (cart.find(x => x.id === vehicleId),index++){
-                cart.splice(index,0,qty++)
+            if (index > 0){
+                let qty = cart[index].qty
+                cart[index].qty = qty+1
             }
             else{
-                qty++
-                cart.push({id : vehicleId , qty : qty })
+                cart.push({id : vehicleId , qty : 1 })
             }
 
             {
