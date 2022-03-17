@@ -38,7 +38,8 @@ const homeSignoutLink = homeView.querySelector('#myLinks #signout')
 homeSignoutLink.onclick = event => {
   event.preventDefault()
 
-  id = undefined
+  _token = undefined
+  delete sessionStorage.token
 
   homeView.classList.add('off')
 

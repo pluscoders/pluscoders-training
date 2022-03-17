@@ -48,6 +48,9 @@ loginForm.onsubmit = event => {
         return
       }
 
+      _token = token
+      sessionStorage.token = _token
+
       try {
         retrieveUser(token, (error, user) => {
           if (error) {
@@ -57,8 +60,6 @@ loginForm.onsubmit = event => {
 
             return
           }
-
-          _token = token
 
           loginForm.email.value = ''
           loginForm.password.value = ''
@@ -70,8 +71,6 @@ loginForm.onsubmit = event => {
           homeTitle.innerText = 'Hello,' + user.firstname + '!'
 
           homeView.classList.remove('off')
-
-
         })
       } catch (error) {
         feedback.innerText = error.message
