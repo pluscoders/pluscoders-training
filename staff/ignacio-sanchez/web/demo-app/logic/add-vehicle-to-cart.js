@@ -19,7 +19,7 @@ function addVehicleToCart(token, vehicleId, callback) {
 
             const index = cart.findIndex(x => x.id === vehicleId)
 
-            if (index > 0){
+            if (index >= 0){
                 //let qty = cart[index].qty
                 //cart[index].qty = qty+1
                 cart[index].qty++
