@@ -91,6 +91,7 @@ homeFavouritesLink.onclick = event => {
         const name = document.createElement('p')
         const maker = document.createElement('p')
         const image = document.createElement('img')
+        image.classList.add('image-detail')
 
         id.innerText = `Car ID: ${car.id}`
         maker.innerText = `Brand: ${car.maker}`
@@ -109,6 +110,7 @@ homeFavouritesLink.onclick = event => {
       favouritesView.append(list)
 
       resultsView.classList.add('off')
+      basketView.classList.add('off')
 
       favouritesView.classList.remove('off')
 
@@ -147,7 +149,7 @@ homeBasketLink.onclick = event => {
 
         resultsView.innerHTML = ''
 
-        error.innerText = 'No favourites found '
+        error.innerText = 'No vehicles found '
 
         resultsView.append(error)
 
@@ -162,6 +164,8 @@ homeBasketLink.onclick = event => {
 
         const id = document.createElement('h3')
         const qty = document.createElement('p')
+        const image = document.createElement('img')
+        image.classList.add('image-detail')
         const addToCartButton = document.createElement('button')
         const removeFromCartButton = document.createElement('button')
         addToCartButton.classList.add('button--small')
@@ -169,9 +173,12 @@ homeBasketLink.onclick = event => {
 
 
         id.innerText = `Car ID: ${vehicle.id}`
-        qty.innerText = `Quantity: ${vehicle.qty}`
+        qty.innerText = `Quantity: ${vehicle.qty} (${vehicle.price * vehicle.qty} $)`
+        image.src = vehicle.image
         addToCartButton.innerText = 'Add'
         removeFromCartButton.innerText = 'Remove'
+
+        // TODO calculate the total price to pay (HINT use reduce)
 
         addToCartButton.onclick = event => {
           event.stopPropagation()
@@ -180,6 +187,30 @@ homeBasketLink.onclick = event => {
             addVehicleToCart(_token, vehicle.id, error => {
               if (error) return alert(error.message)
               
+              qty.innerText = `Quantity: ${++vehicle.qty} (${vehicle.price * vehicle.qty} $)`
+            })
+          } catch (error) {
+            alert(error.message)
+            //feedback.innerText = error.message
+
+            //feedback.classList.remove('off')
+          }
+
+        }
+        removeFromCartButton.onclick = event => {
+          event.stopPropagation()
+
+          try {
+            removeVehicleFromCart(_token, vehicle.id, error => {
+              if (error) return alert(error.message)
+
+              if (vehicle.qty === 1) {
+
+              } 
+              else {
+                qty.innerText = `Quantity: ${--vehicle.qty} (${vehicle.price * vehicle.qty} $)`
+              }
+
             })
           } catch (error) {
             alert(error.message)
@@ -190,7 +221,7 @@ homeBasketLink.onclick = event => {
 
         }
 
-        result.append(id, qty, addToCartButton, removeFromCartButton)
+        result.append(id, qty, image, addToCartButton, removeFromCartButton)
 
         list.append(result)
 

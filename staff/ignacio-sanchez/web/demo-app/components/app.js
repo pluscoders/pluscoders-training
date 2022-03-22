@@ -11,31 +11,38 @@ const basketView = document.querySelector('.basket')
 // state
 let id // user id
 var user
-let _token = sessionStorage.token
+let _token
 
-if (_token) {
-    try {
-        retrieveUser(_token, (error, user) => {
-          if (error) {
-            //feedback.innerText = error.message
+try {
+  checkToken(sessionStorage.token)
 
-            //feedback.classList.remove('off')
+  _token = sessionStorage.token
 
-            alert(error.message)
-
-            return
-          }
-
-          const homeTitle = homeView.querySelector('a')
-
-          homeTitle.innerText = 'Hello,' + user.firstname + '!'
-
-          homeView.classList.remove('off')
-        })
-      } catch (error) {
+  try {
+    retrieveUser(_token, (error, user) => {
+      if (error) {
         //feedback.innerText = error.message
 
         //feedback.classList.remove('off')
+
         alert(error.message)
+
+        return
       }
-} else loginView.classList.remove('off')
+
+      const homeTitle = homeView.querySelector('a')
+
+      homeTitle.innerText = 'Hello,' + user.firstname + '!'
+
+      homeView.classList.remove('off')
+    })
+  } catch (error) {
+    //feedback.innerText = error.message
+
+    //feedback.classList.remove('off')
+    alert(error.message)
+  }
+} catch (error) {
+  loginView.classList.remove('off')
+}
+

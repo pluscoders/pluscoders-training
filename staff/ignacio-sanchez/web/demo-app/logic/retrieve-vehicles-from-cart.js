@@ -24,8 +24,10 @@ function retrieveVehiclesFromCart(token, callback) {
             let count = 0
 
             if (cart.length) {
-                for (let i = 0; i < cart.length; ++i) {
+                for (let i = 0; i < cart.length; i++) {
                     const xhr = new XMLHttpRequest
+
+                    const item = cart[i]
 
                     xhr.onload = () => {
                         const { status } = xhr
@@ -35,8 +37,9 @@ function retrieveVehiclesFromCart(token, callback) {
 
                             const vehicle = JSON.parse(json)
 
-                            // vehicles.push(vehicle)
-                            vehicles[i] = cart[i]
+                            vehicle.qty = item.qty
+
+                            vehicles[i] = vehicle
 
                             count++
 
@@ -59,7 +62,7 @@ function retrieveVehiclesFromCart(token, callback) {
                         }
                     }
 
-                    xhr.open('GET', `https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles/${cart[i]}`)
+                    xhr.open('GET', `https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles/${item.id}`)
 
                     xhr.send()
                 }
