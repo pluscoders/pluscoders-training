@@ -40,7 +40,7 @@ searchForm.onsubmit = event => {
         name.innerText = `${vehicle.name} (${vehicle.id})`
         thumbnail.src = vehicle.thumbnail
         price.innerText = `${vehicle.price} $`
-        cartButton.innerText = 'Add to basket'
+        cartButton.innerText = 'Add to cart'
         favButton.innerText = `${vehicle.isFav ? '💜' : '🤍'}`
 
         cartButton.onclick = event => {

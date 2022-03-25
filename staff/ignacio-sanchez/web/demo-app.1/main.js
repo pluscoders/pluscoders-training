@@ -427,7 +427,7 @@ searchForm.onsubmit = function (event) {
         name.innerText = car.name + ' (' + car.id + ')'
         thumbnail.src = car.thumbnail
         price.innerText = car.price + ' $'
-        button.innerText = 'Add to basket'
+        button.innerText = 'Add to cart'
 
         result.append(name, thumbnail, price, button)
 

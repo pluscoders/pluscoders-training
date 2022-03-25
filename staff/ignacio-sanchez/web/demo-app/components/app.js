@@ -6,7 +6,7 @@ const passwordView = document.querySelector('.password')
 const unregisterView = document.querySelector('.unregister')
 const resultsView = document.querySelector('.results')
 const favouritesView = document.querySelector('.favourites')
-const basketView = document.querySelector('.basket')
+const basketView = document.querySelector('.cart')
 
 // state
 let id // user id
