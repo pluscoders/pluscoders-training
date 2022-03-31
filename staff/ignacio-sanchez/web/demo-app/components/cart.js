@@ -18,6 +18,8 @@ homeBasketLink.onclick = event => {
 
   basketView.classList.remove('off')
 
+  let totalCart = 0
+
   try {
     retrieveVehiclesFromCart(token, ((error, vehicles) => {
       if (vehicles.length == 0) {
@@ -34,8 +36,11 @@ homeBasketLink.onclick = event => {
 
       const list = document.createElement('ul')
 
-      vehicles.forEach(vehicle => {
+      const totalCartText = document.createElement('p')
+      
 
+      
+      vehicles.forEach(vehicle => {
         const result = document.createElement('li')
 
         const id = document.createElement('h3')
@@ -60,14 +65,18 @@ homeBasketLink.onclick = event => {
 
         // TODO calculate the total price to pay (HINT use reduce)
 
+
         addToCartButton.onclick = event => {
           event.stopPropagation()
 
           try {
             addVehicleToCart(_token, vehicle.id, error => {
               if (error) return alert(error.message)
-              
+
               qty.innerText = `Quantity: ${++vehicle.qty} (${vehicle.price * vehicle.qty} $)`
+
+              totalCart.total = totalCart.total + (vehicle.price)
+              totalCart_.innerText = `Total Price: (${totalCart.total} $)`
             })
           } catch (error) {
             alert(error.message)
@@ -85,11 +94,13 @@ homeBasketLink.onclick = event => {
               if (error) return alert(error.message)
 
               if (vehicle.qty === 1) {
-
-              } 
-              else {
+                list.removeChild(result)
+              } else {
                 qty.innerText = `Quantity: ${--vehicle.qty} (${vehicle.price * vehicle.qty} $)`
               }
+              
+              totalCart.total = totalCart.total - (vehicle.price)
+              totalCart_.innerText = `Total Price: (${totalCart.total} $)`
 
             })
           } catch (error) {
@@ -101,16 +112,30 @@ homeBasketLink.onclick = event => {
 
         }
 
-        result.append(id, qty, maker,name, image, addToCartButton, removeFromCartButton)
+        result.append(id, qty, maker, name, image, addToCartButton, removeFromCartButton)
 
         list.append(result)
-
       })
 
+      const totalCart = vehicles.reduce((acc = {}, vehicle = {}) => {
+        const itemTotal = (vehicle.price * vehicle.qty);
+      
+        acc.total = (acc.total + itemTotal);
+      
+        return acc;
+      }, {
+        total: 0
+      });
+
+      const totalCart_ = document.createElement('p')
+
+      totalCart_.innerText = `Total Price: (${totalCart.total} $)`
+      
+      totalCartText.append(totalCart_)
 
       basketView.innerHTML = ''
 
-      basketView.append(list)
+      basketView.append(list, totalCartText)
 
       resultsView.classList.add('off')
       favouritesView.classList.add('off')

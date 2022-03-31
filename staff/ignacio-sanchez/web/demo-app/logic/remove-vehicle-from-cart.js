@@ -26,9 +26,10 @@ function removeVehicleFromCart(token, vehicleId, callback) {
                 if (cart[index].qty === 0 ){
                     cart.splice(index,1)
                 }
-            }
-            else {
-                cart.push({ id: vehicleId, qty: 1 })
+            } else {
+                callback(new Error(`vehicle with id ${vehicleId} not in cart`))
+
+                return
             }
 
             {
