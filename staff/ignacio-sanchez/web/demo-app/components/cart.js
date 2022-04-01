@@ -5,7 +5,7 @@ homeBasketLink.onclick = event => {
 
   const token = _token
 
-  const basketView = homeView.querySelector('.cart')
+  const cartView = homeView.querySelector('.cart')
 
   //id = undefined
 
@@ -16,9 +16,10 @@ homeBasketLink.onclick = event => {
 
   //homeView.classList.add('off')
 
-  basketView.classList.remove('off')
+  cartView.classList.remove('off')
 
   let totalCart = 0
+
 
   try {
     retrieveVehiclesFromCart(token, ((error, vehicles) => {
@@ -32,14 +33,17 @@ homeBasketLink.onclick = event => {
         resultsView.append(error)
 
         return
+      } else if (error == 401) {
+        homeView.classList.add('off')
+        loginView.classList.remove('off')
       }
 
       const list = document.createElement('ul')
 
       const totalCartText = document.createElement('p')
-      
 
-      
+
+
       vehicles.forEach(vehicle => {
         const result = document.createElement('li')
 
@@ -50,8 +54,8 @@ homeBasketLink.onclick = event => {
         const image = document.createElement('img')
         image.classList.add('image-detail')
         const addToCartButton = document.createElement('button')
-        const removeFromCartButton = document.createElement('button')
         addToCartButton.classList.add('button--small')
+        const removeFromCartButton = document.createElement('button')
         removeFromCartButton.classList.add('button--small')
 
 
@@ -95,12 +99,19 @@ homeBasketLink.onclick = event => {
 
               if (vehicle.qty === 1) {
                 list.removeChild(result)
+                totalCart.total = totalCart.total - (vehicle.price)
+                totalCart_.innerText = `Total Price: (${totalCart.total} $)`
+
+                if (totalCart.total === 0){
+                  cartView.removeChild(totalCartText)
+                  cartView.removeChild(checkoutButton)
+                }
               } else {
                 qty.innerText = `Quantity: ${--vehicle.qty} (${vehicle.price * vehicle.qty} $)`
-              }
+                totalCart.total = totalCart.total - (vehicle.price)
+                totalCart_.innerText = `Total Price: (${totalCart.total} $)`
               
-              totalCart.total = totalCart.total - (vehicle.price)
-              totalCart_.innerText = `Total Price: (${totalCart.total} $)`
+              }
 
             })
           } catch (error) {
@@ -119,9 +130,9 @@ homeBasketLink.onclick = event => {
 
       const totalCart = vehicles.reduce((acc = {}, vehicle = {}) => {
         const itemTotal = (vehicle.price * vehicle.qty);
-      
+
         acc.total = (acc.total + itemTotal);
-      
+
         return acc;
       }, {
         total: 0
@@ -129,18 +140,27 @@ homeBasketLink.onclick = event => {
 
       const totalCart_ = document.createElement('p')
 
-      totalCart_.innerText = `Total Price: (${totalCart.total} $)`
+      const checkoutButton = document.createElement('button')
+      checkoutButton.classList.add('button--small')
+      checkoutButton.innerText = 'Proceed with checkout'
+
       
+      totalCart_.innerText = `Total Price: (${totalCart.total} $)`
+
       totalCartText.append(totalCart_)
 
-      basketView.innerHTML = ''
+      cartView.innerHTML = ''
 
-      basketView.append(list, totalCartText)
+      if (totalCart.total == 0 )  {
+        cartView.removeChild(totalCartText)
+      } else {
+        cartView.append(list, totalCartText, checkoutButton)
+      } 
 
       resultsView.classList.add('off')
       favouritesView.classList.add('off')
 
-      basketView.classList.remove('off')
+      cartView.classList.remove('off')
 
     }))
   } catch (error) {

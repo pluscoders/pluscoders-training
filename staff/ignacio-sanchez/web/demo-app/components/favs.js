@@ -61,7 +61,7 @@ homeFavouritesLink.onclick = event => {
       favouritesView.append(list)
 
       resultsView.classList.add('off')
-      basketView.classList.add('off')
+      cartView.classList.add('off')
 
       favouritesView.classList.remove('off')
 
