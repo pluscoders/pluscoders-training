@@ -7,6 +7,7 @@ const unregisterView = document.querySelector('.unregister')
 const resultsView = document.querySelector('.results')
 const favouritesView = document.querySelector('.favourites')
 const cartView = document.querySelector('.cart')
+const checkoutView = document.querySelector('.checkout')
 const ordersView = document.querySelector('.orders')
 
 // state

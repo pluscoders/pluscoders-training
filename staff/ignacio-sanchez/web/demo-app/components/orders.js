@@ -3,9 +3,9 @@ const homeOrdersLink = homeView.querySelector('#myLinks #orders')
 homeOrdersLink.onclick = event => {
   event.preventDefault()
 
-  const token = _token
-
   const ordersView = homeView.querySelector('.orders')
+
+  //id = undefined
 
   const feedback = searchForm.querySelector('.feedback')
 
@@ -14,13 +14,8 @@ homeOrdersLink.onclick = event => {
 
   //homeView.classList.add('off')
 
+  homeView.classList.add('off')
   ordersView.classList.remove('off')
-  cartView.classList.add('off')
-
-  try{
-
-  } catch {
-      
-  }
+  
 
 }

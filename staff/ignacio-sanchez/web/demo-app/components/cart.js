@@ -7,8 +7,6 @@ homeBasketLink.onclick = event => {
 
   const cartView = homeView.querySelector('.cart')
 
-  //id = undefined
-
   const feedback = searchForm.querySelector('.feedback')
 
   feedback.innerText = ''
@@ -67,8 +65,6 @@ homeBasketLink.onclick = event => {
         addToCartButton.innerText = 'Add'
         removeFromCartButton.innerText = 'Remove'
 
-        // TODO calculate the total price to pay (HINT use reduce)
-
 
         addToCartButton.onclick = event => {
           event.stopPropagation()
@@ -102,7 +98,7 @@ homeBasketLink.onclick = event => {
                 totalCart.total = totalCart.total - (vehicle.price)
                 totalCart_.innerText = `Total Price: (${totalCart.total} $)`
 
-                if (totalCart.total === 0){
+                if (totalCart.total === 0) {
                   cartView.removeChild(totalCartText)
                   cartView.removeChild(checkoutButton)
                 }
@@ -110,7 +106,7 @@ homeBasketLink.onclick = event => {
                 qty.innerText = `Quantity: ${--vehicle.qty} (${vehicle.price * vehicle.qty} $)`
                 totalCart.total = totalCart.total - (vehicle.price)
                 totalCart_.innerText = `Total Price: (${totalCart.total} $)`
-              
+
               }
 
             })
@@ -141,31 +137,84 @@ homeBasketLink.onclick = event => {
       const totalCart_ = document.createElement('p')
 
       const checkoutButton = document.createElement('button')
-      checkoutButton.classList.add('button--small')
+      checkoutButton.classList.add('button--small_checkout')
       checkoutButton.innerText = 'Proceed with checkout'
 
-      
       totalCart_.innerText = `Total Price: (${totalCart.total} $)`
 
       totalCartText.append(totalCart_)
 
       cartView.innerHTML = ''
 
-      if (totalCart.total == 0 )  {
+      if (totalCart.total == 0) {
         cartView.removeChild(totalCartText)
       } else {
         cartView.append(list, totalCartText, checkoutButton)
-      } 
+      }
 
       resultsView.classList.add('off')
       favouritesView.classList.add('off')
-
       cartView.classList.remove('off')
+
+      checkoutButton.onclick = event => {
+        event.preventDefault()
+
+        checkoutView.classList.remove('off')
+        cartView.classList.add('off')
+        homeView.classList.add('off')
+      }
+
+      const checkoutForm = checkoutView.querySelector('form')
+
+      checkoutForm.onsubmit = event => {
+        event.preventDefault()
+
+        try {
+          placeVehiclesOrder(token, ((error, orderId) => {
+            if (error) return alert(error.message)
+
+            if (orders.length > 0) {
+
+              ordersView.innerText = ''
+
+              orders.forEach(order => {
+                const orders = document.createElement('li')
+        
+                const id = document.createElement('h3')
+                const date = document.createElement('p')
+                const cart = document.createElement('p')
+        
+                id.innerText = `Car ID: ${order.id}`
+                date.innerText = `Date: ${order.date}`
+                cart.innerText = `Cart: ${order.cart}`
+
+                orders.append(id, date, cart)
+
+              })
+
+            } else {
+              
+        }
+      }))
+      } catch (error) {
+    alert(error.message)
+  }
+
+
+
+  checkoutView.classList.add('off')
+  ordersView.classList.remove('off')
+  homeView.classList.remove('off')
+}
+
+
+
 
     }))
   } catch (error) {
-    feedback.innerText = error.message
+  feedback.innerText = error.message
 
-    feedback.classList.remove('off')
-  }
+  feedback.classList.remove('off')
+}
+
 }
