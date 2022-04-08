@@ -2,7 +2,7 @@
 
 npm i sequelize pg dotenv
 
-npm i -D sequelize-cli
+npm i -D sequelize-cli 
 
 npx sequelize init
 npx sequelize db:create
