@@ -1,8 +1,10 @@
 import React from 'react'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import './Login.css'
 
 export default function Login() {
+
+  const navigate = useNavigate()
 
   const handleLogin = async event => {
     event.preventDefault();
@@ -24,22 +26,16 @@ export default function Login() {
     const { status } = response
 
     if (status === 200) {
-      // TODO get the token and go to home
-
       const { token } = await response.json()
 
       sessionStorage.token = token
 
-      // TODO navigate to home (useNavigate)
+      navigate('/')
     } else if (status >= 400 && status < 500) {
-      // TODO get the error and show it (alert)
-
       const { error } = await response.json()
 
-      alert(error.messsage)
+      alert(error)
     } else if (status >= 500) {
-      // TODO show "server error" message (alert)
-
       alert('server error')
     }
   }
