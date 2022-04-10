@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import Note from './Note'
 
 export default function Home() {
   const [name, setName] = useState()
 
   useEffect(() => {
     fetch('https://b00tc4mp.herokuapp.com/api/v2/users', {
-      method: "GET",
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${sessionStorage.token}`
       }
@@ -38,6 +39,7 @@ export default function Home() {
     <main>
       <h1>Home</h1>
       <p>hello {name}!</p>
+      <Note />
     </main>
   )
 }
