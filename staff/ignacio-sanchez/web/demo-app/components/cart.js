@@ -173,48 +173,38 @@ homeBasketLink.onclick = event => {
           placeVehiclesOrder(token, ((error, orderId) => {
             if (error) return alert(error.message)
 
-            if (orders.length > 0) {
+            if (orderId.length > 0) {
 
-              ordersView.innerText = ''
+              resultsView.innerText = ''
 
-              orders.forEach(order => {
-                const orders = document.createElement('li')
-        
-                const id = document.createElement('h3')
-                const date = document.createElement('p')
-                const cart = document.createElement('p')
-        
-                id.innerText = `Car ID: ${order.id}`
-                date.innerText = `Date: ${order.date}`
-                cart.innerText = `Cart: ${order.cart}`
-
-                orders.append(id, date, cart)
-
-              })
-
-            } else {
+              const idOrder = document.createElement('p')
               
+              idOrder.innerText = `The Order with ID  ${orderId} has been created and registered`
+              
+              resultsView.append(idOrder)
+
+            }
+
+
+          }))
+        } catch (error) {
+          alert(error.message)
         }
-      }))
-      } catch (error) {
-    alert(error.message)
-  }
 
-
-
-  checkoutView.classList.add('off')
-  ordersView.classList.remove('off')
-  homeView.classList.remove('off')
-}
+        checkoutView.classList.add('off')
+        //ordersView.classList.remove('off')
+        homeView.classList.remove('off')
+        resultsView.classList.remove('off')
+      }
 
 
 
 
     }))
   } catch (error) {
-  feedback.innerText = error.message
+    feedback.innerText = error.message
 
-  feedback.classList.remove('off')
-}
+    feedback.classList.remove('off')
+  }
 
 }
