@@ -17,8 +17,8 @@ homeOrdersLink.onclick = event => {
 
 
   try {
-    retrieveVehicleOrders(token, ((error, vehicles) => {
-      if (vehicles.length == 0) {
+    retrieveVehicleOrders(token, ((error, orders) => {
+      if (orders.length == 0) {
         error = document.createElement('p')
 
         resultsView.innerHTML = ''
@@ -37,7 +37,7 @@ homeOrdersLink.onclick = event => {
 
 
 
-      vehicles.forEach(vehicle => {
+      orders.forEach(vehicle => {
         const result = document.createElement('li')
 
         const id = document.createElement('h3')

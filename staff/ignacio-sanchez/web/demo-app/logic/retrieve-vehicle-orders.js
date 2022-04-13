@@ -16,69 +16,62 @@ function retrieveVehicleOrders(token, callback) {
 
             const { orders = [] } = user
 
-            //- create empty array of vehicles ([])
+            const totalVehicles = orders.reduce((accum, order) => accum + order.cart.length, 0)
 
             const vehicles = []
 
-            //- extract orders from user ([...])
-            let count = 0
+            let vehiclesCount = 0
 
             if (orders.length) {
-                for (let i = 0; i < orders.length; i++) {
-                    const xhr = new XMLHttpRequest
+                for (let i = 0; i < orders.length; i++) { 
+                    const order = orders[i]
 
-                    let z = 0
+                    const { cart } = order
+                    
+                    if (cart.length) {
+                        for (let j = 0; j < cart.length; j++) {
+                            const item = cart[j]
 
-                    const anyCars = orders[i].cart
-                    //const anyCars = orders[i].cart[z]
+                            const xhr = new XMLHttpRequest
 
-                    if (z < anyCars.length) {
-                        for (let z = 0; z < anyCars.length; z++) {
-                            
-                        }
-                    }
+                            xhr.onload = () => {
+                                const { status } = xhr
 
+                                if (status === 200) {
+                                    const { responseText: json } = xhr
 
-                    const item = orders[i]
+                                    const vehicle = JSON.parse(json)
 
-                    xhr.onload = () => {
-                        const { status } = xhr
+                                    item.vehicle = vehicle
 
-                        if (status === 200) {
-                            const { responseText: json } = xhr
+                                    delete item.id
 
-                            const vehicle = JSON.parse(json)
+                                    vehiclesCount++
 
-                            vehicle.qty = item.qty
+                                    if (vehiclesCount === totalVehicles)
+                                        callback(null, orders)
+                                } else if (status >= 400 && status < 500) {
+                                    const { responseText: json } = xhr
 
-                            vehicles[i] = vehicle
+                                    const payload = JSON.parse(json)
 
-                            count++
+                                    const { error } = payload
 
-                            // if (vehicles.length === orders.length) {
-                            if (count === orders.length) {
-                                // console.log(vehicles)
-
-                                callback(null, vehicles)
+                                    callback(new ClientError(error))
+                                } else {
+                                    callback(new ServerError('server error'))
+                                }
                             }
-                        } else if (status >= 400 && status < 500) {
-                            const { responseText: json } = xhr
 
-                            const payload = JSON.parse(json)
-
-                            const { error } = payload
-
-                            callback(new ClientError(error))
-                        } else {
-                            callback(new ServerError('server error'))
+                            xhr.open('GET', `https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles/${item.id}`)
+    
+                            xhr.send()
                         }
                     }
-
-                    xhr.open('GET', `https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles/${orders[i].cart[z].id}`)
-
-                    xhr.send()
                 }
-            } else callback(null, vehicles)
+
+
+            } else callback(null, orders)
 
         } else if (status >= 400 && status < 500) {
             const { responseText: json } = xhr
