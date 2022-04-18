@@ -14,7 +14,7 @@ homeFavouritesLink.onclick = event => {
   feedback.innerText = ''
   //feedback.classList.add('off')
 
-  //homeView.classList.add('off')
+  ordersView.classList.add('off')
 
   favouritesView.classList.remove('off')
 
@@ -22,6 +22,8 @@ homeFavouritesLink.onclick = event => {
     retrieveFavVehicles(token, ((error, vehicles) => {
       if (vehicles.length == 0) {
         error = document.createElement('p')
+
+        resultsView.classList.remove('off')
 
         resultsView.innerHTML = ''
 
@@ -34,7 +36,7 @@ homeFavouritesLink.onclick = event => {
 
       const list = document.createElement('ul')
 
-      vehicles.forEach(car => {
+      vehicles.forEach(vehicle => {
 
         const result = document.createElement('li')
 
@@ -43,15 +45,38 @@ homeFavouritesLink.onclick = event => {
         const maker = document.createElement('p')
         const image = document.createElement('img')
         image.classList.add('image-detail')
+        const favButton = document.createElement('button')
+        favButton.classList.add('button--small_fav')
 
-        id.innerText = `Car ID: ${car.id}`
-        maker.innerText = `Brand: ${car.maker}`
-        name.innerText = `Name: ${car.name}`
-        image.src = car.image
+        id.innerText = `Car ID: ${vehicle.id}`
+        maker.innerText = `Brand: ${vehicle.maker}`
+        name.innerText = `Name: ${vehicle.name}`
+        image.src = vehicle.image
+        favButton.innerText = `${vehicle.id ? '💜' : '🤍'}`
 
-        result.append(id, maker, name, image)
+        favButton.onclick = event => {
+          event.stopPropagation()
+
+          try {
+            toggleFavVehicle(_token, vehicle.id, error => {
+              if (error) return alert(error.message)
+              list.removeChild(result)
+
+              favButton.innerText = favButton.innerText === '💜' ? '🤍' : '💜'
+            })
+          } catch (error) {
+            alert(error.message)
+            feedback.innerText = error.message
+
+            feedback.classList.remove('off')
+          }
+        }
+
+        result.append(id, maker, name, image, favButton)
 
         list.append(result)
+
+
 
       })
 

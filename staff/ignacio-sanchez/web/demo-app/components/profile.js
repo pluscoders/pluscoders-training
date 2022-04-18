@@ -110,6 +110,8 @@ profileBackButton.onclick = function () {
 
     homeView.classList.remove('off')
 
+    ordersView.classList.add('off')
+
 
   })
 

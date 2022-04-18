@@ -80,6 +80,7 @@ homeOrdersLink.onclick = event => {
 
       ordersView.append(list)
 
+      cartView.classList.add('off')
       resultsView.classList.add('off')
       favouritesView.classList.add('off')
       ordersView.classList.remove('off')

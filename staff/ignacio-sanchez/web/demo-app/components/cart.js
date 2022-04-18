@@ -196,19 +196,22 @@ homeBasketLink.onclick = event => {
         checkoutView.classList.add('off')
         homeView.classList.remove('off')
         resultsView.classList.remove('off')
+        
       }
-
-
-
-
+      
+      
+      
+      
     }))
   } catch (error) {
-
+    
     error.message = 'Empty Cart'
-
+    
     feedback.innerText = error.message
-
+    
     feedback.classList.remove('off')
   }
-
+  ordersView.classList.add('off')
+  favouritesView.classList.add('off')
+  
 }
