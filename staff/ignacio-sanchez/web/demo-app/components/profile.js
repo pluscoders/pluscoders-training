@@ -62,7 +62,6 @@ profileForm.onsubmit = event => {
   const city = profileForm.city.value
   const country = profileForm.country.value
   const email = profileForm.email.value
-  // const password = profileForm.password.value
 
 
   try {

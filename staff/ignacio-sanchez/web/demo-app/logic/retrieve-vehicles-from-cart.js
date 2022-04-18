@@ -1,9 +1,5 @@
 function retrieveVehiclesFromCart(token, callback) {
 
-    //TODO
-    //- call api to retrieve user (xhr)
-
-    // retrieve user api call
     const xhr = new XMLHttpRequest
 
     xhr.onload = () => {
@@ -16,11 +12,8 @@ function retrieveVehiclesFromCart(token, callback) {
 
             const { cart = [] } = user
 
-            //- create empty array of vehicles ([])
-
             const vehicles = []
 
-            //- extract cart from user ([...])
             let count = 0
 
             if (cart.length) {
@@ -43,9 +36,7 @@ function retrieveVehiclesFromCart(token, callback) {
 
                             count++
 
-                            // if (vehicles.length === cart.length) {
                             if (count === cart.length) {
-                                // console.log(vehicles)
 
                                 callback(null, vehicles)
                             }

@@ -1,5 +1,4 @@
 function retrieveVehicle(token, vehicleId, callback) {
-    // TODO validate input arguments (token, vehicleId)
     validateCallback(callback)
     validateToken(token)
 
@@ -26,7 +25,6 @@ function retrieveVehicle(token, vehicleId, callback) {
 
                 const vehicle = JSON.parse(json)
 
-                // TODO check if vehicle is in favs
                 vehicle.isFav = favs.includes(vehicle.id)
 
                 callback(null, vehicle)

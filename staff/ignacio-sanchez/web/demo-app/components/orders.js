@@ -15,6 +15,8 @@ homeOrdersLink.onclick = event => {
 
   //homeView.classList.add('off')
 
+  ordersView.classList.remove('off')
+
 
   try {
     retrieveVehicleOrders(token, ((error, orders) => {
@@ -37,43 +39,52 @@ homeOrdersLink.onclick = event => {
 
 
 
-      orders.forEach(vehicle => {
+      orders.forEach(order => {
         const result = document.createElement('li')
+        
 
         const id = document.createElement('h3')
-        const qty = document.createElement('p')
-        const name = document.createElement('p')
-        const maker = document.createElement('p')
-        const image = document.createElement('img')
-        image.classList.add('image-detail')
-        const addToCartButton = document.createElement('button')
-        addToCartButton.classList.add('button--small')
-        const removeFromCartButton = document.createElement('button')
-        removeFromCartButton.classList.add('button--small')
+        const date = document.createElement('p')
 
 
-        id.innerText = `Car ID: ${vehicle.id}`
-        qty.innerText = `Quantity: ${vehicle.qty} (${vehicle.price * vehicle.qty} $)`
-        maker.innerText = `Brand: ${vehicle.maker}`
-        name.innerText = `Name: ${vehicle.name}`
-        image.src = vehicle.image
-        addToCartButton.innerText = 'Add'
-        removeFromCartButton.innerText = 'Remove'
+        id.innerText = `Order ID: ${order.id}`
+        date.innerText = `Date: ${order.date}`
 
+        const vehicles = order.cart
 
-        result.append(id, qty, maker, name, image, addToCartButton, removeFromCartButton)
+        result.append(id, date)
 
         list.append(result)
+
+        vehicles.forEach(vehicle => {
+
+            const name = document.createElement('p')
+            const maker = document.createElement('p')
+            const qty = document.createElement('p')
+            const image = document.createElement('img')
+            image.classList.add('image-detail')
+  
+            maker.innerText = `Brand: ${vehicle.vehicle.maker}`
+            name.innerText = `Name: ${vehicle.vehicle.name}`
+            qty.innerText = `Quantity: ${vehicle.qty} (${vehicle.vehicle.price * vehicle.qty} $)`
+            image.src = vehicle.vehicle.image
+
+            result.append(name, maker,qty, image)
+
+        })
+  
       })
 
 
+      ordersView.innerHTML = ''
+
+      ordersView.append(list)
+
       resultsView.classList.add('off')
       favouritesView.classList.add('off')
-      homeView.classList.add('off')
       ordersView.classList.remove('off')
-    
 
-   
+
 
     }))
   } catch (error) {
@@ -81,43 +92,9 @@ homeOrdersLink.onclick = event => {
 
     feedback.classList.remove('off')
   }
-  
+
 
 }
 
 
-// const checkoutForm = checkoutView.querySelector('form')
 
-// checkoutForm.onsubmit = event => {
-//   event.preventDefault()
-
-//   try {
-//     retrieveVehicleOrders(token, ((error, orders) => {
-//       if (error) return alert(error.message)
-
-//       if (orders.length > 0) {
-
-//         ordersView.innerText = ''
-
-//         orders.forEach(order => {
-//           const orders = document.createElement('li')
-  
-//           const id = document.createElement('h3')
-//           const date = document.createElement('p')
-//           const cart = document.createElement('p')
-  
-//           id.innerText = `Car ID: ${order.id}`
-//           date.innerText = `Date: ${order.date}`
-//           cart.innerText = `Cart: ${order.cart}`
-
-//           orders.append(id, date, cart)
-
-//         })
-
-//       } else {
-        
-//   }
-// }))
-// } catch (error) {
-// alert(error.message)
-// }

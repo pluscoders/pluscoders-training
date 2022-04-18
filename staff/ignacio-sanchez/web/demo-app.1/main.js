@@ -1,6 +1,5 @@
-// presentation
 
-let id // user id
+let id 
 
 var user
 
@@ -282,7 +281,6 @@ profileForm.onsubmit = function (event) {
   const city = profileForm.city.value
   const country = profileForm.country.value
   const email = profileForm.email.value
-  // const password = profileForm.password.value
 
 
   try {
@@ -386,8 +384,6 @@ profileBackButton.onclick = function () {
 }
 
 
-// search form
-
 
 const searchForm = homeView.querySelector('form')
 
@@ -400,7 +396,6 @@ searchForm.onsubmit = function (event) {
   const brand = searchForm.brand.value
   const model = searchForm.model.value
 
-  //const filtered = searchVehicles(query, model)
 
   try {
 
@@ -467,11 +462,4 @@ cart.onclick = function (event) {
   const counter = counterCart()
 
 }
-
-// const counts = 0;
-// (".button--small").click(function () {
-//   counts += +1;
-//   (".cart-counter").animate({
-//     (this).text(counts)
-// });
 

@@ -6,13 +6,13 @@ homeBasketLink.onclick = event => {
   const token = _token
 
   const cartView = homeView.querySelector('.cart')
+  const resultsView = homeView.querySelector('.results')
+  
 
   const feedback = searchForm.querySelector('.feedback')
 
   feedback.innerText = ''
-  //feedback.classList.add('off')
-
-  //homeView.classList.add('off')
+  feedback.classList.add('off')
 
   cartView.classList.remove('off')
 
@@ -24,9 +24,11 @@ homeBasketLink.onclick = event => {
       if (vehicles.length == 0) {
         error = document.createElement('p')
 
+        resultsView.classList.remove('off')
+
         resultsView.innerHTML = ''
 
-        error.innerText = 'No vehicles found '
+        error.innerText = 'Empty Cart '
 
         resultsView.append(error)
 
@@ -80,9 +82,9 @@ homeBasketLink.onclick = event => {
             })
           } catch (error) {
             alert(error.message)
-            //feedback.innerText = error.message
+            feedback.innerText = error.message
 
-            //feedback.classList.remove('off')
+            feedback.classList.remove('off')
           }
 
         }
@@ -112,9 +114,9 @@ homeBasketLink.onclick = event => {
             })
           } catch (error) {
             alert(error.message)
-            //feedback.innerText = error.message
+            feedback.innerText = error.message
 
-            //feedback.classList.remove('off')
+            feedback.classList.remove('off')
           }
 
         }
@@ -192,7 +194,6 @@ homeBasketLink.onclick = event => {
         }
 
         checkoutView.classList.add('off')
-        //ordersView.classList.remove('off')
         homeView.classList.remove('off')
         resultsView.classList.remove('off')
       }
@@ -202,6 +203,9 @@ homeBasketLink.onclick = event => {
 
     }))
   } catch (error) {
+
+    error.message = 'Empty Cart'
+
     feedback.innerText = error.message
 
     feedback.classList.remove('off')

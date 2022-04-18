@@ -1,9 +1,4 @@
 function retrieveVehicleOrders(token, callback) {
-
-    //TODO
-    //- call api to retrieve user (xhr)
-
-    // retrieve user api call
     const xhr = new XMLHttpRequest
 
     xhr.onload = () => {

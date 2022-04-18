@@ -23,9 +23,9 @@ try {
   try {
     retrieveUser(_token, (error, user) => {
       if (error) {
-        //feedback.innerText = error.message
+        feedback.innerText = error.message
 
-        //feedback.classList.remove('off')
+        feedback.classList.remove('off')
 
         alert(error.message)
 
@@ -39,9 +39,9 @@ try {
       homeView.classList.remove('off')
     })
   } catch (error) {
-    //feedback.innerText = error.message
+    feedback.innerText = error.message
 
-    //feedback.classList.remove('off')
+    feedback.classList.remove('off')
     alert(error.message)
   }
 } catch (error) {

@@ -6,8 +6,6 @@ searchForm.onsubmit = event => {
   const resultsView = homeView.querySelector('.results')
   const detailView = homeView.querySelector('.detail')
 
-  //const brand = searchForm.brand.value
-  //const model = searchForm.model.value
   const { brand: { value: brand }, model: { value: model } } = searchForm
 
   try {
@@ -46,25 +44,21 @@ searchForm.onsubmit = event => {
         cartButton.onclick = event => {
           event.stopPropagation()
 
-          // TODO toggleFavVehicle
           try {
             addVehicleToCart(_token, vehicle.id, error => {
               if (error) return alert(error.message)
             })
           } catch (error) {
             alert(error.message)
-            //feedback.innerText = error.message
+            feedback.innerText = error.message
 
-            //feedback.classList.remove('off')
+            feedback.classList.remove('off')
           }
-
-          // TODO addVehicleToCart
         }
 
         favButton.onclick = event => {
           event.stopPropagation()
 
-          // TODO toggleFavVehicle
           try {
             toggleFavVehicle(_token, vehicle.id, error => {
               if (error) return alert(error.message)
@@ -73,9 +67,9 @@ searchForm.onsubmit = event => {
             })
           } catch (error) {
             alert(error.message)
-            //feedback.innerText = error.message
+            feedback.innerText = error.message
 
-            //feedback.classList.remove('off')
+            feedback.classList.remove('off')
           }
         }
 
@@ -108,7 +102,6 @@ searchForm.onsubmit = event => {
             const price = document.createElement('p')
             const url = document.createElement('p')
 
-            // TODO add fav button and mechanise toggleFavVehicle
 
             id.innerText = `Car ID: ${vehicle.id}`
             name.innerText = `Name: ${vehicle.name}`
@@ -128,7 +121,6 @@ searchForm.onsubmit = event => {
             favButton.onclick = event => {
               event.stopPropagation()
     
-              // TODO toggleFavVehicle
               try {
                 toggleFavVehicle(_token, vehicle.id, error => {
                   if (error) return alert(error.message)
@@ -137,9 +129,9 @@ searchForm.onsubmit = event => {
                 })
               } catch (error) {
                 alert(error.message)
-                //feedback.innerText = error.message
+                feedback.innerText = error.message
     
-                //feedback.classList.remove('off')
+                feedback.classList.remove('off')
               }
             }
 

@@ -1,10 +1,6 @@
 function removeVehicleFromCart(token, vehicleId, callback) {
-    // TODO get user (from api)
-    // TODO remove vehicle to the cart with its quantity updated
-    // TODO patch user in api to update cart
 
 
-    // retrieve user api call
     const xhr = new XMLHttpRequest
 
     xhr.onload = () => {
@@ -20,8 +16,6 @@ function removeVehicleFromCart(token, vehicleId, callback) {
             const index = cart.findIndex(x => x.id === vehicleId)
 
             if (index >= 0) {
-                //let qty = cart[index].qty
-                //cart[index].qty = qty+1
                 cart[index].qty--
                 if (cart[index].qty === 0 ){
                     cart.splice(index,1)
@@ -33,7 +27,6 @@ function removeVehicleFromCart(token, vehicleId, callback) {
             }
 
             {
-                // update user api call
                 const xhr = new XMLHttpRequest
 
                 xhr.onload = () => {

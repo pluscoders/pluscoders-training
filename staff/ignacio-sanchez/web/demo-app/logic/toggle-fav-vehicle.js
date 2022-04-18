@@ -1,10 +1,4 @@
 function toggleFavVehicle(token, vehicleId, callback) {
-    // TODO get user (from api)
-    // TODO create property favs in user (if not existed before)
-    // TODO add/remove vehicle to the favs
-    // TODO patch user in api to update favs
-
-    // retrieve user api call
     const xhr = new XMLHttpRequest
 
     xhr.onload = () => {
@@ -15,7 +9,6 @@ function toggleFavVehicle(token, vehicleId, callback) {
 
             const user = JSON.parse(json)
 
-            // const favs = user.favs || []
             const { favs = [] } = user
 
             const index = favs.indexOf(vehicleId)
@@ -23,17 +16,8 @@ function toggleFavVehicle(token, vehicleId, callback) {
             if (index < 0)
                 favs.push(vehicleId)
             else favs.splice(index, 1)
-
-            /*
-            mirar si en favs contiene vehicleId
-            si lo tiene entonces quitarlo de favs
-            si no, añadirlo a favs
-
-            llamar a api para actualizar favs en el usuario (patch)    
-            */
             
             {
-                // update user api call
                 const xhr = new XMLHttpRequest
                 
                 xhr.onload = () => {

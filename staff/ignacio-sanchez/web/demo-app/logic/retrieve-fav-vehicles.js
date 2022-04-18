@@ -1,9 +1,4 @@
 function retrieveFavVehicles(token, callback) {
-
-    //TODO
-    //- call api to retrieve user (xhr)
-
-    // retrieve user api call
     const xhr = new XMLHttpRequest
 
     xhr.onload = () => {
@@ -16,11 +11,8 @@ function retrieveFavVehicles(token, callback) {
 
             const { favs = [] } = user
 
-            //- create empty array of vehicles ([])
-
             const vehicles = []
 
-            //- extract favs from user ([...])
             let count = 0
 
             if (favs.length) {
@@ -35,14 +27,11 @@ function retrieveFavVehicles(token, callback) {
 
                             const vehicle = JSON.parse(json)
 
-                            // vehicles.push(vehicle)
                             vehicles[i] = vehicle
 
                             count++
 
-                            // if (vehicles.length === favs.length) {
                             if (count === favs.length) {
-                                // console.log(vehicles)
 
                                 callback(null, vehicles)
                             }
@@ -86,11 +75,5 @@ function retrieveFavVehicles(token, callback) {
     xhr.send()
 }
 
-
-
-//- call api to retrieve each vehicle from favs (xhr)
-//- per api call (vehicles) push vehicle in vehicles
-//- HINT count api responses 
-//- when count === favs.length then call callback(null, vehicles)
 
 

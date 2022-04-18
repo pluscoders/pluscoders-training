@@ -1,10 +1,5 @@
 function addVehicleToCart(token, vehicleId, callback) {
-    // TODO get user (from api)
-    // TODO create property cart in user (if not existed before)
-    // TODO add vehicle to the cart with its quantity updated
-    // TODO patch user in api to update cart
 
-    // retrieve user api call
     const xhr = new XMLHttpRequest
 
     xhr.onload = () => {
@@ -20,8 +15,6 @@ function addVehicleToCart(token, vehicleId, callback) {
             const index = cart.findIndex(x => x.id === vehicleId)
 
             if (index >= 0){
-                //let qty = cart[index].qty
-                //cart[index].qty = qty+1
                 cart[index].qty++
             }
             else{
@@ -29,7 +22,6 @@ function addVehicleToCart(token, vehicleId, callback) {
             }
 
             {
-                // update user api call
                 const xhr = new XMLHttpRequest
 
                 xhr.onload = () => {

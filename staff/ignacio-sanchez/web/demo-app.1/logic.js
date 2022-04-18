@@ -1,4 +1,3 @@
-// users
 
 function registerUser(firstname, lastName, city, country, email, password, callback) {
     validateFirstName(firstname)
@@ -235,16 +234,6 @@ function unregisterUser(token, password, callback) {
 
     xhr.send(json)
 }
-
-// vehicles
-
-// function searchVehicles(query, model) {
-//     const filtered = vehicles.filter(function (vehicle) {
-//         return vehicle.name.includes(query) && vehicle.name.includes(model)
-//     })
-
-//     return filtered
-// }
 
 function searchVehicles(brand, model, callback) {
     validateCallback(callback)

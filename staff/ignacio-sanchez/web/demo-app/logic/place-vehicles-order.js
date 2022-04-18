@@ -1,6 +1,5 @@
 function placeVehiclesOrder(token, callback) {
 
-    // retrieve user api call
     const xhr = new XMLHttpRequest
 
     xhr.onload = () => {
@@ -18,7 +17,6 @@ function placeVehiclesOrder(token, callback) {
             orders.push({ id, date: new Date(), cart })
 
             {
-                // update user api call
                 const xhr = new XMLHttpRequest
 
                 xhr.onload = () => {
