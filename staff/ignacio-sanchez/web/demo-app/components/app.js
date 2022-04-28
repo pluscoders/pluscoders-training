@@ -1,7 +1,9 @@
 const loginView = document.querySelector('.login')
 const registerView = document.querySelector('.register')
 const homeView = document.querySelector('.home')
+const searchView = document.querySelector('.search')
 const profileView = document.querySelector('.profile')
+const detailView = document.querySelector('.detail')
 const passwordView = document.querySelector('.password')
 const unregisterView = document.querySelector('.unregister')
 const resultsView = document.querySelector('.results')
@@ -10,6 +12,7 @@ const cartView = document.querySelector('.cart')
 const cartNumber = homeView.querySelector('.cart__number')
 const checkoutView = document.querySelector('.checkout')
 const ordersView = document.querySelector('.orders')
+
 
 // state
 let id // user id

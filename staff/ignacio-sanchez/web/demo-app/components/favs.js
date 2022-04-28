@@ -18,6 +18,8 @@ homeFavouritesLink.onclick = event => {
 
   favouritesView.classList.remove('off')
 
+  
+
   try {
     retrieveFavVehicles(token, ((error, vehicles) => {
       if (vehicles.length == 0) {
@@ -76,17 +78,19 @@ homeFavouritesLink.onclick = event => {
 
         list.append(result)
 
-
-
       })
 
+      const title = document.createElement('h2')
+      title.innerText = 'Favourites'
 
       favouritesView.innerHTML = ''
 
-      favouritesView.append(list)
+      favouritesView.append(title, list)
 
       resultsView.classList.add('off')
       cartView.classList.add('off')
+      detailView.classList.add('off')
+      profileView.classList.add('off')
 
       favouritesView.classList.remove('off')
 

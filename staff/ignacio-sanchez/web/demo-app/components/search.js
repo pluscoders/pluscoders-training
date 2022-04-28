@@ -150,6 +150,10 @@ searchForm.onsubmit = event => {
       resultsView.append(list)
 
       detailView.classList.add('off')
+      favouritesView.classList.add('off')
+      profileView.classList.add('off')
+      unregisterView.classList.add('off')
+      passwordView.classList.add('off')
 
       resultsView.classList.remove('off')
     })

@@ -37,6 +37,7 @@ unregisterForm.onsubmit = event => {
 
     })
     unregisterView.classList.add('off')
+    homeView.classList.add('off')
     loginView.classList.remove('off')
 
   } catch (error) {

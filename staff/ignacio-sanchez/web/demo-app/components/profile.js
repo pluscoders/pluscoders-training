@@ -23,7 +23,13 @@ homeProfileLink.onclick = event => {
       profileForm.country.value = user.country
       profileForm.email.value = user.username
 
-      homeView.classList.add('off')
+      //searchView.classList.add('off')
+
+      ordersView.classList.add('off')
+      unregisterView.classList.add('off')
+      passwordView.classList.add('off')
+      favouritesView.classList.add('off')
+      resultsView.classList.add('off')
 
       profileView.classList.remove('off')
     })
@@ -38,10 +44,11 @@ const profilePasswordLink = profileView.querySelector('.profile__password-button
 
 profilePasswordLink.onclick = event => {
   event.preventDefault()
+  
+  passwordView.classList.remove('off')
 
   profileView.classList.add('off')
 
-  passwordView.classList.remove('off')
 
 }
 
@@ -108,7 +115,9 @@ profileBackButton.onclick = function () {
 
     homeTitle.innerText = 'Hello,' + user.firstname + '!'
 
-    homeView.classList.remove('off')
+    searchView.classList.remove('off')
+    
+    favouritesView.classList.add('off')
 
     ordersView.classList.add('off')
 

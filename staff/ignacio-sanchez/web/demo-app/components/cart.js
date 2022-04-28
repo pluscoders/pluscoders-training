@@ -30,7 +30,14 @@ homeBasketLink.onclick = event => {
 
         error.innerText = 'Empty Cart '
 
+        cartView.innerHTML = ''
+
         resultsView.append(error)
+
+        profileView.classList.add('off')
+        unregisterView.classList.add('off')
+        passwordView.classList.add('off')
+        favouritesView.classList.add('off')
 
         return
       } else if (error == 401) {
@@ -148,13 +155,20 @@ homeBasketLink.onclick = event => {
 
       cartView.innerHTML = ''
 
+      const title = document.createElement('h2')
+      title.innerText = 'Cart'
+
       if (totalCart.total == 0) {
         cartView.removeChild(totalCartText)
+        cartView.innerHTML = ''
       } else {
-        cartView.append(list, totalCartText, checkoutButton)
+        cartView.append(title,list, totalCartText, checkoutButton)
       }
 
       resultsView.classList.add('off')
+      profileView.classList.add('off')
+      unregisterView.classList.add('off')
+      passwordView.classList.add('off')
       favouritesView.classList.add('off')
       cartView.classList.remove('off')
 

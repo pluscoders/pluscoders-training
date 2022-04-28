@@ -92,17 +92,14 @@
     </div>
 
     <div class="home off">
-        <div class="card">
-            <h1 class="card__title">BuyYourCar home</h1>
-            <img class="card__img" src="byc.gif" alt="logo">
-        </div>
-        <h2>Search new cars by brand and model</h2>
         <div class="topnav">
-            <a href="#home" class="active">Hello Ignacio Sanchez!</a>
+            <a href="#home" class="active">Hello Ignacio Sanchez! </a>
+
             <div id="myLinks">
                 <a href="#profile" id="profile">Profile</a>
                 <a href="#favourites" id="favourites">Favourites</a>
-                <a href="#cart" id="cart">Cart <i class="fa fa-shopping-cart"></i><span class="cart__number off"></span></a>
+                <a href="#cart" id="cart">Cart <i class="fa fa-shopping-cart"></i><span
+                        class="cart__number off"></span></a>
                 <a href="#orders" id="orders">Orders</a>
                 <a href="#signout" id="signout">Sign out</a>
             </div>
@@ -110,18 +107,23 @@
                 <i class="fa fa-bars"></i>
             </a>
         </div>
-        <div class="cartResult"> </div>
-        <div class="form-divider">
-            <p></p>
+        <div class="card">
+            <!-- <h1 class="card__title">BuyYourCar home</h1> -->
+            <img class="card__img" src="byc.gif" alt="logo">
         </div>
-        <p class="subtitle"> Please fill in everything.</p>
-
+        
         <div class="search">
+            <!-- <h2>Search new cars by brand and model</h2> -->
+            <div class="cartResult"> </div>
+            <div class="form-divider">
+                <p></p>
+            </div>
+            <p class="subtitle"> Please fill in everything.</p>
             <form class="container container--vertical">
-                <label for="trade"> <b>Brand</b></label>
+                <!-- <label for="trade"> <b>Brand</b></label> -->
                 <input type="search" placeholder="Enter brand" name="brand" required>
 
-                <label for="model"><b>Model</b></label>
+                <!-- <label for="model"><b>Model</b></label> -->
                 <input type="search" placeholder="Enter model" name="model" required>
 
                 <button type="submit">Search</button>
@@ -136,8 +138,92 @@
 
         </div>
 
+        <div class="profile off">
+
+            <h2>Profile</h2>
+            <div class="form-divider">
+                <p></p>
+            </div>
+            <p class="subtitle"> Edit your personal info.</p>
+    
+            <form class="container container--vertical" id="profile">
+                <label for="firstName"> <b>First name</b></label>
+                <input type="text" placeholder="Enter first name" name="firstname" required>
+    
+                <label for="lastName"><b>Last name</b></label>
+                <input type="text" placeholder="Enter last name" name="lastname" required>
+    
+                <label for="city"><b>City</b></label>
+                <input type="text" placeholder="Enter your city" name="city" required>
+    
+                <label for="country"><b>Country</b></label>
+                <input type="text" placeholder="Enter your contry" name="country" required>
+    
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter your email" name="email" required>
+    
+                <!-- <label for="password"><b>Password</b></label>
+                <input type="text" placeholder="Enter your password" name="password" required> -->
+    
+                <button type="submit">Update</button>
+                <button class="profile__password-button">Change password</button>
+                <button class="profile__unregister-button">Unregister</button>
+                <button class="profile__back-button">Back</button>
+    
+                <p class="feedback feedback--error off"></p>
+            </form>
+    
+        </div>
+
+        <div class="password off">
+
+            <h2>Change password</h2>
+            <div class="form-divider">
+                <p></p>
+            </div>
+            <p class="subtitle"> Edit your email and password.</p>
+    
+            <form class="container container--vertical" id="password">
+                <label for="oldPassword"><b>Old password</b></label>
+                <input type="password" placeholder="Enter old password" name="oldPassword" required>
+    
+                <label for="password"><b>New password</b></label>
+                <input type="password" placeholder="Enter new password" name="password" required>
+    
+                <button type="submit">Update</button>
+                <button class="password__back-button">Back</button>
+    
+                <p class="feedback feedback--error off"></p>
+            </form>
+    
+            <div class="form-divider"> </div>
+        </div>
+    
+        <div class="unregister off">
+            <h2>Unregister</h2>
+            <div class="form-divider">
+                <p></p>
+            </div>
+            <p class="subtitle"> Please, enter your password for unregister.</p>
+    
+            <form class="container container--vertical" id="unregister">
+    
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter password" name="password" required>
+    
+                <button type="submit">Unregister</button>
+                <button class="unregister__back-button">Back</button>
+    
+                <p class="feedback feedback--error off"></p>
+            </form>
+    
+            <div class="form-divider"> </div>
+        </div>
+
+        
         <div class="form-divider"> </div>
     </div>
+    
 
     <div class="checkout off">
         <div class="card">
@@ -189,7 +275,7 @@
 
 
 
-    <div class="profile off">
+    <!-- <div class="profile off">
         <div class="card">
             <h1 class="card__title">Edit your profile</h1>
             <img class="card__img" src="byc.gif" alt="logo">
@@ -216,8 +302,8 @@
             <label for="email"><b>Email</b></label>
             <input type="text" placeholder="Enter your email" name="email" required>
 
-            <!-- <label for="password"><b>Password</b></label>
-            <input type="text" placeholder="Enter your password" name="password" required> -->
+            <label for="password"><b>Password</b></label>
+            <input type="text" placeholder="Enter your password" name="password" required>
 
             <button type="submit">Update</button>
             <button class="profile__password-button">Change password</button>
@@ -227,104 +313,56 @@
             <p class="feedback feedback--error off"></p>
         </form>
 
+    </div> -->
 
 
-        <div class="password off">
-            <div class="card">
-                <h1 class="card__title">Edit your profile</h1>
-                <img class="card__img" src="byc.gif" alt="logo">
-            </div>
-            <h2>Change password</h2>
-            <div class="form-divider">
-                <p></p>
-            </div>
-            <p class="subtitle"> Edit your email and password.</p>
-
-            <form class="container container--vertical" id="password">
-                <label for="oldPassword"><b>Old password</b></label>
-                <input type="password" placeholder="Enter old password" name="oldPassword" required>
-
-                <label for="password"><b>New password</b></label>
-                <input type="password" placeholder="Enter new password" name="password" required>
-
-                <button type="submit">Update</button>
-                <button class="password__back-button">Back</button>
-
-                <p class="feedback feedback--error off"></p>
-            </form>
-
-            <div class="form-divider"> </div>
-        </div>
-
-        <div class="unregister off">
-            <div class="card">
-                <h1 class="card__title">Edit your profile</h1>
-                <img class="card__img" src="byc.gif" alt="logo">
-            </div>
-            <h2>Unregister</h2>
-            <div class="form-divider">
-                <p></p>
-            </div>
-            <p class="subtitle"> Please, enter your password for unregister.</p>
-
-            <form class="container container--vertical" id="unregister">
-
-                <label for="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter password" name="password" required>
-
-                <button type="submit">Unregister</button>
-                <button class="unregister__back-button">Back</button>
-
-                <p class="feedback feedback--error off"></p>
-            </form>
-
-            <div class="form-divider"> </div>
-        </div>
-
-        <!-- utils, helpers, commons ... -->
-        <script src="logic/commons/calculate-vehicles-count-from-cart.js"> </script>
-        <script src="logic/commons/errors.js"> </script>
-        <script src="logic/commons/validators.js"></script>
-        <script src="logic/commons/jwt.js"></script>
-        <script src="logic/commons/ids.js"></script>
 
 
-        <!-- data layer -->
-        <!-- <script src="data.js"> </script> -->
 
-        <!-- business (logic) layer -->
-        <script src="logic/add-vehicle-to-cart.js"></script>
-        <script src="logic/authenticate-user.js"></script>
-        <script src="logic/nav.js"></script>
-        <script src="logic/place-vehicles-order.js"></script>
-        <script src="logic/register-user.js"></script>
-        <script src="logic/remove-vehicle-from-cart.js"></script>
-        <script src="logic/retrieve-fav-vehicles.js"></script>
-        <script src="logic/retrieve-user.js"></script>
-        <script src="logic/retrieve-vehicle-orders.js"></script>
-        <script src="logic/retrieve-vehicle.js"></script>
-        <script src="logic/retrieve-vehicles-count-from-cart.js"></script>
-        <script src="logic/retrieve-vehicles-from-cart.js"></script>
-        <script src="logic/search-vehicles.js"></script>
-        <script src="logic/toggle-fav-vehicle.js"></script>
-        <script src="logic/unregister-user.js"></script>
-        <script src="logic/update-user-password.js"></script>
-        <script src="logic/update-user.js"></script>
+    <!-- utils, helpers, commons ... -->
+    <script src="logic/commons/calculate-vehicles-count-from-cart.js"> </script>
+    <script src="logic/commons/errors.js"> </script>
+    <script src="logic/commons/validators.js"></script>
+    <script src="logic/commons/jwt.js"></script>
+    <script src="logic/commons/ids.js"></script>
 
 
-        <!-- presentation layer -->
-        <script src="components/app.js"></script>
-        <script src="components/cart.js"></script>
-        <script src="components/checkout.js"></script>
-        <script src="components/favs.js"></script>
-        <script src="components/home.js"></script>
-        <script src="components/login.js"></script>
-        <script src="components/orders.js"></script>
-        <script src="components/profile.js"></script>
-        <script src="components/password.js"></script>
-        <script src="components/register.js"></script>
-        <script src="components/search.js"></script>
-        <script src="components/unregister.js"></script>
+    <!-- data layer -->
+    <!-- <script src="data.js"> </script> -->
+
+    <!-- business (logic) layer -->
+    <script src="logic/add-vehicle-to-cart.js"></script>
+    <script src="logic/authenticate-user.js"></script>
+    <script src="logic/nav.js"></script>
+    <script src="logic/place-vehicles-order.js"></script>
+    <script src="logic/register-user.js"></script>
+    <script src="logic/remove-vehicle-from-cart.js"></script>
+    <script src="logic/retrieve-fav-vehicles.js"></script>
+    <script src="logic/retrieve-user.js"></script>
+    <script src="logic/retrieve-vehicle-orders.js"></script>
+    <script src="logic/retrieve-vehicle.js"></script>
+    <script src="logic/retrieve-vehicles-count-from-cart.js"></script>
+    <script src="logic/retrieve-vehicles-from-cart.js"></script>
+    <script src="logic/search-vehicles.js"></script>
+    <script src="logic/toggle-fav-vehicle.js"></script>
+    <script src="logic/unregister-user.js"></script>
+    <script src="logic/update-user-password.js"></script>
+    <script src="logic/update-user.js"></script>
+
+
+    <!-- presentation layer -->
+    <script src="components/app.js"></script>
+    <script src="components/cart.js"></script>
+    <script src="components/checkout.js"></script>
+    <script src="components/favs.js"></script>
+    <script src="components/home.js"></script>
+    <script src="components/login.js"></script>
+    <script src="components/orders.js"></script>
+    <script src="components/profile.js"></script>
+    <script src="components/password.js"></script>
+    <script src="components/register.js"></script>
+    <script src="components/search.js"></script>
+    <script src="components/unregister.js"></script>
 
 </body>
 

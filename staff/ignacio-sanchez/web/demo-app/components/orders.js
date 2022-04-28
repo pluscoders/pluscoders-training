@@ -78,7 +78,10 @@ homeOrdersLink.onclick = event => {
 
       ordersView.innerHTML = ''
 
-      ordersView.append(list)
+      const title = document.createElement('h2')
+      title.innerText = 'Orders'
+
+      ordersView.append(title,list)
 
       cartView.classList.add('off')
       resultsView.classList.add('off')
