@@ -101,7 +101,12 @@
  .card__img {
      width: 129px;
      height: 66px;
-     padding-left: 30px;
+
+ }
+ .card__img--bar {
+     width: 86px;
+     height: 44px;
+     float: left;
  }
 
  .subtitle {
@@ -193,9 +198,16 @@
 
 
  .topnav {
-     overflow: hidden;
-     background-color: #333;
-     position: relative;
+    overflow: hidden;
+    background-color: #04AA6D;
+    background: linear-gradient(150deg, #61d8d6, #7696ff);
+    background-color: #05db8d;
+    position: sticky;
+    width: inherit;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
  }
 
  .topnav #myLinks {
@@ -207,7 +219,7 @@
      padding: 14px 16px;
      text-decoration: none;
      font-size: 17px;
-     display: block;
+     
  }
 
  .topnav a.icon {
@@ -216,18 +228,17 @@
      position: absolute;
      right: 0;
      top: 0;
+     margin-left: 100px;
  }
 
  .topnav a:hover {
-     background-color: #ddd;
+     /* background-color: #ddd; */
      color: black;
  }
 
  .active {
-     background-color: #04AA6D;
-     background: linear-gradient(150deg, #61d8d6, #7696ff);
-     background-color: #05db8d;
      color: white;
+     position:relative;
  }
 
  .cars_list {
@@ -309,8 +320,16 @@
  }
 
 
+ @media (max-width: 680px) {
+     .login, .register, .home, .profile, .search {
+         grid-template-areas: 'box-1';
+         grid-auto-rows: minmax(200px);
+         grid-template-columns: 380px;
+     }
+ }
+
  @media (min-width: 680px) and (max-width: 940px) {
-     .login, .register, .home, .profile {
+     .login, .register, .home, .profile, .search {
          grid-template-areas: 'box-1';
          grid-auto-rows: minmax(200px);
          grid-template-columns: 500px;
@@ -318,7 +337,7 @@
  }
 
  @media (min-width: 940px) {
-     .login, .register, .home, .profile {
+     .login, .register, .home, .profile, .search {
          grid-template-areas: 'box-1';
          grid-auto-rows: minmax(200px);
          grid-template-columns: 700px;

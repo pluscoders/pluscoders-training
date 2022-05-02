@@ -78,6 +78,14 @@ loginForm.onsubmit = event => {
         feedback.classList.remove('off')
       }
 
+      detailView.classList.add('off')
+      favouritesView.classList.add('off')
+      profileView.classList.add('off')
+      unregisterView.classList.add('off')
+      passwordView.classList.add('off')
+      resultsView.classList.add('off')
+      ordersView.classList.add('off')
+
     })
 
   } catch (error) {

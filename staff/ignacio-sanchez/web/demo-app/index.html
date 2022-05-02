@@ -20,12 +20,7 @@
             <h1 class="card__title">Welcome to buyYourCar</h1>
             <img class="card__img" src="byc.gif" alt="logo">
         </div>
-        <div class="container container--top">
-            <button class="button button--signin" id="a" type="submit">Sign up your account</button>
-        </div>
-        <div class="form-divider">
-            <p></p>
-        </div>
+
         <p class="subtitle">Sign in with your buyYourCar account</p>
 
         <form class="container container--vertical container--bordered">
@@ -39,14 +34,11 @@
 
             <p class="feedback feedback--error off"></p>
         </form>
-        <!-- <label class="input">
-            <input class="input--checkbox" type="checkbox" checked="checked" name="remember"> Save your login details
-            in this
-            browser.
-        </label> -->
 
-        <!-- <div class="psw">Forgot your password <a href="#">click here?</a></div> -->
-        <!-- <div class="form-divider"> -->
+        <div class="container container--top">
+            <button class="button button--signin" id="a" type="submit">Sign up your account</button>
+        </div>
+
     </div>
     </div>
 
@@ -93,7 +85,8 @@
 
     <div class="home off">
         <div class="topnav">
-            <a href="#home" class="active">Hello Ignacio Sanchez! </a>
+            <img class="card__img--bar" src="byc.gif" alt="logo">
+            <a href="#home" id="back" class="active">Hello Ignacio Sanchez! </a>
 
             <div id="myLinks">
                 <a href="#profile" id="profile">Profile</a>
@@ -109,7 +102,7 @@
         </div>
         <div class="card">
             <!-- <h1 class="card__title">BuyYourCar home</h1> -->
-            <img class="card__img" src="byc.gif" alt="logo">
+            <!-- <img class="card__img" src="byc.gif" alt="logo"> -->
         </div>
         
         <div class="search">
@@ -120,10 +113,8 @@
             </div>
             <p class="subtitle"> Please fill in everything.</p>
             <form class="container container--vertical">
-                <!-- <label for="trade"> <b>Brand</b></label> -->
                 <input type="search" placeholder="Enter brand" name="brand" required>
 
-                <!-- <label for="model"><b>Model</b></label> -->
                 <input type="search" placeholder="Enter model" name="model" required>
 
                 <button type="submit">Search</button>
@@ -168,7 +159,6 @@
                 <button type="submit">Update</button>
                 <button class="profile__password-button">Change password</button>
                 <button class="profile__unregister-button">Unregister</button>
-                <button class="profile__back-button">Back</button>
     
                 <p class="feedback feedback--error off"></p>
             </form>

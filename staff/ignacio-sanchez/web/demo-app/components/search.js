@@ -19,6 +19,13 @@ searchForm.onsubmit = event => {
 
         resultsView.append(error)
 
+        detailView.classList.add('off')
+        favouritesView.classList.add('off')
+        profileView.classList.add('off')
+        unregisterView.classList.add('off')
+        passwordView.classList.add('off')
+        cartView.classList.add('off')
+
         return
       }
 
@@ -168,3 +175,6 @@ searchForm.onsubmit = event => {
   resultsView.classList.remove('off')
 
 }
+
+
+

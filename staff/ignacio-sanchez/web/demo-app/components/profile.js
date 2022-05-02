@@ -40,17 +40,7 @@ homeProfileLink.onclick = event => {
 }
 
 
-const profilePasswordLink = profileView.querySelector('.profile__password-button')
 
-profilePasswordLink.onclick = event => {
-  event.preventDefault()
-  
-  passwordView.classList.remove('off')
-
-  profileView.classList.add('off')
-
-
-}
 
 const profileForm = profileView.querySelector('form')
 
