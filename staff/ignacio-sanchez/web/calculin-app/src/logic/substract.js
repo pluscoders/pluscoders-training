@@ -1,10 +1,10 @@
 import { validateNumber } from '../utils/validators'
 
-function divide (a, b) {
+function substract (a, b) {
     validateNumber(a)
     validateNumber(b)
 
-    return a / b
+    return a - b
 }
 
-export default divide 
+export default substract 
