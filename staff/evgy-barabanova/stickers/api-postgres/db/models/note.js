@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({Note}) {
+    static associate({User}) {
       this.belongsTo(User, {foreignKey: 'user_id'});
     }
   }
@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Note',
+    timestamps: false
   });
   return Note;
 };
