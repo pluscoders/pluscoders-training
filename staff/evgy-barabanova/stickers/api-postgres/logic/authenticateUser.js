@@ -1,5 +1,5 @@
-const bcrypt = require('bcrypt');
-const { User } = require('../db/models');
+const bcrypt = require('bcrypt')
+const { User } = require('../db/models')
 
 function authenticateUser(email, password) {
   // TODO validate arguments
@@ -9,18 +9,18 @@ function authenticateUser(email, password) {
       where: {
         email,
       },
-    });
+    })
 
-    if(!user)
+    if (!user)
       throw new Error(`user with email ${email} not found`)
 
-    const match = await bcrypt.compare(password, user.password);
+    const match = await bcrypt.compare(password, user.password)
 
-    if(!match)
+    if (!match)
       throw new Error('wrong credentials')
 
-    return user.id;
-  })();
+    return user.id
+  })()
 }
 
-module.exports = authenticateUser;
+module.exports = authenticateUser

@@ -8,8 +8,12 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module',
+    sourceType: 'module'
   },
   rules: {
-  },
-};
+    'nonblock-statement-body-position': 'off',
+    curly: 'off',
+    'comma-dangle': 'off',
+    semi: 'off'
+  }
+}
