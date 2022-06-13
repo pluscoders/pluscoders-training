@@ -94,3 +94,5 @@ class Snake extends Component {
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(<Snake />)
+
+// TODO learn React component life cycle methods
