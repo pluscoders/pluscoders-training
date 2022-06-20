@@ -13,13 +13,7 @@ class Snake extends Component {
     constructor() {
         super()
 
-        const food = []
-
-        const fruit = new Bit(Math.round(Math.random() * 1000), Math.round(Math.random() * 500))
-
-        food.push(fruit)
-
-        this.state = { snake: [new Bit(0, 0)], direction: null, food }
+        this.state = { bits: [new Bit(0, 0)], direction: null }
 
         // TODO see Function.prototype.bind() / .call() / .apply()
         this.handleDownButtonClicked = this.handleDownButtonClicked.bind(this)
@@ -33,66 +27,62 @@ class Snake extends Component {
     }
 
     handleDownButtonClicked(event) {
-        const { state: { direction, snake } } = this
+        const { state: { direction, bits } } = this
 
-        if (direction !== 'up') {
-            const preBit = snake[snake.length - 1]
+        if (direction !== 'up') {    
+            const preBit = bits[bits.length - 1]
             const newBit = new Bit(preBit.x, preBit.y + 1)
-
-            const newBits = snake.concat(newBit)
-
-            this.setState({ snake: newBits, direction: 'down' })
+            
+            const newBits = bits.concat(newBit)
+            
+            this.setState({ bits: newBits, direction: 'down' })
         }
     }
 
     handleRightButtonClicked(event) {
-        const { state: { direction, snake } } = this
+        const { state: { direction, bits } } = this
 
         if (direction !== 'left') {
-            const preBit = snake[snake.length - 1]
+            const preBit = bits[bits.length - 1]
             const newBit = new Bit(preBit.x + 1, preBit.y)
-
-            const newBits = snake.concat(newBit)
-
-            this.setState({ snake: newBits, direction: 'right' })
+    
+            const newBits = bits.concat(newBit)
+    
+            this.setState({ bits: newBits, direction: 'right' })
         }
     }
 
     handleUpButtonClicked(event) {
-        const { state: { direction, snake } } = this
+        const { state: { direction, bits } } = this
 
         if (direction !== 'down') {
-            const preBit = snake[snake.length - 1]
+            const preBit = bits[bits.length - 1]
             const newBit = new Bit(preBit.x, preBit.y - 1)
-
-            const newBits = snake.concat(newBit)
-
-            this.setState({ snake: newBits, direction: 'up' })
+    
+            const newBits = bits.concat(newBit)
+    
+            this.setState({ bits: newBits, direction: 'up' })
         }
     }
 
     handleLeftButtonClicked(event) {
-        const { state: { direction, snake } } = this
+        const { state: { direction, bits } } = this
 
         if (direction !== 'right') {
-            const preBit = snake[snake.length - 1]
+            const preBit = bits[bits.length - 1]
             const newBit = new Bit(preBit.x - 1, preBit.y)
-
-            const newBits = snake.concat(newBit)
-
-            this.setState({ snake: newBits, direction: 'left' })
+    
+            const newBits = bits.concat(newBit)
+    
+            this.setState({ bits: newBits, direction: 'left' })
         }
     }
 
     render() {
-        const { state: { snake, food } } = this
+        const { state: { bits } } = this
 
-        const snakeBits = snake.map(bit => {
+        const snake = bits.map(bit => {
             return <div className="snake-bit" style={{ left: bit.x * STEP, top: bit.y * STEP }}></div >
-        })
-
-        const foodBits = food.map(bit => {
-            return <div className="food-bit" style={{ left: bit.x * STEP, top: bit.y * STEP }}></div >
         })
 
         return <div class="board" >
@@ -103,8 +93,7 @@ class Snake extends Component {
                 <button onClick={this.handleRightButtonClicked}>Right</button>
             </div>
 
-            {snakeBits}
-            {foodBits}
+            {snake}
         </div >
     }
 }
