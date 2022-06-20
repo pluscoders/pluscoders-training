@@ -15,9 +15,9 @@ class Snake extends Component {
 
         const food = []
 
-        const fruit = new Bit(Math.round(Math.random() * 1000), Math.round(Math.random() * 500))
-
-        food.push(fruit)
+        food.push(new Bit(Math.round(Math.random() * 10), Math.round(Math.random() * 20)))
+        food.push(new Bit(Math.round(Math.random() * 10), Math.round(Math.random() * 20)))
+        food.push(new Bit(Math.round(Math.random() * 10), Math.round(Math.random() * 20)))
 
         this.state = { snake: [new Bit(0, 0)], direction: null, food }
 
@@ -39,7 +39,7 @@ class Snake extends Component {
             const preBit = snake[snake.length - 1]
             const newBit = new Bit(preBit.x, preBit.y + 1)
 
-            const newBits = snake.concat(newBit)
+            const newBits = snake.slice(1).concat(newBit)
 
             this.setState({ snake: newBits, direction: 'down' })
         }
@@ -52,7 +52,7 @@ class Snake extends Component {
             const preBit = snake[snake.length - 1]
             const newBit = new Bit(preBit.x + 1, preBit.y)
 
-            const newBits = snake.concat(newBit)
+            const newBits = snake.slice(1).concat(newBit)
 
             this.setState({ snake: newBits, direction: 'right' })
         }
@@ -65,7 +65,7 @@ class Snake extends Component {
             const preBit = snake[snake.length - 1]
             const newBit = new Bit(preBit.x, preBit.y - 1)
 
-            const newBits = snake.concat(newBit)
+            const newBits = snake.slice(1).concat(newBit)
 
             this.setState({ snake: newBits, direction: 'up' })
         }
@@ -78,7 +78,7 @@ class Snake extends Component {
             const preBit = snake[snake.length - 1]
             const newBit = new Bit(preBit.x - 1, preBit.y)
 
-            const newBits = snake.concat(newBit)
+            const newBits = snake.slice(1).concat(newBit)
 
             this.setState({ snake: newBits, direction: 'left' })
         }
