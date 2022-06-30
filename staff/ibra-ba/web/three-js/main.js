@@ -19,6 +19,7 @@ const materials = [
     new THREE.MeshBasicMaterial({ map: loader.load("textures/radiation.png") }),
     new THREE.MeshBasicMaterial({ map: loader.load("textures/radiation.png") }),
     new THREE.MeshBasicMaterial({ map: loader.load("textures/radiation.png") }),
+
 ];
 
 const cube = new THREE.Mesh(geometry, materials)
@@ -56,7 +57,7 @@ function animate() {
     requestAnimationFrame(animate)
 
     //cube.rotation.x += 0.02
-    //cube.rotation.y += 0.01
+    cube.rotation.y += 0.01
 
     renderer.render(scene, camera)
 }
