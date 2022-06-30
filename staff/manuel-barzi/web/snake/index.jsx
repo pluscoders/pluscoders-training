@@ -11,6 +11,8 @@ const STEP = 11
 
 class Snake extends Component {
     constructor() {
+        console.log('Snake -> constructor')
+
         super()
 
         const food = []
@@ -19,72 +21,88 @@ class Snake extends Component {
         food.push(new Bit(Math.round(Math.random() * 10), Math.round(Math.random() * 20)))
         food.push(new Bit(Math.round(Math.random() * 10), Math.round(Math.random() * 20)))
 
-        this.state = { snake: [new Bit(0, 0)], direction: null, food }
-
-        // TODO see Function.prototype.bind() / .call() / .apply()
-        this.handleDownButtonClicked = this.handleDownButtonClicked.bind(this)
-        this.handleRightButtonClicked = this.handleRightButtonClicked.bind(this)
-        this.handleUpButtonClicked = this.handleUpButtonClicked.bind(this)
-        this.handleLeftButtonClicked = this.handleLeftButtonClicked.bind(this)
+        this.state = { snake: [new Bit(0, 0)], direction: 'down', food }
     }
 
-    handleKeyPressed(event) {
-        console.log(event)
-    }
+    componentDidMount() {
+        console.log('Snake -> componentDidMount')
 
-    handleDownButtonClicked(event) {
-        const { state: { direction, snake } } = this
+        setInterval(() => {
+            const { state: { snake, food, direction } } = this
 
-        if (direction !== 'up') {
             const preBit = snake[snake.length - 1]
-            const newBit = new Bit(preBit.x, preBit.y + 1)
 
-            const newBits = snake.slice(1).concat(newBit)
+            let newBit
 
-            this.setState({ snake: newBits, direction: 'down' })
-        }
-    }
+            switch (direction) {
+                case 'up':
+                    newBit = new Bit(preBit.x, preBit.y - 1)
+                    break
 
-    handleRightButtonClicked(event) {
-        const { state: { direction, snake } } = this
+                case 'down':
+                    newBit = new Bit(preBit.x, preBit.y + 1)
+                    break
 
-        if (direction !== 'left') {
-            const preBit = snake[snake.length - 1]
-            const newBit = new Bit(preBit.x + 1, preBit.y)
+                case 'left':
+                    newBit = new Bit(preBit.x - 1, preBit.y)
+                    break
 
-            const newBits = snake.slice(1).concat(newBit)
+                case 'right':
+                    newBit = new Bit(preBit.x + 1, preBit.y)
+                    break
 
-            this.setState({ snake: newBits, direction: 'right' })
-        }
-    }
+                default:
+                    break
+            }
 
-    handleUpButtonClicked(event) {
-        const { state: { direction, snake } } = this
+            const eating = food.some(foodBit => foodBit.x === newBit.x && foodBit.y === newBit.y)
 
-        if (direction !== 'down') {
-            const preBit = snake[snake.length - 1]
-            const newBit = new Bit(preBit.x, preBit.y - 1)
+            const newBits = eating ? snake.concat(newBit) : snake.slice(1).concat(newBit)
 
-            const newBits = snake.slice(1).concat(newBit)
+            this.setState({ snake: newBits })
+        }, 250)
 
-            this.setState({ snake: newBits, direction: 'up' })
-        }
-    }
+        document.addEventListener('keydown', event => {
+            console.log('document -> keydown')
 
-    handleLeftButtonClicked(event) {
-        const { state: { direction, snake } } = this
+            const { key } = event
 
-        if (direction !== 'right') {
-            const preBit = snake[snake.length - 1]
-            const newBit = new Bit(preBit.x - 1, preBit.y)
+            const { state: { direction } } = this
 
-            const newBits = snake.slice(1).concat(newBit)
+            let newDirection = direction
 
-            this.setState({ snake: newBits, direction: 'left' })
-        }
+            switch (key) {
+                case 'ArrowUp':
+                    if (direction !== 'down')
+                        newDirection = 'up'
+                    break
+
+                case 'ArrowDown':
+                    if (direction !== 'up')
+                        newDirection = 'down'
+                    break
+
+                case 'ArrowLeft':
+                    if (direction !== 'right')
+                        newDirection = 'left'
+                    break
+
+                case 'ArrowRight':
+                    if (direction !== 'left')
+                        newDirection = 'right'
+                    break
+
+                default:
+                    break
+            }
+
+            this.setState({ direction: newDirection })
+        })
     }
 
     render() {
+        console.log('Snake -> render')
+
         const { state: { snake, food } } = this
 
         const snakeBits = snake.map(bit => {
@@ -96,13 +114,6 @@ class Snake extends Component {
         })
 
         return <div class="board" >
-            <div className="keyboard">
-                <button onClick={this.handleLeftButtonClicked}>Left</button>
-                <button onClick={this.handleUpButtonClicked}>Up</button>
-                <button onClick={this.handleDownButtonClicked}>Down</button>
-                <button onClick={this.handleRightButtonClicked}>Right</button>
-            </div>
-
             {snakeBits}
             {foodBits}
         </div >
@@ -112,5 +123,3 @@ class Snake extends Component {
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(<Snake />)
-
-// TODO learn React component life cycle methods
