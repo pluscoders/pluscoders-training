@@ -31,7 +31,7 @@ function authenticateUser(email, password) {
     if (!match)
       throw new Error('wrong credentials')
 
-    return user.id
+    return user.id.toString()
   })()
 }
 

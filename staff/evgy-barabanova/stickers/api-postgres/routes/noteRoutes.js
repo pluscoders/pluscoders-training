@@ -1,15 +1,22 @@
-const router = require('express').Router();
-const { createNote, retrieveNotes, deleteNote, updateNote } = require('../logic');
+const router = require('express').Router()
+const { createNote, retrieveNotes, deleteNote, updateNote } = require('../logic')
+const { env: { JWT_SECRET } } = process
+const jwt = require('jsonwebtoken')
 
 router.post('/', async (req, res) => {
   try {
-    const { authorization } = req.headers
+    const { headers: { authorization } } = req
 
-    const [, userId] = authorization.split(' ')
+    const [, token] = authorization.split(' ')
 
-    const {
-      text
-    } = req.body
+    const payload = jwt.verify(token, JWT_SECRET)
+
+    const { sub: userId } = payload
+
+    // const {
+    //   text
+    // } = req.body
+    const { body: { text } } = req
 
     await createNote(userId, text)
 
@@ -21,9 +28,13 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const { authorization } = req.headers
+    const { headers: { authorization } } = req
 
-    const [, userId] = authorization.split(' ')
+    const [, token] = authorization.split(' ')
+
+    const payload = jwt.verify(token, JWT_SECRET)
+
+    const { sub: userId } = payload
 
     const notes = await retrieveNotes(userId)
 

@@ -12,6 +12,10 @@ function retrieveUser(userId) {
 
     if (!user) throw new Error(`user with id ${userId} not found`)
 
+    user.id = user.id.toString()
+
+    delete user.password
+
     return user
   })()
 }

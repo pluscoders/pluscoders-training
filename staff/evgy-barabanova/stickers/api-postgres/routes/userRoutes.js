@@ -1,5 +1,8 @@
 const router = require('express').Router()
 const { registerUser, authenticateUser, retrieveUser } = require('../logic')
+//const JWT_SECRET = process.env.JWT_SECRET
+const { env: { JWT_SECRET } } = process
+const jwt = require('jsonwebtoken')
 
 router.post('/', async (req, res) => {
   try {
@@ -26,19 +29,31 @@ router.post('/auth', async (req, res) => {
 
     const userId = await authenticateUser(email, password)
 
-    res.status(200).json({ userId })
+    const payload = {
+      sub: userId
+    }
+
+    const token = jwt.sign(payload, JWT_SECRET)
+
+    res.status(200).json({ token })
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
 })
 
-router.get('/:userId', async (req, res) => {
-  const { userId } = req.params
-
+router.get('/', async (req, res) => {
   try {
+    const { headers: { authorization } } = req
+
+    const [, token] = authorization.split(' ')
+
+    const payload = jwt.verify(token, JWT_SECRET)
+
+    const { sub: userId } = payload
+
     const user = await retrieveUser(userId)
 
-    res.status(200).json({ user })
+    res.status(200).json(user)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }

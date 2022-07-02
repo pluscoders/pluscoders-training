@@ -9,7 +9,14 @@ function retrieveNotes(userId) {
 
     if (!user) throw new Error(`user with id ${userId} not found`)
 
-    const notes = await Note.findAll({})
+    let notes = await Note.findAll({})
+
+    notes = notes.map(note => ({
+      id: note.id.toString(),
+      user_id: note.user_id.toString(),
+      text: note.text,
+      date: note.date
+    }))
 
     return notes
   })();
