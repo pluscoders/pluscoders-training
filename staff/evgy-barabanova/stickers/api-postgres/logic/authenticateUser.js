@@ -2,7 +2,22 @@ const bcrypt = require('bcrypt')
 const { User } = require('../db/models')
 
 function authenticateUser(email, password) {
-  // TODO validate arguments
+  const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+
+  if (typeof email !== 'string')
+    throw new Error('email is not a string')
+
+  else if (email.trim().length === 0)
+    throw new Error('email is empty or blank')
+
+  else if (!EMAIL_REGEXP.test(email))
+    throw new Error('email is not a valid email')
+
+  else if (typeof password !== 'string')
+    throw new Error('password is not a string')
+
+  else if (password.trim().length === 0)
+    throw new Error('password is empty or blank')
 
   return (async () => {
     const user = await User.findOne({
@@ -10,9 +25,6 @@ function authenticateUser(email, password) {
         email,
       },
     })
-
-    if (!user)
-      throw new Error(`user with email ${email} not found`)
 
     const match = await bcrypt.compare(password, user.password)
 
