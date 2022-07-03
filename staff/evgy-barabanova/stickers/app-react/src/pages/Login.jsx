@@ -1,39 +1,34 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
-import { useState } from "react";
-import axios from "axios";
+import { authenticateUser } from "../logic";
 
 export default function Login() {
-  const [items, setItems] = useState([]);
-  const [inputs, setInputs] = useState({});
+  const navigate = useNavigate();
 
-  const addHandler = (e) => {
-    axios
-      .post("http://localhost:5000/users/auth", {
-        email: inputs.email,
-        password: inputs.password,
-      })
-      .then((loginUser) => {
-        //console.log('newSer', newUser);
-        // const {email, password} = loginUser.data.post
-      });
-    setInputs({});
-  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-  const inputsHandler = (e) => {
-    console.log(e.target.value);
-    // setInputs(pre => ({...pre, [e.target.name]: e.target.value}))
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+    try {
+      authenticateUser(email, password)
+      .then(()=> navigate('/home'))
+      .catch(error => alert(error.message))
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
     <div className="Login">
       <h1>Login</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
-          name="username"
-          type="username"
-          placeholder="Enter your username"
+          name="email"
+          type="email"
+          placeholder="Enter youremail"
         />
         <input
           name="password"
