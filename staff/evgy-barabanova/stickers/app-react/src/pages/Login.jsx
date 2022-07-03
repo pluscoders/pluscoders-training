@@ -14,8 +14,12 @@ export default function Login() {
 
     try {
       authenticateUser(email, password)
-      .then(()=> navigate('/home'))
-      .catch(error => alert(error.message))
+        .then(token => {
+          sessionStorage.token = token
+          
+          navigate('/home')
+        })
+        .catch(error => alert(error.message))
     } catch (error) {
       alert(error.message);
     }

@@ -30,4 +30,10 @@ export default function registerUser(name, email, password) {
             email,
             password,
         })
+        .then(() => {})
+        .catch(error => {
+            const message = error.response.data.error
+
+            throw new Error(message)
+        })
 }

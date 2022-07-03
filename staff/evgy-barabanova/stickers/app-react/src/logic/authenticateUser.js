@@ -23,4 +23,14 @@ export default function authenticateUser(email, password) {
       email,
       password,
     })
+    .then(response => {
+      const { token } = response.data
+
+      return token
+    })
+    .catch(error => {
+      const message = error.response.data.error
+
+      throw new Error(message)
+    })
 }
