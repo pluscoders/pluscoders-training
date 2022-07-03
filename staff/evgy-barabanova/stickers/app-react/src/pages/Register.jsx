@@ -1,36 +1,31 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./Register.css";
-import { useState } from "react";
-import axios from "axios";
+import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import './Register.css'
+import { registerUser } from '../logic'
 
 export default function Register() {
-  const [items, setItems] = useState([]);
-  const [inputs, setInputs] = useState({});
+  const navigate = useNavigate()
 
-  const addHandler = (e) => {
-    axios
-      .post("http://localhost:5000/users", {
-        name: inputs.name,
-        email: inputs.email,
-        password: inputs.password,
-      })
-      .then((newUser) => {
-        //console.log('newSer', newUser);
-        // const {name, email, password} = newUser.data.post
-      });
-    setInputs({});
-  };
+  const handleSubmit = event => {
+    event.preventDefault()
 
-  const inputsHandler = (e) => {
-    console.log(e.target.value);
-    // setInputs(pre => ({...pre, [e.target.name]: e.target.value}))
-  };
+    const name = event.target.name.value
+    const email = event.target.email.value
+    const password = event.target.password.value
+
+    try {
+      registerUser(name, email, password)
+        .then(() => navigate('/login'))
+        .catch(error => {debugger; alert(error.message)})
+    } catch(error) {
+      alert(error.message)
+    }
+  }
 
   return (
     <div className="Register">
       <h1>Register</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input name="name" type="text" placeholder="Enter your name" />
         <input name="email" type="email" placeholder="Enter your email" />
         <input
@@ -42,5 +37,5 @@ export default function Register() {
       </form>
       <Link to="/">back</Link>
     </div>
-  );
+  )
 }

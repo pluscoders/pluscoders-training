@@ -1,9 +1,9 @@
 const bcrypt = require('bcrypt')
 const { User } = require('../db/models')
 
-function registerUser(name, email, password) {
-  const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu
 
+function registerUser(name, email, password) {
   if (typeof name !== 'string')
     throw new Error('name is not a string')
 
