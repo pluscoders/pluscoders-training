@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
 
     res.status(201).send()
   } catch (error) {
-    res.status(500).json({ error: error.massage })
+    res.status(500).json({ error: error.message })
   }
 })
 
@@ -46,11 +46,13 @@ router.get('/', async (req, res) => {
 
 router.delete('/:noteId', async (req, res) => {
   try {
-    const { authorization } = req.headers
+    const { headers: { authorization }, params: { noteId } } = req
 
-    const [, userId] = authorization.split(' ')
+    const [, token] = authorization.split(' ')
 
-    const { noteId } = req.params
+    const payload = jwt.verify(token, JWT_SECRET)
+
+    const { sub: userId } = payload
 
     await deleteNote(userId, noteId)
     res.status(204).send()
@@ -61,12 +63,21 @@ router.delete('/:noteId', async (req, res) => {
 
 router.patch('/:noteId', async (req, res) => {
   try {
-    const { authorization } = req.headers
+    // const { authorization } = req.headers
 
-    const [, userId] = authorization.split(' ')
+    // const [, userId] = authorization.split(' ')
 
-    const { noteId } = req.params
-    const { text } = req.body
+    // const { noteId } = req.params
+    // const { text } = req.body
+
+    const { headers: { authorization }, params: { noteId }, body: { text } } = req
+
+    const [, token] = authorization.split(' ')
+
+    const payload = jwt.verify(token, JWT_SECRET)
+
+    const { sub: userId } = payload
+
 
     await updateNote(userId, noteId, text)
     res.status(201).send()
