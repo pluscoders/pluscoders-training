@@ -1,0 +1,36 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+header {
+    background-color: orange;
+    height: 20%;
+}
+
+nav {
+    background-color: yellow;
+    width: 20%;
+}
+
+main {
+    background-color: skyblue;
+    width: 60%;
+}
+
+aside {
+    background-color: greenyellow;
+    width: 20%;
+}
+
+footer {
+    background-color: coral;
+    height: 20%;
+}
+
+.body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 60%;
+}
