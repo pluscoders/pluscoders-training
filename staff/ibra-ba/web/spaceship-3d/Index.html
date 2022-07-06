@@ -5,34 +5,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Game 3D</title>
+    <title>Space Game 3D</title>
     <link rel="shortcut icon" href="Multimedia/car_icon3959.png" type="image/x-icon">
 </head>
 
 <body>
 
-    <h1>Car Game 3D</h1>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 
         body {
             margin: 0;
         }
 
-        h1{
-            font-family: 'Bangers', sans-serif;
-            margin: 20px;
-        }
     </style>
 
     <script src="three.js"></script>
     <script type="module" src="GLTFLoader.js"></script>
 
     <script type="module">
-        //Hola Manu Cargue un modelo 3d que encontre en una pagina :) que porcierto ese es su color porque olvide darle textura en el blender
+       
 
-        import { GLTFLoader } from "./GLTFLoader.js"; //el archivo que te carga el modelo
+        import { GLTFLoader } from "./GLTFLoader.js"; 
 
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera(
@@ -46,28 +40,30 @@
         var loader = new GLTFLoader()
         var obj;
 
-        loader.load('scene.gltf', function (gltf) { //te carga el modelo 
+        loader.load('scene.gltf', function (gltf) { 
             obj = gltf.scene;
-            scene.add(gltf.scene);// lo pone el la escena
+            scene.add(gltf.scene);
         });
 
-        scene.background = new THREE.Color(0xFFFFFF) //descubri que se podia cambiar el color de fondo con hexadecimal
-        var light = new THREE.HemisphereLight(0xffffff, 0x000000, 5); //la luz, que se puede cambiar de color, El valor 5 es la potencia de la luz la puedes incrementar o bajar 
+        scene.background = new THREE.Color(0x200642) 
+        var light = new THREE.HemisphereLight(0xffffff, 0x000000, 3); 
+
+        var loader = new THREE.TextureLoader()                // cree un texture loader para poner una imagen de fondo
+        loader.load('spaceback.jpg', function(texture){
+            scene.background = texture
+        })
 
         scene.add(light);
-        camera.position.set(0, 20, 700); //posicion de la camara de los ejes x y z como en unity
+        camera.position.set(0, 100, 300); 
         function animate() {
             requestAnimationFrame(animate);
             renderer.render(scene, camera);
-
-            //obj.rotation.y += 0.01
 
         }
 
         animate();
 
-        const step = .2
-        const step2 = 10 //le añadi esta nueva porque la step era muy lenta para subir y bajar
+        const step = 10
 
         document.onkeydown = event => {
             const { key } = event
@@ -75,13 +71,13 @@
             //console.log(key)
 
             if (key === 'ArrowUp')
-                obj.rotation.x -= step
+                obj.position.y += step
             else if (key === 'ArrowDown')
-                obj.rotation.x += step
+                obj.position.y -= step
             else if (key === 'ArrowLeft')
-                obj.rotation.y -= step
+                obj.position.x -= step
             else if (key === 'ArrowRight')
-                obj.rotation.y += step
+                obj.position.x += step
             else if (key === 'PageUp')
                 obj.position.y += step2
             else if (key === 'PageDown')
