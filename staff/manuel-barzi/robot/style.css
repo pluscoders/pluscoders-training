@@ -1,0 +1,90 @@
+.robot {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.face {
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    display: grid;
+    grid-template-areas: 
+    ". . . . ."
+    ". e1 . e2 ."
+    ". . n . ."
+    ". m m m ."
+    ". . . . .";
+    border-radius: 20px;
+}
+
+.eye {
+    background-color: white;
+    border-radius: 10px;
+}
+
+.eye-1 {
+    grid-area: e1;
+}
+
+.eye-2 {
+    grid-area: e2;
+}
+
+.nose {
+    background-color: black;
+    grid-area: n;
+}
+
+.mouth {
+    background-color: white;
+    grid-area: m;
+}
+
+.neck {
+    background-color: dodgerblue;
+    width: 30px;
+    height: 10px;
+}
+
+.trunk {
+    background-color: yellowgreen;
+    width: 60px;
+    height: 60px;
+}
+
+.torso {
+    display: flex;
+}
+
+.arm {
+    width: 20px;
+    height: 40px;
+}
+
+.arm-1 {
+    background-color: darkturquoise;
+}
+
+.arm-2 {
+    background-color: darksalmon;
+}
+
+.legs {
+    display: flex;
+}
+
+.leg {
+    width: 20px;
+    height: 40px;
+}
+
+.leg-1 {
+    background-color: aqua;
+}
+
+.leg-2 {
+    background-color: gold;
+}
