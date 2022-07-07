@@ -1,0 +1,34 @@
+html, body{
+    height: 100%;
+    margin: 0%;
+}
+body{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+header{ 
+background-color: lightsteelblue;
+grid-column-start: 1;
+grid-column-end: 6;
+}
+nav{
+    background-color: aquamarine;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    }
+main{
+    background-color: rebeccapurple;
+    grid-column-start: 2;
+    grid-column-end: 5;
+}
+aside{
+    background-color: lightcoral;
+    grid-column-start: 5;
+    grid-column-end: 6;
+}
+footer{
+    background-color: lightseagreen;
+    grid-column-start: 1;
+    grid-column-end: 6;
+}

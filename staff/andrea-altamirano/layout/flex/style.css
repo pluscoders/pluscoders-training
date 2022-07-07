@@ -1,0 +1,30 @@
+html, body{
+    height: 100%;
+    margin: 0%;
+}
+
+header{ 
+background-color: olivedrab;
+height: 20%;
+}
+nav{
+    background-color: aquamarine;
+    width: 20%;
+    }
+main{
+    background-color: rebeccapurple;
+    width: 60%;
+}
+aside{
+    background-color: lightcoral;
+    width: 20%;
+}
+footer{
+    background-color: lightseagreen;
+    height: 20%;
+}
+.body {
+    display: flex;
+    justify-content:space-evenly;
+    height: 60%;
+}
