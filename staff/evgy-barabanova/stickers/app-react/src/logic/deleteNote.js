@@ -1,29 +1,24 @@
 import axios from 'axios'
 
-export default function createNote(token, text) {
-  // TODO validate inputs
+export default function deleteNote(token, noteId) {
   if (typeof token !== 'string') throw new Error('token is not a string')
 
   else if (!token.trim().length) throw new Error('token is empty or blank')
 
-  else if (typeof text !== 'string')
-    throw new Error('text is not a string')
+  else if (typeof noteId !== 'string')
+    throw new Error('noteId is not a string')
 
-  else if (text.trim().length === 0)
-    throw new Error('text is empty or blank')
-
-
-  // TODO call api via ajax
+  else if (!noteId.trim().length) throw new Error('token is empty or blank')
 
   return axios
     .post(`${process.env.REACT_APP_API_URL}/notes`, {
       token,
-      text,
+      noteId
     })
     .then(response => {
-      const { token } = response.data
+      // const { noteId } = response.data
 
-      return token
+      // return token
     })
     .catch(error => {
       const message = error.response.data.error
@@ -31,3 +26,4 @@ export default function createNote(token, text) {
       throw new Error(message)
     })
 }
+
