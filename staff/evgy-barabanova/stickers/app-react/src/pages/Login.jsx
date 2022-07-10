@@ -6,7 +6,7 @@ import { authenticateUser } from "../logic"
 export default function Login() {
   const navigate = useNavigate()
 
-  const handleSubmit = (event) => {
+  const handleAuthenticateUser = (event) => {
     event.preventDefault()
 
     const email = event.target.email.value
@@ -28,7 +28,7 @@ export default function Login() {
   return (
     <div className="Login">
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleAuthenticateUser}>
         <input
           name="email"
           type="email"

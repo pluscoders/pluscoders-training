@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 export default function createNote(token, text) {
-  // TODO validate inputs
   if (typeof token !== 'string') throw new Error('token is not a string')
 
   else if (!token.trim().length) throw new Error('token is empty or blank')
@@ -17,14 +16,13 @@ export default function createNote(token, text) {
 
   return axios
     .post(`${process.env.REACT_APP_API_URL}/notes`, {
-      token,
-      text,
+      text
+    }, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
     })
-    .then(response => {
-      const { token } = response.data
-
-      return token
-    })
+    .then(() => { })
     .catch(error => {
       const message = error.response.data.error
 

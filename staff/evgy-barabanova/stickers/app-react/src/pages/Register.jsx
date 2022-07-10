@@ -6,7 +6,7 @@ import { registerUser } from '../logic'
 export default function Register() {
   const navigate = useNavigate()
 
-  const handleSubmit = event => {
+  const handleRegisterUser = event => {
     event.preventDefault()
 
     const name = event.target.name.value
@@ -25,7 +25,7 @@ export default function Register() {
   return (
     <div className="Register">
       <h1>Register</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleRegisterUser}>
         <input name="name" type="text" placeholder="Enter your name" />
         <input name="email" type="email" placeholder="Enter your email" />
         <input
