@@ -1,0 +1,40 @@
+html, body{
+    height: 100%;
+}
+body{
+    background-color: black;
+    color: white;
+}
+
+.lenguaje{
+    display: flex;
+    justify-content: flex-end;   
+}
+.español{
+    background-color: lightgray;
+    color: black;
+    margin-right: 10px;
+}
+.english{
+    background-color: lightgray;
+    color: black;
+    margin-right: 10px;
+}
+.portugues{
+    background-color: lightgray;
+    color: black;
+    margin-right: 10px;
+}
+.video{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    background-color: lightgray;
+    height: 700px;
+    margin: 10px;
+}
+.quienes-somos{
+    height: 50px;
+    width: 50px;
+    grid-column-start: 2;
+    grid-column-end: 5;
+}
