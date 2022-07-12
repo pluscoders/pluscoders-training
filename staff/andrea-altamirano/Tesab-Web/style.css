@@ -1,76 +1,98 @@
-html, body{
+html,
+body {
     height: 100%;
-}
-body{
-    background-color: black;
-    color: white;
+    top: 0;
 }
 
-.container-lenguaje{
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.header {
+    background-color: white;
+    height: 15%;
+    padding: 10px;
+}
+
+.main {
+    height: 75%;
     display: flex;
-    justify-content: flex-end;   
+    justify-content: center;
+    align-items: center;
+    background-image: url(images/tesab-1012.jpg);
 }
-.español{
-    background-color: lightgray;
-    height: 25px;
-    width: 75px;
-    color: black;
-    margin-right: 10px;
-    text-align: center;
-}
-.english{
-    background-color: lightgray;
-    color: black;
-    margin-right: 10px;
-    height: 25px;
-    width: 75px;
-    text-align: center;
-}
-.portugues{
-    background-color: lightgray;
-    color: black;
-    margin-right: 10px;
-    height: 25px;
-    width: 75px;
-    text-align: center;
-}
-.video{
-    background-color: lightgray;
-    height: 700px;
-    margin: 10px;
-}
-.container-menu{
-display: grid;
-grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
 
+.footer {
+    height: 10%;
 }
-.quienes-somos{
-    background-color: lightgray;
+
+.title {
+    background-image: url(images/tesab-logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: transparent;
+    margin: 0;
+}
+
+.language {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.language__item {
+    height: 25px;
+    width: 75px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.menu {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.menu__item {
     height: 50px;
     width: 75px;
     text-align: center;
 }
-.equipos{
-    background-color: lightgray;
-    height: 50px;
-    width: 75px;
-    text-align: center;
+
+.menu-2 {
+    display: grid;
+    grid-template-areas: 
+        ". a . b . c ."
+        ". . d . e . .";
 }
-.recambios{
-    background-color: lightgray;
-    height: 50px;
-    width: 75px;
+
+.menu-2__item {
+    background-color: white;
+    opacity: 0.7;
+    height: 80px;
+    width: 80px;
     text-align: center;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.servicios{
-    background-color: lightgray;
-    height: 50px;
-    width: 75px;
-    text-align: center;
+
+.menu-2__item:nth-child(1) {
+    grid-area: a;
 }
-.contacto{ 
-    background-color: lightgray;
-    height: 50px;
-    width: 75px;
-    text-align: center;
+
+.menu-2__item:nth-child(2) {
+    grid-area: b;
+}
+
+.menu-2__item:nth-child(3) {
+    grid-area: c;
+}
+
+.menu-2__item:nth-child(4) {
+    grid-area: d;
+}
+
+.menu-2__item:nth-child(5) {
+    grid-area: e;
 }
