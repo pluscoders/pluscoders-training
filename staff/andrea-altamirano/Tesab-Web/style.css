@@ -6,35 +6,71 @@ body{
     color: white;
 }
 
-.lenguaje{
+.container-lenguaje{
     display: flex;
     justify-content: flex-end;   
 }
 .español{
     background-color: lightgray;
+    height: 25px;
+    width: 75px;
     color: black;
     margin-right: 10px;
+    text-align: center;
 }
 .english{
     background-color: lightgray;
     color: black;
     margin-right: 10px;
+    height: 25px;
+    width: 75px;
+    text-align: center;
 }
 .portugues{
     background-color: lightgray;
     color: black;
     margin-right: 10px;
+    height: 25px;
+    width: 75px;
+    text-align: center;
 }
 .video{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     background-color: lightgray;
     height: 700px;
     margin: 10px;
 }
+.container-menu{
+display: grid;
+grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
+
+}
 .quienes-somos{
+    background-color: lightgray;
     height: 50px;
-    width: 50px;
-    grid-column-start: 2;
-    grid-column-end: 5;
+    width: 75px;
+    text-align: center;
+}
+.equipos{
+    background-color: lightgray;
+    height: 50px;
+    width: 75px;
+    text-align: center;
+}
+.recambios{
+    background-color: lightgray;
+    height: 50px;
+    width: 75px;
+    text-align: center;
+}
+.servicios{
+    background-color: lightgray;
+    height: 50px;
+    width: 75px;
+    text-align: center;
+}
+.contacto{ 
+    background-color: lightgray;
+    height: 50px;
+    width: 75px;
+    text-align: center;
 }
