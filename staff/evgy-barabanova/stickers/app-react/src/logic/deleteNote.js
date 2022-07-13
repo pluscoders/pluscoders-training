@@ -11,15 +11,13 @@ export default function deleteNote(token, noteId) {
   else if (!noteId.trim().length) throw new Error('token is empty or blank')
 
   return axios
-    .post(`${process.env.REACT_APP_API_URL}/notes`, {
-      token,
-      noteId
-    })
-    .then(response => {
-      // const { noteId } = response.data
-
-      // return token
-    })
+    .delete(`${process.env.REACT_APP_API_URL}/notes/${noteId}`, 
+      {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      })
+    .then(() => { })
     .catch(error => {
       const message = error.response.data.error
 

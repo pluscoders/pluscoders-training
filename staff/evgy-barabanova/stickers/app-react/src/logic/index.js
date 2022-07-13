@@ -4,6 +4,7 @@ import retrieveUser from './retrieveUser'
 import createNote from './createNote'
 import updateNote from './updateNote'
 import deleteNote from './deleteNote'
+import retrieveNotes from './retrieveNotes'
 
 export {
     registerUser,
@@ -12,4 +13,5 @@ export {
     createNote,
     updateNote,
     deleteNote,
+    retrieveNotes,
 }

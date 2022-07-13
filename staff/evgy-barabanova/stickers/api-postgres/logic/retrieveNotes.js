@@ -11,7 +11,7 @@ function retrieveNotes(userId) {
 
     let notes = await Note.findAll({})
 
-    notes = notes.map(note => ({
+    notes = notes.map((note) => ({
       id: note.id.toString(),
       user_id: note.user_id.toString(),
       text: note.text,
