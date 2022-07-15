@@ -53,25 +53,23 @@ export default function Home() {
     try {
       deleteNote(sessionStorage.token, noteId)
         .then(() => retrieveNotes(sessionStorage.token))
-        .then((notes) =>
-          setNotes(notes)
-        )
+        .then((notes) => setNotes(notes))
         .catch((error) => alert(error.message))
     } catch (error) {
       alert(error.message)
     }
   }
 
-   const handleUpdateNote = (noteId, text) => {
-     try {
-       updateNote(sessionStorage.token, noteId, text)
-         .then(() => retrieveNotes(sessionStorage.token))
-         .then((notes) => setNotes(notes))
-         .catch((error) => alert(error.message))
-     } catch (error) {
-       alert(error.message)
-     }
-   }
+  const handleUpdateNote = (noteId, text) => {
+    try {
+      updateNote(sessionStorage.token, noteId, text)
+        .then(() => retrieveNotes(sessionStorage.token))
+        .then((notes) => setNotes(notes))
+        .catch((error) => alert(error.message))
+    } catch (error) {
+      alert(error.message)
+    }
+  }
 
   return (
     <div>
@@ -85,17 +83,23 @@ export default function Home() {
             <div>{note.date}</div>
             <button onClick={() => handleDeleteNote(note.id)}>Delete</button>
 
-            <form onSubmit={event=>{
-              event.preventDefault()
+            <form
+              onSubmit={(event) => {
+                event.preventDefault()
 
-              const text = event.target.text.value;
+                const text = event.target.text.value
 
-              handleUpdateNote( note.id, text)
-            }}>
-            <textarea  name="text" placeholder="Edit me" defaultValue={note.text}></textarea>    
-            <button type="submit">Update</button>
+                handleUpdateNote(note.id, text)
+              }}
+            >
+              <textarea
+                name="text"
+                placeholder="Edit me"
+                defaultValue={note.text}
+              ></textarea>
+              <button type="submit">Update</button>
             </form>
-        </div>
+          </div>
         ))}
       </ul>
 
@@ -105,8 +109,6 @@ export default function Home() {
         <input name="text" type="text" placeholder="Enter your note" />
         <button type="submit">Create</button>
       </form>
-
-      {/* <button type="submit">Update</button> */}
     </div>
   )
 }
