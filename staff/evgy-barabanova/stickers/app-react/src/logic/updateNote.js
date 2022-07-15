@@ -16,13 +16,14 @@ export default function updateNote(token, noteId, text) {
   else if (!text.trim().length) throw new Error('text is empty or blank')
 
   return axios
-    .post(`${process.env.REACT_APP_API_URL}/notes/:noteId`, {
-      token, 
-      noteId, 
+    .patch(`${process.env.REACT_APP_API_URL}/notes/${noteId}`, {
       text
+    }, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
     })
-    .then(
-    )
+    .then(() => { })
     .catch(error => {
       const message = error.response.data.error
 
