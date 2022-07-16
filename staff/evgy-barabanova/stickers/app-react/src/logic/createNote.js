@@ -8,9 +8,6 @@ export default function createNote(token, text) {
   else if (typeof text !== 'string')
     throw new Error('text is not a string')
 
-  else if (text.trim().length === 0)
-    throw new Error('text is empty or blank')
-
 
   // TODO call api via ajax
 

@@ -1,43 +1,66 @@
 .Landing {
   box-sizing: border-box;
+  position: absolute;
   width: 2160px;
   height: 1456px;
-  background: linear-gradient(114.04deg, #69A1AC 11.79%, rgba(146, 100, 168, 0.74) 66.28%, rgba(112, 11, 239, 0.7) 100%);
-  border: 1px solid #000000;
+  background: rgba(241, 241, 241, 0.74) 66.28%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.text__title {
+.element__top {
+  box-sizing: border-box;
+  position: absolute;
+  width: 182px;
+  height: 182px;
+  top: -22.69px;
+  background: linear-gradient(155.02deg, rgba(147, 225, 211, 0.6) 25.24%, rgba(226, 226, 226, 0) 90.39%);
+  transform: rotate(107.69deg);
+}
 
+.text__title {
+  position: absolute;
+  width: 200px;
+  height: 56px;
+  left: 114px;
+  top: 95px;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
   font-size: 48px;
   line-height: 56px;
-
   color: #000000;
-
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.btn__reg {
+.image {
+  position: absolute;
+  width: 363px;
+  height: 415px;
+  left: 30px;
+  top: 214px;
+}
+
+.link__reg {
+  position: absolute;
   width: 368px;
   height: 50px;
   left: 30px;
   top: 678px;
-
   background: #700BEF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
 }
 
-.btn__log {
+
+
+.link__log {
+  position: absolute;
   width: 368px;
   height: 50px;
   left: 30px;
-  top: 678px;
-
-  background: #700BEF;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  top: 760px;
+  background: rgba(112, 11, 239, 0.3);
   border-radius: 30px;
 }
+
+

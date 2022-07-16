@@ -26,9 +26,7 @@ export default function Home() {
     event.preventDefault()
 
     try {
-      const text = event.target.text.value
-
-      createNote(sessionStorage.token, text)
+      createNote(sessionStorage.token, '')
         .then(() => retrieveNotes(sessionStorage.token))
         .then((notes) => setNotes(notes))
         .catch((error) => alert(error.message))
@@ -79,26 +77,25 @@ export default function Home() {
       <ul className="noteText">
         {notes.map((note) => (
           <div className="textDate">
-            <div> {note.text}</div>
-            <div>{note.date}</div>
             <button onClick={() => handleDeleteNote(note.id)}>Delete</button>
 
             <form
               onSubmit={(event) => {
                 event.preventDefault()
-
+                
                 const text = event.target.text.value
-
+                
                 handleUpdateNote(note.id, text)
               }}
-            >
+              >
               <textarea
                 name="text"
-                placeholder="Edit me"
+                placeholder="Add note"
                 defaultValue={note.text}
-              ></textarea>
-              <button type="submit">Update</button>
+                ></textarea>
+              <button type="submit">Save</button>
             </form>
+            <div>{note.date}</div>
           </div>
         ))}
       </ul>
@@ -106,8 +103,7 @@ export default function Home() {
       <h2>New note</h2>
 
       <form onSubmit={handleCreateNote}>
-        <input name="text" type="text" placeholder="Enter your note" />
-        <button type="submit">Create</button>
+        <button type="submit">+</button>
       </form>
     </div>
   )
