@@ -28,24 +28,15 @@ export default function Register() {
   return (
     <div className="Register">
       <h1>Register</h1>
-      <div className="image">
-        <img src="images/login 1.png" alt="login" />
-      </div>
       <form onSubmit={handleRegisterUser}>
-        <div className="name">
         <input name="name" type="text" placeholder="Enter your name" />
-        </div>
-        <div className="email">
         <input name="email" type="email" placeholder="Enter your email" />
-        </div>
-        <div className="password">
         <input
           name="password"
           type="password"
           placeholder="Enter your password"
         />
-        </div>
-        
+
         <button type="submit">Register</button>
       </form>
       <Link to="/">back</Link>

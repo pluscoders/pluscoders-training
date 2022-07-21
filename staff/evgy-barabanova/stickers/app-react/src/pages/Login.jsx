@@ -1,39 +1,35 @@
-import React from "react"
-import { Link, useNavigate } from "react-router-dom"
-import "./Login.css"
-import { authenticateUser } from "../logic"
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./Login.css";
+import { authenticateUser } from "../logic";
 
 export default function Login() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleAuthenticateUser = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    const email = event.target.email.value
-    const password = event.target.password.value
+    const email = event.target.email.value;
+    const password = event.target.password.value;
 
     try {
       authenticateUser(email, password)
-        .then(token => {
-          sessionStorage.token = token
-          
-          navigate('/home')
+        .then((token) => {
+          sessionStorage.token = token;
+
+          navigate("/home");
         })
-        .catch(error => alert(error.message))
+        .catch((error) => alert(error.message));
     } catch (error) {
-      alert(error.message)
+      alert(error.message);
     }
-  }
+  };
 
   return (
     <div className="Login">
       <h1>Login</h1>
       <form onSubmit={handleAuthenticateUser}>
-        <input
-          name="email"
-          type="email"
-          placeholder="Enter youremail"
-        />
+        <input name="email" type="email" placeholder="Enter youremail" />
         <input
           name="password"
           type="password"
@@ -43,5 +39,5 @@ export default function Login() {
       </form>
       <Link to="/">back</Link>
     </div>
-  )
+  );
 }
