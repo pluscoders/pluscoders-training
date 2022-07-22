@@ -1,0 +1,37 @@
+/* generics */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.container--vertical {
+    flex-direction: column;
+}
+
+.container--bordered {
+    border: 1px solid black;
+}
+
+.input {
+    margin: .1rem;
+}
+
+/* utils */
+
+.off {
+    display: none;
+}
+
+/* custom */
+
+.login {
+}
+
+.register {
+}
+
+.home {
+}
