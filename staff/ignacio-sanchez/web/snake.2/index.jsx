@@ -19,7 +19,7 @@ class Snake extends Component {
         food.push(new Bit(Math.round(Math.random() * 10), Math.round(Math.random() * 20)))
         food.push(new Bit(Math.round(Math.random() * 10), Math.round(Math.random() * 20)))
 
-        this.state = { snake: [new Bit(0, 0)], direction: 'down', food }
+        this.state = { snake: [new Bit(0, 0)], direction: null, food }
 
         // TODO see Function.prototype.bind() / .call() / .apply()
         this.handleDownButtonClicked = this.handleDownButtonClicked.bind(this)
@@ -31,6 +31,24 @@ class Snake extends Component {
     handleKeyPressed(event) {
         console.log(event)
     }
+
+    // handleDownButtonClicked(event) {
+    //     const { state: { direction, snake, food } } = this
+
+    //     if (snake.length == 1) {
+    //         const preBit = snake[snake.length - 1]
+    //         const newBit = new Bit(preBit.x, preBit.y + 1)
+    //         const Food = food[food.length - 1]
+
+    //         if((preBit.x === Food.x) && (preBit.y === Food.y)){
+
+    //         }
+
+    //         this.setState({ snake: newBits, direction: 'down' })
+    //         const newBits = snake.slice(1).concat(newBit)
+
+    //     }
+    // }
 
     handleDownButtonClicked(event) {
         const { state: { direction, snake, food } } = this
@@ -90,32 +108,6 @@ class Snake extends Component {
 
             this.setState({ snake: newBits, direction: 'left' })
         }
-    }
-
-    componentDidMount() {
-        
-        setInterval(() => {
-            const { state: { direction } } = this
-            
-            switch (direction) {
-                case 'up':
-                    this.handleUpButtonClicked()
-                    break;
-                case 'down':
-                    this.handleDownButtonClicked()
-                    break;
-                case 'right':
-                    this.handleRightButtonClicked()
-                    break;
-                case 'left':
-                    this.handleLeftButtonClicked()
-                    break;
-            
-                default:
-                    break;
-            }
-
-        }, 500);
     }
 
     render() {
