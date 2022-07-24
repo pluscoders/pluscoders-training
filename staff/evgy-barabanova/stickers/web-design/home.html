@@ -8,33 +8,36 @@
   <link rel="stylesheet" href="style.css" type="text/css" />
   <title>Home</title>
 </head>
-<header class="header">
-  <div class="username">Hello, username!</div>
-  <button class="logout">Logout</button>
-</header>
 
 <body>
-  <h1>Note list</h1>
-  <div class="container">
-    <div class="sticker__1">
-      <div class="stick">
-        Note 1
-      </div>
-      <button class="delete">Delete</button>
-      <button class="save">Save</button>
-    </div>
-    <div class="sticker__2">
-      <div class="stick">
-        Note 2
-      </div>
-      <button class="delete">Delete</button>
-      <button class="save">Save</button>
-    </div>
+  <header class="header">
+    <h1 class="header__title">Hello, username!</h1>
+    <button class="header__logout-button">Logout</button>
+  </header>
 
-  </div>
-  <h1>New note</h1>
+  <main class="list">
+    <ul class="list">
+      <li class="list__item">
+        <div class="sticker">
+          <button class="sticker__delete-button">x</button>
+          <textarea class="sticker__text"></textarea>
+        </div>
+      </li>
+      <li class="list__item">
+        <div class="sticker">
+          <textarea class="sticker__text"></textarea>
+        </div>
+      </li>
+      <li class="list__item">
+        <div class="sticker">
+          <textarea class="sticker__text"></textarea>
+        </div>
+      </li>
+    </ul>
 
-  <button class="newNote">+</button>
+
+  </main>
+
 
 </body>
 

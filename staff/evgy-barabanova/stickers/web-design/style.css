@@ -1,85 +1,45 @@
-* {
+body {
   background-color: #1e90ff;
-  color: #ffffff;
-}
-
-.password_login, .email_login, .name_register,
-.email_register, .password_register {
-  margin-top: 40px;
-  margin-bottom: 40px;
-  font-size: 30px;
-  position: center;
-  text-align: center;
-}
-
-
-.Login, .Register {
-  margin-top: 200px;
-  margin-bottom: 20px;
-}
-
-
-.input {
-  font-size: 20px;
-}
-
-.test {
-  margin-left: 36rem;
-  font-size: 25px;
-}
-
-.line {
-  margin-top: 20px;
-  border-bottom: 3px solid #ffffff;
 }
 
 .header {
   display: flex;
   justify-content: flex-end;
-  font-size: 30px;
-  margin-top: 30px;
-  border-bottom: 3px solid #ffffff;
 }
 
-.username {
-  margin-right: 30px;
+.header__title {
+  color: #fff;
 }
 
-
-.logout {
-  font-size: 25px;
+.header__logout-button {
+  background-color: transparent;
+  color: #fff;
+  border: none;
 }
 
-.container {
-  width: 700px;
-  height: 1200px;
-  margin-top: 5rem;
+.list {
+  list-style: none;
+  padding: 0%;
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  overflow-y: scroll;
-
+  gap: 1rem;
+  align-items: center;
 }
 
-.stick {
-  width: 500px;
-  height: 500px;
-  background-color: rgb(248, 245, 63);
-  font-size: 30px;
-  position: center;
-  text-align: center;
-  margin-top: 5rem;
+.sticker {
+  display: inline-block;
+  background-color: yellow;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
 }
 
-.delete, .save {
-  font-size: 25px;
+.sticker__text {
+  background-color: orange;
+  border: none;
+  outline: none;
 }
 
-.new {
-  font-size: 25px;
-
-}
-
-.newNote {
-  margin-top: 5rem;
+.sticker__delete-button {
+  border: none;
 }
