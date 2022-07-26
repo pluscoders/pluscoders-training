@@ -30,9 +30,7 @@ export default function Home() {
     navigate("/login");
   };
 
-  const handleCreateNote = (event) => {
-    event.preventDefault();
-
+  const handleCreateNote = (text) => {
     try {
       createNote(sessionStorage.token, "")
         .then(() => retrieveNotes(sessionStorage.token))
@@ -68,28 +66,27 @@ export default function Home() {
 
   const handleUpdateNote = (noteId, text) => {
     try {
-      updateNote(sessionStorage.token, noteId, text)
-        .then(() => retrieveNotes(sessionStorage.token))
-        .then((notes) => setNotes(notes))
-        .catch((error) => alert(error.message));
+      updateNote(sessionStorage.token, noteId, text).catch((error) =>
+        alert(error.message)
+      );
     } catch (error) {
       alert(error.message);
     }
   };
 
   return (
-    <div>
-      <header className="header">
-        <h1 className="header__title">Hello, {user?.name}!</h1>
+    <>
+      <header className="home-page-header">
+        <h1 className="home-page-header__title">Hello, {user?.name}!</h1>
         <button
-          className="header__logout-button"
+          className="home-page-header__logout-button"
           onClick={() => handlerLogout()}
         >
           Logout
         </button>
       </header>
 
-      <main className="main">
+      <main className="home-page-main">
         <ul className="list">
           <li className="list__item">
             {notes.map((note) => (
@@ -101,36 +98,32 @@ export default function Home() {
                   x
                 </button>
 
-                <form
-                  onSubmit={(event) => {
-                    event.preventDefault();
-
-                    const text = event.target.text.value;
+                <p
+                  className="sticker__text"
+                  contentEditable="true"
+                  onKeyUp={(event) => {
+                    const text = event.target.innerText;
 
                     handleUpdateNote(note.id, text);
                   }}
                 >
-                  <textarea
-                    className="sticker__text"
-                    name="text"
-                    placeholder="Add note"
-                    defaultValue={note.text}
-                  ></textarea>
-                  <button type="submit">Save</button> 
-                </form>
-                <div>{note.date}</div>
+                  {note.text}
+                </p>
               </div>
             ))}
           </li>
         </ul>
-
-        <footer className="footer">
-          <form class="footer__add-button" onSubmit={handleCreateNote}>
-            <button type="submit">+</button>
-          </form>
-        </footer>
       </main>
-    </div>
+
+      <footer className="home-page-footer">
+        <button
+          class="home-page-footer__add-button"
+          onClick={() => handleCreateNote()}
+        >
+          +
+        </button>
+      </footer>
+    </>
   );
 }
 

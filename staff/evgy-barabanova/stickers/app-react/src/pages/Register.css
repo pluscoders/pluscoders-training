@@ -1,0 +1,34 @@
+.register-page-main {
+  background-color: #1e90ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 0;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  padding-top: 10rem;
+  font-size: large;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+}
+
+.register-page-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+input {
+  margin-left: 1rem;
+}
+
+.register-page-button {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  font-size: large;
+  padding-bottom: 1rem;
+}

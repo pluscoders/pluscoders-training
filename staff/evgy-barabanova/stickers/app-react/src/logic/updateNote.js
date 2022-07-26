@@ -13,8 +13,6 @@ export default function updateNote(token, noteId, text) {
   else if (typeof text !== 'string')
     throw new Error('text is not a string')
 
-  else if (!text.trim().length) throw new Error('text is empty or blank')
-
   return axios
     .patch(`${process.env.REACT_APP_API_URL}/notes/${noteId}`, {
       text
