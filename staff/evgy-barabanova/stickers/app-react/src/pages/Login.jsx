@@ -29,23 +29,22 @@ export default function Login() {
     <main class="login-page-main">
       <h1>Login</h1>
       <form class="login-page-form" onSubmit={handleAuthenticateUser}>
-      <div class="register-page-email">
-          {" "}
-          Email
-          <input name="email" type="email" placeholder="Enter your email" />
-        </div>
-        <div class="register-page-password">
-          {" "}
-          Password
-          <input
-            name="password"
-            type="password"
-            placeholder="Enter your password"
-          />
-        </div>
-        <button class="login-page-button" type="submit">Login</button>
+        <label for="email">Email</label>
+        <input name="email" type="email" placeholder="Enter your email" />
+        <div class="register-page-password"></div>
+        <label for="password">Password</label>
+        <input
+          name="password"
+          type="password"
+          placeholder="Enter your password"
+        />
+        <button class="login-page-button" type="submit">
+          Login
+        </button>
       </form>
-      <Link to="/">back</Link>
+      <Link className="link" to="/">
+        back
+      </Link>
     </main>
   );
 }

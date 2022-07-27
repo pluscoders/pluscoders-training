@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
 
     res.status(201).send()
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: error.message('Failed to register') })
   }
 })
 
@@ -37,7 +37,7 @@ router.post('/auth', async (req, res) => {
 
     res.status(200).json({ token })
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: error.message('Failed to login') })
   }
 })
 
@@ -55,7 +55,7 @@ router.get('/', async (req, res) => {
 
     res.status(200).json(user)
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: error.message('Users were not received') })
   }
 })
 

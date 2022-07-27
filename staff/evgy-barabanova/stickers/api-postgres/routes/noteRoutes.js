@@ -13,16 +13,13 @@ router.post('/', async (req, res) => {
 
     const { sub: userId } = payload
 
-    // const {
-    //   text
-    // } = req.body
     const { body: { text } } = req
 
     await createNote(userId, text)
 
-    res.status(201).send()
+    res.status(201).send('Note created')
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: error.message('Note was not created') })
   }
 })
 
@@ -40,7 +37,7 @@ router.get('/', async (req, res) => {
 
     res.status(200).json(notes)
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: error.message('Notes could not be retrieved') })
   }
 })
 
@@ -55,21 +52,14 @@ router.delete('/:noteId', async (req, res) => {
     const { sub: userId } = payload
 
     await deleteNote(userId, noteId)
-    res.status(204).send()
+    res.status(204).send('Note deleted')
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: error.message('Note could not be deleted') })
   }
 })
 
 router.patch('/:noteId', async (req, res) => {
   try {
-    // const { authorization } = req.headers
-
-    // const [, userId] = authorization.split(' ')
-
-    // const { noteId } = req.params
-    // const { text } = req.body
-
     const { headers: { authorization }, params: { noteId }, body: { text } } = req
 
     const [, token] = authorization.split(' ')
@@ -78,11 +68,10 @@ router.patch('/:noteId', async (req, res) => {
 
     const { sub: userId } = payload
 
-
     await updateNote(userId, noteId, text)
     res.status(201).send()
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: error.message('Note could not be updated') })
   }
 })
 

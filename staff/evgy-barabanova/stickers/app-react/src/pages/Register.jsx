@@ -29,30 +29,21 @@ export default function Register() {
     <main class="register-page-main">
       <h1>Register here</h1>
       <form class="register-page-form" onSubmit={handleRegisterUser}>
-        <div class="register-page-name">
-          {" "}
-          Name
-          <input name="name" type="text" placeholder="Enter your name" />
-        </div>
-        <div class="register-page-email">
-          {" "}
-          Email
-          <input name="email" type="email" placeholder="Enter your email" />
-        </div>
-        <div class="register-page-password">
-          {" "}
-          Password
-          <input
-            name="password"
-            type="password"
-            placeholder="Enter your password"
-          />
-        </div>
+        <div class="register-page-name"> Name</div>
+        <input name="name" type="text" placeholder="Enter your name" />
+        <div class="register-page-email"> Email</div>
+        <input name="email" type="email" placeholder="Enter your email" />
+        <div class="register-page-password"> Password</div>
+        <input
+          name="password"
+          type="password"
+          placeholder="Enter your password"
+        />
         <button class="register-page-button" type="submit">
           Register
         </button>
       </form>
-      <Link to="/">back</Link>
+        <Link className="link" to="/">back</Link>
     </main>
   );
 }
