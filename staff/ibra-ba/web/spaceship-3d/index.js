@@ -11,9 +11,15 @@ document.body.appendChild(renderer.domElement)
 
 var loader = new GLTFLoader()
 var ship;
+var bullet;
 
 loader.load('scene.gltf', function (gltf) {
     ship = gltf.scene;
+    scene.add(gltf.scene);
+});
+
+loader.load('bullet.gltf', function (gltf) {
+    bullet = gltf.scene;
     scene.add(gltf.scene);
 });
 
@@ -52,15 +58,23 @@ document.onkeydown = event => {
         ship.position.x += step
     else if (key === ' ')
         launchMissil()
+    if (key === 'ArrowUp')
+        bullet.position.y += step
+    else if (key === 'ArrowDown')
+        bullet.position.y -= step
+    else if (key === 'ArrowLeft')
+        bullet.position.x -= step
+    else if (key === 'ArrowRight')
+        bullet.position.x += step
 }
 
 function launchMissil() {
     let count = 0
     const intervalId = setInterval(() => {
-        ship.position.y += step
+        bullet.position.y += step
         count++
 
-        if (count > 9)
+        if (count > 10)
             clearInterval(intervalId)
     }, 250) // 1s / 4 -> 1000ms / 4 -> 250ms
 }
