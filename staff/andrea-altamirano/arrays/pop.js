@@ -1,27 +1,23 @@
-function pop(array){
-    var final =''
-    for (i=0; i< array.length -2; i++){
-        var element = array[i]
-       
-       final= final + element
+function pop(array) {
+    var last = array[array.length - 1]
 
-    }
-    return final
+    array.length = array.length - 1
+
+    return last
 }
 
+// tests
 
-*// one way
-function pop(array){
-    array.length = array.length -1
+// case 1
 
-}
-
-//test
-
-numbers = ['1','2','3','4','5','6','7']
+var numbers = ['1', '2', '3', '4', '5', '6', '7']
 console.log(pop(numbers))
+console.log(numbers)
 //result numbers = ['1','2','3','4','5','6']
 
-animals = ['dogs', 'cats','elephant', 'whale', 'cocodriles','snakes','alligator']
+// case 2
+
+var animals = ['dogs', 'cats', 'elephant', 'whale', 'cocodriles', 'snakes', 'alligator']
 console.log(pop(animals))
+console.log(animals)
 //result animals = ['dogs', 'cats','elephant', 'whale', 'cocodriles','snakes']
