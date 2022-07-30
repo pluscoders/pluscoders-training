@@ -52,36 +52,36 @@ function animate() {
 }
 
 const step = 10
+let launched = false
 
 document.onkeydown = event => {
     const { key } = event
 
     //console.log(key)
     
-
-
-    if (key === 'ArrowUp')
+    if (key === 'ArrowUp') {
         ship.position.y += step
-    else if (key === 'ArrowDown')
+
+        if (!launched) bullet.position.y += step
+    } else if (key === 'ArrowDown') {
         ship.position.y -= step
-    else if (key === 'ArrowLeft')
+
+        if (!launched) bullet.position.y -= step
+    } else if (key === 'ArrowLeft') {
         ship.position.x -= step
-    else if (key === 'ArrowRight')
+
+        if (!launched) bullet.position.x -= step
+    } else if (key === 'ArrowRight') {
         ship.position.x += step
-    else if (key === ' ')
+
+        if (!launched) bullet.position.x += step
+    } else if (key === ' ')
         launchMissil()
-    if (key === 'ArrowUp')
-        bullet.position.y += step
-    else if (key === 'ArrowDown')
-        bullet.position.y -= step
-    else if (key === 'ArrowLeft')
-        bullet.position.x -= step
-    else if (key === 'ArrowRight')
-        bullet.position.x += step
 }
 
 function launchMissil() {
     let count = 0
+    
     const intervalId = setInterval(() => {
         bullet.position.y += step
         count++
@@ -89,6 +89,8 @@ function launchMissil() {
         if (count > 20)
             clearInterval(intervalId)
     }, 350) // 1s / 4 -> 1000ms / 4 -> 250ms
+
+    launched = true
 }
 
 animate();  
