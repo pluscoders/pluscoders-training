@@ -8,7 +8,6 @@ class Bit {
 }
 
 const STEP = 11
-const INTERVAL_STEP = 25
 
 class Snake extends Component {
     constructor() {
@@ -18,19 +17,13 @@ class Snake extends Component {
 
         const food = new Bit(Math.round(Math.random() * 10), Math.round(Math.random() * 20))
 
-        this.state = { snake: [new Bit(0, 0)], direction: 'down', food, intervalMilis: INTERVAL_STEP * 10 }
+        this.state = { snake: [new Bit(0, 0)], direction: 'down', food }
     }
 
-    updateInterval() {
-        let { state : {intervalId, intervalMilis} } = this
+    componentDidMount() {
+        console.log('Snake -> componentDidMount')
 
-        if (intervalId !== undefined)
-            clearInterval(intervalId)
-
-        //intervalMilis = intervalMilis - INTERVAL_STEP
-        intervalMilis -= INTERVAL_STEP
-
-        intervalId = setInterval(() => {
+        setInterval(() => {
             const { state: { snake, food, direction } } = this
 
             const preBit = snake[snake.length - 1]
@@ -66,22 +59,12 @@ class Snake extends Component {
                 const newFood = new Bit(Math.round(Math.random() * 10), Math.round(Math.random() * 20))
 
                 this.setState({ snake: newSnake, food: newFood })
-
-                this.updateInterval()[]
             } else {
                 const newSnake = snake.slice(1).concat(newBit) // method chaining
 
                 this.setState({ snake: newSnake })
             }
-        }, intervalMilis)
-
-        this.setState({ intervalId, intervalMilis })
-    }
-
-    componentDidMount() {
-        console.log('Snake -> componentDidMount')
-
-        this.updateInterval()
+        }, 250)
 
         document.addEventListener('keydown', event => {
             console.log('document -> keydown')
