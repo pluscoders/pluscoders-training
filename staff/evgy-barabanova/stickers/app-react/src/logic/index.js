@@ -5,6 +5,7 @@ import createNote from './createNote'
 import updateNote from './updateNote'
 import deleteNote from './deleteNote'
 import retrieveNotes from './retrieveNotes'
+import updateUserPassword from './updateUserPassword'
 
 export {
     registerUser,
@@ -14,4 +15,5 @@ export {
     updateNote,
     deleteNote,
     retrieveNotes,
+    updateUserPassword,
 }

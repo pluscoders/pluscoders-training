@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
 
     res.status(201).send('Note created')
   } catch (error) {
-    res.status(500).json({ error: error.message('Note was not created') })
+    res.status(500).json({ error: error.message })
   }
 })
 
@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
 
     res.status(200).json(notes)
   } catch (error) {
-    res.status(500).json({ error: error.message('Notes could not be retrieved') })
+    res.status(500).json({ error: error.message })
   }
 })
 
@@ -54,7 +54,7 @@ router.delete('/:noteId', async (req, res) => {
     await deleteNote(userId, noteId)
     res.status(204).send('Note deleted')
   } catch (error) {
-    res.status(500).json({ error: error.message('Note could not be deleted') })
+    res.status(500).json({ error: error.message })
   }
 })
 
@@ -71,7 +71,7 @@ router.patch('/:noteId', async (req, res) => {
     await updateNote(userId, noteId, text)
     res.status(201).send()
   } catch (error) {
-    res.status(500).json({ error: error.message('Note could not be updated') })
+    res.status(500).json({ error: error.message })
   }
 })
 

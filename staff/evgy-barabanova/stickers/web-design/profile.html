@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css" type="text/css" />
+  <title>Profile</title>
+</head>
+
+<body>
+  <header class="profile-page-header">
+    <h1 class="profile-page-header__title">User name</h1>
+        <!-- //menu  -->
+        <input id="toggle" type="checkbox"></input>
+
+        <label for="toggle" class="hamburger">
+          <div class="top-bun"></div>
+          <div class="meat"></div>
+          <div class="bottom-bun"></div>
+        </label>
+    
+        <div class="nav">
+          <div class="nav-wrapper">
+            <nav>
+              <a href="#">Settings</a><br>
+              <a href="#">Logout</a><br>
+            </nav>
+          </div>
+        </div>
+    
+        <!-- end menu -->
+  </header>
+  <main class="profile-page-main">
+    <h2 class="profile-page-main__title">Settings</h2>
+    <div class="profile-page-name"> Name
+      <input placeholder="Enter your name"/>
+      <button class="profile-page__save-button">save</button>
+    </div>
+
+    <div class="profile-page-email"> Email
+      <input placeholder="Enter your email"/>
+      <button class="profile-page__save-button">save</button>
+    </div>
+    <div class="profile-page-password"> Password
+      <input placeholder="Enter your password"/>
+      <button class="profile-page__save-button">save</button>
+    </div>
+
+  </main>
+</body>
+
+</html>

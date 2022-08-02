@@ -117,7 +117,7 @@ export default function Home() {
 
       <footer className="home-page-footer">
         <button
-          class="home-page-footer__add-button"
+          className="home-page-footer__add-button"
           onClick={() => handleCreateNote()}
         >
           +
