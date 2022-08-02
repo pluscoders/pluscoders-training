@@ -1,24 +1,43 @@
-function numerify(text) {
-  var finalText = text;
+var numerify = function (text) {
+  /*
+    . text -> 'hola'
+    . result -> ''
+    . char -> 'h'
+    . char === 'a'? yes -> result = result + '4'
+    . char === 'e'? yes -> result = result + '3'
+    . char === 'i'? yes -> result = result + '1'
+    . char === 'o'? yes -> result = result + '0'
+    . else -> result = result + char // 'h'
+    . char -> 'o'
+    . char === 'a'? yes -> result = result + '4'
+    . char === 'e'? yes -> result = result + '3'
+    . char === 'i'? yes -> result = result + '1'
+    . char === 'o'? yes -> result = result + '0' // 'h0'
+    . char -> 'l'
+    . char === 'a'? yes -> result = result + '4'
+    . char === 'e'? yes -> result = result + '3'
+    . char === 'i'? yes -> result = result + '1'
+    . char === 'o'? yes -> result = result + '0'
+    . else -> result = result + char // 'h0l'
+    . char -> 'a'
+    . char === 'a'? yes -> result = result + '4' // 'h0l4'
+    . return result
+    */
 
-  for (var lp = 0; lp < text.length; lp++) {
-    var l = text[lp];
+  var result = "";
 
-    if (l == "a") {
-    }
+  for (var i = 0; i < text.length; i++) {
+    var char = text[i];
+
+    if (char === "a") result = result + "4";
+    else if (char === "e") result = result + "3";
+    else if (char === "i") result = result + "1";
+    else if (char === "o") result = result + "0";
+    else result = result + char;
   }
-}
-return;
 
-///another way
-function numerify(text) {
-  let resultA = text.replace("a", "4");
-  let resultE = resultA.replace("e", "3");
-  let resultI = resultE.replace("i", "1");
-  let resultO = resultI.replace("o", "0");
-
-  return resultO;
-}
+  return result;
+};
 
 // tests
 

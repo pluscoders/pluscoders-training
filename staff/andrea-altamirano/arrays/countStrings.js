@@ -13,19 +13,7 @@ function countStrings(array) {
 }
 // tests
 console.log(
-  countStrings([
-    true,
-    "one",
-    false,
-    1,
-    "two",
-    2,
-    3,
-    {},
-    "three",
-    function () {},
-    [],
-  ])
+  countStrings([true, "one", false, 1, 3, {}, "three", function () {}, []])
 );
 // 3
 
