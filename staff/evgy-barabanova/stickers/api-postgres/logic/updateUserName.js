@@ -1,17 +1,11 @@
 const { User } = require('../db/models')
 
-function updateUserName(userId, oldName, newName) {
-  if (typeof oldName !== 'string')
+function updateUserName(userId, name) {
+  if (typeof name !== 'string')
     throw new Error('old name is not a string')
 
-  else if (oldName.trim().length === 0)
+  else if (name.trim().length === 0)
     throw new Error('old name is empty or blank')
-
-  else if (typeof newName !== 'string')
-    throw new Error('new name is not a string')
-
-  else if (newName.trim().length === 0)
-    throw new Error('new name is empty or blank')
 
   else if (typeof userId !== 'string')
     throw new Error('userId is not a string')
@@ -23,7 +17,7 @@ function updateUserName(userId, oldName, newName) {
     const user = await User.findOne({ where: { id: userId }, raw: true })
     if (!user) throw new Error(`user with id ${userId} not found`)
 
-    const userUpdate = await User.update({ name: newName },
+    const userUpdate = await User.update({ name },
 
       { where: { id: userId }, raw: true }
     )
