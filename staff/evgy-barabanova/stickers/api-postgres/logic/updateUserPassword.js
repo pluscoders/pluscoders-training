@@ -10,16 +10,16 @@ function updateUserPassword(userId, oldPassword, newPassword) {
     throw new Error('old password is empty or blank')
 
   else if (typeof newPassword !== 'string')
-    throw new Error('old password is not a string')
+    throw new Error('new password is not a string')
 
   else if (newPassword.trim().length === 0)
-    throw new Error('old password is empty or blank')
+    throw new Error('new password is empty or blank')
 
   else if (typeof userId !== 'string')
     throw new Error('userId is not a string')
 
   else if (userId.trim().length === 0)
-    throw new Error('old password is empty or blank')
+    throw new Error('userId is empty or blank')
 
   return (async () => {
     const user = await User.findOne({ where: { id: userId }, raw: true })

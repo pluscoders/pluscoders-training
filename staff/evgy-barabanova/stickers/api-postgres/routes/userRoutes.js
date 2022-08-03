@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { registerUser, authenticateUser, retrieveUser, updateUserPassword } = require('../logic')
+const { registerUser, authenticateUser, retrieveUser, updateUserPassword, updateUserName } = require('../logic')
 const { env: { JWT_SECRET } } = process
 const jwt = require('jsonwebtoken')
 
@@ -69,6 +69,24 @@ router.patch('/password', async (req, res) => {
     const { sub: userId } = payload
 
     await updateUserPassword(userId, oldPassword, newPassword)
+
+    res.status(204).send()
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+router.patch('/name', async (req, res) => {
+  try {
+    const { headers: { authorization }, body: { oldName, newName } } = req
+
+    const [, token] = authorization.split(' ')
+
+    const payload = jwt.verify(token, JWT_SECRET)
+
+    const { sub: userId } = payload
+
+    await updateUserName(userId, oldName, newName)
 
     res.status(204).send()
   } catch (error) {
