@@ -11,6 +11,18 @@ results[5] -> ['dogs', 'cats','elephant', 'whale', 'cocodriles','snakes']
 results[6] -> ['dogs', 'cats','elephant', 'whale', 'cocodriles','snakes','alligator']
 */
 function concat(array1, array2) {
+  var newArray = [];
+  for (var i = 0; i < array1.length; i++) {
+    newArray[i] = array1[i];
+  }
+  for (var i = 0; i < array2.length; i++) {
+    newArray[newArray.length] = array2[i];
+  }
+  return newArray;
+}
+
+/*
+function concat(array1, array2) {
     var result = []
 
     for (var i = 0; i < array1.length; i++) {
@@ -22,4 +34,4 @@ function concat(array1, array2) {
     }
 
     return result
-}
+}*/
