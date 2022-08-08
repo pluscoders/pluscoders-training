@@ -1,12 +1,3 @@
-function map(array, callback) {
-  var newArray = [];
-  for (i = 0; i < array.length; i++) {
-    result = callback(array[i]);
-    newArray[i] = result;
-  }
-  return newArray;
-}
-
 //tests
 //case 1
 var number = [1, 4, 9, 16];

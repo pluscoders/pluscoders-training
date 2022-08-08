@@ -1,12 +1,3 @@
-function filter(array, callback) {
-  var arrayCopied = [];
-  for (i = 0; i < array.length; i++) {
-    result = callback(array[i]);
-    if (result === true) arrayCopied[arrayCopied.length] = array[i];
-  }
-  return arrayCopied;
-}
-
 //tests
 //case 1
 var words = ["spray", "limit", "elite", "exuberant", "destruction", "present"];

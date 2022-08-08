@@ -1,4 +1,14 @@
 function reverse(array) {
+  var newArray = [];
+  for (var i = 0; i < array.length / 2; i++) {
+    var aux = array[i];
+    array[i] = array[array.length - i - 1];
+    array[array.length - i - 1] = aux;
+  }
+  return newArray;
+}
+
+/*function reverse(array) {
     // TODO
     /*
     -buscar el ultimo elemento del array
@@ -19,7 +29,7 @@ function reverse(array) {
     ['nine', 'eight', 'seven', 'four', 'five', 'four', 'three', 'two', 'one']
     ['nine', 'eight', 'seven', 'six', 'five', 'four', 'three', 'two', 'one']
     return array
-    */
+    
     for (var i = array.length - 1; i > array.length / 2; i--) {
         var aux = array[i]
 
@@ -30,14 +40,4 @@ function reverse(array) {
 
     return array
 }
-
-// tests
-
-const array1 = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
-
-const reversed = reverse(array1)
-console.log('reversed:', reversed);
-// ['nine', 'eight', 'seven', 'six', 'five', 'four', 'three', 'two', 'one']
-
-console.log(array1);
-// ['nine', 'eight', 'seven', 'six', 'five', 'four', 'three', 'two', 'one']
+*/
