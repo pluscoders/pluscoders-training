@@ -29,13 +29,13 @@ loader.load('enemigo.gltf', function (gltf) {
     scene.add(gltf.scene);
 
     enemigo.position.y = 210
-    enemigo.rotation.x = 260.-1
+    enemigo.rotation.x = 260. - 1
 });
 
 scene.background = new THREE.Color(0x200642)
 var light = new THREE.HemisphereLight(0xffffff, 0x000000, 3);
 
-var loader = new THREE.TextureLoader()             
+var loader = new THREE.TextureLoader()
 loader.load('spaceback.jpg', function (texture) {
     scene.background = texture
 })
@@ -46,9 +46,8 @@ camera.position.set(0, 100, 300);
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
- 
-    enemigo.rotation.y += 0.02
 
+    //enemigo.rotation.y += 0.02
 }
 
 const step = 10
@@ -58,7 +57,7 @@ document.onkeydown = event => {
     const { key } = event
 
     //console.log(key)
-    
+
     if (key === 'ArrowUp') {
         ship.position.y += step
 
@@ -79,12 +78,27 @@ document.onkeydown = event => {
         launchMissil()
 }
 
+function checkCollision() {
+    const firstBB = new THREE.Box3().setFromObject(bullet);
+
+    const secondBB = new THREE.Box3().setFromObject(enemigo);
+
+    const collision = firstBB.intersectsBox(secondBB);
+
+    return collision
+}
+
+
+
+
 function launchMissil() {
     let count = 0
-    
+
     const intervalId = setInterval(() => {
         bullet.position.y += step
         count++
+
+        console.log(checkCollision())
 
         if (count > 20)
             clearInterval(intervalId)
