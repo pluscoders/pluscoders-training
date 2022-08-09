@@ -1,3 +1,9 @@
+// data
+
+const users = [
+    { name: 'Pepito Grillo', email: 'pepito@grillo.com', password: '123123123' }
+]
+
 // login page
 
 var loginPage = document.querySelector('.login-page')
@@ -13,7 +19,14 @@ loginForm.onsubmit = function (event) {
     var password = passwordInput.value
 
     try {
-        const user = authenticateUser(email, password)
+        if (email.trim().length === 0) throw new Error('email is empty or blank')
+        if (password.trim().length === 0) throw new Error('password is empty or blank')
+
+        const user = users.find(function (user) {
+            return user.email === email && user.password === password
+        })
+
+        if (user === undefined) throw new Error('wrong credentials')
 
         loginForm.reset()
 
@@ -24,8 +37,6 @@ loginForm.onsubmit = function (event) {
         homePage.classList.remove('off')
     } catch (error) {
         alert(error.message)
-
-        passwordInput.value = ''
     }
 }
 
@@ -56,7 +67,24 @@ registerForm.onsubmit = function (event) {
     var password = passwordInput.value
 
     try {
-        registerUser(name, email, password)
+        if (name.trim().length === 0) throw new Error('name is empty or blank')
+        // TODO validate name has not numbers
+        if (email.trim().length === 0) throw new Error('email is empty or blank')
+        if (password.trim().length === 0) throw new Error('password is empty or blank')
+
+        let user = users.find(function (user) {
+            return user.email === email
+        })
+
+        if (user !== undefined) throw new Error('user already exists')
+
+        user = {
+            name: name,
+            email: email,
+            password: password
+        }
+
+        users.push(user)
 
         alert('user registered')
 
