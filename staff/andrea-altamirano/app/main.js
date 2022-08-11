@@ -88,3 +88,46 @@ logoutButton.onclick = function() {
     homePage.classList.add('off')
     loginPage.classList.remove('off')
 }
+
+var searchForm = homePage.querySelector('.home-page__search-form')
+searchForm.onsubmit = function(event) {
+    event.preventDefault()
+
+    var queryInput = searchForm.query
+
+    var query = queryInput.value
+
+    try {
+        var machines = searchMachinery(query)
+
+        // console.table(machines)
+
+        var resultList = homePage.querySelector('.home-page__result-list')
+        resultList.innerHTML = ''
+
+        machines.forEach(function(machine) {
+            var resultItem = document.createElement('li')
+
+            var resultTitle = document.createElement('h2')
+            resultTitle.innerText = machine.type + ' ' + machine.model + ' (' + machine.brand + ')'
+
+            var resultDescription = document.createElement('p')
+            resultDescription.innerText = machine.description
+
+            var resultImage = document.createElement('img')
+            resultImage.src = machine.image
+            resultImage.style.width = '500px'
+
+            resultItem.append(resultTitle, resultDescription, resultImage)
+
+            resultList.append(resultItem)
+        })
+    } catch(error) {
+        alert(error.message)
+    }
+}
+
+//
+
+//loginPage.classList.add('off')
+//homePage.classList.remove('off')

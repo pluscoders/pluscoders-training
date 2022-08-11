@@ -34,7 +34,7 @@ function registerUser(name, email, password) {
 
 function searchMachinery(query) {
     const machines = machinery.filter(function (machine) {
-        return machine.type.includes(query) || machine.brand.includes(query) || machine.model.includes(query) // TODO synonyms, description
+        return machine.type.includes(query) || machine.brand.includes(query) || machine.model.includes(query) || machine.synonyms.includes(query) || machine.description.includes(query)// TODO synonyms, description
     })
 
     return machines
