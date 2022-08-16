@@ -2,7 +2,6 @@ const { User } = require('../db/models')
 
 function updateUserEmail(userId, email) {
   const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
-
   if (typeof email !== 'string')
     throw new Error('email is not a string')
 

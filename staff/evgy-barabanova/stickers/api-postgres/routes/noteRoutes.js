@@ -1,5 +1,8 @@
 const router = require('express').Router()
-const { createNote, retrieveNotes, deleteNote, updateNote } = require('../logic')
+const {
+  createNote, retrieveNotes, deleteNote, updateNote, searchNotes
+} = require('../logic')
+
 const { env: { JWT_SECRET } } = process
 const jwt = require('jsonwebtoken')
 
@@ -17,7 +20,7 @@ router.post('/', async (req, res) => {
 
     await createNote(userId, text)
 
-    res.status(201).send('Note created')
+    res.status(201).send()
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
@@ -52,7 +55,7 @@ router.delete('/:noteId', async (req, res) => {
     const { sub: userId } = payload
 
     await deleteNote(userId, noteId)
-    res.status(204).send('Note deleted')
+    res.status(204).send()
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
@@ -70,6 +73,26 @@ router.patch('/:noteId', async (req, res) => {
 
     await updateNote(userId, noteId, text)
     res.status(201).send()
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+router.get('/search', async (req, res) => {
+  try {
+    const { headers: { authorization } } = req
+
+    const [, token] = authorization.split(' ')
+
+    const payload = jwt.verify(token, JWT_SECRET)
+
+    const { sub: userId } = payload
+
+    const { query: { q } } = req
+
+    const notes = await searchNotes(userId, q)
+
+    res.status(200).send(notes)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }

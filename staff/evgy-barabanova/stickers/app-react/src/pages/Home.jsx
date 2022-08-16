@@ -1,6 +1,6 @@
 /* eslint-disable no-unreachable */
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Home.css";
 import {
   retrieveUser,
@@ -8,11 +8,13 @@ import {
   createNote,
   updateNote,
   deleteNote,
+  searchNotes,
 } from "../logic";
 
 export default function Home() {
   const [user, setUser] = useState();
   const [notes, setNotes] = useState([]);
+  const [menuButton, setMenuButton] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,6 +26,10 @@ export default function Home() {
       alert(error.message);
     }
   }, []);
+
+  const menuButtonHandler = () => {
+    setMenuButton((value) => !value);
+  };
 
   const handlerLogout = () => {
     delete sessionStorage.token;
@@ -74,19 +80,53 @@ export default function Home() {
     }
   };
 
+  const handleSearchNotes = (query) => {
+    try {
+      searchNotes(sessionStorage.token, query).catch((error) =>
+        alert(error.message)
+      );
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
     <>
       <header className="home-page-header">
         <h1 className="home-page-header__title">Hello, {user?.name}!</h1>
+
         <button
-          className="home-page-header__logout-button"
-          onClick={() => handlerLogout()}
+          className="home-page-header__menu-button"
+          onClick={menuButtonHandler}
         >
-          Logout
+          Menu
         </button>
+        {menuButton && (
+          <div className="home-page-header__menu-link">
+            <Link className="link" to="/users/profile">
+              Setting
+            </Link>
+            <button
+              className="home-page-header__logout-button"
+              onClick={() => handlerLogout()}
+            >
+              Logout
+            </button>
+          </div>
+        )}
       </header>
 
       <main className="home-page-main">
+        <div className="home-page-main__search">
+          <input type="search" />
+          <button
+            //  const query = event.target.text
+            className="home-page-header__search-button"
+            // onClick={() => handleSearchNotes(query)}
+          >
+            Search
+          </button>
+        </div>
         <ul className="list">
           <li className="list__item">
             {notes.map((note) => (

@@ -8,16 +8,18 @@ import retrieveNotes from './retrieveNotes'
 import updateUserPassword from './updateUserPassword'
 import updateUserName from './updateUserName'
 import updateUserEmail from './updateUserEmail'
+import searchNotes from './searchNotes'
 
 export {
-    registerUser,
-    authenticateUser,
-    retrieveUser,
-    createNote,
-    updateNote,
-    deleteNote,
-    retrieveNotes,
-    updateUserPassword,
-    updateUserName,
-    updateUserEmail,
+  registerUser,
+  authenticateUser,
+  retrieveUser,
+  createNote,
+  updateNote,
+  deleteNote,
+  retrieveNotes,
+  updateUserPassword,
+  updateUserName,
+  updateUserEmail,
+  searchNotes,
 }
