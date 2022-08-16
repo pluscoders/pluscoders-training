@@ -19,7 +19,8 @@ loginForm.onsubmit = function (event) {
 
         loginPage.classList.add('off')
 
-        document.querySelector('.home-page__title').innerText = 'Hola ' + user.name
+        const title = homePage.querySelector('.home-page__title')
+        title.innerText = 'Hola ' + user.name
 
         homePage.classList.remove('off')
     } catch (error) {
