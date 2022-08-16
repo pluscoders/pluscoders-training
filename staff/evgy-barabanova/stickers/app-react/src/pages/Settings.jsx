@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./Profile.css";
+import "./Settings.css";
 import {
   retrieveUser,
   updateUserPassword,
@@ -8,7 +8,7 @@ import {
   updateUserEmail,
 } from "../logic";
 
-export default function Profile() {
+export default function Settings() {
   const [user, setUser] = useState();
 
   useEffect(() => {

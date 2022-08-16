@@ -1,7 +1,8 @@
 /* eslint-disable no-unreachable */
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Routes, Route } from "react-router-dom";
 import "./Home.css";
+import Settings from "./Settings";
 import {
   retrieveUser,
   retrieveNotes,
@@ -14,7 +15,8 @@ import {
 export default function Home() {
   const [user, setUser] = useState();
   const [notes, setNotes] = useState([]);
-  const [menuButton, setMenuButton] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,11 +29,11 @@ export default function Home() {
     }
   }, []);
 
-  const menuButtonHandler = () => {
-    setMenuButton((value) => !value);
+  const handleMenuVisibility = () => {
+    setMenuVisible(!menuVisible);
   };
 
-  const handlerLogout = () => {
+  const handleLogout = () => {
     delete sessionStorage.token;
     navigate("/login");
   };
@@ -97,18 +99,18 @@ export default function Home() {
 
         <button
           className="home-page-header__menu-button"
-          onClick={menuButtonHandler}
+          onClick={handleMenuVisibility}
         >
           Menu
         </button>
-        {menuButton && (
+        {menuVisible && (
           <div className="home-page-header__menu-link">
-            <Link className="link" to="/users/profile">
-              Setting
+            <Link className="link" to="settings">
+              Settings
             </Link>
             <button
               className="home-page-header__logout-button"
-              onClick={() => handlerLogout()}
+              onClick={handleLogout}
             >
               Logout
             </button>
@@ -127,32 +129,41 @@ export default function Home() {
             Search
           </button>
         </div>
-        <ul className="list">
-          <li className="list__item">
-            {notes.map((note) => (
-              <div className="sticker">
-                <button
-                  className="sticker__delete-button"
-                  onClick={() => handleDeleteNote(note.id)}
-                >
-                  x
-                </button>
 
-                <p
-                  className="sticker__text"
-                  contentEditable="true"
-                  onKeyUp={(event) => {
-                    const text = event.target.innerText;
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ul className="list">
+                <li className="list__item">
+                  {notes.map((note) => (
+                    <div className="sticker">
+                      <button
+                        className="sticker__delete-button"
+                        onClick={() => handleDeleteNote(note.id)}
+                      >
+                        x
+                      </button>
 
-                    handleUpdateNote(note.id, text);
-                  }}
-                >
-                  {note.text}
-                </p>
-              </div>
-            ))}
-          </li>
-        </ul>
+                      <p
+                        className="sticker__text"
+                        contentEditable="true"
+                        onKeyUp={(event) => {
+                          const text = event.target.innerText;
+
+                          handleUpdateNote(note.id, text);
+                        }}
+                      >
+                        {note.text}
+                      </p>
+                    </div>
+                  ))}
+                </li>
+              </ul>
+            }
+          ></Route>
+          <Route path="settings" element={<Settings />}></Route>
+        </Routes>
       </main>
 
       <footer className="home-page-footer">
