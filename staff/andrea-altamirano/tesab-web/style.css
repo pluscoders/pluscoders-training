@@ -1,0 +1,112 @@
+/* resets */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* settings */
+
+:root {
+    --background-color: #323A47;
+    --color: white;
+}
+
+/* blocks */
+
+/* generics */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container--row {
+    flex-direction: row;
+}
+
+.container--gap-m {
+    gap: 10px;
+}
+
+.container--distributed {
+    justify-content: space-between;
+}
+
+.font-s {
+    font-size: .75rem
+}
+
+/* custom */
+
+.back-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.header {
+    background-color: white;
+    opacity: 75%;
+    padding-bottom: 1rem;
+}
+
+.header__sup {
+    background-color: var(--background-color);
+    opacity: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: .5rem;
+}
+
+.header__sub {
+    padding-right: .5rem;
+    padding-left: 2rem;
+}
+
+.nav {
+    list-style-type: none;
+    padding: 0% 2% 0%;
+}
+
+.nav__icon {
+    height: 20px;
+}
+
+.nav__anchor {
+    color: var(--color);
+}
+
+.phone {
+    display: inline-block;
+}
+
+.title {
+    color: transparent;
+    font-size: 0;
+    margin: 0;
+}
+
+.brand__logo {
+    margin: 0;
+    padding: 10px;
+
+}
+
+.brand__subtitle {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: medium;
+    margin: 0;
+}
+
+.off {
+    display: none;
+}

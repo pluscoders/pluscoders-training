@@ -6,9 +6,11 @@ TODOS
 */
 
 function authenticateUser(email, password) {
-    // TODO validate inputs
+    if (email.trim().length === 0) throw new Error('email is empty or blank')
 
-    const user = users.find(function(user){
+    if (password.trim().length === 0) throw new Error('password is empty or blank')
+
+    const user = users.find(function (user) {
         return user.email === email && user.password === password
     })
 
@@ -17,21 +19,30 @@ function authenticateUser(email, password) {
     return user
 }
 
-function registerUser(name, email, password){
-    let user = users.find (function (user){
+function registerUser(name, email, password) {
+    if (name.trim().length === 0) throw new Error('name is empty or blank')
+
+    if (email.trim().length === 0) throw new Error('email is empty or blank')
+    if (password.trim().length === 0) throw new Error('password is empty or blank')
+
+    let user = users.find(function (user) {
         return user.email === email
     })
-     if (user !== undefined) throw new Error ('user already registered')
+    if (user !== undefined) throw new Error('user already registered')
 
-     user = {
+    user = {
         id: 'user-' + (Number(users[users.length - 1].id.split('-')[1]) + 1),
         name: name,
-        email: email, 
+        email: email,
         password: password
-     }
-      users.push (user)
+    }
+    users.push(user)
 }
 
 function retrieveUserNotes(userId) {
-    // TODO filter notes that have this user id and return them
+    const notesFiltered = notes.filter(function (note) {
+        return note.user === userId
+    })
+    return notesFiltered
+
 }
