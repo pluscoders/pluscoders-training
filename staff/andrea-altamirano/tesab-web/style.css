@@ -107,6 +107,23 @@ body {
     margin: 0;
 }
 
+.menulist{
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+.menulist__item{
+    padding: 15rem;
+    background-color:var(--background-color);
+    opacity: 75%;
+}
+.menulist__anchor{
+    text-decoration: none;
+    color: var(--color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .off {
     display: none;
 }
