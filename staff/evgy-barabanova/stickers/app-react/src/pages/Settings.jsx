@@ -10,7 +10,7 @@ import {
 
 export default function Settings() {
   const [user, setUser] = useState();
-  const [correctPassword, setCorrectPassword] = useState(false);
+  const [correctPassword, setUpdatePassword] = useState(false);
 
   useEffect(() => {
     try {
@@ -22,8 +22,8 @@ export default function Settings() {
     }
   }, []);
 
-  const handleCorrectPassword = () => {
-    setCorrectPassword(!correctPassword);
+  const handleUpdatePassword = () => {
+    setUpdatePassword(!correctPassword);
   };
 
   const handleUpdateUserPassword = (event) => {
@@ -49,7 +49,7 @@ export default function Settings() {
 
     try {
       updateUserName(sessionStorage.token, name).catch((error) => {
-        // debugger;
+        debugger;
         alert(error.message);
       });
     } catch (error) {
@@ -79,9 +79,14 @@ export default function Settings() {
           onSubmit={handleUpdateUserName}
         >
           <div className="profile-page-name">
-            {" "}
-            {user?.name}
-            <input name="name" type="text" placeholder="Enter your new name" />
+            <label htmlFor="name">Name</label>
+            <input
+              name="name"
+              type="text"
+              id="name"
+              placeholder="Enter your new name"
+              defaultValue={user?.name}
+            />
             <button className="profile-page__save-button" type="submit">
               save
             </button>
@@ -93,12 +98,13 @@ export default function Settings() {
           onSubmit={handleUpdateUserEmail}
         >
           <div className="profile-page-email">
-            {" "}
-            {user?.email}
+            <label htmlFor="email">Email</label>
             <input
               name="email"
               type="email"
               placeholder="Enter your new email"
+              defaultValue={user?.email}
+              id="email"
             />
             <button className="profile-page__save-button" type="submit">
               save
@@ -110,38 +116,28 @@ export default function Settings() {
           onSubmit={handleUpdateUserPassword}
         >
           <div className="profile-page-oldPassword">
-            {" "}
-            old password
+          <label htmlFor="oldPassword">Old password</label>
             <input
               name="oldPassword"
-              type="oldPassword"
+              type="password"
               placeholder="Enter your old password"
+            />
+          </div>
+          <div className="profile-page-newPassword">
+          <label htmlFor="newPassword">New password</label>
+            <input
+              name="newPassword"
+              type="password"
+              placeholder="Enter your new password"
             />
             <button
               className="profile-page__save-oldPassword-button"
               type="submit"
-              onClick={handleCorrectPassword}
+              onClick={handleUpdatePassword}
             >
               save
             </button>
           </div>
-          {correctPassword && (
-            <div className="profile-page-newPassword">
-              {" "}
-              new password
-              <input
-                name="newPassword"
-                type="newPassword"
-                placeholder="Enter your new password"
-              />
-              <button
-                className="profile-page__save-newPassword-button"
-                type="submit"
-              >
-                save
-              </button>
-            </div>
-          )}
         </form>
 
         <Link className="link" to="/home">

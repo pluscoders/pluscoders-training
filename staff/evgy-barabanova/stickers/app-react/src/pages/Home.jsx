@@ -87,7 +87,9 @@ export default function Home() {
 
     const query = event.target.innerText
     try {
-      searchNotes(sessionStorage.token, query).catch((error) =>
+      searchNotes(sessionStorage.token, query)
+      .then((notes) => setNotes(notes))
+      .catch((error) =>
         alert(error.message)
       );
     } catch (error) {
