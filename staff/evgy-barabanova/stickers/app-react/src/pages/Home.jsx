@@ -1,8 +1,8 @@
-/* eslint-disable no-unreachable */
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link, Routes, Route } from "react-router-dom";
 import "./Home.css";
 import Settings from "./Settings";
+import List from "./List";
 import {
   retrieveUser,
   retrieveNotes,
@@ -82,7 +82,10 @@ export default function Home() {
     }
   };
 
-  const handleSearchNotes = (query) => {
+  const handleSearchNotes = (event) => {
+    event.preventDefault();
+
+    const query = event.target.innerText
     try {
       searchNotes(sessionStorage.token, query).catch((error) =>
         alert(error.message)
@@ -119,16 +122,14 @@ export default function Home() {
       </header>
 
       <main className="home-page-main">
-        <div className="home-page-main__search">
-          <input type="search" />
-          <button
-            //  const query = event.target.text
-            className="home-page-header__search-button"
-            // onClick={() => handleSearchNotes(query)}
-          >
-            Search
-          </button>
-        </div>
+        <form className="home-page-main-form" onSubmit={handleSearchNotes}>
+          <div className="home-page-main__search">
+            <input type="search" />
+            <button className="home-page-header__search-button" type="submit">
+              Search
+            </button>
+          </div>
+        </form>
 
         <Routes>
           <Route
@@ -163,6 +164,7 @@ export default function Home() {
             }
           ></Route>
           <Route path="settings" element={<Settings />}></Route>
+          <Route path="/" element={<List />}></Route>
         </Routes>
       </main>
 

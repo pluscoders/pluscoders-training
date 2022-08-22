@@ -23,12 +23,12 @@
   flex-direction: column;
 }
 
-.profile-page-main__title, :link{
+.profile-page-main__title, :link {
   display: flex;
   justify-content: center;
 }
 
-.profile-page-name, .profile-page-email, .profile-page-password {
+.profile-page-name, .profile-page-email, .profile-page-oldPassword, .profile-page-newPassword {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,11 +39,10 @@ input {
   margin-left: 1rem;
 }
 
-.profile-page__save-button {
+.profile-page__save-button, .profile-page__save-newPassword-button, .profile-page__save-oldPassword-button {
   border: none;
   background-color: transparent;
   color: #fff;
   font-size: medium;
   margin-bottom: 1rem;
 }
-

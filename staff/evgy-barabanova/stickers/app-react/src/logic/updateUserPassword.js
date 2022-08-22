@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default function updateUserPassword(token, userId, oldPassword, newPassword) {
+export default function updateUserPassword(token, oldPassword, newPassword) {
   if (typeof oldPassword !== 'string')
     throw new Error('old password is not a string')
 
@@ -11,12 +11,6 @@ export default function updateUserPassword(token, userId, oldPassword, newPasswo
     throw new Error('old password is not a string')
 
   else if (newPassword.trim().length === 0)
-    throw new Error('old password is empty or blank')
-
-  else if (typeof userId !== 'string')
-    throw new Error('userId is not a string')
-
-  else if (userId.trim().length === 0)
     throw new Error('old password is empty or blank')
 
   return axios

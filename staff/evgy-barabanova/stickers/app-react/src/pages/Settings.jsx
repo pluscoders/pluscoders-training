@@ -10,6 +10,7 @@ import {
 
 export default function Settings() {
   const [user, setUser] = useState();
+  const [correctPassword, setCorrectPassword] = useState(false);
 
   useEffect(() => {
     try {
@@ -21,32 +22,47 @@ export default function Settings() {
     }
   }, []);
 
-  const handlerUpdateUserPassword = (userId, oldPassword, newPassword) => {
-    try {
-      updateUserPassword(
-        sessionStorage.token,
-        userId,
-        oldPassword,
-        newPassword
-      ).catch((error) => alert(error.message));
-    } catch (error) {
-      alert(error.message);
-    }
+  const handleCorrectPassword = () => {
+    setCorrectPassword(!correctPassword);
   };
 
-  const handlerUpdateUserName = (userId, name) => {
+  const handleUpdateUserPassword = (event) => {
+    event.preventDefault();
+
+    const oldPassword = event.target.oldPassword.value;
+    const newPassword = event.target.newPassword.value;
+
     try {
-      updateUserName(sessionStorage.token, userId, name).catch((error) =>
-        alert(error.message)
+      updateUserPassword(sessionStorage.token, oldPassword, newPassword).catch(
+      //debugger
+        (error) => alert(error.message)
       );
     } catch (error) {
       alert(error.message);
     }
   };
 
-  const handlerUpdateUserEmail = (userId, email) => {
+  const handleUpdateUserName = (event) => {
+    event.preventDefault();
+
+    const name = event.target.name.value;
+
     try {
-      updateUserEmail(sessionStorage.token, userId, email).catch((error) =>
+      updateUserName(sessionStorage.token, name).catch((error) => {
+        // debugger;
+        alert(error.message);
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const handleUpdateUserEmail = (event) => {
+    event.preventDefault();
+
+    const email = event.target.email.value;
+    try {
+      updateUserEmail(sessionStorage.token, email).catch((error) =>
         alert(error.message)
       );
     } catch (error) {
@@ -56,44 +72,71 @@ export default function Settings() {
 
   return (
     <>
-      <header className="profile-page-header">
-        <h1 className="profile-page-header__title">{user?.name}`s profile</h1>
-      </header>
       <main className="profile-page-main">
         <h2 className="profile-page-main__title">Settings</h2>
-        <div className="profile-page-name">
-          {" "}
-          {user?.name}
-          <input placeholder="Enter your new name" />
-          <button
-            className="profile-page__save-button"
-            onClick={() => updateUserName()}
-          >
-            save
-          </button>
-        </div>
-        <div className="profile-page-email">
-          {" "}
-          {user?.email}
-          <input placeholder="Enter your new email" />
-          <button
-            className="profile-page__save-button"
-            onClick={() => updateUserEmail()}
-          >
-            save
-          </button>
-        </div>
-        <div className="profile-page-password">
-          {" "}
-          Password
-          <input placeholder="Enter your new password" />
-          <button
-            className="profile-page__save-button"
-            onClick={() => updateUserPassword()}
-          >
-            save
-          </button>
-        </div>
+        <form
+          className="profile-page-name-form"
+          onSubmit={handleUpdateUserName}
+        >
+          <div className="profile-page-name">
+            {" "}
+            {user?.name}
+            <input name="name" type="text" placeholder="Enter your new name" />
+            <button className="profile-page__save-button" type="submit">
+              save
+            </button>
+          </div>
+        </form>
+
+        <form
+          className="profile-page-email-form"
+          onSubmit={handleUpdateUserEmail}
+        >
+          <div className="profile-page-email">
+            {" "}
+            {user?.email}
+            <input
+              name="email"
+              type="email"
+              placeholder="Enter your new email"
+            />
+            <button className="profile-page__save-button" type="submit">
+              save
+            </button>
+          </div>
+        </form>
+        <form
+          className="profile-page-password-form"
+          onSubmit={handleUpdateUserPassword}
+        >
+  
+          <div className="profile-page-oldPassword">
+            {" "}
+            old password
+            <input
+              name="oldPassword"
+              type="oldPassword"
+              placeholder="Enter your old password"
+            />
+            <button className="profile-page__save-oldPassword-button" type="submit">
+              save
+            </button>
+            </div>
+            {correctPassword && (
+              <div className="profile-page-newPassword">
+              {" "}
+              new password
+              <input
+                name="newPassword"
+                type="newPassword"
+                placeholder="Enter your new password"
+              />
+              <button className="profile-page__save-newPassword-button" type="submit">
+                save
+              </button>
+              </div>
+            )}
+        </form>
 
         <Link className="link" to="/home">
           back

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default function updateUserName(token, userId, name) {
+export default function updateUserName(token, name) {
   if (typeof token !== 'string') throw new Error('token is not a string')
 
   else if (!token.trim().length) throw new Error('token is empty or blank')
@@ -10,12 +10,6 @@ export default function updateUserName(token, userId, name) {
 
   else if (name.trim().length === 0)
     throw new Error('new name is empty or blank')
-
-  else if (typeof userId !== 'string')
-    throw new Error('userId is not a string')
-
-  else if (userId.trim().length === 0)
-    throw new Error('userId is empty or blank')
 
   return axios
     .patch(`${process.env.REACT_APP_API_URL}/users/name`, {
