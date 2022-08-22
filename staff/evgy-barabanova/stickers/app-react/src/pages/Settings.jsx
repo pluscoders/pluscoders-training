@@ -34,7 +34,7 @@ export default function Settings() {
 
     try {
       updateUserPassword(sessionStorage.token, oldPassword, newPassword).catch(
-      //debugger
+        //debugger
         (error) => alert(error.message)
       );
     } catch (error) {
@@ -109,7 +109,6 @@ export default function Settings() {
           className="profile-page-password-form"
           onSubmit={handleUpdateUserPassword}
         >
-  
           <div className="profile-page-oldPassword">
             {" "}
             old password
@@ -118,12 +117,16 @@ export default function Settings() {
               type="oldPassword"
               placeholder="Enter your old password"
             />
-            <button className="profile-page__save-oldPassword-button" type="submit">
+            <button
+              className="profile-page__save-oldPassword-button"
+              type="submit"
+              onClick={handleCorrectPassword}
+            >
               save
             </button>
-            </div>
-            {correctPassword && (
-              <div className="profile-page-newPassword">
+          </div>
+          {correctPassword && (
+            <div className="profile-page-newPassword">
               {" "}
               new password
               <input
@@ -131,11 +134,14 @@ export default function Settings() {
                 type="newPassword"
                 placeholder="Enter your new password"
               />
-              <button className="profile-page__save-newPassword-button" type="submit">
+              <button
+                className="profile-page__save-newPassword-button"
+                type="submit"
+              >
                 save
               </button>
-              </div>
-            )}
+            </div>
+          )}
         </form>
 
         <Link className="link" to="/home">
