@@ -15,6 +15,8 @@ body {
 :root {
     --background-color: #323A47;
     --color: white;
+    --color-translucid:  rgba(255, 255, 255, .75);
+    --font-color: black;
 }
 
 /* blocks */
@@ -44,7 +46,9 @@ body {
     font-size: .75rem
 }
 
-/* custom */
+/***********
+ *  custom *
+ ***********/
 
 .back-video {
     position: fixed;
@@ -52,12 +56,19 @@ body {
     bottom: 0;
     min-width: 100%;
     min-height: 100%;
+    z-index: -1;
 }
 
+/* header */
+
 .header {
-    background-color: white;
-    opacity: 75%;
+    background-color: var(--color-translucid);
     padding-bottom: 1rem;
+}
+
+.header--full {
+    height: 100%;
+    padding-bottom: 0;
 }
 
 .header__sup {
@@ -85,7 +96,7 @@ body {
     color: var(--color);
 }
 
-.phone {
+.contact-menu__phone-item {
     display: inline-block;
 }
 
@@ -98,31 +109,41 @@ body {
 .brand__logo {
     margin: 0;
     padding: 10px;
-
 }
 
 .brand__subtitle {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: medium;
+    font-size: larger;
     margin: 0;
 }
 
-.menulist{
+.menu-options {
+    margin-top: 1rem;
+}
+
+.menu-options__list {
     list-style: none;
     text-decoration: none;
     margin: 0;
     padding: 0;
 }
-.menulist__item{
-    padding: 15rem;
-    background-color:var(--background-color);
-    opacity: 75%;
+
+.menu-options__item {
+    font-size: x-large;
+    padding: 1rem;
+    border-bottom: 1px solid var(--background-color);
 }
-.menulist__anchor{
+
+.menu-options__anchor {
     text-decoration: none;
-    color: var(--color);
+    color: var(--background-color);
+    font-weight: bold;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+/* main */
+
+/* generics */
 
 .off {
     display: none;
