@@ -39,10 +39,41 @@ function registerUser(name, email, password) {
     users.push(user)
 }
 
+function addNewNote(event){
+
+    note = {
+        id: 'note-' + (Number(notes[notes.length - 1].id.split('-')[1]) + 1),
+        user: '',
+        text: '',
+        category: ''
+    }
+    
+    notes.push(note)
+}
+
+
+/*
 function retrieveUserNotes(userId) {
-    const notesFiltered = notes.filter(function (note) {
+    return notes.filter(function(note) {
         return note.user === userId
     })
-    return notesFiltered
+}
+*/
 
+/*
+function retrieveUserNotes(userId) {
+    return notes.filter(note => note.user === userId)
+}
+*/
+
+/*
+const retrieveUserNotes = function(userId) {
+    return notes.filter(note => note.user === userId)
+}
+*/
+
+const retrieveNotes = userId => notes.filter(note => note.user === userId)
+
+const createNote = userId => {
+    // TODO create an empty note, with a new id (correlative with previous notes), with the user id, add it to notes (array)
 }

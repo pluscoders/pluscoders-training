@@ -140,6 +140,16 @@ body {
     font-weight: bold;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.menu-options__subgroup{
+    list-style: none;
+}
+
+.menu-options__subgroup__item{
+    padding: .5rem;
+
+}
+
+
 
 /* main */
 

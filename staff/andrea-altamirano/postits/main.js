@@ -21,12 +21,12 @@ loginForm.onsubmit = function (event) {
 
         const userId = user.id
 
-        const resultNotes = retrieveUserNotes(userId)
+        const resultNotes = retrieveNotes(userId)
 
         var resultList = homePage.querySelector('.home-page__result-list')
         resultList.innerHTML = ''
 
-        resultNotes.forEach(function (note) {
+        resultNotes.forEach(note => {
             var resultItem = document.createElement('li')
 
             var resultTitle = document.createElement('h2')
@@ -39,15 +39,11 @@ loginForm.onsubmit = function (event) {
 
             resultList.append(resultItem)
         })
-
-
     } catch (error) {
         alert(error.message)
 
         passwordInput.value = ''
-
     }
-
 }
 
 var registerAnchor = loginPage.querySelector('a')
@@ -108,6 +104,17 @@ logoutButton.onclick = function (event) {
 
     homePage.classList.add('off')
     loginPage.classList.remove('off')
-
-
 }
+
+var footer = document.querySelector('footer')
+var addButton = footer.querySelector('.add-note')
+
+addButton.onclick = function (event) {
+    addNewNote(event)
+
+    }
+
+
+
+
+// TODO mechanise + button, to create an empty note (call logic for that) and surall the other logic for that)
