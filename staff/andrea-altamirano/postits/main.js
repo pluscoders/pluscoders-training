@@ -1,44 +1,26 @@
-var loginPage = document.querySelector('.login-page')
+let userId
 
-var loginForm = loginPage.querySelector('form')
+const loginPage = document.querySelector('.login-page')
+
+const loginForm = loginPage.querySelector('form')
 loginForm.onsubmit = function (event) {
     event.preventDefault()
 
-    var emailInput = loginForm.email
-    var passwordInput = loginForm.password
+    const emailInput = loginForm.email
+    const passwordInput = loginForm.password
 
-    var email = emailInput.value
-    var password = passwordInput.value
+    const email = emailInput.value
+    const password = passwordInput.value
 
     try {
-
-        const user = authenticateUser(email, password)
+        userId = authenticateUser(email, password)
 
         loginForm.reset()
 
         loginPage.classList.add('off')
         homePage.classList.remove('off')
 
-        const userId = user.id
-
-        const resultNotes = retrieveNotes(userId)
-
-        var resultList = homePage.querySelector('.home-page__result-list')
-        resultList.innerHTML = ''
-
-        resultNotes.forEach(note => {
-            var resultItem = document.createElement('li')
-
-            var resultTitle = document.createElement('h2')
-            resultTitle.innerText = note.id + ' ' + note.category
-
-            var resultNote = document.createElement('p')
-            resultNote.innerText = note.text
-
-            resultItem.append(resultTitle, resultNote)
-
-            resultList.append(resultItem)
-        })
+        renderNotes()
     } catch (error) {
         alert(error.message)
 
@@ -46,7 +28,7 @@ loginForm.onsubmit = function (event) {
     }
 }
 
-var registerAnchor = loginPage.querySelector('a')
+const registerAnchor = loginPage.querySelector('a')
 registerAnchor.onclick = function (event) {
     event.preventDefault()
 
@@ -55,19 +37,19 @@ registerAnchor.onclick = function (event) {
     loginPage.classList.add('off')
     registerPage.classList.remove('off')
 }
-var registerPage = document.querySelector('.register-page')
+const registerPage = document.querySelector('.register-page')
 
-var registerForm = registerPage.querySelector('form')
+const registerForm = registerPage.querySelector('form')
 registerForm.onsubmit = function (event) {
     event.preventDefault()
 
-    var nameInput = registerForm.name
-    var emailInput = registerForm.email
-    var passwordInput = registerForm.password
+    const nameInput = registerForm.name
+    const emailInput = registerForm.email
+    const passwordInput = registerForm.password
 
-    var name = nameInput.value
-    var email = emailInput.value
-    var password = passwordInput.value
+    const name = nameInput.value
+    const email = emailInput.value
+    const password = passwordInput.value
 
     try {
         registerUser(name, email, password)
@@ -83,7 +65,7 @@ registerForm.onsubmit = function (event) {
     }
 }
 
-var loginAnchor = registerPage.querySelector('a')
+const loginAnchor = registerPage.querySelector('a')
 loginAnchor.onclick = function (event) {
     event.preventDefault()
 
@@ -93,10 +75,10 @@ loginAnchor.onclick = function (event) {
     loginPage.classList.remove('off')
 }
 
-//home page variables
-var homePage = document.querySelector('.home-page')
+//home page constiables
+const homePage = document.querySelector('.home-page')
 
-var logoutButton = homePage.querySelector('.home-page__logout-button')
+const logoutButton = homePage.querySelector('.home-page__logout-button')
 logoutButton.onclick = function (event) {
     event.preventDefault()
 
@@ -106,13 +88,47 @@ logoutButton.onclick = function (event) {
     loginPage.classList.remove('off')
 }
 
-var footer = document.querySelector('footer')
-var addButton = footer.querySelector('.add-note')
+const footer = document.querySelector('footer')
+const addButton = footer.querySelector('.add-note')
 
-addButton.onclick = function (event) {
-    addNewNote(event)
+addButton.onclick = function() {
+    try {
+        addNote(userId)
 
+        renderNotes()
+    } catch(error) {
+        alert(error.message)
     }
+}
+
+function renderNotes() {
+    const notes = retrieveNotes(userId)
+
+    const resultList = homePage.querySelector('.home-page__result-list')
+    resultList.innerHTML = ''
+
+    notes.forEach(note => {
+        const item = document.createElement('li')
+
+        const category = document.createElement('h4')
+        category.innerText = note.id + ' ' + note.category
+
+        const text = document.createElement('p')
+        text.contentEditable = true
+        text.innerText = note.text
+        text.onkeyup = function() {
+            try {
+                updateNote(userId, note.id, text.innerText)
+            } catch(error) {
+                alert(error.message)
+            }
+        }
+
+        item.append(category, text)
+
+        resultList.append(item)
+    })
+}
 
 
 

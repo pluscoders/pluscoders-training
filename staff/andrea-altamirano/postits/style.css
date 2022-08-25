@@ -6,10 +6,17 @@ html, body {
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     padding: 1rem;
     box-sizing: border-box;
+}
+
+.container--centered {
+    justify-content: center;
+}
+
+.container--scroll {
+    overflow: auto;
 }
 
 .container--bordered {
