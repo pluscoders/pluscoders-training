@@ -10,18 +10,24 @@ body {
     padding: 0 !important;
 }
 
+
 /* settings */
 
 :root {
     --background-color: #323A47;
     --color: white;
-    --color-translucid:  rgba(255, 255, 255, .75);
+    --color-translucid: rgba(255, 255, 255, .75);
     --font-color: black;
+    --font-text:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-menu: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 /* blocks */
 
 /* generics */
+.off {
+    display: none;
+}
 
 .container {
     display: flex;
@@ -44,6 +50,14 @@ body {
 
 .font-s {
     font-size: .75rem
+}
+
+.pointer:hover {
+    cursor: pointer;
+}
+
+.font-m{
+    font-family: var(--font-menu);
 }
 
 /***********
@@ -117,6 +131,11 @@ body {
     margin: 0;
 }
 
+.languages {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .menu-options {
     margin-top: 1rem;
 }
@@ -140,20 +159,30 @@ body {
     font-weight: bold;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.menu-options__subgroup{
+
+.menu-options__subgroup {
     list-style: none;
 }
 
-.menu-options__subgroup-item{
+.menu-options__subgroup-item {
     padding: .5rem;
 }
 
+/*Equipment-Page*/
+
+
+.equipment-page__image{
+max-width: 25rem;
+min-height: 15rem;
+
+}
 
 
 /* main */
 
+main{
+    background-color: var(--color);
+}
+
 /* generics */
 
-.off {
-    display: none;
-}

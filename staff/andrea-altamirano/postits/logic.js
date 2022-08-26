@@ -92,6 +92,14 @@ function updateNote(userId, noteId, text) {
     // TODO update note text
 }
 
+function updateNoteCategory(userId, noteId, category) {
+
+}
+
+function deleteNote(userId, noteId) {
+    
+}
+
 /*
 function retrieveUserNotes(userId) {
     return notes.filter(function(note) {

@@ -5,10 +5,14 @@ const phoneAnchor = phoneButton.querySelector('a')
 const emailAnchor = emailButton.querySelector('a')
 const openMenuButton = header.querySelector('.menu-button')
 const menuList = header.querySelector('.menu-options')
+const equipmentButton = menuList.querySelector('.equipmentm')
 const equipmentDropDownButton = header.querySelector('.equipment-drop-down-button')
 const equipment = header.querySelector('.equipment')
 const services = header.querySelector('.services')
 const servicesDropDownButton = header.querySelector('.services-drop-down-button')
+const main = document.querySelector('main')
+const equipmentPage = main.querySelector('.equipment-page')
+const video = document.querySelector('.back-video')
 
 phoneButton.onclick = function (event) {
     emailAnchor.classList.add('off')
@@ -32,8 +36,14 @@ equipmentDropDownButton.onclick = function (event) {
     equipment.classList.toggle('off')
 }
 
-servicesDropDownButton.onclick = function(event){
-    servicesDropDownButton.innerText = servicesDropDownButton.innerText === 'arrow_drop_up'? 'arrow_drop_down' : 'arrow_drop_up'
+servicesDropDownButton.onclick = function (event) {
+    servicesDropDownButton.innerText = servicesDropDownButton.innerText === 'arrow_drop_up' ? 'arrow_drop_down' : 'arrow_drop_up'
     services.classList.toggle('off')
 }
+
+equipmentButton.onclick = function (event) {
+    main.classList.remove('off')
+    equipmentPage.classList.remove('off')
+}
+
 
