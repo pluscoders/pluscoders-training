@@ -1,15 +1,19 @@
+body {
+    margin: 0;
+}
+
 .snake-bit {
-    width: 10px;
-    height: 10px;
     background-color: yellowgreen;
-    margin: 1px;
     position: absolute;
+    border: 1px solid white;
 }
 
 .food-bit {
-    width: 10px;
-    height: 10px;
     background-color: tomato;
-    margin: 1px;
     position: absolute;
 }
+
+.board {
+    position: absolute;
+    border: 3px solid black;
+  }

@@ -2,13 +2,20 @@ const { Component } = React
 
 class Bit {
     constructor(x, y) {
+        console.log('Bit -> constructor')
+
         this.x = x
         this.y = y
     }
 }
 
-const STEP = 11
-const INTERVAL_STEP = 25
+const BOARD = { x: 250, y: 250, width: 100, height: 100 }
+const STEP = 10
+const INTERVAL_STEP = 250
+
+function newRandomFoodBit() {
+    return new Bit(Math.round(Math.random() * (BOARD.width / STEP - 1)), Math.round(Math.random() * (BOARD.height / STEP - 1)))
+}
 
 class Snake extends Component {
     constructor() {
@@ -16,13 +23,21 @@ class Snake extends Component {
 
         super()
 
-        const food = new Bit(Math.round(Math.random() * 10), Math.round(Math.random() * 20))
+        const food = newRandomFoodBit()
 
-        this.state = { snake: [new Bit(0, 0)], direction: 'down', food, intervalMilis: INTERVAL_STEP * 10 }
+        this.state = { snake: [new Bit(0, 0)], direction: 'down', food, intervalMilis: INTERVAL_STEP * 20, status: 'playing' }
+    }
+
+    setState(newState) { // override
+        console.log('Snake -> setState', newState)
+
+        super.setState(newState)
     }
 
     updateInterval() {
-        let { state : {intervalId, intervalMilis} } = this
+        console.log('Snake -> updateInterval')
+        
+        let { state: { intervalId, intervalMilis } } = this
 
         if (intervalId !== undefined)
             clearInterval(intervalId)
@@ -58,20 +73,24 @@ class Snake extends Component {
                     break
             }
 
-            const eating = food.x === newBit.x && food.y === newBit.y
+            if (newBit.x >= 0 && newBit.y >= 0 && newBit.x * STEP + STEP <= BOARD.width && newBit.y * STEP + STEP <= BOARD.height) {
+                const eating = food.x === newBit.x && food.y === newBit.y
 
-            if (eating) {
-                const newSnake = snake.concat(newBit)
+                if (eating) {
+                    const newSnake = snake.concat(newBit)
 
-                const newFood = new Bit(Math.round(Math.random() * 10), Math.round(Math.random() * 20))
+                    const newFood = newRandomFoodBit()
 
-                this.setState({ snake: newSnake, food: newFood })
+                    this.setState({ snake: newSnake, food: newFood })
 
-                this.updateInterval()[]
+                    this.updateInterval()
+                } else {
+                    const newSnake = snake.slice(1).concat(newBit) // method chaining
+
+                    this.setState({ snake: newSnake })
+                }
             } else {
-                const newSnake = snake.slice(1).concat(newBit) // method chaining
-
-                this.setState({ snake: newSnake })
+                this.setState({ status: 'game-over' })
             }
         }, intervalMilis)
 
@@ -123,13 +142,17 @@ class Snake extends Component {
     }
 
     render() {
-        const { state: { snake, food } } = this
+        console.log('Snake -> render')
 
-        return <div class="board" >
-            {snake.map(bit => {
-                return <div className="snake-bit" style={{ left: bit.x * STEP, top: bit.y * STEP }}></div >
-            })}
-            <div className="food-bit" style={{ left: food.x * STEP, top: food.y * STEP }}></div >
+        const { state: { snake, food, status } } = this
+
+        return <div class="board" style={{ left: BOARD.x, top: BOARD.y, width: BOARD.width, height: BOARD.height }}>
+            {status === 'playing' ? <>
+                {snake.map(bit => {
+                    return <div className="snake-bit" style={{ left: bit.x * STEP, top: bit.y * STEP, width: STEP, height: STEP }}></div >
+                })}
+                <div className="food-bit" style={{ left: food.x * STEP, top: food.y * STEP, width: STEP, height: STEP }}></div >
+            </> : <h2>Game Over</h2>}
         </div>
     }
 }
