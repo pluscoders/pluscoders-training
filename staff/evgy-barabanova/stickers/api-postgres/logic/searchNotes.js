@@ -9,10 +9,10 @@ function searchNotes(userId, query) {
     throw new Error('userId is empty or blank')
 
   else if (typeof query !== 'string')
-    throw new Error('text is not a string')
+    throw new Error('query is not a string')
 
   else if (query.trim().length === 0)
-    throw new Error('userId is empty or blank')
+    throw new Error('query is empty or blank')
 
   return (async () => {
     const user = await User.findOne({ where: { id: userId }, raw: true })

@@ -6,14 +6,17 @@ export default function searchNotes(token, query) {
   else if (!token.trim().length) throw new Error('token is empty or blank')
 
   else if (typeof query !== 'string')
-    throw new Error('text is not a string')
+    throw new Error('query is not a string')
 
   else if (query.trim().length === 0)
-    throw new Error('userId is empty or blank')
+    throw new Error('query is empty or blank')
 
-  return axios.get(`${process.env.REACT_APP_API_URL}/notes`, {
+  return axios.get(`${process.env.REACT_APP_API_URL}/notes/search`, {
     headers: {
       authorization: `Bearer ${token}`
+    },
+    params: {
+      q: query
     }
   })
     .then(response => {

@@ -16,7 +16,6 @@ export default function Home() {
   const [user, setUser] = useState();
   const [notes, setNotes] = useState([]);
   const [menuVisible, setMenuVisible] = useState(false);
-  const [query, setQuery] = useState(null);
 
   const navigate = useNavigate();
 
@@ -90,9 +89,7 @@ export default function Home() {
     try {
       searchNotes(sessionStorage.token, query)
         .then((notes) => setNotes(notes))
-        .catch((error) => 
-        alert(error.message)
-        );
+        .catch((error) => alert(error.message));
     } catch (error) {
       alert(error.message);
     }
