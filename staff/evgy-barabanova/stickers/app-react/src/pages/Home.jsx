@@ -16,6 +16,7 @@ export default function Home() {
   const [user, setUser] = useState();
   const [notes, setNotes] = useState([]);
   const [menuVisible, setMenuVisible] = useState(false);
+  const [query, setQuery] = useState(null);
 
   const navigate = useNavigate();
 
@@ -85,13 +86,13 @@ export default function Home() {
   const handleSearchNotes = (event) => {
     event.preventDefault();
 
-    const query = event.target.innerText
+    const query = event.target.query.value;
     try {
       searchNotes(sessionStorage.token, query)
-      .then((notes) => setNotes(notes))
-      .catch((error) =>
+        .then((notes) => setNotes(notes))
+        .catch((error) => 
         alert(error.message)
-      );
+        );
     } catch (error) {
       alert(error.message);
     }
@@ -126,8 +127,16 @@ export default function Home() {
       <main className="home-page-main">
         <form className="home-page-main-form" onSubmit={handleSearchNotes}>
           <div className="home-page-main__search">
-            <input type="search" />
-            <button className="home-page-header__search-button" type="submit">
+            <input
+              type="search"
+              name="query"
+              placeholder="search notes"
+              id="query"
+            />
+            <button
+              className="home-page-header__search-button"
+              type="submit"
+            >
               Search
             </button>
           </div>

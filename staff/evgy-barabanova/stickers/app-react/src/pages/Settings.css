@@ -44,5 +44,9 @@ input {
   background-color: transparent;
   color: #fff;
   font-size: medium;
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
+}
+
+.profile-page-newPassword{
+  margin-top: 1rem;
 }

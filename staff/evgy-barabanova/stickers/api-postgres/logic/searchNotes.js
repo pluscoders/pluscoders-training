@@ -1,5 +1,5 @@
-const { Note, User } = require('../db/models');
 const { Op } = require('sequelize')
+const { Note, User } = require('../db/models');
 
 function searchNotes(userId, query) {
   if (typeof userId !== 'string')

@@ -11,7 +11,7 @@ export default function searchNotes(token, query) {
   else if (query.trim().length === 0)
     throw new Error('userId is empty or blank')
 
-  return axios.get(`${process.env.REACT_APP_API_URL}/search`, {
+  return axios.get(`${process.env.REACT_APP_API_URL}/notes`, {
     headers: {
       authorization: `Bearer ${token}`
     }
