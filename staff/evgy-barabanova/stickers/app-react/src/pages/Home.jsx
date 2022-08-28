@@ -149,7 +149,7 @@ export default function Home() {
                     <div className="sticker">
                       <button
                         className="sticker__delete-button"
-                        onClick={() => handleDeleteNote(note.id)}
+                        onClick={() => handleDeleteNote(note.id).reverse()}
                       >
                         x
                       </button>
