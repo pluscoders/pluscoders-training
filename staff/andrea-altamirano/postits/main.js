@@ -109,11 +109,10 @@ function renderNotes() {
 
     notes.forEach(note => {
         const item = document.createElement('li')
-      
+
         const category = document.createElement('h4')
-        category.innerText = note.id + ' ' + note.category 
-        category.contentEditable = true
         category.innerText = note.category
+        category.contentEditable = true
         category.onkeyup = function () {
             try {
                 updateNoteCategory(userId, note.id, category.innerText)
@@ -121,8 +120,18 @@ function renderNotes() {
                 alert(error.message)
             }
         }
-        const deletebutton = document.createElement('button')
-        deletebutton.innerText = 'Supr'
+
+        const deleteButton = document.createElement('button')
+        deleteButton.innerText = 'Supr'
+        deleteButton.onclick = function (event) {
+            try {
+                deleteNote(userId, note.id)
+
+                renderNotes()
+            } catch (error) {
+                alert(error.message)
+            }
+        }
 
         const text = document.createElement('p')
         text.contentEditable = true
@@ -135,11 +144,13 @@ function renderNotes() {
             }
         }
 
-        item.append(category, text)
+        item.append(category, text, deleteButton)
 
         resultList.append(item)
     })
 }
+
+
 
 
 

@@ -44,10 +44,38 @@
 
     <div class="home-page container container--bordered container--full container--centered off">
         <header class="home-page__header">
+            <button class="home-page__settings-button">settings</button>
             <button class="home-page__logout-button">logout</button>
         </header>
         <main class="home-page__main container container--borderedn container--scroll">
             <ul class="home-page__result-list"></ul>
+            
+            <div class="home-page__settings-panel">
+                <form action="" class="name-form">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name">
+                    <button>Save</button>
+                </form>
+
+                <form action="" class="email-form">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" id="email">
+                    <button>Save</button>
+                </form>
+
+                <form action="" class="password-form">
+                    <fieldset>
+                        <legend>Update password</legend>
+                        <label for="oldPassword">Old password</label>
+                        <input type="password" name="oldPassword" id="oldPassword">
+                        <label for="newPassword">New password</label>
+                        <input type="password" name="newPassword" id="newPassword">
+                        <label for="newPasswordRepeat">New password</label>
+                        <input type="password" name="newPasswordRepeat" id="newPasswordRepeat">
+                    </fieldset>
+                    <button>Save</button>
+                </form>
+            </div>
         </main>
         <footer class="home-page__footer">
             <button class="add-note">+</button>

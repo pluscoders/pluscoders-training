@@ -117,7 +117,32 @@ function updateNoteCategory(userId, noteId, category) {
 }
 
 function deleteNote(userId, noteId) {
+    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
+    if (userId.trim().length === 0) throw new Error('userId is empty or blank')
+    if (typeof noteId !== 'string') throw new TypeError('noteId is not a string')
+    if (noteId.trim().length === 0) throw new Error('noteId is empty or blank')
+   
+    var user = users.find(function (user) {
+        return user.id === userId
+    })
 
+    if (!user) throw new Error(`user with id ${userId} not found`)
+
+    var note = notes.find(function (note) {
+        return note.id === noteId
+    })
+
+    if (!note) throw new Error(`note with id ${noteId} not found`)
+
+    if (note.user !== userId) throw new Error(`note with id ${noteId} does not belong to user with id ${userId}`)
+
+
+    var noteIndex = notes.findIndex (function (note){
+        return note.id === noteId
+    })
+     
+        notes.splice (noteIndex,1)
+ 
 }
 
 /*
