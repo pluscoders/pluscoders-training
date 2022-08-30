@@ -91,12 +91,12 @@ logoutButton.onclick = function (event) {
 const footer = document.querySelector('footer')
 const addButton = footer.querySelector('.add-note')
 
-addButton.onclick = function() {
+addButton.onclick = function () {
     try {
         addNote(userId)
 
         renderNotes()
-    } catch(error) {
+    } catch (error) {
         alert(error.message)
     }
 }
@@ -109,17 +109,28 @@ function renderNotes() {
 
     notes.forEach(note => {
         const item = document.createElement('li')
-
+      
         const category = document.createElement('h4')
-        category.innerText = note.id + ' ' + note.category
+        category.innerText = note.id + ' ' + note.category 
+        category.contentEditable = true
+        category.innerText = note.category
+        category.onkeyup = function () {
+            try {
+                updateNoteCategory(userId, note.id, category.innerText)
+            } catch (error) {
+                alert(error.message)
+            }
+        }
+        const deletebutton = document.createElement('button')
+        deletebutton.innerText = 'Supr'
 
         const text = document.createElement('p')
         text.contentEditable = true
         text.innerText = note.text
-        text.onkeyup = function() {
+        text.onkeyup = function () {
             try {
                 updateNote(userId, note.id, text.innerText)
-            } catch(error) {
+            } catch (error) {
                 alert(error.message)
             }
         }
@@ -133,4 +144,4 @@ function renderNotes() {
 
 
 
-// TODO mechanise + button, to create an empty note (call logic for that) and surall the other logic for that)
+
