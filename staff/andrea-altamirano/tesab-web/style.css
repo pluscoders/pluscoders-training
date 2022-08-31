@@ -64,6 +64,9 @@ body {
 .list-image {
     width: 75vw;
 }
+.background-image {
+    width: 100vw;
+}
 
 .no-list {
     list-style: none;
@@ -175,16 +178,22 @@ body {
 
 /*Equipment-Page*/
 
-.crusher700ie-page {
-    background-image: url("images/Equipos/Machacadoras/700ie/700ie-Transport.jpg");
+.crusher700ie-page{
+    
+    height: 100%;
+    padding-bottom: 0;
+}
+
+.especification-container{
     background-color: var(--background-color);
-  }
+    font-family: var(--font-menu);
+}
+
 
 /* main */
 
 main {
     background-color: var(--color);
-   }
+}
 
 /* generics */
-

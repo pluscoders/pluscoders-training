@@ -52,6 +52,7 @@ crushersAnchor.onclick = function (event) {
 
     equipmentPage.classList.add('off')
     equipmentList.classList.toggle('off')
+    crusher700iePage.classList.add('off')
 
     openMenuButton.click()
 
@@ -68,6 +69,8 @@ equipmentAnchor.onclick = function (event) {
 
     main.classList.remove('off')
     equipmentPage.classList.remove('off')
+    crusher700iePage.classList.add('off')
+    crusherPage.classList.add('off')
 
     openMenuButton.click()
 }
@@ -78,6 +81,7 @@ crushersAnchor2.onclick = function (event) {
     event.preventDefault()
 
     equipmentPage.classList.add('off')
+    crusher700iePage.classList.add('off')
     crusherPage.classList.remove('off')
 }
 
@@ -87,4 +91,5 @@ crusher700ieAnchor.onclick = function (event) {
     crusherPage.classList.add('off')
     crusher700iePage.classList.remove('off')
 }
+
 
