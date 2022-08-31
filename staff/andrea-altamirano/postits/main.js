@@ -101,6 +101,19 @@ addButton.onclick = function () {
     }
 }
 
+const settingsButton = homePage.querySelector('.home-page__settings-button')
+const resultList = homePage.querySelector('.home-page__result-list')
+const settingsPanel = homePage.querySelector ('.home-page__settings-panel')
+settingsButton.onclick = function (event) {
+
+    resultList.classList.toggle('off')
+    addButton.classList.toggle('off')
+    settingsPanel.classList.toggle('off')
+    settingsButton.innerText = settingsButton.innerText ==='notes'? 'settings' : 'notes'
+
+}
+
+
 function renderNotes() {
     const notes = retrieveNotes(userId)
 
@@ -149,6 +162,25 @@ function renderNotes() {
         resultList.append(item)
     })
 }
+
+const nameForm = homePage.querySelector('.name-form')
+const emailForm = homePage.querySelector('.email-form')
+const passwordForm = homePage.querySelector('.password-form')
+
+nameForm.onsubmit = function (event) {
+    event.preventDefault()
+
+    const nameInput = nameForm.name
+
+
+    try {
+        updateName(userId, nameInput)
+
+        } catch (error) {
+        alert(error.message)
+    }
+}
+
 
 
 

@@ -145,6 +145,26 @@ function deleteNote(userId, noteId) {
  
 }
 
+function updateName(userId, nameInput){
+    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
+    if (userId.trim().length === 0) throw new Error('userId is empty or blank')
+    if (typeof nameInput !== 'string') throw new TypeError('name is not a string')
+    if (nameInput.trim().length === 0) throw new Error('name is empty or blank')
+
+    var user = users.find(function(user){
+        return user.id === userId
+    })
+
+     if (!user) throw new Error (`user with id ${userId} not found`)
+
+     var userIndex = users.findIndex(function(user){
+        return user.id === userId
+     })
+
+     users[userIndex] = nameInput
+
+}
+
 /*
 function retrieveUserNotes(userId) {
     return notes.filter(function(note) {
