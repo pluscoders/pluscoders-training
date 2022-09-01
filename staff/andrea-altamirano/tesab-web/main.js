@@ -1,3 +1,4 @@
+
 // header
 
 const header = document.querySelector('.header')
@@ -14,6 +15,7 @@ const crushersAnchor = equipmentList.querySelector('.crushers-anchor')
 const servicesList = header.querySelector('.services-list')
 const servicesDropDownButton = header.querySelector('.services-drop-down-button')
 
+
 // main
 
 const main = document.querySelector('main')
@@ -23,6 +25,7 @@ const crushersAnchor2 = equipmentPage.querySelector('.crusher-anchor')
 const crusher700ieAnchor = crusherPage.querySelector('.crusher700ie-anchor')
 const crusher700iePage = main.querySelector('.crusher700ie-page')
 const video = document.querySelector('.back-video')
+
 
 // header
 
@@ -90,6 +93,7 @@ crusher700ieAnchor.onclick = function (event) {
 
     crusherPage.classList.add('off')
     crusher700iePage.classList.remove('off')
+  
 }
 
 
