@@ -1,8 +1,25 @@
 let userId
 
 const loginPage = document.querySelector('.login-page')
-
 const loginForm = loginPage.querySelector('form')
+const registerAnchor = loginPage.querySelector('a')
+
+const registerPage = document.querySelector('.register-page')
+const registerForm = registerPage.querySelector('form')
+const loginAnchor = registerPage.querySelector('a')
+
+const homePage = document.querySelector('.home-page')
+const logoutButton = homePage.querySelector('.home-page__logout-button')
+const settingsButton = homePage.querySelector('.home-page__settings-button')
+const resultList = homePage.querySelector('.home-page__result-list')
+const settingsPanel = homePage.querySelector('.home-page__settings-panel')
+const nameForm = homePage.querySelector('.name-form')
+const emailForm = homePage.querySelector('.email-form')
+const passwordForm = homePage.querySelector('.password-form')
+const footer = homePage.querySelector('footer')
+const addButton = footer.querySelector('.add-note')
+
+
 loginForm.onsubmit = function (event) {
     event.preventDefault()
 
@@ -28,7 +45,6 @@ loginForm.onsubmit = function (event) {
     }
 }
 
-const registerAnchor = loginPage.querySelector('a')
 registerAnchor.onclick = function (event) {
     event.preventDefault()
 
@@ -37,9 +53,7 @@ registerAnchor.onclick = function (event) {
     loginPage.classList.add('off')
     registerPage.classList.remove('off')
 }
-const registerPage = document.querySelector('.register-page')
 
-const registerForm = registerPage.querySelector('form')
 registerForm.onsubmit = function (event) {
     event.preventDefault()
 
@@ -65,7 +79,6 @@ registerForm.onsubmit = function (event) {
     }
 }
 
-const loginAnchor = registerPage.querySelector('a')
 loginAnchor.onclick = function (event) {
     event.preventDefault()
 
@@ -75,10 +88,7 @@ loginAnchor.onclick = function (event) {
     loginPage.classList.remove('off')
 }
 
-//home page constiables
-const homePage = document.querySelector('.home-page')
 
-const logoutButton = homePage.querySelector('.home-page__logout-button')
 logoutButton.onclick = function (event) {
     event.preventDefault()
 
@@ -88,8 +98,7 @@ logoutButton.onclick = function (event) {
     loginPage.classList.remove('off')
 }
 
-const footer = document.querySelector('footer')
-const addButton = footer.querySelector('.add-note')
+
 
 addButton.onclick = function () {
     try {
@@ -101,16 +110,20 @@ addButton.onclick = function () {
     }
 }
 
-const settingsButton = homePage.querySelector('.home-page__settings-button')
-const resultList = homePage.querySelector('.home-page__result-list')
-const settingsPanel = homePage.querySelector ('.home-page__settings-panel')
 settingsButton.onclick = function (event) {
+    try{
+        const user = retrieveUser(userId)
 
-    resultList.classList.toggle('off')
-    addButton.classList.toggle('off')
-    settingsPanel.classList.toggle('off')
-    settingsButton.innerText = settingsButton.innerText ==='notes'? 'settings' : 'notes'
+        nameForm.name.value = user.name
+        emailForm.email.value = user.email
 
+        resultList.classList.toggle('off')
+        addButton.classList.toggle('off')
+        settingsPanel.classList.toggle('off')
+        settingsButton.innerText = settingsButton.innerText === 'notes' ? 'settings' : 'notes'    
+    } catch(error) {
+        alert(error.message)
+    }
 }
 
 
@@ -163,22 +176,52 @@ function renderNotes() {
     })
 }
 
-const nameForm = homePage.querySelector('.name-form')
-const emailForm = homePage.querySelector('.email-form')
-const passwordForm = homePage.querySelector('.password-form')
-
 nameForm.onsubmit = function (event) {
     event.preventDefault()
 
     const nameInput = nameForm.name
+    const name = nameInput.value
+
+    try {
+        updateName(userId, name)
+
+    } catch (error) {
+        alert(error.message)
+    }
+}
+
+emailForm.onsubmit = function (event) {
+    event.preventDefault()
+    
+    const emailInput = emailForm.email
+    const email = emailInput.value
 
 
     try {
-        updateName(userId, nameInput)
+        updateEmail(userId, email)
 
-        } catch (error) {
+    } catch (error) {
         alert(error.message)
     }
+}
+
+passwordForm.onsubmit = function (event) {
+    event.preventDefault()
+
+    const oldPasswordInput = passwordForm.oldPassword
+    const oldPassword = oldPasswordInput.value
+    const newPasswordInput = passwordForm.newPassword
+    const newPassword = newPasswordInput.value
+    const newPasswordRepeatInput = passwordForm.newPasswordRepeat
+    const newPasswordRepeat = newPasswordRepeatInput.value
+
+    try {
+        updatePassword(userId, oldPassword, newPassword, newPasswordRepeat)
+    } catch (error) {
+        alert(error.message)
+    }
+
+    passwordForm.reset
 }
 
 
