@@ -75,10 +75,6 @@ body {
     width: 75vw;
 }
 
-.background-image {
-    width: 100vw;
-}
-
 .no-list {
     list-style: none;
 }
@@ -201,23 +197,55 @@ body {
     background-color: var(--color);
 }
 
-.crusher700ie-page__specs {
+.crusher700ie-page__specs0{
+    background-image: url(images/equipment/crushers/700ie/700ie-10.jpg);
+    background-size: cover;
+    height: calc(720/1600 * 100vw);
+    width: 100vw;
+    box-sizing: border-box;
+    margin: 0%;
+}
+.crusher700ie-page__specs1 {
     background-image: url(images/equipment/crushers/700ie/700ie-2.jpg);
     background-size: cover;
     height: calc(900/2000 * 100vw);
     width: 100vw;
     box-sizing: border-box;
+    font-weight: bolder;
+    
 }
+
+.crusher700ie-page__specs2 {
+    background-image: url(images/equipment/crushers/700ie/700ie-6.jpg);
+    background-size: cover;
+    height: calc(1800/4000 * 100vw);
+    width: 100vw;
+    box-sizing: border-box;
+    margin: 0%;
+    font-weight: bolder;
+    }
 
 .model-page {
     font-family: var(--font-text);
+    background-color: var(--color);
+   
+}
+.model-title{
+    
 }
 
 /* main */
 
 .main {
-    /* sbackground-color: var(--color); */
-    flex: 1;
+        flex: 1;
+}
+
+.input{
+    width: calc(421/213 *50vw);
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+
 }
 
 /* generics */

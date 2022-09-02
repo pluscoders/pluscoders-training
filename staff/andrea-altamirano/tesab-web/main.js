@@ -43,6 +43,9 @@ openMenuButton.onclick = function (event) {
     openMenuButton.innerText = openMenuButton.innerText === 'menu' ? 'close' : 'menu'
     menuList.classList.toggle('off')
     header.classList.toggle('header--full')
+    crusherPage.classList.add('.off')
+    crusher700iePage.classList.add('off')
+   
 }
 
 equipmentDropDownButton.onclick = function (event) {
