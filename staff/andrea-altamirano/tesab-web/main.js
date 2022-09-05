@@ -21,10 +21,14 @@ const servicesDropDownButton = header.querySelector('.services-drop-down-button'
 const main = document.querySelector('main')
 const equipmentPage = main.querySelector('.equipment-page')
 const crusherPage = main.querySelector('.crusher-page')
-const crushersAnchor2 = equipmentPage.querySelector('.crusher-anchor')
+const crushersAnchor2 = equipmentPage.querySelector('.crushers-anchor')
 const crusher700ieAnchor = crusherPage.querySelector('.crusher700ie-anchor')
 const crusher700iePage = main.querySelector('.crusher700ie-page')
 const video = document.querySelector('.back-video')
+const contactButton = main.querySelector('.contact-button')
+const contactMadePage = main.querySelector('.contact-made-page')
+const continueLookingButton = main.querySelector('.continue-looking-button')
+
 
 
 // header
@@ -98,5 +102,21 @@ crusher700ieAnchor.onclick = function (event) {
     crusher700iePage.classList.remove('off')
   
 }
+
+contactButton.onclick = function(event){
+    event.preventDefault()
+    crusher700iePage.classList.add('off')
+    contactMadePage.classList.remove('off')   
+    
+}
+
+continueLookingButton.onclick = function(event){
+    event.preventDefault()
+    contactMadePage.classList.add('off')  
+
+
+}
+
+
 
 
