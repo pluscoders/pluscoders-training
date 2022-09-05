@@ -112,7 +112,7 @@ contactButton.onclick = function(event){
 
 continueLookingButton.onclick = function(event){
     event.preventDefault()
-    contactMadePage.classList.add('off')  
+    contactMadePage.classList.addgit('off')  
 
 
 }
