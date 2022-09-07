@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="login-page container container--bordered container--full container--centered">
+        <form action="" class="form">
+            <label for="login-page__email-input">e-mail</label>
+            <input type="email" name="email" id="login-page__email-input">
+
+            <label for="login-page__password-input">password</label>
+            <input type="password" name="password" id="login-page__password-input">
+
+            <button>Login</button>
+        </form>
+
+        <a href="">Register</a>
+    </main>
+
+    <main class="register-page container container--bordered container--full container--centered off">
+        <form action="" class="form">
+            <label for="register-page__name-input">name</label>
+            <input type="text" name="name" id="register-page__name-input">
+
+            <label for="register-page__email-input">e-mail</label>
+            <input type="email" name="email" id="register-page__email-input">
+
+            <label for="register-page_password-input">password</label>
+            <input type="password" name="password" id="register-page_password-input">
+
+            <button>Register</button>
+        </form>
+
+        <a href="">Login</a>
+    </main>
+
+    <div class="home-page container container--bordered container--full container--centered off">
+        <header class="home-page__header">
+            <button class="home-page__settings-button">settings</button>
+            <button class="home-page__logout-button">logout</button>
+        </header>
+        <main class="home-page__main container container--borderedn container--scroll">
+            <ul class="home-page__result-list"></ul>
+
+            <div class="home-page__settings-panel off">
+                <fieldset class="form">
+                    <legend>Update name</legend>
+                    <form action="" class="name-form">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name">
+                        <button>Save</button>
+                    </form>
+                </fieldset>
+
+                <fieldset class="form">
+                    <legend>Update e-mail</legend>
+                    <form action="" class="email-form">
+                        <label for="email">E-mail</label>
+                        <input type="email" name="email" id="email">
+                        <button>Save</button>
+                    </form>
+                </fieldset>
+
+                <form action="" class="password-form">
+                    <fieldset class="form ">
+                        <legend>Update password</legend>
+                        <label for="oldPassword">Old password</label>
+                        <input type="password" name="oldPassword" id="oldPassword">
+                        <label for="newPassword">New password</label>
+                        <input type="password" name="newPassword" id="newPassword">
+                        <label for="newPasswordRepeat">New password</label>
+                        <input type="password" name="newPasswordRepeat" id="newPasswordRepeat">
+                        <button class="save-button">Save</button>
+                    </fieldset>
+                </form>
+            </div>
+        </main>
+        <footer class="home-page__footer">
+            <button class="add-note">+</button>
+        </footer>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="logic.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
