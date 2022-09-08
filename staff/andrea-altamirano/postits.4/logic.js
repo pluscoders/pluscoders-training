@@ -231,28 +231,17 @@ function updatePassword(userId, oldPassword, newPassword, newPasswordRepeat){
 
 }
 
-/*
-function retrieveUserNotes(userId) {
-    return notes.filter(function(note) {
-        return note.user === userId
+const retrieveNotes = userId => {
+    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
+    if (userId.trim().length === 0) throw new Error('userId is empty or blank')
+
+    var user = users.find(function (user) {
+        return user.id === userId
     })
-}
-*/
 
-/*
-function retrieveUserNotes(userId) {
-    return notes.filter(note => note.user === userId)
-}
-*/
+    if (!user) throw new Error(`user with id ${userId} not found`)
 
-/*
-const retrieveUserNotes = function(userId) {
-    return notes.filter(note => note.user === userId)
-}
-*/
+    const userNotes = notes.filter(note => note.user === userId)
 
-const retrieveNotes = userId => notes.filter(note => note.user === userId)
-
-const createNote = userId => {
-    // TODO create an empty note, with a new id (correlative with previous notes), with the user id, add it to notes (array)
+    return userNotes
 }

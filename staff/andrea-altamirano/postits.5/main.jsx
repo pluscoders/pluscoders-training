@@ -64,6 +64,14 @@ function RegisterPage(props) {
             alert(error.message)
         }
     }
+
+    const handleLinkClick = event => {
+        event.preventDefault()
+            
+        props.onGoToLogin()
+        
+    }
+    
     return <main className="register-page container container--bordered container--full container--centered">
         <form action="" className="form" onSubmit={handleSubmit}>
             <label for="register-page__name-input">name</label>
@@ -78,7 +86,7 @@ function RegisterPage(props) {
             <button>Register</button>
         </form>
 
-        <a href="">Login</a>
+        <a href="" onClick={handleLinkClick}>Login</a>
     </main>
 }
 
@@ -146,10 +154,14 @@ function App() {
         setView('login')
     }
 
+    const handleGoToLogin= ()=>{
+        setView('login')
+    }
+
     if (view === 'login')
         return <LoginPage onLoggedIn={handleLoggedIn} onGoToRegister={handleGoToRegister} />
     else if (view === 'register')
-        return <RegisterPage onRegistered={handleRegistered} />
+        return <RegisterPage onRegistered={handleRegistered} onGoToLogin={handleGoToLogin} />
     else if (view === 'home')
         return <HomePage />
 }
