@@ -22,16 +22,24 @@ function App() {
         logger.debug('App -> setView(login)')
     }
 
-    const handleGoToLogin= ()=>{
+    const handleGoToLogin = ()=>{
         setView('login')
 
         logger.debug('App -> setView(login)')
     }
+     const handleGoToSettings = () => {
+        setView('settings')
+
+        logger.debug('App -> setView(setting)')
+     }
 
     if (view === 'login')
         return <LoginPage onLoggedIn={handleLoggedIn} onGoToRegister={handleGoToRegister} />
     else if (view === 'register')
         return <RegisterPage onRegistered={handleRegistered} onGoToLogin={handleGoToLogin} />
     else if (view === 'home')
-        return <HomePage />
+        return <HomePage onSettings={handleGoToSettings}/>
+    else if (view === 'settings')
+        return <settingPage/>
+
 }

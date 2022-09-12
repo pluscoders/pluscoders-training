@@ -13,7 +13,7 @@ function LoginPage(props) {
         try {
             userId = authenticateUser(email, password)
 
-            logger.debug(`LoginrPage -> authenticaterUser(${email}, ${password})`)
+            logger.debug(`LoginPage -> authenticaterUser(${email}, ${password})`)
 
             props.onLoggedIn()
         } catch (error) {
