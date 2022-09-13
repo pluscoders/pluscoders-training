@@ -5,7 +5,7 @@ function HomePage(props) {
 
     const handleCreateNote = () => {
         try {
-            createNote(userId)
+            createNote(sessionStorage.userId)
 
             setLastUpdate(Date.now())
         } catch (error) {
@@ -13,15 +13,21 @@ function HomePage(props) {
         }
     }
 
-    const handleSettingsButton = event => {
+    const handleSettings = event => {
         props.onSettings()
+    }
+
+    const handleLogout = event =>{
+        delete sessionStorage.userId
+
+        props.onLoggedOut()
     }
 
    
     return <div className="home-page container container--bordered container--full container--centered">
         <header className="home-page__header">
-            <button className="home-page__settings-button" onClick={handleSettingsButton}>settings</button>
-            <button className="home-page__logout-button">logout</button>
+            <button className="home-page__settings-button" onClick={handleSettings}>settings</button>
+            <button className="home-page__logout-button"onClick={handleLogout} >logout</button>
         </header>
         <main className="home-page__main container container--borderedn container--scroll">
             <NoteList lastUpdate={lastUpdate} />

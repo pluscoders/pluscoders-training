@@ -6,7 +6,7 @@ function NoteList (props) {
 
     useEffect(() => { // NOTE it runs this callback after component is mounted in the DOM
         try {
-            const notes = retrieveNotes(userId)
+            const notes = retrieveNotes(sessionStorage.userId)
     
             setNotes(notes)
         } catch(error) {

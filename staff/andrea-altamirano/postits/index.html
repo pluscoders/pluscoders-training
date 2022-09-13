@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-    <div id="root" class="container container--full"></div>
+<body class="h-full flex justify-center">
+    <div id="root" class="h-full"></div>
 
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.19.0/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
     
     <script src="logger.js"></script>
 
@@ -23,7 +23,6 @@
 
     <script src="logic.js"></script>
 
-    <script src="init.js"></script>
     <script src="components/LoginPage.jsx" type="text/babel"></script>
     <script src="components/RegisterPage.jsx" type="text/babel"></script>
     <script src="components/NoteList.jsx" type="text/babel"></script>

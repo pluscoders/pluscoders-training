@@ -11,7 +11,7 @@ function SettingsPage(props) {
         logger.debug('SettingsPage -> useEffect')
 
         try {
-            const user = retrieveUser(userId)
+            const user = retrieveUser(sessionStorage.userId)
 
             setUser(user)
         } catch {
@@ -28,7 +28,7 @@ function SettingsPage(props) {
         const name = nameInput.value
 
         try {
-            updateName(userId, name)
+            updateName(sessionStorage.userId, name)
 
             alert('name has been changed')
         } catch (error) {
@@ -46,7 +46,7 @@ function SettingsPage(props) {
 
 
         try {
-            updateEmail(userId, email)
+            updateEmail(sessionStorage.userId, email)
 
             alert('email has been changed')
         } catch (error) {
@@ -67,18 +67,23 @@ function SettingsPage(props) {
         const newPasswordRepeat = newPasswordRepeatInput.value
 
         try {
-            updatePassword(userId, oldPassword, newPassword, newPasswordRepeat)
+            updatePassword(sessionStorage.userId, oldPassword, newPassword, newPasswordRepeat)
 
             alert('password has been changed')
         } catch (error) {
             alert(error.message)
         }
     }
+    const handleLogout = event =>{
+        delete sessionStorage.userId
 
+        props.onLoggedOut()
+    }
+    
     return <div className="home-page__settings-panel">
         <header className="home-page__header">
             <button className="home-page__settings-button">notes</button>
-            <button className="home-page__logout-button">logout</button>
+            <button className="home-page__logout-button" onClick={handleLogout}>logout</button>
         </header>
         <main>
 
