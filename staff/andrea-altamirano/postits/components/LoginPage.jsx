@@ -1,5 +1,5 @@
 function LoginPage(props) {
-    logger.debug('LoginPage -> render')
+    logger.debug('LoginPage')
 
     const handleSubmit = function (event) {
         event.preventDefault()
@@ -30,7 +30,7 @@ function LoginPage(props) {
 
         props.onGoToRegister()
 
-        logger.debug('LoginPage -> link click')
+        logger.debug('LoginPage -> handleLinkClickk')
     }
 
     return <main className="login-page container container--padding container--bordered container--full container--centered">

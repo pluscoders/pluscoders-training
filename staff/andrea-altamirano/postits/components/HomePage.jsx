@@ -13,22 +13,14 @@ function HomePage(props) {
         }
     }
 
-    const handleSettingsButton =  function (event) {
-            try{
-                const user = retrieveUser(userId)
-    
-            
-               props.onSettings()
-    
-               // settingsButton.innerText = settingsButton.innerText === 'notes' ? 'settings' : 'notes'    
-            } catch(error) {
-                alert(error.message)
-            }
-        }
+    const handleSettingsButton = event => {
+        props.onSettings()
+    }
 
+   
     return <div className="home-page container container--bordered container--full container--centered">
         <header className="home-page__header">
-            <button className="home-page__settings-button" onClick={() => handleSettingsButton(userId)}>settings</button>
+            <button className="home-page__settings-button" onClick={handleSettingsButton}>settings</button>
             <button className="home-page__logout-button">logout</button>
         </header>
         <main className="home-page__main container container--borderedn container--scroll">

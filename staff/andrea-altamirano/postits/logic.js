@@ -178,8 +178,6 @@ function updateName(userId, name) {
     })
 
     users[userIndex].name = name
-    alert('name has been changed')
-
 }
 
 function updateEmail(userId, email) {
@@ -199,8 +197,6 @@ function updateEmail(userId, email) {
     })
 
     users[userIndex].email = email
-    alert('email has been changed')
-
 }
 
 function updatePassword(userId, oldPassword, newPassword, newPasswordRepeat){
@@ -209,9 +205,9 @@ function updatePassword(userId, oldPassword, newPassword, newPasswordRepeat){
     if (typeof oldPassword !== 'string') throw new TypeError('oldPassword is not a string')
     if (oldPassword.trim().length === 0) throw new Error('oldPassword is empty or blank')
     if (typeof newPassword !== 'string') throw new TypeError('oldPassword is not a string')
-    if (newPassword.trim().length === 0) throw new Error('oldPassword is empty or blank')
+    if (newPassword.trim().length === 0) throw new Error('newPassword is empty or blank')
     if (typeof newPasswordRepeat !== 'string') throw new TypeError('oldPassword is not a string')
-    if (newPasswordRepeat.trim().length === 0) throw new Error('oldPassword is empty or blank')
+    if (newPasswordRepeat.trim().length === 0) throw new Error('newPasswordRepeat is empty or blank')
 
     var user = users.find(function (user) {
         return user.id === userId
@@ -227,8 +223,6 @@ function updatePassword(userId, oldPassword, newPassword, newPasswordRepeat){
    if (newPassword !== newPasswordRepeat) throw new TypeError ('New password and new password repeat is not the same')
 
    users[userIndex].password = newPasswordRepeat
-   alert('password has been changed') 
-
 }
 
 const retrieveNotes = userId => {

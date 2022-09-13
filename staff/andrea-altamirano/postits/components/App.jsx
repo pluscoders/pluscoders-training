@@ -1,45 +1,40 @@
 const useState = React.useState
 
 function App() {
-    logger.debug('App -> render')
+    logger.debug('App')
 
     const [view, setView] = useState('login')
 
-    const handleLoggedIn = () => {
+    const goToHome = () => {
         setView('home')
 
-        logger.debug('App -> setView(home)')
+        logger.debug('App -> goToHome')
     }
 
-    const handleGoToRegister = () => {
+    const goToRegister = () => {
         setView('register')
 
-        logger.debug('App -> setView(register)')
+        logger.debug('App -> goToRegister')
     }
-    const handleRegistered = () => {
+
+    const goToLogin = ()=>{
         setView('login')
 
-        logger.debug('App -> setView(login)')
+        logger.debug('App -> goToLogin')
     }
-
-    const handleGoToLogin = ()=>{
-        setView('login')
-
-        logger.debug('App -> setView(login)')
-    }
-     const handleGoToSettings = () => {
+     const goToSettings = () => {
         setView('settings')
 
-        logger.debug('App -> setView(setting)')
+        logger.debug('App -> goToSettings')
      }
 
     if (view === 'login')
-        return <LoginPage onLoggedIn={handleLoggedIn} onGoToRegister={handleGoToRegister} />
+        return <LoginPage onLoggedIn={goToHome} onGoToRegister={goToRegister} />
     else if (view === 'register')
-        return <RegisterPage onRegistered={handleRegistered} onGoToLogin={handleGoToLogin} />
+        return <RegisterPage onRegistered={goToLogin} onGoToLogin={goToLogin} />
     else if (view === 'home')
-        return <HomePage onSettings={handleGoToSettings}/>
+        return <HomePage onSettings={goToSettings}/>
     else if (view === 'settings')
-        return <settingPage/>
+        return <SettingsPage />
 
 }

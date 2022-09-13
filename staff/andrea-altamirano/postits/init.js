@@ -1,1 +1,1 @@
-let userId
+let userId = null
