@@ -34,14 +34,17 @@ function NoteList (props) {
         }
     }
 
-    return <ul className="home-page__result-list">
+    return <ul className="grid grid-rows-4 grid-flow-col gap-4 justify-center font-sans">
         {notes.map(note => <li>
-            <h4>{note.category}</h4>
+            <div className="bg-pink-800 border-2 w-64 px-6 pb-6 mb-4 shadow-2xl hover:bg-indigo-900 hover:bg-pink-900 text-neutral-50">
+
+            <h3 className="font-bold text-xl pr-6 pb-6">{note.category}</h3>
             <p contentEditable="true" onKeyUp={event =>{
                 const text = event.target.innerText
-
+                
                 handleUpdateNote(note.id, text)
             }}>{note.text}</p>
+            </div>
             <button onClick={() => handleDeleteNote(note.id)}>Supr</button>
         </li>)}
     </ul>

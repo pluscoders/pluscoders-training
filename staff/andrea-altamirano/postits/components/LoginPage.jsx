@@ -33,17 +33,22 @@ function LoginPage(props) {
         logger.debug('LoginPage -> handleLinkClickk')
     }
 
-    return <main className="h-full flex flex-col justify-center items-center">
-        <form action="" className="flex gap-10" onSubmit={handleSubmit}>
-            <label htmlFor="email">e-mail</label>
-            <input className="rounded-md border" type="email" name="email" id="email" />
+    return <main className="bg-cover w-full h-full flex flex-col justify-center items-center" style={{ 
+        backgroundImage: `url("https://images.unsplash.com/photo-1473773508845-188df298d2d1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80")` 
+      }} >
+        <h1 className="text-8xl font-bold text-red-200 mb-24">POSTITS</h1>
+            <form action="" className="flex flex-col gap-5" onSubmit={handleSubmit}>
+            <label className="text-xl text-neutral-100" htmlFor="email">E-mail</label>
+            <input className="rounded-md border h-12" type="email" name="email" id="email" />
 
-            <label htmlFor="password">password</label>
-            <input className="rounded-md border" type="password" name="password" id="password" />
+            <label className="text-xl text-neutral-100" htmlFor="password">Password</label>
+            <input className="rounded-md border h-12 mb-8 w-64" type="password" name="password" id="password" />
             
-            <button className="rounded-md border border-transparent bg-blue-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg">Login</button>
+            <button className="h-12 mb-20 rounded-md border-transparent bg-gradient-to-r from-pink-400 to-yellow-300 hover:from-purple-500 hover:to-fuchsia-300">Login</button>
         </form>
 
-        <a className="underline" href="" onClick={handleLinkClick}>Register</a>
+        <a className="text-lg text-neutral-100 underline" href="" onClick={handleLinkClick}>Register</a>
     </main>
+    
+    
 }
