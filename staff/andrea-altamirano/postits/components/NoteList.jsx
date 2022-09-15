@@ -16,9 +16,9 @@ function NoteList (props) {
 
     const handleDeleteNote = noteId => {
         try {
-            deleteNote(userId, noteId)
+            deleteNote(sessionStorage.userId, noteId)
 
-            const notes = retrieveNotes(userId)
+            const notes = retrieveNotes(sessionStorage.userId)
     
             setNotes(notes)
         } catch (error) {
@@ -28,15 +28,15 @@ function NoteList (props) {
 
     const handleUpdateNote = (noteId, text) => {
         try {
-            updateNote(userId, noteId, text)
+            updateNote(sessionStorage.userId, noteId, text)
         } catch (error) {
             alert(error.message)
         }
     }
 
-    return <ul className="grid grid-rows-4 grid-flow-col gap-4 justify-center font-sans">
+    return <ul className="w-full grid grid-rows-4 grid-flow-col gap-4 justify-center font-sans">
         {notes.map(note => <li>
-            <div className="bg-pink-800 border-2 w-64 px-6 pb-6 mb-4 shadow-2xl hover:bg-indigo-900 hover:bg-pink-900 text-neutral-50">
+            <div className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
 
             <h3 className="font-bold text-xl pr-6 pb-6">{note.category}</h3>
             <p contentEditable="true" onKeyUp={event =>{
@@ -45,7 +45,7 @@ function NoteList (props) {
                 handleUpdateNote(note.id, text)
             }}>{note.text}</p>
             </div>
-            <button onClick={() => handleDeleteNote(note.id)}>Supr</button>
+            <button className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={() => handleDeleteNote(note.id)}>Supr</button>
         </li>)}
     </ul>
 } 
