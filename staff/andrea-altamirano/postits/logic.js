@@ -229,7 +229,7 @@ const retrieveNotes = userId => {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (userId.trim().length === 0) throw new Error('userId is empty or blank')
 
-    var user = users.find(function (user) {
+    const user = users.find(function (user) {
         return user.id === userId
     })
 
