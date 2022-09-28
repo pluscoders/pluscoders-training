@@ -6,21 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Google</title>
   </head>
-  <body>
-    <script
-      src="https://unpkg.com/react@18/umd/react.development.js"
-      crossorigin
-    ></script>
-    <script
-      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-      crossorigin
-    ></script>
+  <body class="h-full">
+    <div id="root"></div>
+    
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.19.0/babel.js"></script>
 
-    <script src="logic.js" type="text/label"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <script src="App.jsx" type="text/label"></script>
-    <script src="HompePage.jsx" type="text/label"></script>
-    <script src="index.jsx" type="text/label"></script>
+    <script src="logic.js"></script>
+
+   <script src="components/ResultList.jsx" type="text/babel"></script>
+    <script src="components/HomePage.jsx" type="text/babel"></script>
+    <script src="components/App.jsx" type="text/babel"></script>
+    <script src="index.jsx" type="text/babel"></script>
   </body>
 </html>
