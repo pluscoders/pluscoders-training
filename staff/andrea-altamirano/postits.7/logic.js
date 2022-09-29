@@ -1,104 +1,60 @@
 /* users */
 
-function authenticateUser(email, password, callback) {
+function authenticateUser(email, password) {
     if (typeof email !== 'string') throw new TypeError('email is not a string')
     if (email.trim().length === 0) throw new Error('email is empty or blank')
     if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (password.trim().length === 0) throw new Error('password is empty or blank')
-    // TODO validate callback
 
-    const xhr = new XMLHttpRequest
+    const user = users.find(function (user) {
+        return user.email === email && user.password === password
+    })
 
-    xhr.onload = () => {
-        const status = xhr.status
+    if (user === undefined) throw new Error('wrong credentials')
 
-        if (status >= 500) {
-            callback(new Error('server error'))
-        } else if (status >= 400) {
-            callback(new Error('client error'))
-        } else if (status === 200) {
-            const json = xhr.responseText
-
-            const response = JSON.parse(json)
-
-            const token = response.token
-
-            callback(null, token)
-        }
-    }
-
-    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users/auth')
-    xhr.setRequestHeader('Content-Type', "application/json")
-
-    xhr.send(`{
-        "username": "${email}",
-        "password": "${password}"
-    }`
-    )
+    return user.id
 }
 
-function registerUser(name, email, password, callback) {
+function registerUser(name, email, password) {
     if (typeof name !== 'string') throw new TypeError('name is not a string')
     if (name.trim().length === 0) throw new Error('name is empty or blank')
     if (typeof email !== 'string') throw new TypeError('email is not a string')
     if (email.trim().length === 0) throw new Error('email is empty or blank')
     if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (password.trim().length === 0) throw new Error('password is empty or blank')
-    // TODO validate callback
 
-    const xhr = new XMLHttpRequest
+    let user = users.find(function (user) {
+        return user.email === email
+    })
 
-    xhr.onload = () => {
-        const status = xhr.status
+    if (user !== undefined) throw new Error('user already registered')
 
-        if (status >= 500) {
-            callback(new Error('server error'))
-        } else if (status >= 400) {
-            callback(new Error('client error'))
-        } else if (status === 201) {
-            callback(null)
-        }
+    user = {
+        id: 'user-' + (Number(users[users.length - 1].id.split('-')[1]) + 1),
+        name: name,
+        email: email,
+        password: password
     }
-
-    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    xhr.send(`{
-    "name": "${name}",
-    "username": "${email}",
-    "password": "${password}"
-   }`)
+    users.push(user)
 }
 
-function retrieveUser(token, callback) {
-    if (typeof token !== 'string') throw new TypeError('token is not a string')
-    if (token.trim().length === 0) throw new Error('token is empty or blank')
-    // TODO validate callback
+function retrieveUser(userId) {
+    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
+    if (userId.trim().length === 0) throw new Error('userId is empty or blank')
 
-    const xhr = new XMLHttpRequest
+    var user = users.find(function (user) {
+        return user.id === userId
+    })
 
-    xhr.onload = () => {
-        const status = xhr.status
+    if (!user) throw new Error(`user with id ${userId} not found`)
 
-        if (status >= 500) {
-            callback(new Error('server error'))
-        } else if (status >= 400) {
-            callback(new Error('client error'))
-        } else if (status >= 200) {
-            const json = xhr.responseText
+    const name = user.name
+    const email = user.email
 
-            const response = JSON.parse(json)
-
-            callback(null, response)
-        }
+    return {
+        name,
+        email
     }
-
-    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-
-    xhr.send()
 }
 
 /* notes */
@@ -243,7 +199,7 @@ function updateEmail(userId, email) {
     users[userIndex].email = email
 }
 
-function updatePassword(userId, oldPassword, newPassword, newPasswordRepeat) {
+function updatePassword(userId, oldPassword, newPassword, newPasswordRepeat){
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (userId.trim().length === 0) throw new Error('userId is empty or blank')
     if (typeof oldPassword !== 'string') throw new TypeError('oldPassword is not a string')
@@ -263,10 +219,10 @@ function updatePassword(userId, oldPassword, newPassword, newPasswordRepeat) {
         return user.id === userId
     })
 
-    if (users[userIndex].password !== oldPassword) throw new TypeError('Old Password does not correspond')
-    if (newPassword !== newPasswordRepeat) throw new TypeError('New password and new password repeat is not the same')
+   if (users[userIndex].password !== oldPassword) throw new TypeError('Old Password does not correspond')
+   if (newPassword !== newPasswordRepeat) throw new TypeError ('New password and new password repeat is not the same')
 
-    users[userIndex].password = newPasswordRepeat
+   users[userIndex].password = newPasswordRepeat
 }
 
 const retrieveNotes = userId => {
