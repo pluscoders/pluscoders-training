@@ -4,19 +4,18 @@ function HomePage(props) {
 
         const queryInput = event.target.query
         const query = queryInput.value
+
         try {
-
-            searchInGoogle(query)
-
-            props.onSearchedItem
-
+            searchInGoogle(query, results => {
+                props.onSearchResults(results)
+            })
         } catch (error) {
             alert(error.message)
 
         }
     }
 
-    return <div>
+    return <>
         <header className="">
             <div className="flex">
                 <div className="grow flex justify-around">
@@ -45,5 +44,5 @@ function HomePage(props) {
                 <a className="pl-8" href="">euskara</a>
             </div>
         </main>
-    </div>
+    </>
 }

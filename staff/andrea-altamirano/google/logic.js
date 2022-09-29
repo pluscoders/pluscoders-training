@@ -11,7 +11,7 @@
  * @param {string} query 
  * @param {function} callback 
  */
-function searchInGoogle(query,  ) {
+function searchInGoogle(query,callback) {
     const xhr = new XMLHttpRequest
 
     xhr.onload = function() {

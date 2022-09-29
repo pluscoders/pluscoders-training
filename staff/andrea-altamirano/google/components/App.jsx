@@ -1,18 +1,18 @@
 const useState = React.useState
 
 function App() {
-
     const [view, setView] = useState('home')
+    const [results, setResults] = useState([])
 
-    const goToSearchPage = () => {
-        setView('searched')
+    const goToSearchPage = results => {
+        setResults(results)
+        setView('search')
 
-        logger.debug('App -> goToSearchPage')
     }
 
     if (view === 'home')
-        return <HomePage onSearchedItem={goToSearchPage} />
-    else if (view === 'searched')
-        return <SearchPage />
+        return <HomePage onSearchResults={goToSearchPage} />
+    else if (view === 'search')
+        return <SearchPage results={results} />
 
 }

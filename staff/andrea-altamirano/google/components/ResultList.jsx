@@ -1,10 +1,7 @@
-function ResultList(results){
+function ResultList(props) {
     return <ul>
-        {results.map(result => <li>
-            <div>
-            <h3>{results.title}</h3>
-            <a href="${result.url}">{results.url}</a>
-            </div>
+        {props.results.map(result => <li>
+            <h3><a href={result.url}>{result.title}</a></h3>
         </li>)}
-    </ul>    
+    </ul>
 }
