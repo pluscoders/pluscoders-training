@@ -5,9 +5,15 @@ function HomePage(props) {
 
     const handleCreateNote = () => {
         try {
-            createNote(sessionStorage.userId)
+            createNote(sessionStorage.token, error => {
+                if (error) {
+                    alert(error.message)
 
-            setLastUpdate(Date.now())
+                    return
+                }
+
+                setLastUpdate(Date.now())
+            })
         } catch (error) {
             alert(error.message)
         }

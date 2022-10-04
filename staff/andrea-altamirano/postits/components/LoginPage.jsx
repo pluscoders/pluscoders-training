@@ -11,11 +11,20 @@ function LoginPage(props) {
     const password = passwordInput.value;
 
     try {
-      sessionStorage.userId = authenticateUser(email, password);
+      authenticateUser(email, password, (error, token) => {
+        if (error) {
+          alert(error.message)
 
-      logger.debug(`LoginPage -> authenticaterUser(${email}, ${password})`);
+          return
+        }
 
-      props.onLoggedIn();
+        logger.debug(`LoginPage -> authenticaterUser(${email}, ${password})`);
+
+        sessionStorage.token = token
+
+        props.onLoggedIn();
+      });
+      
     } catch (error) {
       alert(error.message);
 

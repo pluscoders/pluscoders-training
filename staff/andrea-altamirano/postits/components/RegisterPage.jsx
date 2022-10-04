@@ -13,11 +13,17 @@ function RegisterPage(props) {
         const password = passwordInput.value
 
         try {
-            registerUser(name, email, password)
+            registerUser(name, email, password, error => {
+                if (error) {
+                    alert(error.message)
 
-            logger.debug(`RegisterPage -> registerUser(${name}, ${email}, ${password})`)
+                    return
+                }
 
-            props.onRegistered()
+                logger.debug(`RegisterPage -> registerUser(${name}, ${email}, ${password})`)
+
+                props.onRegistered()
+            })
         } catch (error) {
             alert(error.message)
 
@@ -27,12 +33,12 @@ function RegisterPage(props) {
 
     const handleLinkClick = event => {
         event.preventDefault()
-            
+
         props.onGoToLogin()
-    
+
         logger.debug('RegisterPage -> link click')
     }
-    
+
     return <main className="register-page container container--bordered container--full container--centered">
         <form action="" className="form" onSubmit={handleSubmit}>
             <label for="register-page__name-input">name</label>

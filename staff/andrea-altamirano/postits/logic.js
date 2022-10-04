@@ -5,7 +5,7 @@ function authenticateUser(email, password, callback) {
     if (email.trim().length === 0) throw new Error('email is empty or blank')
     if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (password.trim().length === 0) throw new Error('password is empty or blank')
-    // TODO validate callback
+    if (typeof callback !== 'function') throw TypeError('callback is not a function')
 
     const xhr = new XMLHttpRequest
 
@@ -33,8 +33,7 @@ function authenticateUser(email, password, callback) {
     xhr.send(`{
         "username": "${email}",
         "password": "${password}"
-    }`
-    )
+    }`)
 }
 
 function registerUser(name, email, password, callback) {
@@ -44,7 +43,7 @@ function registerUser(name, email, password, callback) {
     if (email.trim().length === 0) throw new Error('email is empty or blank')
     if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (password.trim().length === 0) throw new Error('password is empty or blank')
-    // TODO validate callback
+    if (typeof callback !== 'function') throw TypeError('callback is not a function')
 
     const xhr = new XMLHttpRequest
 
@@ -73,7 +72,7 @@ function registerUser(name, email, password, callback) {
 function retrieveUser(token, callback) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (token.trim().length === 0) throw new Error('token is empty or blank')
-    // TODO validate callback
+    if (typeof callback !== 'function') throw TypeError('callback is not a function')
 
     const xhr = new XMLHttpRequest
 
@@ -103,53 +102,173 @@ function retrieveUser(token, callback) {
 
 /* notes */
 
-function createNote(userId) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (userId.trim().length === 0) throw new Error('userId is empty or blank')
+const retrieveNotes = (token, callback) => {
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+    if (token.trim().length === 0) throw new Error('token is empty or blank')
+    if (typeof callback !== 'function') throw TypeError('callback is not a function')
 
-    // TODO find user in db and validate that exists
-    var user = users.find(function (user) {
-        return user.id === userId
-    })
+    const xhr = new XMLHttpRequest
 
-    if (!user) throw new Error(`user with id ${userId} not found`)
+    xhr.onload = () => {
+        const status = xhr.status
 
-    const note = {
-        id: 'note-' + (Number(notes[notes.length - 1].id.split('-')[1]) + 1),
-        user: userId,
-        text: '',
-        category: ''
+        if (status >= 500) {
+            callback(new Error('server error'))
+        } else if (status >= 400) {
+            callback(new Error('client error'))
+        } else if (status === 200) {
+            const json = xhr.responseText
+
+            const response = JSON.parse(json)
+
+            const notes = response.notes || []
+
+            callback(null, notes)
+        }
     }
 
-    notes.push(note)
+    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+    xhr.send()
 }
 
-function updateNote(userId, noteId, text) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (userId.trim().length === 0) throw new Error('userId is empty or blank')
+function createNote(token, callback) {
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+    if (token.trim().length === 0) throw new Error('token is empty or blank')
+    if (typeof callback !== 'function') throw TypeError('callback is not a function')
+   
+    const xhr = new XMLHttpRequest
+
+    xhr.onload = () => {
+        const status = xhr.status
+
+        if (status >= 500) {
+            callback(new Error('server error'))
+        } else if (status >= 400) {
+            callback(new Error('client error'))
+        } else if (status === 200) {
+            const json = xhr.responseText
+
+            const response = JSON.parse(json)
+
+            const notes = response.notes || []
+
+            const note = {
+                id: 'note-' + Date.now(),
+                text: '',
+                category: ''
+            }
+        
+            notes.push(note)
+
+            const xhr2 = new XMLHttpRequest
+
+            xhr2.onload = () => {
+                const status = xhr2.status
+
+                if (status >= 500) {
+                    callback(new Error('server error'))
+                } else if (status >= 400) {
+                    callback(new Error('client error'))
+                } else if (status === 204) {
+                    callback(null)
+                }
+            }
+
+            xhr2.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+            xhr2.setRequestHeader('Content-Type', 'application/json')
+            xhr2.setRequestHeader('Authorization', `Bearer ${token}`)
+
+            const payload = { notes }
+
+            const json2 = JSON.stringify(payload)
+
+            xhr2.send(json2)
+        }
+    }
+
+    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+    xhr.send()
+}
+
+/*
+1) recuperar notas del usuario desde la api (token)
+2) en esas notas buscar la nota que quiero modificar (por id nota)
+3) aplicar nuevo texto (update) a esa nota
+4) guardar todas la notas con esa nota actualizada en la api (token, notas)
+
+*/
+function updateNote(token, noteId, text, callback) {
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+    if (token.trim().length === 0) throw new Error('token is empty or blank')
     if (typeof noteId !== 'string') throw new TypeError('noteId is not a string')
     if (noteId.trim().length === 0) throw new Error('noteId is empty or blank')
     if (typeof text !== 'string') throw new TypeError('text is not a string')
+    if (typeof callback !== 'function') throw TypeError('callback is not a function')
 
-    var user = users.find(function (user) {
-        return user.id === userId
-    })
+    const xhr = new XMLHttpRequest
 
-    if (!user) throw new Error(`user with id ${userId} not found`)
+    xhr.onload = () => {
+        const status = xhr.status
 
-    var note = notes.find(function (note) {
-        return note.id === noteId
-    })
+        if (status >= 500) {
+            callback(new Error('server error'))
+        } else if (status >= 400) {
+            callback(new Error('client error'))
+        } else if (status === 200) {
+            const json = xhr.responseText
 
-    if (!note) throw new Error(`note with id ${noteId} not found`)
+            const response = JSON.parse(json)
 
-    if (note.user !== userId) throw new Error(`note with id ${noteId} does not belong to user with ${userId}`)
+            const notes = response.notes || []
 
-    note.text = text
-    // TODO validate inputs
-    // TODO find user in db by userId, and validate that exists
-    // TODO find note in db by noteId, and validate that exists and belongs to this user
-    // TODO update note text
+            // TODO en esas notas buscar la nota que quiero modificar (por id nota)
+
+            const note = notes.find (function (note) {
+                return note.id === noteId
+            })
+
+            if (!note) {
+                callback(new Error(`note with id ${noteId} not found`))
+
+                return
+            }
+
+            note.text = text
+
+            const xhr2 = new XMLHttpRequest
+
+            xhr2.onload = () => {
+                const status = xhr2.status
+
+                if (status >= 500) {
+                    callback(new Error('server error'))
+                } else if (status >= 400) {
+                    callback(new Error('client error'))
+                } else if (status === 204) {
+                    callback(null)
+                }
+            }
+
+            xhr2.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+            xhr2.setRequestHeader('Content-Type', 'application/json')
+            xhr2.setRequestHeader('Authorization', `Bearer ${token}`)
+
+            const payload = { notes }
+
+            const json2 = JSON.stringify(payload)
+
+            xhr2.send(json2)
+        }
+    }
+
+    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+    xhr.send()
 }
 
 function updateNoteCategory(userId, noteId, category) {
@@ -176,34 +295,73 @@ function updateNoteCategory(userId, noteId, category) {
     note.category = category
 }
 
-function deleteNote(userId, noteId) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (userId.trim().length === 0) throw new Error('userId is empty or blank')
+function deleteNote(token, noteId,callback) {
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+    if (token.trim().length === 0) throw new Error('token is empty or blank')
     if (typeof noteId !== 'string') throw new TypeError('noteId is not a string')
     if (noteId.trim().length === 0) throw new Error('noteId is empty or blank')
+    if (typeof callback !== 'function') throw TypeError('callback is not a function')
 
-    var user = users.find(function (user) {
-        return user.id === userId
-    })
+    const xhr = new XMLHttpRequest
 
-    if (!user) throw new Error(`user with id ${userId} not found`)
+    xhr.onload = () => {
+        const status = xhr.status
 
-    var note = notes.find(function (note) {
-        return note.id === noteId
-    })
+        if (status >= 500) {
+            callback(new Error('server error'))
+        } else if (status >= 400) {
+            callback(new Error('client error'))
+        } else if (status === 200) {
+            const json = xhr.responseText
 
-    if (!note) throw new Error(`note with id ${noteId} not found`)
+            const response = JSON.parse(json)
 
-    if (note.user !== userId) throw new Error(`note with id ${noteId} does not belong to user with id ${userId}`)
+            const notes = response.notes || []
 
+            const noteIndex = notes.findIndex(function (note) {
+                return note.id === noteId
+            })
 
-    var noteIndex = notes.findIndex(function (note) {
-        return note.id === noteId
-    })
+            if (noteIndex < 0) {
+                callback(new Error(`note with id ${noteId} not found`))
 
-    notes.splice(noteIndex, 1)
+                return
+            }
+        
+            notes.splice(noteIndex, 1)
 
+            const xhr2 = new XMLHttpRequest
+
+            xhr2.onload = () => {
+                const status = xhr2.status
+
+                if (status >= 500) {
+                    callback(new Error('server error'))
+                } else if (status >= 400) {
+                    callback(new Error('client error'))
+                } else if (status === 204) {
+                    callback(null)
+                }
+            }
+
+            xhr2.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+            xhr2.setRequestHeader('Content-Type', 'application/json')
+            xhr2.setRequestHeader('Authorization', `Bearer ${token}`)
+
+            const payload = { notes }
+
+            const json2 = JSON.stringify(payload)
+
+            xhr2.send(json2)
+        }
+    }
+
+    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+    xhr.send()
 }
+
 
 function updateName(userId, name) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
@@ -267,19 +425,4 @@ function updatePassword(userId, oldPassword, newPassword, newPasswordRepeat) {
     if (newPassword !== newPasswordRepeat) throw new TypeError('New password and new password repeat is not the same')
 
     users[userIndex].password = newPasswordRepeat
-}
-
-const retrieveNotes = userId => {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (userId.trim().length === 0) throw new Error('userId is empty or blank')
-
-    const user = users.find(function (user) {
-        return user.id === userId
-    })
-
-    if (!user) throw new Error(`user with id ${userId} not found`)
-
-    const userNotes = notes.filter(note => note.user === userId)
-
-    return userNotes
 }

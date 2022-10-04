@@ -1,9 +1,10 @@
 const useState = React.useState
 
+
 function App() {
     logger.debug('App')
 
-    const [view, setView] = useState(sessionStorage.userId ? 'home' : 'login')
+    const [view, setView] = useState(sessionStorage.token ? 'home' : 'login')
 
     const goToHome = () => {
         setView('home')
@@ -33,8 +34,8 @@ function App() {
     else if (view === 'register')
         return <RegisterPage onRegistered={goToLogin} onGoToLogin={goToLogin} />
     else if (view === 'home')
-        return <HomePage onSettings={goToSettings} onLoggedOut= {goToLogin} />
+        return <HomePage onSettings={goToSettings} onLoggedOut={goToLogin} />
     else if (view === 'settings')
-        return <SettingsPage onLoggedOut= {goToLogin} />
+        return <SettingsPage onLoggedOut={goToLogin} />
 
 }
