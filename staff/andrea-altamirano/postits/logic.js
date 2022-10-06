@@ -201,7 +201,7 @@ function createNote(token, callback) {
 4) guardar todas la notas con esa nota actualizada en la api (token, notas)
 
 */
-function updateNote(token, noteId, text, callback) {
+function updateNoteText(token, noteId, text, callback) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (token.trim().length === 0) throw new Error('token is empty or blank')
     if (typeof noteId !== 'string') throw new TypeError('noteId is not a string')
@@ -271,29 +271,76 @@ function updateNote(token, noteId, text, callback) {
     xhr.send()
 }
 
-function updateNoteCategory(userId, noteId, category) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (userId.trim().length === 0) throw new Error('userId is empty or blank')
+function updateNoteCategory(token, noteId, category, callback) {
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+    if (token.trim().length === 0) throw new Error('token is empty or blank')
     if (typeof noteId !== 'string') throw new TypeError('noteId is not a string')
     if (noteId.trim().length === 0) throw new Error('noteId is empty or blank')
     if (typeof category !== 'string') throw new TypeError('text is not a string')
+    if (typeof callback !== 'function') throw TypeError('callback is not a function')
 
-    var user = users.find(function (user) {
-        return user.id === userId
-    })
+    const xhr = new XMLHttpRequest
 
-    if (!user) throw new Error(`user with id ${userId} not found`)
+    xhr.onload = () => {
+        const status = xhr.status
 
-    var note = notes.find(function (note) {
-        return note.id === noteId
-    })
+        if (status >= 500) {
+            callback(new Error('server error'))
+        } else if (status >= 400) {
+            callback(new Error('client error'))
+        } else if (status === 200) {
+            const json = xhr.responseText
 
-    if (!note) throw new Error(`note with id ${noteId} not found`)
+            const response = JSON.parse(json)
 
-    if (note.user !== userId) throw new Error(`note with id ${noteId} does not belong to user with id ${userId}`)
+            const notes = response.notes || []
 
-    note.category = category
+            // TODO en esas notas buscar la nota que quiero modificar (por id nota)
+
+            const note = notes.find (function (note) {
+                return note.id === noteId
+            })
+
+            if (!note) {
+                callback(new Error(`note with id ${noteId} not found`))
+
+                return
+            }
+
+            note.category = category
+
+            const xhr2 = new XMLHttpRequest
+
+            xhr2.onload = () => {
+                const status = xhr2.status
+
+                if (status >= 500) {
+                    callback(new Error('server error'))
+                } else if (status >= 400) {
+                    callback(new Error('client error'))
+                } else if (status === 204) {
+                    callback(null)
+                }
+            }
+
+            xhr2.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+            xhr2.setRequestHeader('Content-Type', 'application/json')
+            xhr2.setRequestHeader('Authorization', `Bearer ${token}`)
+
+            const payload = { notes }
+
+            const json2 = JSON.stringify(payload)
+
+            xhr2.send(json2)
+        }
+    }
+
+    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+    xhr.send()
 }
+
 
 function deleteNote(token, noteId,callback) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
