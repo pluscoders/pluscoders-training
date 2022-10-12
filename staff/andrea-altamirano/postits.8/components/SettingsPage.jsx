@@ -55,14 +55,9 @@ function SettingsPage(props) {
     const email = emailInput.value;
 
     try {
-      updateUserEmail(sessionStorage.token, email, (error) => {
-        if (error) {
-          alert(error.message);
+      updateUserEmail(sessionStorage.userId, email);
 
-          return;
-        }
-        alert("email has been changed");
-      });
+      alert("email has been changed");
     } catch (error) {
       alert(error.message);
     }
@@ -82,20 +77,13 @@ function SettingsPage(props) {
 
     try {
       updateUserPassword(
-        sessionStorage.token,
+        sessionStorage.userId,
         oldPassword,
         newPassword,
-        newPasswordRepeat,
-        (error) => {
-          if (error) {
-            alert(error.message);
-
-            return;
-          }
-
-          alert("user password updated");
-        }
+        newPasswordRepeat
       );
+
+      alert("password has been changed");
     } catch (error) {
       alert(error.message);
     }
