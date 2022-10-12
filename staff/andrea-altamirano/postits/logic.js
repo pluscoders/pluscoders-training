@@ -453,7 +453,7 @@ function updateUserName(token, name, callback) {
   xhr.send(json);
 }
 
-function updateEmail(userId, email) {
+function updateUserEmail(userId, email) {
   if (typeof userId !== "string") throw new TypeError("userId is not a string");
   if (userId.trim().length === 0) throw new Error("userId is empty or blank");
   if (typeof email !== "string") throw new TypeError("email is not a string");
@@ -472,7 +472,12 @@ function updateEmail(userId, email) {
   users[userIndex].email = email;
 }
 
-function updatePassword(userId, oldPassword, newPassword, newPasswordRepeat) {
+function updateUserPassword(
+  userId,
+  oldPassword,
+  newPassword,
+  newPasswordRepeat
+) {
   if (typeof userId !== "string") throw new TypeError("userId is not a string");
   if (userId.trim().length === 0) throw new Error("userId is empty or blank");
   if (typeof oldPassword !== "string")

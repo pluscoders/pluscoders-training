@@ -34,7 +34,7 @@ function SettingsPage(props) {
     const name = nameInput.value;
 
     try {
-      updateName(sessionStorage.token, name, (error) => {
+      updateUserName(sessionStorage.token, name, (error) => {
         if (error) {
           alert(error.message);
         }
@@ -55,7 +55,7 @@ function SettingsPage(props) {
     const email = emailInput.value;
 
     try {
-      updateEmail(sessionStorage.userId, email);
+      updateUserEmail(sessionStorage.userId, email);
 
       alert("email has been changed");
     } catch (error) {
@@ -76,7 +76,7 @@ function SettingsPage(props) {
     const newPasswordRepeat = newPasswordRepeatInput.value;
 
     try {
-      updatePassword(
+      updateUserPassword(
         sessionStorage.userId,
         oldPassword,
         newPassword,
