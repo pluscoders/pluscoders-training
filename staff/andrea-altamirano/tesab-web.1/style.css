@@ -1,0 +1,274 @@
+/* resets */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* settings */
+
+:root {
+    --background-color: #323A47;
+    --color: white;
+    --color-translucid: rgba(255, 255, 255, .75);
+    --font-color: black;
+    --font-text: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-menu: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* blocks */
+
+/* generics */
+
+.off {
+    display: none !important;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.container--justify-center {
+    justify-content: center;
+}
+
+.container--align-center {
+    align-items: center;
+}
+
+.container--row {
+    flex-direction: row;
+}
+
+.container--gap-m {
+    gap: 10px;
+}
+
+.container--distributed {
+    justify-content: space-between;
+}
+
+.container--full {
+    height: 100%;
+}
+
+.font-s {
+    font-size: .75rem
+}
+
+.pointer:hover {
+    cursor: pointer;
+}
+
+.font-m {
+    font-family: var(--font-menu);
+}
+
+.list-image {
+    width: 75vw;
+}
+
+.no-list {
+    list-style: none;
+}
+
+/***********
+ *  custom *
+ ***********/
+
+.back-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+}
+
+/* header */
+
+.header {
+    background-color: var(--color-translucid);
+    padding-bottom: 1rem;
+}
+
+.header--full {
+    min-height: 100%;
+    padding-bottom: 0;
+}
+
+.header__sup {
+    background-color: var(--background-color);
+    opacity: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: .5rem;
+}
+
+.header__sub {
+    padding-right: .5rem;
+    padding-left: 2rem;
+}
+
+.nav {
+    list-style-type: none;
+    padding: 0% 2% 0%;
+}
+
+.nav__icon {
+    height: 20px;
+}
+
+.nav__anchor {
+    color: var(--color);
+}
+
+.contact-menu__phone-item {
+    display: inline-block;
+}
+
+.title {
+    color: transparent;
+    font-size: 0;
+    margin: 0;
+}
+
+.brand__logo {
+    margin: 0;
+    padding: 10px;
+}
+
+.brand__subtitle {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: larger;
+    margin: 0;
+}
+
+.languages {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.menu {
+    margin-top: 1rem;
+}
+
+.menu__list {
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu__item {
+    font-size: x-large;
+    padding: 1rem;
+    border-bottom: 1px solid var(--background-color);
+}
+
+.menu__anchor {
+    text-decoration: none;
+    color: var(--background-color);
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.menu__subgroup-item {
+    padding: .5rem;
+}
+
+/* pages */
+
+.equipment-page {
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);;
+}
+
+.equipment-type-anchor{
+    text-decoration: none;
+    color: #323A47;
+    margin: 50px;
+
+}
+
+.crusher-page {
+    background-color: var(--color);
+}
+
+.crusher700ie-page {
+    background-color: var(--color);
+}
+
+.crusher700ie-page__specs0{
+    background-image: url(images/equipment/crushers/700ie/700ie-10.jpg);
+    background-size: cover;
+    height: calc(720/1600 * 100vw);
+    width: 100vw;
+    box-sizing: border-box;
+    margin: 0%;
+}
+.crusher700ie-page__specs1 {
+    background-image: url(images/equipment/crushers/700ie/700ie-2.jpg);
+    background-size: cover;
+    height: calc(900/2000 * 100vw);
+    width: 100vw;
+    box-sizing: border-box;
+    font-weight: bolder;
+    
+}
+
+.crusher700ie-page__specs2 {
+    background-image: url(images/equipment/crushers/700ie/700ie-6.jpg);
+    background-size: cover;
+    height: calc(1800/4000 * 100vw);
+    width: 100vw;
+    box-sizing: border-box;
+    margin: 0%;
+    font-weight: bolder;
+    }
+
+.model-page {
+    font-family: var(--font-text);
+    background-color: var(--color);
+   
+}
+.model-title{
+    
+}
+
+/* main */
+
+.main {
+        flex: 1;
+}
+
+.input{
+    width: calc(421/213 *50vw);
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+
+}
+
+/* generics */
+
+.contact-made-page{
+    display: flex;
+    background-color:var(--color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:#323A47;
+    margin: 15px 20px 25px 35px;
+    padding: 25px;
+    border-radius: 5px;
+    border-color: #323A47;
+
+}
+.button{
+
+}
+
