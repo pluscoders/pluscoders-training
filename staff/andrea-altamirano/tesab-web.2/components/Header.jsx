@@ -1,7 +1,10 @@
 function Header() {
-  const [toggleButtonText, setToggleMenuText] = React.useState('close')
+  const [toggleMenuButtonText, setToggleMenuText] = React.useState('close')
+  const [toggleEquipmentButtonText, setToggleEquipmentButton] = React.useState('arrow_drop_up')
+  
 
-  const toggleMenu = () => setToggleMenuText(toggleButtonText === 'menu' ? 'close' : 'menu')
+  const toggleMenu = () => setToggleMenuText(toggleMenuButtonText === 'menu' ? 'close' : 'menu')
+  const toggleEquipment = () => setToggleEquipmentButton(toggleEquipmentButtonText === 'arrow_drop_up' ? 'arrow_drop_down' : 'arrow_drop_up')
 
   return (
     <header>
@@ -68,30 +71,31 @@ function Header() {
         </nav>
       </div>
 
-      <div className="flex justify-center p-3 bg-white/75">
+      <div className="flex justify-between p-3 bg-white/75">
         <div className="flex flex-col justify-self-center self-center">
           <h1 className="">
-            <img className="" src="images/tesab-logo.png" alt="Tesab Spain" />
+            <img className="h-8" src="images/tesab-logo.png" alt="Tesab Spain" />
           </h1>
-          <h2>Alquiler y venta de maquinaria</h2>
+          <h2 className="text-sm font-sans">Alquiler y venta de maquinaria</h2>
         </div>
-
         <button className="material-symbols-outlined justify-self-end self-center cursor-pointer" onClick={toggleMenu}>
-          {toggleButtonText}
+          {toggleMenuButtonText}
         </button>
       </div>
-
-      {toggleButtonText === 'close' && <nav className="bg-white/75">
-        <ul>
-          <li className="border-b-gray-400 border-2 pl-4 text-right">
-            <a href="">English</a>|<a href="">Português</a>
+      {toggleMenuButtonText === 'close' && <nav className=" h-full bg-white/75">
+        <ul className="font-sans text-lg">
+          <li className="pl-4 text-right ">
+            <a href="" className="px-4">English</a>|<a href="" className="px-4">Português</a>
           </li>
-          <li className="border-b-gray-400 border-2 pl-4">
+          <li className="border-b-black border pl-4 py-2">
             <a href="">Quienes Somos</a>
           </li>
-          <li className="border-b-gray-400 border-2 pl-4">
-            <span className="flex items-center"><a href="">Equipos</a><span className="material-symbols-outlined">arrow_drop_up</span></span>
-            <ul className="ml-4">
+          <li className="border-b-black border pl-4 py-2">
+            <span className="flex items-center">
+              <a href="">Equipos</a>
+              <button className="material-symbols-outlined" onClick={toggleEquipment}>{toggleEquipmentButtonText}</button>
+            </span>
+            {toggleEquipmentButtonText === 'arrow_drop_up' && <ul className="ml-4">
               <li className="">
                 <a href="">Machacadoras</a>
               </li>
@@ -111,23 +115,21 @@ function Header() {
                 <a href="">Reciclaje</a>
               </li>
               <li>
-                <a href="">Accesorios</a>
+                <a href="">Application news</a>
               </li>
-            </ul>
+            </ul>}
           </li >
-          <li className="border-b-gray-400 border-2 pl-4"><a href="">Equipos usados</a></li>
-          <li className="border-b-gray-400 border-2 pl-4"><a href="">Recambios</a></li>
-          <li className="border-b-gray-400 border-2 pl-4"><span className="flex items-center"><a href="">Servicios</a><span className="material-symbols-outlined">arrow_drop_up</span></span>
+          <li className="border-b-black border pl-4 py-2 py-2"><a href="">Equipos usados</a></li>
+          <li className="border-b-black border pl-4 py-2"><a href="">Recambios</a></li>
+          <li className="border-b-black border pl-4 py-2"><span className="flex items-center"><a href="">Servicios</a><button className="material-symbols-outlined">arrow_drop_up</button></span>
             <ul className="ml-4">
-              <li><a href="">Asesoramiento</a></li>
-              <li><a href="">Post-Venta</a>
-              </li>
-              <li><a href="">Asistencia
-                Técnica</a></li>
+              <li className="py-1"><a href="">Asesoramiento</a></li>
+              <li className="py-1"><a href="">Post-Venta</a></li>
+              <li className="py-1"><a href="">Asistencia Técnica</a></li>
             </ul>
           </li>
-          <li className="border-b-gray-400 border-2 pl-4"><a href="">Application News</a></li>
-          <li className="border-b-gray-400 border-2 pl-4"><a href="">Contacto</a></li>
+          <li className="border-b-black border pl-4 py-2"><a href="">Application News</a></li>
+          <li className="border-b-black border pl-4 py-2"><a href="">Contacto</a></li>
         </ul>
       </nav>}
     </header>
