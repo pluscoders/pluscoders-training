@@ -1,0 +1,11 @@
+{{#if users}}
+{{#each users}}
+<a href="/users/{{id}}">
+<h5>{{name}}</h5>
+<h5>{{age}}</h5>
+<br/>
+</a>
+{{/each}}
+{{else}}
+<h3>Пользователей нет</h3>
+{{/if}}

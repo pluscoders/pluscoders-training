@@ -1,0 +1,52 @@
+.profile-page-header {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 5rem;
+  background-color: #1e90ff;
+  font-size: medium;
+  color: #fff;
+}
+
+
+.profile-page-main {
+  display: flex;
+  top: 5rem;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #1e90ff;
+  font-size: medium;
+  color: #fff;
+  flex-direction: column;
+}
+
+.profile-page-main__title, :link {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-page-name, .profile-page-email, .profile-page-oldPassword, .profile-page-newPassword {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+input {
+  margin-left: 1rem;
+}
+
+.profile-page__save-button, .profile-page__save-newPassword-button, .profile-page__save-oldPassword-button {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  font-size: medium;
+  margin-bottom: .5rem;
+}
+
+.profile-page-newPassword{
+  margin-top: 1rem;
+}

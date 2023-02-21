@@ -1,0 +1,16 @@
+{
+  "name": "package-demo",
+  "version": "1.0.0",
+  "description": "My package demo project...",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Evgy Barabanova",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.4.7"
+  }
+}
