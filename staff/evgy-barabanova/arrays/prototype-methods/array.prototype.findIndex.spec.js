@@ -1,4 +1,4 @@
-describe('array.prototype.findIndex', () => {
+describe('Array.prototype.findIndex', () => {
   describe('findIndex things', () => {
     let names
 

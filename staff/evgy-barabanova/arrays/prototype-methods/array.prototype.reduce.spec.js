@@ -1,4 +1,4 @@
-describe('reduce', () => {
+describe('Array.prototype.reduce', () => {
   describe('reduce nums to sum of all them', () => {
     let num
 
