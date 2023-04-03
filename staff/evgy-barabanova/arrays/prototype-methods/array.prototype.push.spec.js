@@ -1,4 +1,3 @@
-const { log } = require("console")
 
 describe('Array.prototype.push', () => {
     let animals

@@ -1,4 +1,5 @@
 const push = require('./push')
+const pushElements = require('./pushElements')
 
 describe('push', () => {
     let animals
@@ -14,7 +15,7 @@ describe('push', () => {
     })
 
     it('pushes more than one element into the array', () => {
-        const value = animals.push('chickens', 'cats', 'dogs')
+        const value = animals.pushElements('chickens', 'cats', 'dogs')
 
         expect(value).toBe(6)
         expect(animals).toHaveLength(6)
